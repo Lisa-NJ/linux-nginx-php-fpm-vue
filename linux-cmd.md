@@ -48,7 +48,7 @@ $ sudo systemctl start nginx.service
 $ sudo cat /var/log/nginx/error.log <!-- err info -->
 
 $ sudo systemctl restart nginx
-$ systemctl restart php7.4-fpm
+$ systemctl restart php7.3-fpm
 
 $ sudo apt install ./google-chrome-stable_current_amd64.deb
 
@@ -83,14 +83,17 @@ $ sudo apt-get remove --auto-remove python3
 
 <!-- uninstall nginx -->
 $ sudo apt-get purge nginx nginx-common   <!-- remove everything -->
+$ sudo apt-get autoclean
 $ sudo apt-get autoremove  <!-- remove dependencies used by nginx no longer required -->
 
 <!-- install nginx -->
-$ sudo apt-get update
-$ sudo apt-get install nginx <!-- y -->
+$ sudo apt-get update -y
+$ sudo apt-get upgrade -y
+$ sudo apt-get install nginx -y <!-- y -->
+$ sudo systemctl status nginx
 $ sudo systemctl is-enabled nginx
 $ sudo systemctl is-active nginx
-$ sudo systemctl status nginx.service
+
 
 <!-- reinstall desktop tool -->
 $ sudo apt update
@@ -109,7 +112,11 @@ $ sudo adduser lisa sudo
 $ sudo fuser -k 80/tcp
 <!--apache2 is running -->
 
-<!--install composer globally-->
-$ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" 
-$ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-$ sudo chmod +x /usr/local/bin/composer
+<!-- install php && php-fpm 7.3 -->
+$ sudo apt-get install php7.3-fpm -y
+$ sudo systemctl status php7.3-fpm
+$ php -v
+<!-- test php -->
+$ echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/info.php
+localhost/info.php --> show info 
+
