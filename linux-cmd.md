@@ -35,11 +35,11 @@ $ echo "$PS1"
 \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\$ 
 
 $ pcre-config --version <!-- 8.44 -->
-$ nginx
+$ sudo nginx
 $ nginx -v       <!-- nginx/1.18.0 -->
 $ ps -aux|grep nginx
-$ nginx -s quit
-$ nginx -s reload
+$ sudo nginx -s quit
+$ sudo nginx -s reload
 
 <!-- Dartagnan -->
 $ sudo systemctl status nginx.service <!-- status of nginx -->
@@ -48,7 +48,7 @@ $ sudo systemctl start nginx.service
 $ sudo cat /var/log/nginx/error.log <!-- err info -->
 
 $ sudo systemctl restart nginx
-$ systemctl restart php7.3-fpm
+$ sudo systemctl restart php7.3-fpm
 
 $ sudo apt install ./google-chrome-stable_current_amd64.deb
 
@@ -56,7 +56,7 @@ $ which git <!-- installation directory for git -->
 
 <!-- install phalcon -->
 $ curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash
-$ sudo apt-get install php7.4-phalcon
+$ sudo apt-get install php7.3-phalcon
 
 <!-- uninstall apache2 -->
 $ sudo systemctl stop apache2
@@ -120,3 +120,18 @@ $ php -v
 $ echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/info.php
 localhost/info.php --> show info 
 
+<!-- install composer -->
+$ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+$ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+$ sudo chmod +x /usr/local/bin/composer
+
+<!-- install phalcon -->
+$ sudo apt-get install php7.3-phalcon4
+
+<!-- php modules -->
+$ php -m
+
+<!-- fix problem: PHP Startup: Unable to load dynamic library 'pdo_mysql.so' -->
+<!-- fix problem: php -v fail -->
+$ sudo apt-get --purge remove php7.3-common
+$ sudo apt-get install php7.3-common php7.3-mysql php7.3-cli
