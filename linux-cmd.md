@@ -126,7 +126,14 @@ $ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 $ sudo chmod +x /usr/local/bin/composer
 
 <!-- install phalcon -->
-$ sudo apt-get install php7.3-phalcon4
+$ git clone https://github.com/phalcon/cphalcon.git
+$ cd cphalcon/build 
+$ sudo ./install <!-- php-config is not installed -->
+$ sudo apt-get install php7.3-dev 
+$ sudo ./install <!-- PHP <= 7.4 is no longer supported --> 
+$ sudo apt-get install php7.4-dev 
+$ sudo ./install <!-- Build succeed: Please restart your web server to complete the installation
+ -->
 
 <!-- php modules -->
 $ php -m
