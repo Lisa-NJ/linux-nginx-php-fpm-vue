@@ -112,9 +112,9 @@ $ sudo adduser lisa sudo
 $ sudo fuser -k 80/tcp
 <!--apache2 is running -->
 
-<!-- install php && php-fpm 7.3 -->
-$ sudo apt-get install php7.3-fpm -y
-$ sudo systemctl status php7.3-fpm
+<!-- install php && php-fpm 7.4 -->
+$ sudo apt-get install php7.4-fpm -y
+$ sudo systemctl status php7.4-fpm
 $ php -v
 <!-- test php -->
 $ echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/info.php
@@ -125,7 +125,7 @@ $ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 $ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 $ sudo chmod +x /usr/local/bin/composer
 
-<!-- install phalcon -->
+<!-- install phalcon in ~/software -->
 $ git clone https://github.com/phalcon/cphalcon.git
 $ cd cphalcon/build 
 $ sudo ./install <!-- php-config is not installed -->
