@@ -142,3 +142,23 @@ $ php -m
 <!-- fix problem: php -v fail -->
 $ sudo apt-get --purge remove php7.3-common
 $ sudo apt-get install php7.3-common php7.3-mysql php7.3-cli
+
+<!-- install mariaDB -->
+<!-- 1. Adding mariaDB repository -->
+$ sudo apt-get update
+$ sudo apt-get install lsb-release software-properties-common <!-- necessary software -->
+$ sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc'  <!-- import the repo key to system -->
+$ sudo add-apt-repository "deb [arch=amd64] http://mirror.23media.de/mariadb/repo/10.4/debian $(lsb_release -cs) main"  <!-- add the mariaDB repo to source list -->
+<!-- 2. Installing mariaDB -->
+$ sudo apt-get update
+$ sudo apt-get install mariadb-server
+<!-- 3. Checking mariaDB stauts -->
+$ sudo systemctl is-enabled mariadb
+$ sudo systemctl is-active mariadb
+$ sudo systemctl status mariadb <!-- active 10.5.15 -->
+<!-- 4. Testing mariaDB connectivity -->
+$ sudo mariadb -u root -p
+MariaDB $ SELECT VERSION();
+MariaDB $ SHOW DATABASES;
+MariaDB $ exit;
+$
