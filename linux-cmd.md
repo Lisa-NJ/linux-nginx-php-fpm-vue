@@ -1,3 +1,9 @@
+$ sudo apt remove php8.1* --purge
+$ dpkg -l | grep php
+$ curl localhost:8000
+$ echo "$PATH"
+$ echo "${PATH//:/$'\n'}"
+
 $ clear
 $ reset
 
@@ -161,4 +167,7 @@ $ sudo mariadb -u root -p
 MariaDB $ SELECT VERSION();
 MariaDB $ SHOW DATABASES;
 MariaDB $ exit;
-$
+$ mysqladmin --version
+$ sudo mysql  <!-- log into directly without password -->
+$ 
+
