@@ -1,8 +1,54 @@
 $ sudo apt remove php8.1* --purge
 $ dpkg -l | grep php
-$ curl localhost:8000
+$ apt list --installed | grep php
+$ curl localhost:8000 -I
 $ echo "$PATH"
 $ echo "${PATH//:/$'\n'}"
+$ sudo apt update && sudo apt upgrade
+
+<!-- 1. Dumping database into files -->
+$ mysqldump -u root -p dcdb >dcdb-0817.sql
+$ mysqldump -u root -p csdb >csdb-0817.sql
+$ mysqldump -u root -p owl >owl-0817.sql
+
+$ sudo mysql
+MariaDB > create database owl;
+MariaDB > create database csdb;
+MariaDB > create database dcdb;
+<!-- 2. Import data from files -->
+$ sudo mysql -uroot -p dcdb < dcdb-0817.sql
+$ sudo mysql -uroot -p csdb < csdb-0817.sql
+$ sudo mysql -uroot -p owl < owl-0817.sql
+<!-- 3. Migrating the Database -->
+$ cd ~/owl/program/api
+$ sudo vendor/bin/phinx migrate
+$ sudo vendor/bin/phinx seed:run -s DisplayOwnersSeeder -s AdvertiserSeeder
+
+<!--install phalcon4-->
+https://docs.phalcon.io/4.0/en/installation#deb-based-distributions-debian-ubuntu-etc
+<!-- 1. extensions needed -->
+$ sudo apt-get install php7.4-gd 
+$ sudo apt-get install php7.4-mbstring
+<!-- 2. add the repo to your distribution -->
+$ curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash 
+<!-- 3. install phalcon4 -->
+$ sudo apt-get install php7.4-phalcon4
+<!-- 4. to check -->
+$ php -m <!-- phalcon is on the list -->
+ 
+
+<!-- install phalcon DevTools -->
+https://github.com/phalcon/phalcon-devtools#installing-via-composer
+<!-- 1.Installation via Git -->
+$ cd ~
+$ git clone https://github.com/phalcon/phalcon-devtools.git
+$ cd phalcon-devtools
+$ composer install
+$ ln -s $(pwd)/phalcon /usr/bin/phalcon
+$ chmod ugo+x /usr/bin/phalcon
+<!-- 2. to check -->
+$ phalcon -v <!-- 4.1.0 -->
+
 
 $ clear
 $ reset
