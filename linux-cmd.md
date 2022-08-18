@@ -16,6 +16,11 @@ $ apt list --installed | grep apache2
 $ sudo apt-get remove apache2-bin  --purge 
 $ 
 
+<!-- install nvm -->
+$ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+$ source ~/.bashrc
+$ nvm -v <!-- v0.35.2 -->
+
 <!-- 1. Dumping database into files -->
 $ mysqldump -u root -p dcdb >dcdb-0817.sql
 $ mysqldump -u root -p csdb >csdb-0817.sql
@@ -182,7 +187,7 @@ $ sudo systemctl start nginx.service
 $ sudo cat /var/log/nginx/error.log <!-- err info -->
 
 $ sudo systemctl restart nginx
-$ sudo systemctl restart php7.3-fpm
+$ sudo systemctl restart php7.4-fpm
 
 $ sudo apt install ./google-chrome-stable_current_amd64.deb
 
