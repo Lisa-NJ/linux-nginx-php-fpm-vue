@@ -5,6 +5,16 @@ $ curl localhost:8000 -I
 $ echo "$PATH"
 $ echo "${PATH//:/$'\n'}"
 $ sudo apt update && sudo apt upgrade
+$ cd /
+$ phpize -v
+$ dpkg -l | grep phalcon
+$ apt search php7.4-phalcon
+$ lsof -i:80
+$ sudo apt-get remove apache2 --purge
+$ sudo apt-get autoremove
+$ apt list --installed | grep apache2
+$ sudo apt-get remove apache2-bin  --purge 
+$ 
 
 <!-- 1. Dumping database into files -->
 $ mysqldump -u root -p dcdb >dcdb-0817.sql
@@ -49,6 +59,78 @@ $ chmod ugo+x /usr/bin/phalcon
 <!-- 2. to check -->
 $ phalcon -v <!-- 4.1.0 -->
 
+<!-- Dartagnan used -->
+$ cd /user/bin
+$ ls
+$ mysql -uroot
+$ explorer.exe . 
+$ cat .
+$ cat temp
+$ nano temp
+$ ll /sys/class/net/
+$ ll /sys/class/net/enp1s0/
+$ ll /sys/class/net/enp1s0/device/uevent
+$ cd work-lisa/hadaly/
+$ grep WD_T9SENDER_IV -r *
+$ grep 'sub start_listeners' -r *
+$ grep 'sub start_listener' -r *
+$ ll bin/
+$ perl /bin/ldetect
+$ sudo ifconfig
+$ perl bin/ldetect
+$ grep 'sub dlog' -r *
+$ grep 'ldetect' -r *
+$ grep '$daemons{sender}->{args}' -r *
+$ ./bin/T9Sender_linux --help
+$ ./bin/T9Sender_linux
+$ cd bin/
+$ ./T9Sender_linux --help
+$ bash T9Sender_linux
+$ perl T9Sender_linux
+$ sh -c T9Sender_linux
+$ ulimit -m 512000 && DISPLAY=:1 T9Sender_linux
+$ pgrep -af T9
+$ file T9Sender_linux
+$ ll
+$ sudo chmod +x T9Sender_linux
+$ sudo su
+$ T9Sender_linux --static
+$ lsb_release -a
+$ ./ldetect
+$ ./T9Sender_linux
+$ ll /sys/class/
+$ sudo systemctl start mysql.service
+$ fg
+$ sudo systemctl status mysql.service
+$ mysqld_safe --skip-grant-tables --skip-networking &
+$ mysql -u root
+$ fg
+$ sudo kill $(cat /var/lib/mysql/$HOSTNAME.pid)
+$ sudo systemctl start mariadb.service
+$ sudo systemctl status mariadb.service
+$ mysqlcheck -A -auto-repair -u root -p
+$ sudo systemctl --failed
+$ cd /var/lib/mysql/
+$ ll
+$ sudo rm aria_log_control ib_logfile0
+$ pgrep -af mysql
+$ sudo kill -15 31534 31535 31652
+$ ll /etc/mysql/debian-start
+$ sudo systemctl start mysql
+$ sudo systemctl restart mysql
+$ sudo systemctl status mysql
+$ mysql -uroot -p
+$ cd ~/work-lisa/vue
+$ cat .env.development.local
+$ curl localhost:8000 -I
+$ cd work-lisa/vue
+$ npm run serve
+$ cat .env.development.local
+$ cd ../api
+$ composer install
+$ cat phinx.yml
+$ sudo nano phinx.yml
+$ sudo nano app/config/config.ini
 
 $ clear
 $ reset
