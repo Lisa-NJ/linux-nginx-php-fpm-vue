@@ -16,6 +16,12 @@ $ apt list --installed | grep apache2
 $ sudo apt-get remove apache2-bin  --purge 
 $ 
 
+https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-ubuntu-18-04
+$ ip addr show | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
+$ curl -4 icanhazip.com
+$ sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
+$ sudo unlink /etc/nginx/sites-enabled/default
+
 <!-- install nvm -->
 $ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
 $ source ~/.bashrc
