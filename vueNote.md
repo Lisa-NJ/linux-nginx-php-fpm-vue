@@ -1,6 +1,3 @@
-[vuemastery]
-lisa gmail
-vueLisa0715
 
 ```
 
