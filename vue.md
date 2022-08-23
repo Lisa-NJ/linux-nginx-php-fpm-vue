@@ -1,100 +1,24 @@
-\1. Environment setting up for run and dev && How to check for each one? Phalcon + mariadb
 
-你可以直接run api那个后端看是否能启动，如果有报错查看具体报错
-
-或者 通过$ php -m  查看现有modules，你之前看到的那个文件里应该有list所有需要的modules.
-
-Mariadb直接安装就可以了，但是api里面有个配置文件具体名字我忘了，里面需要修改连接的账号密码和端口，如果有问题的话你在run api 服务器的时候也会报错. 但是本地的DB copy我没有，当时我没有服务器的访问权限,他们直接给了我一个DB的copy.
-
-具体的安装我记得当时是参考的这个网站一步步安装的
-
-https://docs.phalcon.io/4.0/en/installation
-
-
-\2. Structure of E2V-related modules, helper-public && helpers
-
-主要就是helpers那个文件夹里有几个function调用，其余的没用.
-
-那几个functions的作用也只是格式化数据类型为zotac那一端能读懂的类型播放。helper-public那个文件夹差不多就算是helper的README, 单纯告诉你要怎么样的格式. 实际上你如果按照那个格式手写个txt给zotac也能放。
-
-
-\3. What skills to learn at this stage and route?
-
-主要先把环境搭好能把api和vue两个run起来,后面主要看看vue就行。我在那上班的时候基本上没动过api那一端，他们也基本没怎么动，都是原来写好的,也没人愿意大改。
-
-
-\4. Add another public API means:？
-
-比如现在有天气的，real estate的，carswapde，应该是指老爷子想再找个public api的接口拿数据再做一个e2v的内容吧，
-
-
-\5. how to debug？
-
-后端那一块基本就看run api server的terminal报错，以及前端浏览器里response的内容了
-
-前端就直接看浏览器的报错了.
-
-
-a current example
-Concepts - pipe the output to jq - ? / E2V-compatible endpoint = public API ?
-
-E2V Debug直接run那个php文件就能显示报错，或者你从浏览器通过url打开那个文件并且调用参数，如果需要。
-
-
-\6. Other parts? - DealCodes / AWS / IRC
-
-这几个先不用管了，老爷子天天说这个，但是具体是什么东西都没人知道。
-
-Dealcodes目前有一个项目，但是那个只是测试的，没有太多东西，很久没人维护了，modules很多都过期了，还不如重写
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
+
+<p ref="p">This is to show how to use ref</p>
+
+mounted() {
+    this.$refs.p.innerHTML = "Has been mounted successfully";
+  },
+```
+[Installation]
+```
+$ npm install -g @vue/cli
+$ vue --version
+@vue/cli 5.0.8
+```
+
+[Vue devtools] 
+has two main tabs:cd
+
+the Inspector to display debugging information in a structured way (for example inspecting a component),
+the Timeline to track different kinds of data over time such as events.
 
 
 【1】
