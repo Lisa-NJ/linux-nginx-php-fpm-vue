@@ -14,7 +14,7 @@ $ sudo apt-get remove apache2 --purge
 $ sudo apt-get autoremove
 $ apt list --installed | grep apache2
 $ sudo apt-get remove apache2-bin  --purge 
-$ 
+$ alias l='ls -ahltr'
 
 https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-ubuntu-18-04
 $ ip addr show | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
@@ -48,6 +48,16 @@ $ sudo vendor/bin/phinx seed:run -s DisplayOwnersSeeder -s AdvertiserSeeder
 <!--install phalcon4-->
 https://docs.phalcon.io/4.0/en/installation#deb-based-distributions-debian-ubuntu-etc
 <!-- 1. extensions needed -->
+# imagick
+$ sudo apt-get install php7.4-imagick
+
+# memcached http://www.memcached.org/downloads	
+$ sudo apt-get install libevent-dev		 
+$ wget http://memcached.org/latest
+$ tar -zxvf memcached-1.x.x.tar.gz
+$ cd memcached-1.x.x
+$ ./configure && make && make test && sudo make install
+
 $ sudo apt-get install php7.4-gd 
 $ sudo apt-get install php7.4-mbstring
 <!-- 2. add the repo to your distribution -->
