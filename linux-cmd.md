@@ -7,7 +7,6 @@ $ echo "${PATH//:/$'\n'}"
 $ sudo apt update && sudo apt upgrade
 $ cd /
 $ phpize -v
-$ dpkg -l | grep phalcon
 $ apt search php7.4-phalcon
 $ lsof -i:80
 $ sudo apt-get remove apache2 --purge
@@ -51,12 +50,10 @@ https://docs.phalcon.io/4.0/en/installation#deb-based-distributions-debian-ubunt
 # imagick
 $ sudo apt-get install php7.4-imagick
 
-# memcached http://www.memcached.org/downloads	
-$ sudo apt-get install libevent-dev		 
-$ wget http://memcached.org/latest
-$ tar -zxvf memcached-1.x.x.tar.gz
-$ cd memcached-1.x.x
-$ ./configure && make && make test && sudo make install
+# memcached
+$ sudo apt update
+$ sudo apt install memcached libmemcached-tools
+$ sudo systemctl status memcached
 
 $ sudo apt-get install php7.4-gd 
 $ sudo apt-get install php7.4-mbstring
