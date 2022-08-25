@@ -1,0 +1,212 @@
+### php 
+```
+$ php -v
+$ php -f weather.php
+$ php weather.php
+$ php -r 'print "abc\n", "defgg\n";'
+$ php -r 'echo "abc\n";'
+```
+SAPI = Server Application Programming Interface
+CGI = Common Gateway Interface
+// edit php.ini / error_log: /tmp/php_error.log
+	/etc/php/7.4/fpm/php.ini
+
+1. your file must end with that php to be interpreted as php
+2. php files can also have html, CSS, JavaScript in them
+3. php opening and closing tag is <?php ?> 
+4. php interpreter interpreted the code between opening and closing tag. But if your file entirely contain 100 percent php code then you do not need the closing tag
+5. php closing tag will automatically  assume the semicolon on the last  line
+6. Echo is marginally faster than print
+7. Variable declared with dollar sign($)
+8. $this is a special variable that can't be assigned
+9. Vriables are always assigned by value by default. 
+10. clear concept of variable declaration rules and classification
+
+	variable declaration rules:
+
+	(1).start with dollar sign($)
+	(2).first letter of variable name comes from a-zA-z_
+	(3).next letters of variable name comes from a-zA-Z0-9_
+	(4).no space,no syntex
+
+	classification of variables:
+
+	Variable are mainly Two types
+	(1).Predefined Variable
+	(2).User Define Variable
+	
+	Predefined Variable
+	There are 12 predefined variables in php 8
+	
+	(1).$GLOBALS — References all variables available in global scope
+	(2).$_SERVER — Server and execution environment informatio
+	(3).$_REQUEST — HTTP Request variables
+	(4).$_FILES — HTTP File Upload variables
+	(5).$_ENV — Environment variables
+	(6).$_SESSION 
+	(7).$_COOKIE — HTTP Cookies
+	(8).$_GET — HTTP GET variables
+	(9).$_POST — HTTP POST variables
+		==> The above 9 are also superglobals
+	(10).$http_response_header — HTTP response headers
+	(11).$argc — The number of arguments passed to script
+	(12).$argv — Array of arguments passed to script
+
+	User Define Variable
+	User Define variable are 3 types
+	```
+	(1).variable scope ---- .local scope 
+	                    |-- .global scope
+	                    |-- .static variable
+	```
+	(2).variable variables
+	```
+	${$a[1]} - to use $a[1] as a variable
+	${$a}[1] - to use $$a as the variable
+	```
+	(3).reference variable
+
+11. All functions and classes in PHP have the global scope
+12. possible to call recursive functions in PHP
+13. var_dump: Dumps information about a variable
+14. require is identical to include except upon failure it will halt the script whereas include only emits a warning (E_WARNING) which allows the script to continue.
+15. :: allows access to static, constant, and overridden properties or methods of a class.
+16. header — Send a raw HTTP header, header() must be called before any actual output is sent, either by normal HTML tags, blank lines in a file, or from PHP.
+17. array() or [] - to define an array
+18. json_encode - Returns the JSON representation of a value
+19. unset() - destroys the specified variables.
+20. Magic constants - __LINE__ __FILE__	 __DIR__ __FUNCTION__ __CLASS__ __TRAIT__ __METHOD__ __NAMESPACE__ ClassName::class	
+21. References in PHP - a means to access the same variable content by different names. 
+
+The $GLOBALS array is an associative array with the name of the global variable being the key and the contents of that variable being the value of the array element. 
+
+<input name="a.b" /> becomes $_REQUEST["a_b"].
+
+### PHP
+
+为了开始使用 PHP，找一个支持PHP和MySQL的Web主机，安装Web服务器、PHP及MySQL；
+
+如果您的服务器支持 PHP，只要在 web 目录中创建 .php 文件即可，服务器将自动为您解析这些文件。
+
+PHP 脚本在服务器上执行，然后将纯 HTML 结果发送回浏览器。
+
+```php
+<?php
+$txt="Hello world!";
+$x=5;
+$y=10.5;
+$z=$x+$y;
+echo $z;
+echo "变量 x 为: $x"; 
+
+function myTest()
+{
+    //global 关键字：在函数内调用函数外定义的全局变量
+    global $x,$y;
+    $y=$x+$y;
+}
+function myTest1()
+{
+    //所有全局变量存储在一个名为 $GLOBALS[index] 的数组中。 index 保存变量的名称。
+    $GLOBALS['y']=$GLOBALS['x']+$GLOBALS['y'];
+} 
+function myTest2()
+{
+    //static：希望某个局部变量不要被删除
+    static $x1=0;
+    echo $x1;
+    $x1++;
+    echo PHP_EOL;    // 换行符
+}
+function myTest3($x)
+{
+    echo $x;
+}
+
+MyTest3(6);
+//echo - 可以输出一个或多个字符串（字符串可以包含 HTML 标签）,快，没有返回值
+echo "<h2>PHP 很有趣!</h2>";
+echo "这是一个", "字符串，", "使用了", "多个", "参数。";
+$cars=array("Volvo","BMW","Toyota");
+echo "<br>";
+echo "我车的品牌是 {$cars[0]}";
+//print - 只允许输出一个字符串，返回值总为 1；使用方法类似echo
+print "<br>";
+print "我新车的品牌是 {$cars[1]}";
+
+$a = "Hello";
+$b = $a . " world!"; //.可以连接字符串
+?>
+```
+
+PHP 语句和 PHP 变量区分大小写。
+
+弱类型语言：不必向 PHP 声明该变量的数据类型，PHP 会根据变量的值，自动把变量转换为正确的数据类型；在强类型的编程语言中，我们必须在使用变量前先声明（定义）变量的类型和名称。
+
+PHP 中的 $_GET 和 $_POST 变量用于检索表单中的信息，比如用户输入。
+
+```html
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+</head>
+<body>
+ 
+<form action="welcome.php" method="post">
+名字: <input type="text" name="fname">
+年龄: <input type="text" name="age">
+<input type="submit" value="提交">
+</form>
+ 
+</body>
+</html>
+```
+
+当用户填写完上面的表单并点击提交按钮时，表单的数据会被送往名为 "welcome.php" 的 PHP 文件：
+
+```php
+欢迎<?php echo $_POST["fname"]; ?>!<br>
+你的年龄是 <?php echo $_POST["age"]; ?>  岁。
+```
+
+预定义的 **$_GET 变量**用于收集来自 method="get" 的表单中的值，从带有 GET 方法的表单发送的信息，对任何人都是可见的（会显示在浏览器的地址栏）在 HTML 表单中使用 method="get" 时，所有的变量名和值都会显示在 URL 中，所以在发送密码或其他敏感信息时，不应该使用；并且对发送信息的量也有限制，不能超过 2000 个字符。
+
+预定义的 **$_POST** 变量用于收集来自 method="post" 的表单中的值，从带有 POST 方法的表单发送的信息，对任何人都是不可见的（不会显示在浏览器的地址栏），并且对发送信息的量也没有限制，然而，默认情况下，POST 方法的发送信息的量最大值为 8 MB（可通过设置 php.ini 文件中的 post_max_size 进行更改）。
+
+预定义的 **$_REQUEST** 变量包含了$_GET、$POST和 $_COOKIE的内容，可用来收集通过 GET 和 POST 方法发送的表单数据。
+
+### MySQL
+
+可以运行于多个系统上，支持多种语言：C、C++、Python、Java、Perl、PHP、Eiffel、Ruby 和 Tcl 等；
+
+对PHP有很好的支持，PHP 是目前最流行的 Web 开发语言。
+
+```bash
+Rpm -qa | grep mysql //检测系统是否自带安装MySQL
+```
+
+如果你系统有安装，那可以选择进行卸载:
+
+```bash
+rpm -e mysql　　// 普通删除模式
+rpm -e --nodeps mysql　　// 强力删除模式，如果使用上面命令删除时，提示有依赖的其它文件，则用该命令可以对其进行强力删除
+```
+
+### Apache服务
+
+```bash
+httpd -v  //查看Apache版本
+
+sudo apachectl start //启动Apahe服务
+
+//Web服务根目录：Library/WebServer/Documents
+
+sudo apachectl stop //停止Apache服务
+
+php -v //查看php的版本
+```
+
+
+
+### 工具

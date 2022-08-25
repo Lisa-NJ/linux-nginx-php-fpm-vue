@@ -412,3 +412,23 @@ routes:[
 }
 ```
 
+[Bootstrap]
+
+```
+ |---+--- Vanilla.js  ------
+ |	                    |--->Vue
+ |---+---  jQuery     ------
+ |                     
+ |
+ ----<------  Bootstrap    -----X
+                  |             |
+                  V             | 
+	Bootstrap v4 + Vue.js   | 
+	     |                  X
+	     | based            |
+	     V                  |
+	  jQuery <--------------X
+```
+BootStrap     includes CSS files, 
+BootStrapVue  includes components
+

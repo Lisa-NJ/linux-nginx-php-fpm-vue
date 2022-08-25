@@ -14,6 +14,9 @@ $ sudo apt-get autoremove
 $ apt list --installed | grep apache2
 $ sudo apt-get remove apache2-bin  --purge 
 $ alias l='ls -ahltr'
+$ lscpu 
+$ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{print $1"|"$3"|"$4}'|more
+$ service apache2 status
 
 https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-ubuntu-18-04
 $ ip addr show | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
