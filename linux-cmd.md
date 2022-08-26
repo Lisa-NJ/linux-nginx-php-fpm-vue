@@ -20,6 +20,22 @@ $ lscpu
 $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{print $1"|"$3"|"$4}'|more
 $ service apache2 status
 
+<!--install google chrome-->
+$wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+$sudo apt install ./google-chrome-stable_current_amd64.deb
+
+<!--install multiple node versions with nvm-->
+$wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+<!-- close and reopen Terminal-->
+$nvm -version
+ => v0.38.0
+$nvm install node //install latest NodeJs version
+$nvm use node 
+ => now using node v18.6.0 (npm v8.13.2)
+$nvm ls //get a list of installed NodeJs version
+$nvm exec 8.11.1 node app.js //use specific version without switching
+$nvm use system //use installed nodeJs version in the system
+
 
 $ sudo apt update
 $ sudo apt install diffutils
