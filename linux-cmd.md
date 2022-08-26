@@ -1,6 +1,8 @@
 $ sudo apt remove php8.1* --purge
 $ dpkg -l | grep php
 $ apt list --installed | grep php
+$ apt show php7.4-phalcon4
+$ apt depends php7.4-phalcon4
 $ curl localhost:8000 -I
 $ echo "$PATH"
 $ echo "${PATH//:/$'\n'}"
@@ -17,6 +19,11 @@ $ alias l='ls -ahltr'
 $ lscpu 
 $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{print $1"|"$3"|"$4}'|more
 $ service apache2 status
+
+
+$ sudo apt update
+$ sudo apt install diffutils
+$ diff file1 file2
 
 https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-ubuntu-18-04
 $ ip addr show | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
