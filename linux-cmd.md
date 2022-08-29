@@ -20,6 +20,10 @@ $ lscpu
 $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{print $1"|"$3"|"$4}'|more
 $ service apache2 status
 
+<!-- change password mysql -->
+$ mysql> SET PASSWORD FOR 'root'@'localhost' = PASSWORD('666');
+$ mysql> FLUSH PRIVILEGES;
+
 <!-- hexchat -->
 $ sudo apt update
 $ sudo apt install hexchat
