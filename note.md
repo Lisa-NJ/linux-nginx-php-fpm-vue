@@ -5,6 +5,13 @@ Ctrl+Alt+T ==> open the terminal
 Window + <-/-> ==> left half / right half
 
 ```
+[IRC] 
+Internet Relay Chat
+IRC Client
+IRC Server
+
+
+
 [APT]
 APT (Advanced Package Tool) is the command-line tool to interact with this packaging system. There are already dpkg commands to manage it, but apt is a more user-friendly way to handle packages. You can use it to find and install new packages, upgrade packages, clean your packages, etc.
 

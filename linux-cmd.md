@@ -20,6 +20,12 @@ $ lscpu
 $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{print $1"|"$3"|"$4}'|more
 $ service apache2 status
 
+<!-- hexchat -->
+$ sudo apt update
+$ sudo apt install hexchat
+$ hexchat
+$ hexchat -v  <!-- 2.14.3 -->
+
 <!--install google chrome-->
 $wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 $sudo apt install ./google-chrome-stable_current_amd64.deb
