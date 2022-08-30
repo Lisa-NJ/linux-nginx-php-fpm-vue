@@ -1,3 +1,7 @@
+[Web Server]
+
+
+
 ### php 
 ```
 $ php -v
@@ -57,11 +61,11 @@ CGI = Common Gateway Interface
 	```
 	(1).variable scope ---- .local scope 
 	                    |-- .global scope
-	                    |-- .static variable
+	                     |-- .static variable
 	```
 	(2).variable variables
 	```
-	${$a[1]} - to use $a[1] as a variable
+	${$a[1]} - to use $a[1] as a v ariable
 	${$a}[1] - to use $$a as the variable
 	```
 	(3).reference variable
@@ -81,6 +85,29 @@ CGI = Common Gateway Interface
 The $GLOBALS array is an associative array with the name of the global variable being the key and the contents of that variable being the value of the array element. 
 
 <input name="a.b" /> becomes $_REQUEST["a_b"].
+22. Data Types & Type Casting
+# 4 Scalar Types
+	# bool - true / false
+	# int - 1, 2, 3, -5
+	# float - 1.4, -9.8  
+	# string
+# 4 Compound Types
+	# array
+	# object
+	# callable
+	# iterable
+# 2 Special Types
+	# resource
+	# null
+23. Booleans
+
+intergers 0 -0 = false
+floats 0.0 -0.0 = false
+'' = false
+'0' = false
+[] = false
+null = false
+
 
 ### PHP
 
@@ -97,7 +124,15 @@ $x=5;
 $y=10.5;
 $z=$x+$y;
 echo $z;
-echo "变量 x 为: $x"; 
+echo "x: $x"; 
+echo("123";)
+echo "1"," ", "2", " ", "3";
+echo 'Lisa\'s apple';
+echo "Lisa's apple";
+$name = "Lisa";
+echo "My name is {$name}";
+echo "My name is $name";
+echo 'Hello' . $name . '<br />';
 
 function myTest()
 {
@@ -130,15 +165,30 @@ echo "这是一个", "字符串，", "使用了", "多个", "参数。";
 $cars=array("Volvo","BMW","Toyota");
 echo "<br>";
 echo "我车的品牌是 {$cars[0]}";
-//print - 只允许输出一个字符串，返回值总为 1；使用方法类似echo
+//print - 只允许输出一个字符串，return 1；使用方法类似echo
 print "<br>";
 print "我新车的品牌是 {$cars[1]}";
+print("hello");
 
 $a = "Hello";
 $b = $a . " world!"; //.可以连接字符串
 ?>
 ```
 
+``` php
+<!DOCTYPE html>
+<body>
+    <h1>
+        <?php echo 'Hello'; ?>
+        <?= 'Hello'; ?>
+    </h1>
+    <p>
+        My first paragraph.
+
+    </p>
+</body>
+</html>
+```
 PHP 语句和 PHP 变量区分大小写。
 
 弱类型语言：不必向 PHP 声明该变量的数据类型，PHP 会根据变量的值，自动把变量转换为正确的数据类型；在强类型的编程语言中，我们必须在使用变量前先声明（定义）变量的类型和名称。
