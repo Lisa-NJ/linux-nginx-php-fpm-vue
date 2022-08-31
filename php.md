@@ -93,7 +93,7 @@ The $GLOBALS array is an associative array with the name of the global variable 
 	# string
 # 4 Compound Types
 	# array
-	# object
+	# object 
 	# callable
 	# iterable
 # 2 Special Types
@@ -108,7 +108,10 @@ floats 0.0 -0.0 = false
 [] = false
 null = false
 
-
+24. Operators & Operator Precedence 
+ - arithmatic, assignment, string operarors, comparison, error control, increment / decrement, logical, bitwise, array operators, execution
+ - ?? <=> ** . @ union `` instanceof ?
+  
 ### PHP
 
 为了开始使用 PHP，找一个支持PHP和MySQL的Web主机，安装Web服务器、PHP及MySQL；
