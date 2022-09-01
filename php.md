@@ -1,6 +1,12 @@
 [Web Server]
 
+[to try]
+``` php
+$post_body = file_get_contents('php://input');
+$parameters = json_decode($post_body, TRUE);
+$cache_name = './weather_cache/'.md5($parameters['api_key']).'_'.md5($parameters["location"]).'.db';
 
+```
 
 ### php 
 ```
@@ -86,17 +92,17 @@ The $GLOBALS array is an associative array with the name of the global variable 
 
 <input name="a.b" /> becomes $_REQUEST["a_b"].
 22. Data Types & Type Casting
-# 4 Scalar Types
+// 4 Scalar Types
 	# bool - true / false
 	# int - 1, 2, 3, -5
-	# float - 1.4, -9.8  
+	# float - 1.4, -9.8
 	# string
-# 4 Compound Types
+// 4 Compound Types
 	# array
 	# object 
 	# callable
 	# iterable
-# 2 Special Types
+// 2 Special Types
 	# resource
 	# null
 23. Booleans
@@ -109,9 +115,16 @@ floats 0.0 -0.0 = false
 null = false
 
 24. Operators & Operator Precedence 
+	- https://www.php.net/manual/en/language.operators.precedence.php
  - arithmatic, assignment, string operarors, comparison, error control, increment / decrement, logical, bitwise, array operators, execution
  - ?? <=> ** . @ union `` instanceof ?
   
+25. return declare
+	- declare(ticks) encoding
+	- declare(strict_types=1) : write in every file when needed
+	
+
+
 ### PHP
 
 为了开始使用 PHP，找一个支持PHP和MySQL的Web主机，安装Web服务器、PHP及MySQL；
