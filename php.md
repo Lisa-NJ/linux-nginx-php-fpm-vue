@@ -1,12 +1,24 @@
 ### Web Server
+### Basic concepts
+RFC 2616 / Chapter 14 -- http header
+mime - Multipurpose Internet Mail Extensions
+	- IETF RFC 6838
+	- type/subtype
+	- text image audio video application
 
-[to try]
+[code]
 ``` php
+require './e2v_helper.php';
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *'); 
+header('Access-Control-Allow-Headers: application-token, authorization, content-type');
+
 $post_body = file_get_contents('php://input');
 $parameters = json_decode($post_body, TRUE);
 $cache_name = './weather_cache/'.md5($parameters['api_key']).'_'.md5($parameters["location"]).'.db';
 
 ```
+
 
 ### php 
 ```
@@ -49,7 +61,7 @@ CGI = Common Gateway Interface
 	There are 12 predefined variables in php 8
 	
 	(1).$GLOBALS — References all variables available in global scope
-	(2).$_SERVER — Server and execution environment informatio
+	(2).$_SERVER — Server and execution environment information
 	(3).$_REQUEST — HTTP Request variables
 	(4).$_FILES — HTTP File Upload variables
 	(5).$_ENV — Environment variables
