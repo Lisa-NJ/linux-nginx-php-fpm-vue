@@ -17,6 +17,29 @@ $post_body = file_get_contents('php://input');
 $parameters = json_decode($post_body, TRUE);
 $cache_name = './weather_cache/'.md5($parameters['api_key']).'_'.md5($parameters["location"]).'.db';
 
+if (file_exists($cache_name) && (time() - stat($cache_name)['mtime']) < 3600) {
+    $result = file_get_contents($cache_name);
+}
+else
+{
+    $token = $access_token . ":" . "";
+    // $req = curl_init($baseurl . '/properties?active=true&status=listing&api_key=' . $api_key);
+    $req = curl_init($baseurl . '/properties?');
+
+    curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+    // curl_setopt($req, CURLOPT_USERPWD, $token);
+    curl_setopt($req, CURLOPT_HTTPHEADER, array('Accept: application/json', 'X-Api-Key: ' . $api_key, 'Authorization: Bearer ' . $access_token));
+    $result = curl_exec($req);
+
+    $response_code = curl_getinfo($req, CURLINFO_HTTP_CODE);
+    echo $response_code.'is return code';
+    if (curl_errno($req)) {
+        $result = '[]';
+    }
+    else {
+        file_put_contents($cache_name, $result);
+    }
+}
 ```
 
 
@@ -134,7 +157,11 @@ null = false
 25. return declare
 	- declare(ticks) encoding
 	- declare(strict_types=1) : write in every file when needed
-	
+26. curl_init
+    curl_setopt
+    curl_exec
+    curl_getinfo
+    curl_errno
 
 
 ### PHP
