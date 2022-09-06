@@ -20,6 +20,15 @@ $ lscpu
 $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{print $1"|"$3"|"$4}'|more
 $ service apache2 status
 
+<!-- jq -->
+$ sudo apt install jq
+$ curl https://e2v.adverpost.com/simple.php?_path=/status | jq .
+$ curl https://e2v.adverpost.com/simple.php?_path=/parameters | jq .
+$ curl localhost/weather.php?_path=/getSchedule -X POST -H "Content-Type: application/json" -d @test.json | tail -n1 | jq .
+$ curl https://api.carswap.me/e2v/weather.php?_path=/getSchedule -X POST -H "Content-T> output
+$ jq. output
+
+
 <!-- change password mysql -->
 $ mysql> SET PASSWORD FOR 'root'@'localhost' = PASSWORD('666');
 $ mysql> FLUSH PRIVILEGES;

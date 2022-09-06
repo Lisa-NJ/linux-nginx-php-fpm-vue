@@ -13,7 +13,9 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *'); 
 header('Access-Control-Allow-Headers: application-token, authorization, content-type');
 
+// Takes raw data from the request
 $post_body = file_get_contents('php://input');
+// Converts it into a PHP object
 $parameters = json_decode($post_body, TRUE);
 $cache_name = './weather_cache/'.md5($parameters['api_key']).'_'.md5($parameters["location"]).'.db';
 
@@ -162,7 +164,9 @@ null = false
     curl_exec
     curl_getinfo
     curl_errno
-
+27. php://input: This is a read-only stream that allows us to read raw data from the request body. It returns all the raw data after the HTTP headers of the request, regardless of the content type.
+    file_get_contents() function: This function in PHP is used to read a file into a string.
+    json_decode() function: This function takes a JSON string and converts it into a PHP variable that may be an array or an object.
 
 ### PHP
 

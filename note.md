@@ -10,7 +10,12 @@ Internet Relay Chat
 IRC Client
 IRC Server
 
-
+[API]
+https://www.youtube.com/watch?v=Yzx7ihtCGBs&t=6
+	- The system we want to communicate with
+	- We can't access the internals of the system
+	- We can only talk to the API layer
+	- End point / input required + return
 
 [APT]
 APT (Advanced Package Tool) is the command-line tool to interact with this packaging system. There are already dpkg commands to manage it, but apt is a more user-friendly way to handle packages. You can use it to find and install new packages, upgrade packages, clean your packages, etc.
