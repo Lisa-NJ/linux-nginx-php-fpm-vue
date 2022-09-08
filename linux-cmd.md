@@ -19,14 +19,34 @@ $ alias l='ls -ahltr'
 $ lscpu 
 $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{print $1"|"$3"|"$4}'|more
 $ service apache2 status
+$ ifconfig 
+$ ifconfig -a
 
-<!-- jq -->
+
+<!-- curl + jq -->
+https://curl.se/docs/manual.html
 $ sudo apt install jq
 $ curl https://e2v.adverpost.com/simple.php?_path=/status | jq .
 $ curl https://e2v.adverpost.com/simple.php?_path=/parameters | jq .
-$ curl localhost/weather.php?_path=/getSchedule -X POST -H "Content-Type: application/json" -d @test.json | tail -n1 | jq .
-$ curl https://api.carswap.me/e2v/weather.php?_path=/getSchedule -X POST -H "Content-T> output
-$ jq. output
+$ curl https://e2v.adverpost.com/simple.php -I
+$ curl https://e2v.adverpost.com/simple.php?_path=/status
+$ curl http://localhost/.
+$ curl http://localhost/weather.php?_path=/status > output
+$ jq . output
+$ curl http://localhost/weather.php?_path=/getSchedule -X POST -H "Content-Type: application/json" -d @test.json | tail -n1 > output
+$ jq . output
+<!-- test.json -->
+{
+  "api_key": "ce79aef7a491450082040610222607",
+  "location": "Australia/Adelailde",
+  "duration": 10
+}
+$ curl http://localhost/weather.php?_path=/getSchedule -X POST -d @test.json | tail -n1 > output
+$ jq . output
+$ curl http://localhost/weather.php?_path=/getSchedule -X POST -d '{"api_key":"ce79aef7a491450082040610222607", "location":"Australia/Adelailde", "duration":10}' | tail -n1 > output
+$ jq . output
+$ curl -H "x-api-key: bcdc50d80ac04d7a9afcaee612146a7b" https://newsapi.org/v2/everything?q=apple&from=2022-09-06&to=2022-09-06&sortBy=popularity | tail -n1  > output
+$ jq . output
 
 
 <!-- change password mysql -->
