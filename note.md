@@ -195,6 +195,7 @@ server {
 
 [install google chrome]
 Ctrl+Alt+T ==> open the terminal
+Ctrl+Shift+Delete ==> clear the cache
 
 ```
 $wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
