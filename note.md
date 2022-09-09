@@ -5,6 +5,22 @@ Ctrl+Alt+T ==> open the terminal
 Window + <-/-> ==> left half / right half
 
 ```
+[call API]
+http://localhost/weather.php?_path=/status
+http://localhost/weather.php?_path=/parameters
+http://localhost/weather.php?_path=/getShedule
+
+``` bash
+$ curl http://localhost/weather.php?_path=/status
+$ curl http://localhost/weather.php?_path=/parameters
+$ curl http://localhost/weather.php?_path=/getSchedule -X POST -d '{"api_key":"ce79aef7a491450082040610222607", "location":"Australia/Adelailde", "duration":10}' | tail -n1 > output
+$ jq . output
+
+```
+``` php
+
+```
+
 [IRC] 
 Internet Relay Chat
 IRC Client

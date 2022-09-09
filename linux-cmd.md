@@ -47,6 +47,8 @@ $ curl http://localhost/weather.php?_path=/getSchedule -X POST -d '{"api_key":"c
 $ jq . output
 $ curl -H "x-api-key: bcdc50d80ac04d7a9afcaee612146a7b" https://newsapi.org/v2/everything?q=apple&from=2022-09-06&to=2022-09-06&sortBy=popularity | tail -n1  > output
 $ jq . output
+
+
 $ curl -H "Content-Type: application/json, x-api-key: 6JA5SRCMyg19dbMPwle5X1yulrMyygFY3s7W32Ps, Authorization:Bearer fqqknicnyiqisvxmtrzizsorokvjzcvlnbizyaah" https://ap-southeast-2.api.vaultre.com.au/api/v1.3/properties/sale?pagesize=50&status=listing&portalStatus=listing&propertyClass=residential&availableOnly=true
 
 $ curl -H "x-api-key: 6JA5SRCMyg19dbMPwle5X1yulrMyygFY3s7W32Ps, Authorization:Bearer fqqknicnyiqisvxmtrzizsorokvjzcvlnbizyaah" https://ap-southeast-2.api.vaultre.com.au/api/v1.3/properties/sale?pagesize=50&status=listing&portalStatus=listing&propertyClass=residential&availableOnly=true
