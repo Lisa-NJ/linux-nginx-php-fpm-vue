@@ -5,20 +5,41 @@ Ctrl+Alt+T ==> open the terminal
 Window + <-/-> ==> left half / right half
 
 ```
-[call API]
+[call API - browser]
 http://localhost/weather.php?_path=/status
 http://localhost/weather.php?_path=/parameters
 http://localhost/weather.php?_path=/getShedule
+https://newsapi.org/v2/top-headlines?apiKey=bcdc50d80ac04d7a9afcaee612146a7b&q=apple <!-- news -->
 
+[call API - cmd / curl]
 ``` bash
 $ curl http://localhost/weather.php?_path=/status
 $ curl http://localhost/weather.php?_path=/parameters
 $ curl http://localhost/weather.php?_path=/getSchedule -X POST -d '{"api_key":"ce79aef7a491450082040610222607", "location":"Australia/Adelailde", "duration":10}' | tail -n1 > output
 $ jq . output
-
+$ curl http://localhost/test-lisa.php?_path=/status
+$ curl http://localhost/test-lisa.php?_path=/parameters
+$ curl http://localhost/test-lisa.php?_path=/getSchedule -X POST -d '{"duration":5}' | jq . 
 ```
+[call API - code / php]
 ``` php
+	$baseurl = 'https://newsapi.org/v2/top-headlines';
+	$api_key = 'bcdc50d80ac04d7a9afcaee612146a7b';
+	$queryStr = 'apple';
 
+	$api_key = urlencode($api_key);
+	$userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+	$req = curl_init($baseurl . "?apikey=$api_key&q=$queryStr");  // 'api_key'&'q' - from api provider
+	curl_setopt($req, CURLOPT_RETURNTRANSFER, TRUE);
+	curl_setopt($req, CURLOPT_USERAGENT, $userAgent);
+	$output = curl_exec($req);
+
+	file_put_contents($cache_name, $output);
+
+	$json = json_decode($output, true);
+
+	$newsArr = $json['articles'];
 ```
 
 [IRC] 
@@ -239,6 +260,11 @@ Ctrl + D - select the same words one by one
 Ctrl + Shift + ` - Terminal
 Ctrl + Shift + P - fast path
 Ctrl + Home / End - Beginning and End of a file
+Ctrl + Shift + I - json
+
+On Windows: Shift + Alt + F
+On Mac: Shift + Option + F
+
 
 [curl]
 curl command is a tool to download or transfer files/data from or to a server using FTP, HTTP, HTTPS, SCP, SFTP, SMB and other supported protocols on Linux or Unix-like system.
