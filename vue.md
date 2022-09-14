@@ -119,7 +119,11 @@ vue 指令语法：v-bind : href="url"
 
 .stop - 阻止冒泡
 
-.prevent - 阻止默认事件
+.prevent - 阻止默认事件 tells the v-on directive to call event.preventDefault() on the triggered event
+
+```html
+<form v-on:submit.prevent="onSubmit"> ... </form>
+```
 
 // 按键修饰符
 
@@ -193,6 +197,14 @@ v-on: dom <-- js ==> 两行结合 = 双向数据绑定 v-model.trim .number .laz
 
 ​	防止 用户随意更改页面的 dom
 
+Dynamic Argument
+
+```html
+<a v-bind:[attributeName]="url"> ... </a>
+<a v-on:[eventName]="doSomething"> ... </a>
+```
+attributeName & eventName will be dynamically evaluated as a JavaScript expression, and their evaluated value will be used as the final value for the argument
+
 v-html 要慎用
 
 v-once 只渲染一次初始化的值，后面更新后不进行渲染
@@ -223,7 +235,6 @@ key 值的使用
 
 文本框 绑定数据到  value，复选框的话 绑定到 check 上面去
 
-待复习html：ol li ul
 
 【6】计算属性 及 watch 监听
 
@@ -261,15 +272,35 @@ upperCase 的使用举例 {{msg | upperCase}}，写在 filters 里面的函数
 
 饿了么组件库：element.eleme.io
 
-template 模版 - 会覆盖掉 html 模版
-
-主要用在组件里面
+template 模版 - 会覆盖掉 html 模版 / 主要用在组件里面
 
 ```vue
 new Vue({
   el: "#app", 告诉下面的模版要覆盖到哪里去
   template: '<div>Lisa</div>'
 })
+```
+
+8.1 注册一个局部组件，定义好的组件只能在该实例中使用
+
+```html
+	<div id="app">
+	    <runoob></runoob>
+	</div>
+	 
+	<script>
+	var Child = {
+	  template: '<h1>Self-defined component</h1>'
+	}
+	 
+	new Vue({
+	  el: '#app',
+	  components: {
+	    // <runoob> can only be used in parent's template
+	    'runoob': Child
+	  }
+	})
+</script>
 ```
 
 template模版：在 js 中写 dom
@@ -280,17 +311,9 @@ html模版：在 html 中写 js
 
 如何实现可以多次渲染某 dom 节点？ -- 组件化开发 的思想
 
-```vue
-<script>
-	Vue.component("my-component", {
-    template: `
-    <h1>contact info</h1>
-    <p>123456657</p>`
-  })
-</script>
-```
-
 Vue 定义的组件必须在 vue的实例里面使用
+
+8.2 注册一个全局组件语法: Vue.component(tagName, options)
 
 ```vue
 <body>
@@ -389,6 +412,7 @@ vue-cli 生成一个项目，使用 bootstrap
 	})
 ```
 
+【12】- $emit(eventName)
 
 【Vue Mastery-Vue Router Basics】
 
