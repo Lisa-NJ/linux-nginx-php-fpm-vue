@@ -268,7 +268,7 @@ template 模版 - 会覆盖掉 html 模版
 ```vue
 new Vue({
   el: "#app", 告诉下面的模版要覆盖到哪里去
-	template: '<div>Lisa</div>'
+  template: '<div>Lisa</div>'
 })
 ```
 
@@ -372,6 +372,24 @@ webpack：前端自动化构建工具
 
 vue-cli 生成一个项目，使用 bootstrap
 
+【11】-- $
+```js
+	var data = { a: 1 }
+	var vm = new Vue({
+	  el: '#example',
+	  data: data
+	})
+
+	vm.$data === data // => true
+	vm.$el === document.getElementById('example') // => true
+
+	// $watch is a method
+	vm.$watch('a', function (newValue, oldValue) {
+	  // This will be called when `vm.a` changes
+	})
+```
+
+
 【Vue Mastery-Vue Router Basics】
 
 It is a best practice to put components that get loaded by Vue Router in the Views directory.
@@ -411,6 +429,7 @@ routes:[
 	}
 }
 ```
+
 
 [Bootstrap]
 
