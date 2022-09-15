@@ -1,3 +1,6 @@
+camelCase (驼峰命名法)
+kebab-case(短横线分隔命名)
+PascalCase(首字母大写命名)
 
 ```
 
@@ -205,6 +208,8 @@ Dynamic Argument
 ```
 attributeName & eventName will be dynamically evaluated as a JavaScript expression, and their evaluated value will be used as the final value for the argument
 
+在 DOM 中使用模板时 (直接在一个 HTML 文件里撰写模板)，还需要避免使用大写字符来命名键名，因为浏览器会把 attribute 名全部强制转为小写
+
 v-html 要慎用
 
 v-once 只渲染一次初始化的值，后面更新后不进行渲染
@@ -303,9 +308,47 @@ new Vue({
 </script>
 ```
 
-template模版：在 js 中写 dom
-
 html模版：在 html 中写 js
+
+```vue
+<div id="wrap">
+    <p>Your name is:{{list.name}}</p>
+</div>
+<script>
+    var list = {
+        name:"donna",
+        age:20
+    }
+    var vm = new Vue({
+        el:"#wrap",
+        data:{list}
+    });
+</script>
+```
+
+字符串模板 template：在 js 中写 dom
+```vue
+<div id="wrap">
+
+</div>
+<script type="x-template" id="app">
+    <div>
+        <p>你的名字是{{list.name}}</p>
+    </div>
+</script>
+<script>
+    var list = {
+        name:"donna",
+        age:20
+    }
+    var vm = new Vue({
+        el:"#wrap",
+        data:{list},
+        template:"#app"
+    });
+</script>
+```
+
 
 常规方法想要将一组class替换成 template，没有办法做到
 
@@ -314,6 +357,7 @@ html模版：在 html 中写 js
 Vue 定义的组件必须在 vue的实例里面使用
 
 8.2 注册一个全局组件语法: Vue.component(tagName, options)
+全局注册的行为必须在根 Vue 实例 (通过 new Vue) 创建之前发生
 
 ```vue
 <body>
@@ -385,8 +429,26 @@ component 里面也可以有 methods
 
 (found in <Root>)
 
-【9】?
+当使用 kebab-case (短横线分隔命名) 定义一个组件时，你也必须在引用这个自定义元素时使用 kebab-case，例如 <my-component-name>;
 
+当使用 PascalCase (首字母大写命名) 定义一个组件时，<my-component-name> 和 <MyComponentName> 均可，在 DOM (即非字符串的模板) 中使用时只能用前者; 
+
+【9】Prop 类型
+```
+  // 字符串数组形式列出
+  props: ['title', 'likes', 'isPublished', 'commentIds', 'author']
+
+  // 对象形式列出
+  props: {
+    title: String,
+    likes: Number,
+    isPublished: Boolean,
+    commentIds: Array,
+    author: Object,
+    callback: Function,
+    contactsPromise: Promise // or any other constructor
+  }
+```
 webpack：前端自动化构建工具
 
 【10】?
