@@ -23,8 +23,16 @@ has two main tabs:cd
 the Inspector to display debugging information in a structured way (for example inspecting a component),
 the Timeline to track different kinds of data over time such as events.
 
+【0】
+Vue 的特点：
+  1. 采用 组件化 模式，提高代码复用率、且让代码更好维护
+  2. 声明式 编码，让编码人员无需直接操作 DOM，提高开发效率
+  3. 使用 虚拟 DOM + 优秀的 Diff 算法，尽量复用 DOM 节点 
+     虚拟 DOM 就是内存中的一个数据
 
-
+学习 Vue 之前要掌握的 JavaScript 基础知识？
+  ES6模块化 ES6语法 包管理 原型（链） 数组常用方法 axios promise
+      
 【1】
 
 框架 - JS 的一个工具集合；
@@ -448,14 +456,48 @@ component 里面也可以有 methods
     callback: Function,
     contactsPromise: Promise // or any other constructor
   }
+  
+  <!-- 传入数字 42，这是一个 JavaScript 表达式而不是一个字符串。-->
+  <blog-post v-bind:likes="42"></blog-post>
+  
+  <!-- 传入数组，这是一个 JavaScript 表达式而不是一个字符串 -->
+  <blog-post v-bind:comment-ids="[234, 266, 273]"></blog-post>
+  
+  <!-- 传入对象，这是一个 JavaScript 表达式而不是一个字符串。-->
+  <blog-post
+    v-bind:author="{
+      name: 'Veronica',
+      company: 'Veridian Dynamics'
+    }"
+  ></blog-post>
+  
+  <!-- 用不带参数的 v-bind 将一个对象的所有 property 作为 prop 传入 -->
+  post: {
+    id: 1,
+    title: 'My Journey with Vue'
+  }
+  <blog-post v-bind="post"></blog-post>
+  等价于： 
+  <blog-post
+    v-bind:id="post.id"
+    v-bind:title="post.title"
+  ></blog-post>
 ```
 webpack：前端自动化构建工具
+
+组件可以接受任意的 attribute，这些 attribute 会被添加到这个组件的根元素上 -- 非 prop 的 attribute 
+
+对于绝大多数 attribute 来说，从外部提供给组件的值会替换掉组件内部设置好的值; class 和 style attribute 会把两边的值合并起来
+
+如果不希望组件的根元素继承 attribute，可以在组件的选项中设置 inheritAttrs: false, 但该选项不会影响 style 和 class 的绑定
 
 【10】?
 
 单文件组件使用 及 CSS 作用域
 
-vue-cli 生成一个项目，使用 bootstrap
+vue-cli 生成一个项目，使用 bootstrap 后，不需要自己的样式，使用 bootstrap 的样式
+
+html模板+template模板-->对象-->虚拟DOM，通过 render 调用
 
 【11】-- $
 ```js
@@ -476,7 +518,41 @@ vue-cli 生成一个项目，使用 bootstrap
 
 【12】- $emit(eventName)
 
-【Vue Mastery-Vue Router Basics】
+触发的事件名需要完全匹配监听这个事件所用的名称，推荐使用 kebab-case 的事件名
+
+如果你想在某个组件的根元素上监听一个原生事件。可以使用 .native 修饰 v-on 。例如：
+
+```vue
+<my-component v-on:click.native="doTheThing"></my-component>
+```
+自定义组件上的 v-model 默认会利用名为 value 的 prop 和名为 input 的事件
+
+但是像单选框、复选框等类型的输入控件可能会将 value attribute 用于不同的目的。model 选项可以用来避免这样的冲突 ?
+
+```vue
+Vue.component('base-checkbox', {
+  model: {
+    prop: 'checked',
+    event: 'change'
+  },
+  props: {
+    checked: Boolean
+  },
+  template: `
+    <input
+      type="checkbox"
+      v-bind:checked="checked"
+      v-on:change="$emit('change', $event.target.checked)"
+    >
+  `
+})
+
+<base-checkbox v-model="lovingVue"></base-checkbox>
+
+```
+.sync ?
+
+【13】- Vue Mastery-Vue Router Basics
 
 It is a best practice to put components that get loaded by Vue Router in the Views directory.
 
