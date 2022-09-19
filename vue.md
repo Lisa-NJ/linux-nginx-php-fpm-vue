@@ -39,7 +39,7 @@ Vue 的特点：
 
 生态系统 / 工具 + 核心插件
 
-资源列表 / Awesome Vue  
+资源列表 / Awesome Vue
 
 Vue.config - 一个对象，包含 Vue 的全局配置，可以在启动应用之前修改某些 property
 
@@ -47,6 +47,21 @@ Vue.config - 一个对象，包含 Vue 的全局配置，可以在启动应用�
 Vue.config.productionTip = false;
 ```
 
+数据代理 - 通过一个对象代理对另一个对象中属性的操作（读/写）
+
+vm 拿到 data 后会保存在自身的 _data 中 -- 数据劫持 被用到
+
+```vue
+vm._data = options.data
+```
+1. Vue 中的数据代理：
+	通过 vm 对象来代理 data 对象中属性的操作（读/写）
+2. Vue 中数据代理的好处：
+	更加方便地操作 data 中的数据
+3. 基本原理：
+	通过 Object.defineProperty() 把 data 对象中所有属性添加到 vm 上
+	为每一个添加到 vm 上的属性，都指定一个 getter/setter
+	在 getter/setter 内部去操作（读/写）data 中对应的属性
 
 
 【1】
