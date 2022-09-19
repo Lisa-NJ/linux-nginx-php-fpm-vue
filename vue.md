@@ -32,7 +32,23 @@ Vue 的特点：
 
 学习 Vue 之前要掌握的 JavaScript 基础知识？
   ES6模块化 ES6语法 包管理 原型（链） 数组常用方法 axios promise
-      
+
+// 官网值得看的内容
+
+学习 / 教程 + API
+
+生态系统 / 工具 + 核心插件
+
+资源列表 / Awesome Vue  
+
+Vue.config - 一个对象，包含 Vue 的全局配置，可以在启动应用之前修改某些 property
+
+```vue
+Vue.config.productionTip = false;
+```
+
+
+
 【1】
 
 框架 - JS 的一个工具集合；
@@ -78,6 +94,7 @@ https://github.com/vuejs vue-核心，推荐 awesome-vue（很多资源），论
 
 ```vue
 <head>
+  <!-- 下面一行会引入名为 Vue 的构造函数s -->
 	<script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
 </head>
 <body>
