@@ -48,8 +48,8 @@ Vue.config.productionTip = false;
 ```
 
 数据代理 - 通过一个对象代理对另一个对象中属性的操作（读/写）
-
-vm 拿到 data 后会保存在自身的 _data 中 -- 数据劫持 被用到
+ 
+vm 拿到 data 后会保存在自身的 _data 中，并且升级后可以监测到数据的变化 -- 数据劫持 被用到
 
 ```vue
 vm._data = options.data
@@ -160,6 +160,8 @@ vue 指令语法：v-bind : href="url"
 
 // 事件修饰符
 
+修饰符可以连续写 - 链式操作
+
 .stop - 阻止冒泡
 
 .prevent - 阻止默认事件 tells the v-on directive to call event.preventDefault() on the triggered event
@@ -167,12 +169,38 @@ vue 指令语法：v-bind : href="url"
 ```html
 <form v-on:submit.prevent="onSubmit"> ... </form>
 ```
+.once - 事件只触发一次
+
+.capture - 使用事件的捕获模式
+.self - 只有 event.target 是当前操作的元素时才触发事件
+.passive - 事件的默认行为立即执行，无需等待事件回调执行完毕
 
 // 按键修饰符
 
 .enter - 鼠标按键响应 = .13 / 按键对应的数字
 
 .space.esc.enter - 可以链式操作
+
+// 键盘事件
+1.  Vue 中常用的事件别名：
+  回车 => enter
+  删除 => delete（捕获“删除”和“退格”键）
+  退出 => esc
+  空格 => space
+  换行 => tab（** 特殊，必须配合 keydown 去使用）
+  上 => up
+  下 => down
+  左 => left
+  右 => right
+2. Vue 未提供别名的按键，可以使用按键原始的 key 值去绑定，但注意要转为 kebab-case
+```vue
+  <input type="text" @keyup.caps-lock="showInfo" ></input>
+```
+3. 系统修饰键（用法特殊）：ctrl、alt、shift、meta
+  (1). 配合 keyup 使用：按下修饰键的同时，再按下其他键，随后释放其他键，事件才被触发
+  (2). 配合 keydown 使用：正常触发事件
+4. 也可以使用 KeyCode 去指定具体的按键（不推荐）
+5. Vue.config.KeyCode.自定义键名 = 键码，可以去定制按键别名
 
 // 系统修饰符
 
@@ -189,7 +217,7 @@ vue 指令语法：v-bind : href="url"
     new Vue({
       el: "#app",
       methods:{
-        showsome:function(msg, event){
+        showsome(msg, event){
           console.log(msg)
           alert("show some")
         } 
@@ -225,6 +253,16 @@ vue 指令语法：v-bind : href="url"
   </script>
 </body>
 ```
+方法都应该写在 methods 对象中，最终会在 vm 上，methods 中配置的函数，都是被 Vue 管理的函数，this 的指向是 vm 或组件实例对象;
+
+data 配置项下面的数据会做数据代理
+
+@scroll - 滚动条
+	- 优先级： 滚动条滚动 > 消息响应函数执行
+@wheel - 鼠标滚轮 
+	- 鼠标滚轮滚动 --> 触发消息响应回调函数 --> 滚动条移动
+@wheel.passive ==> 先处理滚动条、再执行回调函数 - 手机、平板用的比较多
+
 
 【4】双向数据绑定、条件渲染
 
