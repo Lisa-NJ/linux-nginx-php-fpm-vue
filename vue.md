@@ -38,6 +38,8 @@ Vue 的特点：
 学习 / 教程 + API
 
 生态系统 / 工具 + 核心插件
+	Vue3 Snippets by hollowtree
+	
 
 资源列表 / Awesome Vue
 
@@ -62,6 +64,7 @@ vm._data = options.data
 	通过 Object.defineProperty() 把 data 对象中所有属性添加到 vm 上
 	为每一个添加到 vm 上的属性，都指定一个 getter/setter
 	在 getter/setter 内部去操作（读/写）data 中对应的属性
+
 
 
 【1】
@@ -105,11 +108,13 @@ Vuex 状态管理系统
 
 https://github.com/vuejs vue-核心，推荐 awesome-vue（很多资源），论坛Forum可以提问，聊天室Chat
 
-【2】
+【2】{{}}
+
+如果 data 中的属性在 {{}} 中没有使用，则 开发者工具 中 的属性值不更新即使某个属性的值已经改变了
 
 ```vue
 <head>
-  <!-- 下面一行会引入名为 Vue 的构造函数s -->
+  <!-- 下面一行会引入名为 Vue 的构造函数 -->
 	<script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
 </head>
 <body>
@@ -190,7 +195,7 @@ vue 指令语法：v-bind : href="url"
   换行 => tab（** 特殊，必须配合 keydown 去使用）
   上 => up
   下 => down
-  左 => left
+  左 => left 
   右 => right
 2. Vue 未提供别名的按键，可以使用按键原始的 key 值去绑定，但注意要转为 kebab-case
 ```vue
@@ -198,13 +203,17 @@ vue 指令语法：v-bind : href="url"
 ```
 3. 系统修饰键（用法特殊）：ctrl、alt、shift、meta
   (1). 配合 keyup 使用：按下修饰键的同时，再按下其他键，随后释放其他键，事件才被触发
+```vue
+  <input type="text" placeholder="Enter to show Info" @keyup.ctrl="showInfo" ></input>
+  <input type="text" placeholder="Enter to show Info" @keydown.ctrl="showInfo" ></input>
+```
   (2). 配合 keydown 使用：正常触发事件
-4. 也可以使用 KeyCode 去指定具体的按键（不推荐）
+4. 也可以使用 KeyCode 去指定具体的按键（不推荐 - 该特性已从 Web 标准中删除，另外不同键盘对键的编码不统一）13:Enter 
+```vue
+  <input type="text" placeholder="Enter to show Info" @keyup.13="showInfo" ></input>
+```
 5. Vue.config.KeyCode.自定义键名 = 键码，可以去定制按键别名
 
-// 系统修饰符
-
-.shift
 
 ```vue
 <body>
@@ -254,6 +263,29 @@ vue 指令语法：v-bind : href="url"
 </body>
 ```
 方法都应该写在 methods 对象中，最终会在 vm 上，methods 中配置的函数，都是被 Vue 管理的函数，this 的指向是 vm 或组件实例对象;
+
+作为事件回调出现的 方法 被调用时，如果不传参数，()可加可不加，传参时()必须加
+
+```vue
+  <button @click="showInfo">No para 1</button>
+  <button @click="showInfo()">No para 2</button>
+  <button @click="showMoreInfo(66)">with para</button>
+```
+作为插值语法使用时，没有()表示函数体，有()表示函数调用的返回值
+
+```vue
+  <span>{{showInfo}}</span> 
+  <span>{{showInfo()}}</span>
+```
+
+逻辑简单的事件处理函数体也可以直接写在 模板 中，如下:
+
+```vue
+  @click="isHot = !isHot"
+```
+但是，@click="function" 中，function 只能是 Vue 实例中自己定义的函数,因此 alert(...) 不能在此使用
+
+data 中的任何数据发生变化后，Vue 的模板都会重新解析一遍 - Vue 会把模板拿过来，重新再阅读一遍;模板里面如果用插值语法{{}}调了方法，方法也会被重新调一次
 
 data 配置项下面的数据会做数据代理
 
@@ -323,15 +355,49 @@ key 值的使用
 
 **计算属性**的特点：
 
+要用的数据不存在，要通过已有属性计算得来; 在 computed 对象中定义计算属性; 在页面中使用 {{方法名}} 来显示计算的结果
+
+计算属性最终会出现在 vm 上，直接读取使用即可
+
 1 只有依赖的属性更新后，才会执行
 
-2 执行完后有缓存功能，下一次使用时直接走缓存，不会再执行代码
+2 执行完后有缓存功能，下一次使用时直接走缓存，不会再执行代码 - methods 不同，没有缓存
+
+原理：底层借助了 Object.defineProperty 方法提供的 getter 和 setter
 
 get set 的用法
 
-​	如果依赖的属性变化，get 被调用
+​	如果初始被读取 或 所依赖的属性变化时，get 被调用
+ 
+​	如果给computed的属性赋值，必须通过 set 函数去响应修改，且 set 中要引起计算时依赖的数据发生变化
 
-​	如果给computed的属性赋值，set 被调用
+计算属性的完整写法：
+
+```vue
+computed: {
+        fullName: {
+          get() {
+            return this.lastName + " " + this.firstName
+          },
+          set(newValue) {
+            strArr = newValue.split(" ")
+            this.lastName = strArr[0]
+            this.firstName = strArr[1]
+          }
+        }
+      },
+```
+
+如果不需要 set，可以简写为：
+
+```vue
+computed: {
+	// 此处的 函数 就跟完整写法的 get 一样去用
+        fullName() {
+            return this.lastName + " " + this.firstName
+          }
+        }
+```
 
 **watch** 属性
 
@@ -682,4 +748,7 @@ routes:[
 ```
 BootStrap     includes CSS files, 
 BootStrapVue  includes components
+
+### 风格指南
+模板中简单的表达式 - 组件模板应该只包含简单的表达式，复杂的表达式应该重构为计算属性或方法
 
