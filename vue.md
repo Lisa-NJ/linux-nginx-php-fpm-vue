@@ -50,7 +50,7 @@ Vue.config.productionTip = false;
 ```
 
 数据代理 - 通过一个对象代理对另一个对象中属性的操作（读/写）
- 
+
 vm 拿到 data 后会保存在自身的 _data 中，并且升级后可以监测到数据的变化 -- 数据劫持 被用到
 
 ```vue
@@ -188,21 +188,21 @@ vue 指令语法：v-bind : href="url"
 
 // 键盘事件
 1.  Vue 中常用的事件别名：
-  回车 => enter
-  删除 => delete（捕获“删除”和“退格”键）
-  退出 => esc
-  空格 => space
-  换行 => tab（** 特殊，必须配合 keydown 去使用）
-  上 => up
-  下 => down
-  左 => left 
-  右 => right
+    回车 => enter
+    删除 => delete（捕获“删除”和“退格”键）
+    退出 => esc
+    空格 => space
+    换行 => tab（** 特殊，必须配合 keydown 去使用）
+    上 => up
+    下 => down
+    左 => left 
+    右 => right
 2. Vue 未提供别名的按键，可以使用按键原始的 key 值去绑定，但注意要转为 kebab-case
 ```vue
   <input type="text" @keyup.caps-lock="showInfo" ></input>
 ```
 3. 系统修饰键（用法特殊）：ctrl、alt、shift、meta
-  (1). 配合 keyup 使用：按下修饰键的同时，再按下其他键，随后释放其他键，事件才被触发
+    (1). 配合 keyup 使用：按下修饰键的同时，再按下其他键，随后释放其他键，事件才被触发
 ```vue
   <input type="text" placeholder="Enter to show Info" @keyup.ctrl="showInfo" ></input>
   <input type="text" placeholder="Enter to show Info" @keydown.ctrl="showInfo" ></input>
@@ -368,7 +368,7 @@ key 值的使用
 get set 的用法
 
 ​	如果初始被读取 或 所依赖的属性变化时，get 被调用
- 
+
 ​	如果给computed的属性赋值，必须通过 set 函数去响应修改，且 set 中要引起计算时依赖的数据发生变化
 
 计算属性的完整写法：
@@ -404,6 +404,68 @@ computed: {
 需求：input 框中的输入值改变触发的一些逻辑操作
 
 没有return值的使用 watch 属性，并且可以使用异步操作
+
+当被监视的属性改变时，回调函数自动调用，进行相关操作
+
+监视的属性必须存在，才能进行监视
+
+data 中的属性可以被监视，computed 下面的计算属性也可以
+
+watch  配置项方式 + vm.$watch api调用 两种写法 均可
+
+深度监视
+
+Vue 中的 watch 默认不监测对象内部值的改变（一层）
+
+配置 deep:true 可以监测对象内部值改变（多层）
+
+Vue 自身可以监测对象内部值的改变，但 Vue 提供的 watch 默认不可以
+
+使用 watch 时根据数据的具体结构，决定是否使用深度监视
+
+监视多级结构中某个属性的变化 
+
+```vue
+watch: {
+	isHot : {...}
+	'numbers.a' : {
+    handler() {
+      console.log('a changed')
+    }
+  }
+}
+```
+
+watch 监视多级结构中所有属性的变化  - deep: true
+
+```vue
+watch: {
+	isHot : {...}
+	numbers : {
+		deep: true,
+    handler() {
+      console.log('a or b changed')
+    }
+  }
+}
+```
+
+ 在不需要 immediate, deep 的时候，可以进行简写，只保留处理函数的实现
+
+```vue
+watch: {
+	numbers(newV, oldV) : {
+		console.log('changed')
+  }
+}
+// 或者
+vm.$watch('numbers', function(newV, oldV){
+	console.log('changed')
+})
+// 注意 - vm.$watch 第二个参数不能使用箭头函数，与 this 指向有关
+```
+
+
 
 【7】filter 过滤器及样式变换 ?
 
