@@ -494,6 +494,7 @@ vm.$watch('numbers', function(newV, oldV){
 
 watch 可以通过 setTimeout() 开启异步任务，但 computed 中不能
 
+
 定时器中开启的回调函数是不受 Vue 控制的，而是 浏览器 定时器管理模块 控制，定时器到点了由 JS 引擎调用
 
 小抄之：computed 和 watch 之间的区别：
@@ -502,6 +503,9 @@ watch 可以通过 setTimeout() 开启异步任务，但 computed 中不能
 两个重要的小原则：
  1. 所有被 Vue 管理的函数，最好写成普通函数，这样 this 的指向才是 vm 或 组件实例对象
  2. 所有不被 Vue 管理的函数（定时器的回调函数、ajax 的回调函数、Promise de回调函数等），最好写成箭头函数，这样 this 的指向才是 vm 或组件实例对象 
+
+Vue 监测对象的原理：依赖 Setter
+
 
 【7】filter 过滤器及样式变换 ?
 
