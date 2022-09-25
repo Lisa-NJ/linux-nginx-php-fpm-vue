@@ -465,7 +465,7 @@ vm.$watch('numbers', function(newV, oldV){
 // 注意 - vm.$watch 第二个参数不能使用箭头函数，与 this 指向有关
 ```
 
-
+Vue 监测对象的原理：依赖 Setter
 
 【7】filter 过滤器及样式变换 ?
 
