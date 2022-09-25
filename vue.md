@@ -324,34 +324,60 @@ v-html 要慎用
 
 v-once 只渲染一次初始化的值，后面更新后不进行渲染
 
-v-if 不同条件下渲染不同的 dom 节点
+v-if 不同条件下渲染不同的 dom 节点，显隐切换频率不高时使用
 
 v-else-if
 
-v-else  ==> 兄弟节点才可以使用
+v-else  ==> 兄弟节点才可以使用,要求结构不能被“打断”，v-else 后面的条件判断会被忽略
 
-template + v-if 实现一个条件控制多条 dom 的功能
+使用 template 可解决 用 div 包裹时 结构被破坏的问题，template 展示在页面上时，会被拿掉，template 只能和 v-if 配合使用
+
+```vue
+<template v-if="n===1">
+	<h2>Hello</h2>
+	<h2>How are you</h2>
+</tmplate>
+```
 
 不显示 dom 的两种方式：1-删除掉 dom，2-css / display - "none"
 
-v-show
+v-show ==> true/false 可以 显示/隐藏 一个元素，底层是通过 display:none 来实现隐藏，显隐切换频率高时使用
+
+使用 v-if 时，元素可能无法获取到，而 v-show 一定可以获取到
 
 v-cloak 加载完 vue 库，{{}} 所在的 dom 被识别成 vue 认识的 html 模版后，v-cloak 会消失 
 
 【5】列表渲染
 
-v-for = "title in movies" 模版复用的思想
+v-for = "(item, index) in movies" :key="yyy" 模版复用的思想
+
+如果不写 key，Vue 会自动使用 index 作为 key 值 
+
+可遍历：数组、对象、字符串、指定次数 
+
+使用 index 作为 key 的话，带来的问题：
+  1. 效率低 - 若对数据进行了(逆序添加、逆序删除等)破坏顺序的操作，会产生没有必要的真实DOM更新
+  2. 如果结构中还包含输入类的DOM（ 为 li 添加 input 输入框时），会产生错误的DOM更新，界面会有错位的现象
+
+key 值的使用，作用与原理
+  1. key - 用来对节点进行标识，供 Vue 自身使用，不出现在真实的 DOM 节点中
+  2. 虚拟 DOM 对比算法依赖 key
+
+虚拟 DOM 中key的作用：
+  key 是虚拟 DOM 对象的标识，当数据发生变化时，Vue 会根据“新数据”生成“新的虚拟DOM”，随后 Vue 进行“新虚拟DOM”与“旧虚拟DOM”的差异比较，规则如下：
+    1. 若旧的DOM中没有找到与新虚拟DOM相同的key - 创建新的真实DOM，随后渲染到页面
+    2. 旧虚拟DOM中找到了与新虚拟DOM相同的key - 若虚拟DOM中内容没变，直接使用之前的真实DOM;否则，生成新的真实DOM，并替换掉页面中之前的真实DOM
+
+开发中选择 key：最好使用每条数据的唯一标识，比如 id、手机号、身份证号、学号等唯一值
 
 Vue 重写的数组方法：reverse, push, shift, splice, 
 
 Vue.set 的使用
 
-key 值的使用
-
 文本框 绑定数据到  value，复选框的话 绑定到 check 上面去
 
 
-【6】计算属性 及 watch 监听
+【6】计算属性 及 watch 侦听
 
 **计算属性**的特点：
 
@@ -405,25 +431,25 @@ computed: {
 
 没有return值的使用 watch 属性，并且可以使用异步操作
 
-当被监视的属性改变时，回调函数自动调用，进行相关操作
+当被侦听的属性改变时，回调函数自动调用，进行相关操作
 
-监视的属性必须存在，才能进行监视
+侦听的属性必须存在，才能进行监视
 
 data 中的属性可以被监视，computed 下面的计算属性也可以
 
 watch  配置项方式 + vm.$watch api调用 两种写法 均可
 
-深度监视
+深度侦听
 
-Vue 中的 watch 默认不监测对象内部值的改变（一层）
+Vue 中的 watch 默认不侦听对象内部值的改变（一层）
 
-配置 deep:true 可以监测对象内部值改变（多层）
+配置 deep:true 可以侦听对象内部值改变（多层）
 
-Vue 自身可以监测对象内部值的改变，但 Vue 提供的 watch 默认不可以
+Vue 自身可以侦听对象内部值的改变，但 Vue 提供的 watch 默认不可以
 
-使用 watch 时根据数据的具体结构，决定是否使用深度监视
+使用 watch 时根据数据的具体结构，决定是否使用深度侦听
 
-监视多级结构中某个属性的变化 
+侦听多级结构中某个属性的变化 
 
 ```vue
 watch: {
@@ -436,7 +462,7 @@ watch: {
 }
 ```
 
-watch 监视多级结构中所有属性的变化  - deep: true
+watch 侦听多级结构中所有属性的变化  - deep: true
 
 ```vue
 watch: {
@@ -464,8 +490,18 @@ vm.$watch('numbers', function(newV, oldV){
 })
 // 注意 - vm.$watch 第二个参数不能使用箭头函数，与 this 指向有关
 ```
+// 如果需要过1s钟才更新 fullName
 
+watch 可以通过 setTimeout() 开启异步任务，但 computed 中不能
 
+定时器中开启的回调函数是不受 Vue 控制的，而是 浏览器 定时器管理模块 控制，定时器到点了由 JS 引擎调用
+
+小抄之：computed 和 watch 之间的区别：
+ 1. computed 能完成的任务，watch 都可以完成
+ 2. watch 能完成的功能，computed 不一定能完成，例如: watch 可以进行异步操作
+两个重要的小原则：
+ 1. 所有被 Vue 管理的函数，最好写成普通函数，这样 this 的指向才是 vm 或 组件实例对象
+ 2. 所有不被 Vue 管理的函数（定时器的回调函数、ajax 的回调函数、Promise de回调函数等），最好写成箭头函数，这样 this 的指向才是 vm 或组件实例对象 
 
 【7】filter 过滤器及样式变换 ?
 
@@ -790,6 +826,20 @@ routes:[
 }
 ```
 
+【14】- class 与 style 绑定
+
+在应用界面中，某个（些）元素的样式是变化的
+class / style 绑定就是专门用来实现动态样式效果的技术
+
+class样式
+:class = 'xxx' 
+  表达式是字符串：'classA' - 适用于样式的类名不确定，需要动态指定
+  表达式是对象：{classA:isA, classB:isB} - 适用于要绑定的样式个数和名字都确定，但要动态决定用不用
+  表达式是数组：['classA', 'classB']  - 适用于要绑定的样式个数不确定、名字也不确定
+
+style样式
+  :style="{fontSize: XXX}" 其中 XXX 是动态值
+  :style="[a, b]" 其中 a,b 是样式对象, 样式对象中的 key 值有范围,得是存在的 css 属性，不能想写啥写啥
 
 [Bootstrap]
 
