@@ -1,3 +1,15 @@
+[English]
+Dash delimited format
+a comma-separated list of parameters
+touch base - to talk to someone for a short time to find out how they are or what they think about something
+GUID - Globally Unique Identifier
+UUIU - Universaly Unique Identifiers
+backwards compatibility with previous version of Rex API
+The US government no longer recognizes SHALL as a legal term and recommends using MUST instead.
+When used in a question, which form more often indicates that the asker is hesitant? - should
+a bona fide sample of Lincoln's handwriting - authentic, true
+
+
 
 [linux shortcut]
 ```
@@ -5,6 +17,35 @@ Ctrl+Alt+T ==> open the terminal
 Window + <-/-> ==> left half / right half
 
 ```
+[Rex API]
+	- The Rex application is accessible at https://app.rexsoftware.com
+	- The API supports 2 headers - Authorization and X-api-option
+	- The token is GUID which represents the session you are logged into. 
+	- The X-api-option header allows you to specify options that modify the API request and response handling.
+
+```js
+fetch("https://api.rexsoftware.com/v1/rex/Contacts/read", {
+  body: JSON.stringify({id: 1}),
+  headers: {
+    "Accept": "application/json, text/javascript, */*; q=0.01",
+    "Authorization": `Bearer ${YOUR_TOKEN}`,
+    "Content-Type": "application/json",
+    "X-Api-Option": "use_status_codes=true,add_request_prefixes=true,use_strict_arguments=false,strip_response_prefixes=false"
+  },
+  method: "POST"
+}).then(response => response.json())
+```
+
+```bash
+curl --request POST \
+  --url https://api.rexsoftware.com/v1/rex/Contacts/read \
+  --header 'accept: application/json, text/javascript, */*; q=0.01' \
+  --header 'authorization: Bearer ${YOUR_TOKEN}' \
+  --header 'content-type: application/json' \
+  --header 'x-api-option: use_status_codes=true,add_request_prefixes=true,use_strict_arguments=true,strip_response_prefixes=true' \
+  --data '{"id": 1}'
+```
+
 [call API - browser]
 http://localhost/weather.php?_path=/status
 http://localhost/weather.php?_path=/parameters
