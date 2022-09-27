@@ -9,7 +9,7 @@ The US government no longer recognizes SHALL as a legal term and recommends usin
 When used in a question, which form more often indicates that the asker is hesitant? - should
 a bona fide sample of Lincoln's handwriting - authentic, true
 
-
+z
 
 [linux shortcut]
 ```
@@ -17,6 +17,10 @@ Ctrl+Alt+T ==> open the terminal
 Window + <-/-> ==> left half / right half
 
 ```
+[Postman]
+Cloud Agent Error: Can not send requests to localhost. Select a different agent.
+	- 不能给 localhost 发请求
+
 [Rex API]
 	- The Rex application is accessible at https://app.rexsoftware.com
 	- The API supports 2 headers - Authorization and X-api-option
@@ -44,6 +48,42 @@ curl --request POST \
   --header 'content-type: application/json' \
   --header 'x-api-option: use_status_codes=true,add_request_prefixes=true,use_strict_arguments=true,strip_response_prefixes=true' \
   --data '{"id": 1}'
+```
+
+[REST API & RPC API]
+- https://www.geeksforgeeks.org/difference-between-rest-api-and-rpc-api/
+
+REST APIs
+	- Representational State Transfer
+	- A REST API endpoint is a URL that utilizes HTTP verbs to execute CRUD (Create Read Update Delete) operations over the resources. These HTTP verbs are GET, POST, PATCH, PUT and DELETE. It focuses on providing resources from the server to the clients. 
+	- Allows Standard-based protection with the use of OAuth protocols to verify REST requests.
+	- payload is quite big hence the entire files get back while you needed one field
+	- loses the ability to maintain state in REST
+
+RPC APIs
+	- Remote Procedure Call 
+	- They have lightweight payloads, therefore, provides high performance
+	- easy to understand and work as the action is part of the URL
+	- it is not well standardized
+
+```
+                  REST                                                  RPC
+   1    REST is resource-oriented.	                       RPC is action-oriented.
+   2    Supports GET, POST, PUT, PATCH, and DELETE.            only supports GET and POST
+   3    It provides flexibility for hardware architecture      no flexibility in RPC for hardware architecture
+   4    It supports hypermedia and hyperlinks                  It does not supports hypermedia and hyperlinks
+   5    Allows to specify Content-types or accept headers      Require payloads of a few data types as XML for XML-RPC.
+
+```
+
+	
+[Payload within an API]
+ - https://blog.hubspot.com/website/what-is-payload
+Payload is the data you send over the computer network. 
+```
+data ----- overhead - to show the source or destination of the payload, is removed from the view once reaching its destination
+       |
+       --- payload - the body of your HTTP request and response message when you make an API request.
 ```
 
 [call API - browser]
