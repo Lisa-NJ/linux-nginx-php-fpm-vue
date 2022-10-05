@@ -276,10 +276,6 @@ $ sudo apt install ./google-chrome-stable_current_amd64.deb
 
 $ which git <!-- installation directory for git -->
 
-<!-- install phalcon -->
-$ curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash
-$ sudo apt-get install php7.3-phalcon
-
 <!-- uninstall apache2 -->
 $ sudo systemctl stop apache2
 $ sudo apt-get --purge remove apache2
