@@ -372,7 +372,16 @@ key 值的使用，作用与原理
 
 Vue 重写的数组方法：reverse, push, shift, splice, 
 
-Vue.set 的使用
+push, pop, shift, unshift, sort, reverse, splice - 调用这几个函数后，Vue 能够监测到数组的变化，并更新页面；如果是通过索引值更新数组的某项，Vue 无法监测变化
+
+Vue.set - 后添加的属性也可以具有响应式的特点
+
+```vue
+Vue.set(vm.student, 'sex', 'male')
+vm.$set(vm.student, 'sex', 'male')
+```
+
+
 
 文本框 绑定数据到  value，复选框的话 绑定到 check 上面去
 
