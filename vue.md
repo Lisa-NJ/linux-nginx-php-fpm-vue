@@ -370,9 +370,7 @@ key 值的使用，作用与原理
 
 开发中选择 key：最好使用每条数据的唯一标识，比如 id、手机号、身份证号、学号等唯一值
 
-Vue 重写的数组方法：reverse, push, shift, splice, 
-
-push, pop, shift, unshift, sort, reverse, splice - 调用这几个函数后，Vue 能够监测到数组的变化，并更新页面；如果是通过索引值更新数组的某项，Vue 无法监测变化
+Vue 重写的数组方法：reverse, push, shift, splice, push, pop, shift, unshift, sort, reverse, splice - 调用这几个函数后，Vue 能够监测到数组的变化，并更新页面；如果是通过索引值更新数组的某项，Vue 无法监测变化
 
 Vue.set - 后添加的属性也可以具有响应式的特点
 
@@ -381,10 +379,46 @@ Vue.set(vm.student, 'sex', 'male')
 vm.$set(vm.student, 'sex', 'male')
 ```
 
-
+Vue.set 的使用
+=======
+Vue.set 的使用 - 不能给 vm 添加，可以给 vm.student
+	- 先 赋值 再 set 后，Vue 无法实现动态响应
 
 文本框 绑定数据到  value，复选框的话 绑定到 check 上面去
 
+? 爱好数组调用函数 splice 更新一个元素后，界面成功更新，但是 Vue 开发者工具没有，显示的还是老的数据
+
+【Vue 监视数据的原理】
+  1. Vue 会监视 data 中所有层次的数据
+  2. u如何检测对象中的数据？
+	通过 setter 实现监视，且要在 new Vue 时就传入要检测的数据
+	（1）. 对象中后追加的属性，Vue默认不做响应式处理
+	（2）. 如需给后添加的属性做响应式，请使用如下 API：
+		Vue.set(target, porpertyName/index, value) 或
+		vm.$set(target, porpertyName/index, value)
+  3. 如何检测数组中的数据？
+
+  	通过包裹数组更新元素的方法实现，本质就是做了两件事：
+  	（1）. 调用原生对应的方法对数组进行更新
+  	（2）. 重新解析模板，进而更新页面
+  4. 在 Vue 修改数组中的某个元素一定要用如下方法：
+
+  	（1）. 使用这些API：push,pop,shift,unshift,splice,sort,reverse
+  	（2）. Vue.set() 或 vm.$set()
+  	（3）. 使用非变更方法时，不会变更原始数组，而总是返回一个新数组，可以用新数组替换旧数组，如：filter, concat, slice
+  特别注意：Vue.set() 和 vm.$set() 不能给 vm 或 vm 的根数据对象（vm._data） 添加对象！！！
+
+
+```vue
+// 过滤掉 smoking 这个爱好的方法
+removeSmoke() {
+   this.student.hobbies = this.student.hobbies.filter((h)=>{
+   	return h !== 'smoking'
+   })
+}
+
+```
+  数据劫持：把传入的 data 加工（+get +set）后变成 _data 的过程，用到了 Object.defineProperty
 
 【6】计算属性 及 watch 侦听
 
@@ -853,6 +887,12 @@ class样式
 style样式
   :style="{fontSize: XXX}" 其中 XXX 是动态值
   :style="[a, b]" 其中 a,b 是样式对象, 样式对象中的 key 值有范围,得是存在的 css 属性，不能想写啥写啥
+
+【15】- v-model 收集表单数据
+
+
+【16】
+【17】
 
 [Bootstrap]
 
