@@ -9,12 +9,12 @@ The US government no longer recognizes SHALL as a legal term and recommends usin
 When used in a question, which form more often indicates that the asker is hesitant? - should
 a bona fide sample of Lincoln's handwriting - authentic, true
 
-z
 
 [linux shortcut]
 ```
 Ctrl+Alt+T ==> open the terminal
 Window + <-/-> ==> left half / right half
+Ctrl+R ==> reverse-i-search
 
 ```
 [Postman]
