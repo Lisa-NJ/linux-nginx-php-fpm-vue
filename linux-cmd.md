@@ -21,7 +21,11 @@ $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{p
 $ service apache2 status
 $ ifconfig 
 $ ifconfig -a
+$ gedit php.ini
 
+<!-- history -->
+$ history | grep ssh
+$ pgrep -s 966
 
 <!-- curl + jq -->
 https://curl.se/docs/manual.html
@@ -134,6 +138,14 @@ $ sudo apt-get install php7.4-phalcon4
 <!-- 4. to check -->
 $ php -m <!-- phalcon is on the list -->
  
+<!-- another way to install phalcon4:  --> 
+$ cd /tmp
+$ git clone https://github.com/phalcon/cphalcon
+$ cd phalcon
+$ git checkout tags/v4.0.0 ./
+$ cd build
+$ compose install
+// ...
 
 <!-- install phalcon DevTools -->
 https://github.com/phalcon/phalcon-devtools#installing-via-composer
