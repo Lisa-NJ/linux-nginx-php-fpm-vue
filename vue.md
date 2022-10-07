@@ -11,6 +11,7 @@ mounted() {
   },
 ```
 [Installation]
+
 ```
 $ npm install -g @vue/cli
 $ vue --version
@@ -377,8 +378,7 @@ Vue.set(vm.student, 'sex', 'male')
 vm.$set(vm.student, 'sex', 'male')
 ```
 
-Vue.set 的使用
-=======
+#### Vue.set 的使用
 Vue.set 的使用 - 不能给 vm 添加，可以给 vm.student
 	- 先 赋值 再 set 后，Vue 无法实现动态响应
 
@@ -618,6 +618,63 @@ v-pre 指令：
 
 1. 跳过其所在节点的编译过程
 2. 可利用它跳过：没有使用指令语法、没有使用插值语法的节点，会加快编译
+
+【7-2】自定义指令
+
+一、定义语法：
+
+（1）局部指令
+
+​		new Vue({
+
+​		  directives:{指令名：配置对象}
+
+​		})
+
+​		或
+
+​		new Vue({
+
+​			directives:{指令名：回调函数}
+
+​		})
+
+（2）全局指令
+
+​		Vue.directive(指令名, 配置对象)
+
+​		或：Vue.directive(指令名, 回调函数)
+
+二、配置对象中常用的回调：
+
+（1）bind - 指令与元素成功绑定时调用
+
+（2）inserted - 指令所在元素被插入页面时调用
+
+（3）update - 指令所在模板结构被重新解析时调用
+
+三、备注：
+
+1. 指令定义时不加 v-，但使用时要加 v-
+2. 指令名如果是多个单词，要使用 kebab-case 命名方式，不要用 camelCase 命名
+
+待补：console.dir()
+
+console.log(a instanceof HTMLElement)
+
+element.focus()
+
+【7-3】生命周期
+
+待补：< h2 :style="{opacity:opacity}">Welcome< /h2>
+
+又名：生命周期回调函数、生命周期函数、生命周期钩子
+
+是 Vue 在关键时刻帮我们调用的一些特殊名称的函数
+
+函数名字不可更改，但函数的具体内容是程序员根据需求编写的
+
+生命周期函数中的 this 指向是 vm 或 组件实例对象
 
 【8】组件化开发
 
