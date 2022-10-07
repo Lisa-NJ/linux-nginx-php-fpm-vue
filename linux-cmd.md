@@ -26,6 +26,9 @@ $ gedit php.ini
 <!-- history -->
 $ history | grep ssh
 $ pgrep -s 966
+$ pgrep -s php
+$ pgrep -af php
+$ ssh root@10.1.1.39
 
 <!-- curl + jq -->
 https://curl.se/docs/manual.html
@@ -113,6 +116,8 @@ MariaDB > create database dcdb;
 $ sudo mysql -uroot -p dcdb < dcdb-0817.sql
 $ sudo mysql -uroot -p csdb < csdb-0817.sql
 $ sudo mysql -uroot -p owl < owl-0817.sql
+<!-- or -->
+MariaDB > source /.../dcdb-0817.sql
 <!-- 3. Migrating the Database -->
 $ cd ~/owl/program/api
 $ sudo vendor/bin/phinx migrate

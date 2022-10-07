@@ -8,6 +8,63 @@ backwards compatibility with previous version of Rex API
 The US government no longer recognizes SHALL as a legal term and recommends using MUST instead.
 When used in a question, which form more often indicates that the asker is hesitant? - should
 a bona fide sample of Lincoln's handwriting - authentic, true
+flat out
+
+[connect to zotac]
+```bash
+$ ssh root@10.1.1.39
+// password + enter
+root@ac-master:~# systemctl start apn
+root@ac-master:~# logout
+
+root@ac-master:~# top
+root@ac-master:~# cd /
+root@ac-master:~# cd hadaly
+root@ac-master:~# ls
+// adclient  AnyEvent  assets  bin  cache	Data  DISCLAIMER  docs	Hadaly	IO  opt
+root@ac-master:~# cd Hadaly
+root@ac-master:~# ls
+// Blocking.pm  Config.pm	Listener.pm  Playlist.pm  System.pm  Util.pm
+root@ac-master:~# nano Config.pm
+root@ac-master:~# systemctl restart ac
+root@ac-master:~# systemctl status ac
+```
+A guide to Login as root over SSH on Ubuntu
+https://www.linuxfordevices.com/tutorials/ubuntu/login-as-root-over-ssh
+```bash
+//  To check if we have an ssh-server is installed on our target machine
+root@ac-master:~# apt-cache policy openssh-server
+// Install ssh-server
+root@ac-master:~# sudo apt install openssh-server
+root@ac-master:~# systemctl status ssh
+root@ac-master:~# sudo systemctl enable --now ssh
+// edit /etc/ssh/sshd_config --> PermitRootLogin yes + PubkeyAuthentication yes
+root@ac-master:~# sudo systemctl restart ssh
+```
+
+[DHCP and DNS]
+DHCP 
+	- Dynamic Host Configuration Protocol
+	- Assigns IP addresses to hosts
+	- Comes as a client and a server
+	- DHCP Discover + DHCPOffer + DHCPRequest + DHCPACK
+	- DHCPDiscover - Looks for a DHCP server
+	- DHCPOffer - The DHCP server offers an address
+	- DHCPRequest - The host requests to lease the address
+	- DHCPACK / sends < IP addr + subnet mask + the default gateway + dns server >
+	- UDP Port / Client 68 + Server 67
+OpenWrt luci feed 
+	- LuCI - OpenWrt Configuration Interface
+	- https://github.com/Lisa-NJ/luci
+UPD (User Datagram Protocol)
+	- UDP ports include the DNS port (53), the Dynamic Host Configuration Protocol port (68), and the Kerberos port (88)
+dnsmasq
+
+MAC Address
+	- media access control address
+	- a unique ID assigned to network interface cards (NICs)
+	- also known as a physical or hardware address
+
 
 
 [linux shortcut]
