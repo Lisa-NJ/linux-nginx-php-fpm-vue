@@ -1075,7 +1075,60 @@ Vue 中使用组件的三大步骤：
 
 ​	< school>< /school>
 
-【18-3】单文件组件
+**组件命名**：
+
+​	一个单词组成：
+
+​		第一种写法（首字母小写）：school
+
+​		第二种写法（首字母大写）：School
+
+​	多个单词组成：
+
+​		第一种写法（kebab-case）：my-school
+
+​		第二种写法（CamelCase）：MySchool（需要 Vue 脚手架支持）
+
+​	备注：
+
+​	（1）组件名尽可能回避 HTML 中已有的元素名称，例如：h2、H2都不行
+
+​	（2）可以使用 name 配置项指定组件在开发者工具中呈现的名字
+
+**组件标签**：
+
+​	第一种写法：< school>< /school>
+
+​	第二种写法：< school/> 
+
+​	备注：不使用脚手架时，< school/> 会导致后续组件不能渲染
+
+**一个简写方式**：
+
+​	const school = Vue.extend(options) 可简写为：const school = options
+
+【18-3】VueComponent 构造函数
+
+1. school 组件本质是一个名为 VueComponent 的构造函数，且不是程序员定义的，是 Vue.extend 生成的
+
+2. 我们只需写 < school/> 或 < school>< /school>，Vue 解析时会帮我们创建 school 组件的实例对象
+
+3. 特别注意：每次调用 Vue.extend，返回的都是一个全新的 VueComponent
+
+4. 关于 this 指向
+
+   （1）组件配置中：data 函数、methods 中的函数、watch 中的函数、computed 中的函数 它们的 this 均是 VueComponent 实例对象
+
+   （2）new Vue(options)配置中：data 函数、methods 中的函数、watch 中的函数、computed 中的函数 它们的 this 均是 Vue 实例对象
+
+5. VueComponent 的实例对象，以后简称 vc（组件实例对象），Vue 的实例对象，简称 vm
+
+【18-4】一个重要的内置关系
+
+1. VueComponent.prototype.__ proto__ === Vue.prototype
+2. 为什么要有这个关系：让组件实例对象 (vc) 可以访问到 Vue原型上的属性、方法
+
+【18-5】单文件组件
 
 一个文件中只包含一个组件 *.vue
 
