@@ -10,14 +10,6 @@ mounted() {
     this.$refs.p.innerHTML = "Has been mounted successfully";
   },
 ```
-[Installation]
-
-```
-$ npm install -g @vue/cli
-$ vue --version
-@vue/cli 5.0.8
-```
-
 [Vue devtools] 
 has two main tabs:cd
 
@@ -1024,10 +1016,7 @@ style样式
 
 【15】- v-model 收集表单数据
 
-【16】
-【17】
-
-【18】模块与组件
+【16】模块与组件
 
 模块：
 
@@ -1045,9 +1034,9 @@ style样式
 
 当应用中的功能都是多组件的方式来编写的，那这个应用就是一个组件化的应用
 
-【18-2】非单文件组件
+【16-2】非单文件组件
 
-一个文件中包含有多个组件 *.html
+一个文件中包含有多个组件 *.html，弊病：样式不能跟着组件走
 
 Vue 中使用组件的三大步骤：
 
@@ -1107,7 +1096,7 @@ Vue 中使用组件的三大步骤：
 
 ​	const school = Vue.extend(options) 可简写为：const school = options
 
-【18-3】VueComponent 构造函数
+【16-3】VueComponent 构造函数
 
 1. school 组件本质是一个名为 VueComponent 的构造函数，且不是程序员定义的，是 Vue.extend 生成的
 
@@ -1123,14 +1112,58 @@ Vue 中使用组件的三大步骤：
 
 5. VueComponent 的实例对象，以后简称 vc（组件实例对象），Vue 的实例对象，简称 vm
 
-【18-4】一个重要的内置关系
+【16-4】一个重要的内置关系
 
 1. VueComponent.prototype.__ proto__ === Vue.prototype
 2. 为什么要有这个关系：让组件实例对象 (vc) 可以访问到 Vue原型上的属性、方法
 
-【18-5】单文件组件
+【16-5】单文件组件
 
 一个文件中只包含一个组件 *.vue
+
+<v -- 快速输入 vue / template + script + style
+
+待复习：ES6 模块化
+
+【17】CLI - Command Line Interface
+
+第一步：（仅第一次执行）[Installation]
+
+```
+$ npm install -g @vue/cli
+$ vue --version
+@vue/cli 5.0.8
+```
+
+ 第二步：切换到你要创建项目的目录，然后使用命令创建项目
+
+```vue
+$ vue create xxxx
+```
+
+第三步：启动项目
+
+```vue
+$ npm run serve
+```
+
+http://localhost:8080/ 开启了内置小服务器，端口在 8080
+
+http://192.168.51.200:8080/ 给同局域网内的其他人使用
+
+
+
+build：所有功能开发完，编译生成 .html .css .js文件，把整个工程变成浏览器认识的，最后的一次编译
+
+lint：把所有 .js .vue 进行语法检查，平时开发不使用
+
+package-lock.json: 包版本控制文件，后面安装时可以最快速度安装好需要的特定版本
+
+chrome://settings/content/javascript -- 取消浏览器对 js 的支持
+
+【18】
+
+
 
 [Bootstrap]
 
