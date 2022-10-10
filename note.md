@@ -9,6 +9,9 @@ The US government no longer recognizes SHALL as a legal term and recommends usin
 When used in a question, which form more often indicates that the asker is hesitant? - should
 a bona fide sample of Lincoln's handwriting - authentic, true
 flat out
+btw - by the way
+lol - laugh out loud
+
 
 [connect to zotac]
 ```bash
@@ -42,6 +45,33 @@ root@ac-master:~# sudo systemctl enable --now ssh
 root@ac-master:~# sudo systemctl restart ssh
 ```
 
+[New Zotac]
+How to make a new copy of Zotac
+	- a new empty Zotac + a new M2 Hard disk 
+
+	- U plugged into Zotac and starts system
+	- find AdverClient in two ways
+		1. download from https://docs.adverpost.com 
+		2. desktop when the system is ready 
+	- double-click Adverclient(adclient-318-amd64.img.xz) --> target M2 Hard disk on Linux
+
+	- system / GParted -- expand the volume to 120G
+
+	- connect the Zotac to a screen --> show HWID 014.8be.c4d
+	- Ctrl + Alt + F1: enter cmd window
+	- root / elitem
+	- hadaly/Hadaly/System.pm
+	- nano "..." interface=%s --> "ethe1" // Ln:66
+	- systemctl restart ac
+
+	- Add a Display on adverpost
+		- LED: pixel is useful, physical width and height only for users 
+		- LCD: 0×0 -- use the maximum by default
+		- block time -- the maximum of a campaign supported
+		- Brightness / censor -- not finished yet
+		- ACID connected to IRC, not for users, can be renamed to something meaningful
+		
+
 [DHCP and DNS]
 DHCP 
 	- Dynamic Host Configuration Protocol
@@ -65,7 +95,8 @@ MAC Address
 	- a unique ID assigned to network interface cards (NICs)
 	- also known as a physical or hardware address
 
-
+[HexChat / IRC]
+1. *:getID
 
 [linux shortcut]
 ```
