@@ -326,7 +326,7 @@ v-else  ==> 兄弟节点才可以使用,要求结构不能被“打断”，v-el
 使用 template 可解决 用 div 包裹时 结构被破坏的问题，template 展示在页面上时，会被拿掉，template 只能和 v-if 配合使用
 
 ```vue
-<template v-if="n===1">
+<template v-if="n===1"> 
 	<h2>Hello</h2>
 	<h2>How are you</h2>
 </tmplate>
@@ -1121,7 +1121,7 @@ Vue 中使用组件的三大步骤：
 
 一个文件中只包含一个组件 *.vue
 
-<v -- 快速输入 vue / template + script + style
+<+v -- 快速输入 vue / template + script + style
 
 待复习：ES6 模块化
 
@@ -1160,6 +1160,37 @@ lint：把所有 .js .vue 进行语法检查，平时开发不使用
 package-lock.json: 包版本控制文件，后面安装时可以最快速度安装好需要的特定版本
 
 chrome://settings/content/javascript -- 取消浏览器对 js 的支持
+
+```vue
+// main.js
+import Vue from 'vue' -- 这种方式引入的是 node_modules / vue / package.json 第6行 "module":  "dist/vue.runtime.esm.js"
+
+// The following code can cause some problems
+new Vue({
+  el: "#root",
+  template: `<App/>`,
+  components: { App }
+})
+
+```
+You are using the runtime-only build of Vue where the template compiler is not available.
+Either pre-compile the templates into render functions
+Or use the compiler-included build
+
+【17-1】  render 函数
+Vue = Vue 核心 + 模板解析器 (1/3 体积)
+运行时 Vue 都不包括 模板解析器
+dist/vue.js - 完整版
+dist/vue.runtime.esm.js - ES module 版 
+
+.vue 中的 < template> 由 vue-template-compiler 解析
+vm 中的 template 选项交给 render 去处理
+
+关于不同版本的 Vue：
+  1. vue.js 与 vue.runtime.js 的区别:
+  （1）vue.js 是完整版的 Vue,包含 Vue 核心 + 模板解析器 (1/3 体积)
+  （2）vue.runtime.xxx.js 是运行版的 Vue，只包含 Vue 核心，不包括 模板解析器
+  2. 因为 vue.runtime.xxx.js 没有模板解析器，所以不能使用 template 配置项，需要使用 render 函数接收到的 createElement 函数去指定具体内容
 
 【18】
 

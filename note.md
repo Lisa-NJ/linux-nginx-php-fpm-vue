@@ -12,7 +12,6 @@ flat out
 btw - by the way
 lol - laugh out loud
 
-
 [connect to zotac]
 ```bash
 $ ssh root@10.1.1.39
@@ -71,6 +70,11 @@ How to make a new copy of Zotac
 		- Brightness / censor -- not finished yet
 		- ACID connected to IRC, not for users, can be renamed to something meaningful
 		
+
+[IRC] 
+	Internet Relay Chat
+	IRC Client
+	IRC Server
 
 [DHCP and DNS]
 DHCP 
@@ -211,10 +215,6 @@ $ curl http://localhost/test-lisa.php?_path=/getSchedule -X POST -d '{"duration"
 	$newsArr = $json['articles'];
 ```
 
-[IRC] 
-Internet Relay Chat
-IRC Client
-IRC Server
 
 [API]
 https://www.youtube.com/watch?v=Yzx7ihtCGBs&t=6
