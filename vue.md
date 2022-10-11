@@ -1192,6 +1192,25 @@ vm 中的 template 选项交给 render 去处理
   （2）vue.runtime.xxx.js 是运行版的 Vue，只包含 Vue 核心，不包括 模板解析器
   2. 因为 vue.runtime.xxx.js 没有模板解析器，所以不能使用 template 配置项，需要使用 render 函数接收到的 createElement 函数去指定具体内容
 
+【17-2】  默认配置修改
+Vue 隐藏了重要的配置文件，查看具体的 webpack 配置，执行
+```bash
+vue inspect > output.js
+ERROR  Failed to locate @vue/cli-service.
+Note that `vue inspect` is an alias of `vue-cli-service inspect`
+        and can only be used in a project where @vue/cli-service is locally installed.
+        
+$ nvm use 18
+$ npm install
+$ vue inspect > out.js 
+  working !!! 
+```
+官网参考：cn.vuejs.org / 生态系统 / Vue CLI / 配置参考 -- 左侧目录里出现的都是可以修改的
+
+vue.config.js --输送给--> webpack
+                           |基于
+                         NodeJS --use--> CommonJS
+
 【18】
 
 
