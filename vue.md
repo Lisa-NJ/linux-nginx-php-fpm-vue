@@ -2,14 +2,8 @@ camelCase (驼峰命名法)
 kebab-case(短横线分隔命名)
 PascalCase(首字母大写命名)
 
-```
 
-<p ref="p">This is to show how to use ref</p>
 
-mounted() {
-    this.$refs.p.innerHTML = "Has been mounted successfully";
-  },
-```
 [Vue devtools] 
 has two main tabs:cd
 
@@ -1188,8 +1182,8 @@ vm 中的 template 选项交给 render 去处理
 
 关于不同版本的 Vue：
   1. vue.js 与 vue.runtime.js 的区别:
-  （1）vue.js 是完整版的 Vue,包含 Vue 核心 + 模板解析器 (1/3 体积)
-  （2）vue.runtime.xxx.js 是运行版的 Vue，只包含 Vue 核心，不包括 模板解析器
+    （1）vue.js 是完整版的 Vue,包含 Vue 核心 + 模板解析器 (1/3 体积)
+    （2）vue.runtime.xxx.js 是运行版的 Vue，只包含 Vue 核心，不包括 模板解析器
   2. 因为 vue.runtime.xxx.js 没有模板解析器，所以不能使用 template 配置项，需要使用 render 函数接收到的 createElement 函数去指定具体内容
 
 【17-2】  默认配置修改
@@ -1211,9 +1205,22 @@ vue.config.js --输送给--> webpack
                            |基于
                          NodeJS --use--> CommonJS
 
-【18】
+【18】ref 属性
 
+被用来给元素或者子组件注册引用信息（id的替代者）
 
+应用在 html 标签上获取的是真实 DOM 元素，应用在组件标签上得到的是组件实例对象（vc）
+
+使用方式：打标识: ref='xxx' + 获取：this.$refs.xxx
+
+```
+<p ref='pref'>This is to show how to use ref</p>
+mounted() {
+    this.$refs.pref.innerHTML = "Has been mounted successfully";
+  },
+```
+
+[Vue devtools] 
 
 [Bootstrap]
 
