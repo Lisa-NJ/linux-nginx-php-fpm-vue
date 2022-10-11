@@ -12,6 +12,17 @@ flat out
 btw - by the way
 lol - laugh out loud
 
+
+[IRC] 
+	Internet Relay Chat
+	IRC Client
+	IRC Server
+	
+[HexChat / IRC]
+1. *:getID
+
+http://root.cdn.adverpost.com:2222/clients
+
 [connect to zotac]
 ```bash
 $ ssh root@10.1.1.39
@@ -71,11 +82,6 @@ How to make a new copy of Zotac
 		- ACID connected to IRC, not for users, can be renamed to something meaningful
 		
 
-[IRC] 
-	Internet Relay Chat
-	IRC Client
-	IRC Server
-
 [DHCP and DNS]
 DHCP 
 	- Dynamic Host Configuration Protocol
@@ -99,8 +105,6 @@ MAC Address
 	- a unique ID assigned to network interface cards (NICs)
 	- also known as a physical or hardware address
 
-[HexChat / IRC]
-1. *:getID
 
 [linux shortcut]
 ```
