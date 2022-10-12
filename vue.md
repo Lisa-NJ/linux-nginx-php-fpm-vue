@@ -3,6 +3,10 @@ kebab-case(短横线分隔命名)
 PascalCase(首字母大写命名)
 
 
+vue-cli 生成一个项目，使用 bootstrap 后，不需要自己的样式，使用 bootstrap 的样式
+
+html模板+template模板-->对象-->虚拟DOM，通过 render 调用
+
 
 [Vue devtools] 
 has two main tabs:cd
@@ -841,13 +845,22 @@ component 里面也可以有 methods
 
 
 
-【9】Prop 类型
+【9】Props
+功能：让组件接收外部传进来的数据
+（1）传递数据：
+	< Demo name='xxx'/>
+（2）接收数据：三种方式，如下代码
 
+备注：
+props是只读的，Vue底层会检测对props的修改，如果进行了修改，就会发出警告，若业务需求确实需要修改，那么请复制props的内容到data中一份，然后再去修改data中的数据
+props 先处理，然后再准备 data
+key，ref 不能使用作为 prop 的名称
+ 
 ```
-  // 字符串数组形式列出
+  // 第一种：字符串数组形式列出
   props: ['title', 'likes', 'isPublished', 'commentIds', 'author']
 
-  // 对象形式列出
+  // 第二种：对象形式列出 接收的同时对数据进行类型限制 
   props: {
     title: String,
     likes: Number,
@@ -858,6 +871,19 @@ component 里面也可以有 methods
     contactsPromise: Promise // or any other constructor
   }
   
+  // 第三种：最完整的对象形式列出 接收的同时对数据进行:类型限制、默认值的指定、必要性的限制
+  props: {
+    title: {
+      type: String, 
+      required: true
+    },
+    likes: {
+      type: Number,
+      default: 10
+    },
+    ...
+  }
+   
   <!-- 传入数字 42，这是一个 JavaScript 表达式而不是一个字符串。-->
   <blog-post v-bind:likes="42"></blog-post>
   
@@ -869,7 +895,7 @@ component 里面也可以有 methods
     v-bind:author="{
       name: 'Veronica',
       company: 'Veridian Dynamics'
-    }"
+    }" 
   ></blog-post>
   
   <!-- 用不带参数的 v-bind 将一个对象的所有 property 作为 prop 传入 -->
@@ -884,7 +910,7 @@ component 里面也可以有 methods
     v-bind:title="post.title"
   ></blog-post>
 ```
-webpack：前端自动化构建工具
+
 
 组件可以接受任意的 attribute，这些 attribute 会被添加到这个组件的根元素上 -- 非 prop 的 attribute 
 
@@ -892,13 +918,26 @@ webpack：前端自动化构建工具
 
 如果不希望组件的根元素继承 attribute，可以在组件的选项中设置 inheritAttrs: false, 但该选项不会影响 style 和 class 的绑定
 
-【10】?
+【10】mixin
+功能：可以把多个组件共用的配置提取成一个混入对象
+使用方式：
+  第一步定义混合，例如：
+  ```
+  export const xxx = {
+    data(){...},
+    methods:{...}
+    ...
+  }
+  ```
+  第二步使用混入，例如：
+  （1）全局混入：Vue.mixin(xxx)
+  （2）局部混入：mixins:[xxx]
 
-单文件组件使用 及 CSS 作用域
+复用配置
 
-vue-cli 生成一个项目，使用 bootstrap 后，不需要自己的样式，使用 bootstrap 的样式
+混合 和 data、methods 中出现的同名数据或方法，以data、methods中的为准
 
-html模板+template模板-->对象-->虚拟DOM，通过 render 调用
+对于生命周期钩子来说，都有效，混合中的先调用，自己组件中的后调用
 
 【11】-- $
 ```js
