@@ -2,6 +2,12 @@ camelCase (驼峰命名法)
 kebab-case(短横线分隔命名)
 PascalCase(首字母大写命名)
 
+待补：
+
+```bash
+$ npm view webpack versions
+$ npm view less-loader versions
+```
 
 vue-cli 生成一个项目，使用 bootstrap 后，不需要自己的样式，使用 bootstrap 的样式
 
@@ -853,7 +859,7 @@ component 里面也可以有 methods
 props是只读的，Vue底层会检测对props的修改，如果进行了修改，就会发出警告，若业务需求确实需要修改，那么请复制props的内容到data中一份，然后再去修改data中的数据
 props 先处理，然后再准备 data
 key，ref 不能使用作为 prop 的名称
- 
+
 ```
   // 第一种：字符串数组形式列出
   props: ['title', 'likes', 'isPublished', 'commentIds', 'author']
@@ -1045,6 +1051,12 @@ style样式
   :style="{fontSize: XXX}" 其中 XXX 是动态值
   :style="[a, b]" 其中 a,b 是样式对象, 样式对象中的 key 值有范围,得是存在的 css 属性，不能想写啥写啥
 
+scoped 样式
+
+  作用：让样式在局部生效，防止冲突
+
+  写法：< style scoped>
+
 【15】- v-model 收集表单数据
 
 【16】模块与组件
@@ -1219,6 +1231,7 @@ vm 中的 template 选项交给 render 去处理
 
 关于不同版本的 Vue：
   1. vue.js 与 vue.runtime.js 的区别:
+
     （1）vue.js 是完整版的 Vue,包含 Vue 核心 + 模板解析器 (1/3 体积)
     （2）vue.runtime.xxx.js 是运行版的 Vue，只包含 Vue 核心，不包括 模板解析器
   2. 因为 vue.runtime.xxx.js 没有模板解析器，所以不能使用 template 配置项，需要使用 render 函数接收到的 createElement 函数去指定具体内容
@@ -1256,6 +1269,38 @@ mounted() {
     this.$refs.pref.innerHTML = "Has been mounted successfully";
   },
 ```
+
+【19】插件
+
+功能：用于增强 Vue
+
+本质：包含 install 方法的一个对象，install 的第一个参数是 Vue，第二个以后的参数是插件使用者传递的数据
+
+定义插件：
+
+  对象.install = function (Vue, options) {
+
+​    //1. 添加全局过滤器
+
+​    Vue.filter(...)
+
+​    //2. 添加全局指令
+
+​    Vue.directive(...)
+
+​    //3. 配置全局混入
+
+​    Vue.mixin(...)
+
+​    //4. 添加实例方法
+
+​    Vue.prototype.$myMethod = function() {...}
+
+​    Vue.prototype.$myProperty = xxx
+
+  }
+
+使用插件：Vue.use(对象)
 
 [Vue devtools] 
 
