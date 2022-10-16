@@ -12,6 +12,23 @@ flat out
 btw - by the way
 lol - laugh out loud
 
+[development settings]
+	- Zotac: 10.1.1.134 + /hadaly/Hadaly/Config.pm 'PLAYLIST_ADDR' => 'http://10.1.1238:8000'
+	- $ sudo ufw allow 8000 + 80
+	- ~/work-lisa/api/public - $ php -S 0.0.0.0:8000 index.php
+	
+[ufw]
+```bash
+$ sudo ufw status verbose
+$ systemctl status ufw
+$ sudo ufw allow http
+$ sudo ufw allow 80
+$ sudo ufw allow 8000
+```
+	- UFW防火墙的默认行为是阻止所有传入和转发流量，并允许所有出站流量。这意味着除非您打开指定的端口，否则任何尝试访问您的服务器的人都将无法连接。
+	- 默认策略在/etc/default/ufw文件中定义，可以通过手动修改该文件或使用sudo ufw default <policy> <chain>命令来更改。
+	- 根据系统上运行的应用程序，您可能还需要打开其他端口。 打开端口的一般语法是ufw allow port_number/protocol。如果未给出协议，则UFW会同时为tcp和udp创建规则。
+
 
 [IRC] 
 	Internet Relay Chat
@@ -19,7 +36,8 @@ lol - laugh out loud
 	IRC Server
 	
 [HexChat / IRC]
-1. *:getID
+1. all commands are in 00.html / External API
+2. Server: root.cdn.adverpost.com
 
 http://root.cdn.adverpost.com:2222/clients
 
