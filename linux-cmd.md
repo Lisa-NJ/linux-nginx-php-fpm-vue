@@ -269,6 +269,10 @@ $ find /tmp -type d -empty <!-- empty directories -->
 $ find / -type f -perm 777 -print -exec chmod 755 {}\; <!-- find files 777 then change permission-->
 $ find / -type f -name "*.txt" -exec rm -f {}\; <!-- find all txt files then delete -->
 
+$ find . -type f -mtime +1
+$ find . -type f -mtime 1
+$ find . -name '*.php' -mmin -30
+
 $ echo "$PS1"
 \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ 
 \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\$ 

@@ -62,7 +62,6 @@ vm._data = options.data
 	在 getter/setter 内部去操作（读/写）data 中对应的属性
 
 
-
 【1】
 
 框架 - JS 的一个工具集合；
@@ -139,14 +138,14 @@ https://github.com/vuejs vue-核心，推荐 awesome-vue（很多资源），论
 
 vue 指令语法：v-bind : href="url"
 
-​						v-指令名 : 指令参数 = 指令表达式
+           v-指令名 : 指令参数 = 指令表达式
 
 ```vue
 <body>
   <div id="app">
     <a v-bind:href="url">baidu</a>
   </div>
-	<script>
+  <script>
     new Vue({
       el: "#app",
       data:{
@@ -377,7 +376,7 @@ vm.$set(vm.student, 'sex', 'male')
 Vue.set 的使用 - 不能给 vm 添加，可以给 vm.student
 	- 先 赋值 再 set 后，Vue 无法实现动态响应
 
-文本框 绑定数据到  value，复选框的话 绑定到 check 上面去
+文本框 绑定数据到 value，复选框的话 绑定到 check 上面去
 
 ? 爱好数组调用函数 splice 更新一个元素后，界面成功更新，但是 Vue 开发者工具没有，显示的还是老的数据
 
@@ -549,7 +548,7 @@ upperCase 的使用举例 {{msg | upperCase}}，写在 filters 里面的函数
 
 多个 style 可以同时使用，style 和 v-bind:style 会进行融合，同时起作用
 
-通过改变类 来 改变样式，第一种方式：显示/隐藏；第二种：改变类名
+通过改变类来改变样式，第一种方式：显示/隐藏；第二种：改变类名
 
 过滤器：
 
@@ -557,7 +556,7 @@ upperCase 的使用举例 {{msg | upperCase}}，写在 filters 里面的函数
 
 语法：
 
-1. 注册过滤器：Vue.filter(name, callback) 或 new Vue(filters:{})
+1. 注册过滤器：Vue.filter(name, callback) 或 new Vue({filters:{}})
 
 2. 使用过滤器：{{ xxx | 过滤器 }} 或 v-bind:属性 = "xxx | 过滤器名"
 
@@ -630,7 +629,7 @@ v-pre 指令：
 
 ​		new Vue({
 
-​			directives:{指令名：回调函数}
+​		  directives:{指令名：回调函数}
 
 ​		})
 
@@ -933,7 +932,7 @@ key，ref 不能使用作为 prop 的名称
     data(){...},
     methods:{...}
     ...
-  }
+  }  
   ```
   第二步使用混入，例如：
   （1）全局混入：Vue.mixin(xxx)
