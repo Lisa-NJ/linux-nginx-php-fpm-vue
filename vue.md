@@ -1302,6 +1302,32 @@ mounted() {
 
 使用插件：Vue.use(对象)
 
+【20】TodoList
+
+1. 静态
+	- 分成四个组件：MyHeader + MyList(MyItem) + MyFooter
+2. 初始化列表
+	- checkbox 动态设置勾选状态
+	```vue
+	<input type="checkbox" :checked="done"/>
+	```
+3. Add
+	- 通常：有服务器的情况下，UI传入数据给服务器，服务器进行数据库操作后，返回UI一个唯一的id
+	- 没有服务器的时候，UI自己要生成唯一id，可以使用 uuid
+	- uuid 生成全球唯一字符串编码(所处物理地址+网卡Mac地址+内存条序列号...等)，库太大，生成的id太长
+	- nanoid: uuid简化
+		```
+		$ npm i nanoid
+		
+		import {nanoid} from 'nanoid'
+		id:nanoid()
+		```
+	- 兄弟之间数据没法传输 todoObj，将 todos 提升到共同的父组件
+	- 子组件传给父组件 todoObj：父组件定义一个方法receive，传给子组件，子组件调用receive将todoObj传回
+4. Check
+5. Del
+6. Statistic
+
 [Vue devtools] 
 
 [Bootstrap]
