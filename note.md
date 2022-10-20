@@ -82,23 +82,23 @@ How to make a new copy of Zotac
 		1. download from https://docs.adverpost.com 
 		2. desktop when the system is ready 
 	- double-click Adverclient(adclient-318-amd64.img.xz) --> target M2 Hard disk on Linux
-
+	
 	- system / GParted -- expand the volume to 120G
-
+	
 	- connect the Zotac to a screen --> show HWID 014.8be.c4d
 	- Ctrl + Alt + F1: enter cmd window
 	- root / elitem
 	- hadaly/Hadaly/System.pm
 	- nano "..." interface=%s --> "ethe1" // Ln:66
 	- systemctl restart ac
-
+	
 	- Add a Display on adverpost
 		- LED: pixel is useful, physical width and height only for users 
 		- LCD: 0×0 -- use the maximum by default
 		- block time -- the maximum of a campaign supported
 		- Brightness / censor -- not finished yet
 		- ACID connected to IRC, not for users, can be renamed to something meaningful
-		
+
 
 [DHCP and DNS]
 DHCP 
@@ -190,7 +190,7 @@ RPC APIs
 
 ```
 
-	
+
 [Payload within an API]
  - https://blog.hubspot.com/website/what-is-payload
 Payload is the data you send over the computer network. 
