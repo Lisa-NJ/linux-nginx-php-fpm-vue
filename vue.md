@@ -1326,8 +1326,11 @@ mounted() {
 	- 兄弟之间数据没法传输 todoObj，将 todos 提升到共同的父组件
 	- 子组件传给父组件 todoObj：父组件定义一个方法receive，传给子组件，子组件调用receive将todoObj传回
 4. Check
+	- 
 5. Del
+	- 
 6. Statistic
+	- 
 
 [Vue devtools] 
 
