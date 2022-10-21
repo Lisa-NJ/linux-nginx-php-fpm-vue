@@ -12,10 +12,6 @@ flat out
 btw - by the way
 lol - laugh out loud
 
-[development settings]
-	- Zotac: 10.1.1.134 + /hadaly/Hadaly/Config.pm 'PLAYLIST_ADDR' => 'http://10.1.1238:8000'
-	- $ sudo ufw allow 8000 + 80
-	- ~/work-lisa/api/public - $ php -S 0.0.0.0:8000 index.php
 	
 [ufw]
 ```bash
