@@ -1303,6 +1303,10 @@ mounted() {
 
 使用插件：Vue.use(对象)
 
+【20】TodoList
+
+//待补：reduce
+
 [Vue devtools] 
 
 [Bootstrap]
