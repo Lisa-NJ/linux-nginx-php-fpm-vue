@@ -11,7 +11,7 @@ a bona fide sample of Lincoln's handwriting - authentic, true
 flat out
 btw - by the way
 lol - laugh out loud
-
+lmk - let me know
 	
 [ufw]
 ```bash
@@ -82,6 +82,8 @@ How to make a new copy of Zotac
 	- system / GParted -- expand the volume to 120G
 	
 	- connect the Zotac to a screen --> show HWID 014.8be.c4d
+	- delete --> BIOS setting: Power/Loss - on, Security/Secure boot/Secure boot - disabled, secure mode - custom
+	
 	- Ctrl + Alt + F1: enter cmd window
 	- root / elitem
 	- hadaly/Hadaly/System.pm
