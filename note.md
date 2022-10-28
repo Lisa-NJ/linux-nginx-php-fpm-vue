@@ -13,6 +13,53 @@ btw - by the way
 lol - laugh out loud
 lmk - let me know
 	
+[uploading a png]
+	1. click 'upload' on localhost:8080 
+		- axios.post(UPLOAD_ENDPOINT)
+		- 1. nerkmid receives the file and Beginning conversion of image from $.../conv/in/filename to $.../conv/out/filename.png
+		- 2. Creating thumbnail filename_l.jpg, filename_m.jpg, and filename_s.jpg in  $.../conv/thumb/
+		- 3. Sending callback to API
+		- 4. Sending API request to store media
+	2. axios.get(UPLOAD_POLL_ENDPOINT)
+		- ```
+		response: {
+			stauts:200, 
+			statusText:"OK", 
+			config:{url:"http://localhost:8008/status"},
+			data: {hash: "b735153d8bbc495b22ea4d5d52c9ae83"}
+			}
+		  ```
+
+[Media / refresh]
+http://localhost:8000/api/v1/media?limit=all&search=&team=353
+```
+	...
+	{
+	   "mediaId":"1063843",
+	   "teamId":"353",
+	   "imageId":"15639",
+	   "name":"5188a01e8f98e4e553ded995908d5cea.png",
+	   "size":"68498",
+	   "height":"755",
+	   "width":"1025",
+	   "hash":"b735153d8bbc495b22ea4d5d52c9ae83",
+	   "mimeType":"image\/png",
+	   "uri":"http:\/\/localhost\/out\/5188a01e8f98e4e553ded995908d5cea.png"
+	}
+	...
+```
+http://localhost/thumb/b735153d8bbc495b22ea4d5d52c9ae83_l.jpg
+
+
+1.png 200
+	https://aws.adverpost.com/ccda4afcbad22a95e3bc27d7e6bee980.png 
+PFS_VideoScreen_384x240px_6c_.jpg
+	https://aws.adverpost.com/2779d5953353fa92e04f89af8b65dbf4.png
+0b79f1bc81a936eecc3810aa0b493f6e.png
+	http://localhost/out/0b79f1bc81a936eecc3810aa0b493f6e.png
+ed7bb012952ab8aba1fec4ee038d6ead.png	
+	http://localhost/out/ed7bb012952ab8aba1fec4ee038d6ead.png
+	
 [ufw]
 ```bash
 $ sudo ufw status verbose
@@ -481,3 +528,8 @@ $ curl -I https://www.google.co.in/
 $ man curl
 $ curl --help
 ```
+
+[flight]
+
+		Singapore --> Shanghai    Monday   ￥2000
+Adelaide <---   Singapore                 Sunday   ￥1600
