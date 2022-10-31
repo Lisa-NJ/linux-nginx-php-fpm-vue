@@ -22,6 +22,8 @@ $ service apache2 status
 $ ifconfig 
 $ ifconfig -a
 $ gedit php.ini
+<!-- can not use ifconfig -->
+$ apt install net-tools  
 
 <!-- history -->
 $ history | grep ssh

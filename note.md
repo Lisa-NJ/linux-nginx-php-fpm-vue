@@ -86,7 +86,7 @@ http://root.cdn.adverpost.com:2222/clients
 
 [connect to zotac]
 ```bash
-$ ssh root@10.1.1.39
+$ ssh root@10.1.1.134
 // password + enter
 root@ac-master:~# systemctl start apn
 root@ac-master:~# logout
@@ -125,24 +125,27 @@ How to make a new copy of Zotac
 		1. download from https://docs.adverpost.com 
 		2. desktop when the system is ready 
 	- double-click Adverclient(adclient-318-amd64.img.xz) --> target M2 Hard disk on Linux
+	- a warning window appears + fix
 	
-	- system / GParted -- expand the volume to 120G
+	- system / GParted -- choose the 2nd part(apclient) + expand the volume to 120G
 	
-	- connect the Zotac to a screen --> show HWID 014.8be.c4d
-	- delete --> BIOS setting: Power/Loss - on, Security/Secure boot/Secure boot - disabled, secure mode - custom
-	
-	- Ctrl + Alt + F1: enter cmd window
-	- root / elitem
-	- hadaly/Hadaly/System.pm
-	- nano "..." interface=%s --> "ethe1" // Ln:66
-	- systemctl restart ac
-	
+	- connect the Zotac to a screen --> show HWID a9f.bf3.783
+	- delete --> BIOS setting: Power/Loss - on, Security/Secure boot/Secure boot - disabled, secure mode - custom,
+	                           Boot - legacy --> win8
+
 	- Add a Display on adverpost
 		- LED: pixel is useful, physical width and height only for users 
 		- LCD: 0×0 -- use the maximum by default
 		- block time -- the maximum of a campaign supported
 		- Brightness / censor -- not finished yet
 		- ACID connected to IRC, not for users, can be renamed to something meaningful
+
+	- Ctrl + Alt + F1: enter cmd window
+	- root / elitem
+	- hadaly/Hadaly/System.pm  --> http://10.1.1.238:8000
+	- nano "..." interface=%s --> "ethe1" // Ln:66
+	- systemctl restart ac
+	
 
 
 [DHCP and DNS]
