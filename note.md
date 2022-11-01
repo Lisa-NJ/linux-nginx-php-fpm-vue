@@ -8,10 +8,14 @@ backwards compatibility with previous version of Rex API
 The US government no longer recognizes SHALL as a legal term and recommends using MUST instead.
 When used in a question, which form more often indicates that the asker is hesitant? - should
 a bona fide sample of Lincoln's handwriting - authentic, true
+Leave everything exactly as it is.
+We have enough to do as it is without your latest orders!
+
 flat out
 btw - by the way
 lol - laugh out loud
 lmk - let me know
+imo - in my opinion
 	
 [uploading a png]
 	1. click 'upload' on localhost:8080 
@@ -125,9 +129,9 @@ How to make a new copy of Zotac
 		1. download from https://docs.adverpost.com 
 		2. desktop when the system is ready 
 	- double-click Adverclient(adclient-318-amd64.img.xz) --> target M2 Hard disk on Linux
-	- a warning window appears + fix
 	
-	- system / GParted -- choose the 2nd part(apclient) + expand the volume to 120G
+	- a warning window appears + fix
+	- system / GParted -- choose the 2nd part(apclient) + expand the volume to 120G	
 	
 	- connect the Zotac to a screen --> show HWID a9f.bf3.783
 	- delete --> BIOS setting: Power/Loss - on, Security/Secure boot/Secure boot - disabled, secure mode - custom,
