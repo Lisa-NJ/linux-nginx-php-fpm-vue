@@ -1335,6 +1335,19 @@ mounted() {
 6. Statistic
 	- 
 
+【21】webStorage
+
+浏览器端通过 (window.)localStorage + sessionStorage 属性来实现本地存储机制
+
+Application
+
+JSON.parse(undefined) = null
+
+1. 存储内容大小一般支持 5MB 左右（不同浏览器不同）
+2. 相关API：setItem, getItem, removeItem, clear - getItem("msg")取不到时返回 null
+3. sessionStorage 存储的内容会随着浏览器窗口关闭而消失
+4. localStorage 存储的内容，需要手动清除缓存或调用API清空才会消失
+
 [Bootstrap]
 
 ```
