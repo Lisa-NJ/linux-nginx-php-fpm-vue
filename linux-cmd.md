@@ -22,6 +22,15 @@ $ service apache2 status
 $ ifconfig 
 $ ifconfig -a
 $ gedit php.ini
+
+<!-- ufw -->
+$ sudo ufw status verbose
+$ systemctl status ufw
+$ sudo ufw allow http
+$ sudo ufw allow 80
+$ sudo ufw allow 8000
+
+
 <!-- can not use ifconfig -->
 $ apt install net-tools  
 

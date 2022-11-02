@@ -67,8 +67,9 @@ ed7bb012952ab8aba1fec4ee038d6ead.png
 	
 [ufw]
 ```bash
-$ sudo ufw status verbose
+$ sudo ufw status verbose 
 $ systemctl status ufw
+$ ufw enable
 $ sudo ufw allow http
 $ sudo ufw allow 80
 $ sudo ufw allow 8000
@@ -125,25 +126,30 @@ root@ac-master:~# sudo systemctl restart ssh
 How to make a new copy of Zotac
 	- a new empty Zotac + a new M2 Hard disk 
 
-	- U plugged into Zotac and starts system
-	- find AdverClient in two ways
-		1. download from https://docs.adverpost.com 
-		2. desktop when the system is ready 
-	- double-click Adverclient(adclient-318-amd64.img.xz) --> target M2 Hard disk on Linux
+	[no use most of the time]
+		- U plugged into Zotac and starts system
+		- find AdverClient in two ways
+			1. download from https://docs.adverpost.com 
+			2. desktop when the system is ready 
+	- Hard Disk connected to the computer next to Michael
+	- double-click Adverclient(adclient-318-amd64.img.xz) --> target new Hard disk
 	
 	- a warning window appears + fix
 	- system / GParted -- choose the 2nd part(apclient) + expand the volume to 120G	
 	
-	- connect the Zotac to a screen --> show HWID a9f.bf3.783
+	- put the Hard Disk in the Zotac
+	- connect the Zotac to a screen --power_on--> show HWID 113.189.1b2
 	- delete --> BIOS setting: Power/Loss - on, Security/Secure boot/Secure boot - disabled, secure mode - custom,
 	                           Boot - legacy --> win8
 
-	- Add a Display on adverpost
+	- check HexChat / noconf / :*:getID + :*:clearState
+	- Add a new Display on adverpost + change ACID to TEST.****
 		- LED: pixel is useful, physical width and height only for users 
 		- LCD: 0×0 -- use the maximum by default
 		- block time -- the maximum of a campaign supported
 		- Brightness / censor -- not finished yet
 		- ACID connected to IRC, not for users, can be renamed to something meaningful
+	- check HexChat / noconf: h_14... has quit --> / #au: TEST
 
 	- Ctrl + Alt + F1: enter cmd window
 	- root / elitem
