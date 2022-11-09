@@ -1348,6 +1348,39 @@ JSON.parse(undefined) = null
 3. sessionStorage 存储的内容会随着浏览器窗口关闭而消失
 4. localStorage 存储的内容，需要手动清除缓存或调用API清空才会消失
 
+【22】组件的自定义事件
+一种组件间通信的方式，使用于：子组件 ==> 父组件，没有办法实现兄弟之间的通信
+使用场景：A是父组件，B是子组件，B想给A传数据，那么就要在A中给B绑定自定义事件（事件的回调在A中）
+
+绑定：
+	通过父组件给子组件绑定一个自定义事件实现：子给父传递数据（第一种写法：在父组件中使用v-on或@） 
+	```vue
+	<Student @atguigu="getStudentName" />
+	```
+	通过父组件给子组件绑定一个自定义事件实现：子给父传递数据（第二种写法：在父组件中使用ref） 
+	```vue
+	<Student ref="student" />
+	this.$ref.student.$on('atguigu', this.getStudentName) //绑定自定义事件 - 在父组件的 mounted 里面
+	```
+	若想让自定义事件只能触发一次，可以使用 once 修饰符，或者 $once 方法
+	
+触发：	
+	```
+	this.$emit('atguigu', 数据)
+	```
+解绑：
+	```
+	$off('atguigu')
+	$off(['atguigu', 'demo'])
+	$off() //all custom events
+	```
+注意：
+	1. 谁触发了自定义事件，自定义事件的回调函数中的this就指向谁
+	2. 通过 this.$refs.xxx.$on('atguigu', 回调)绑定自定义事件时，回调要么配置在methods中，要么用箭头函数，否则this指向会出问题!
+	3. 如果 @click 用在组件上，会被vue当成自定义事件，如果想要被按照原生的点击事件解析，需要 @click.native="show"
+	
+待复习：this.$destroy && 强制销毁
+ 
 [Bootstrap]
 
 ```

@@ -22,6 +22,11 @@ $ service apache2 status
 $ ifconfig 
 $ ifconfig -a
 $ gedit php.ini
+$ hostname -I
+$ netstat -l
+$ netstat -i
+$ ls -l test.png
+$ grep 'PLAYLIST_ADDR' -rn *
 
 <!-- ufw -->
 $ sudo ufw status verbose
@@ -83,8 +88,11 @@ $ hexchat
 $ hexchat -v  <!-- 2.14.3 -->
 
 <!--install google chrome-->
+$apt list --installed | grep chrome
 $wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 $sudo apt install ./google-chrome-stable_current_amd64.deb
+<!-- upgrade -->
+$sudo apt install -y google-chrome-stable
 
 <!--install multiple node versions with nvm-->
 $wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash

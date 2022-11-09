@@ -11,11 +11,14 @@ a bona fide sample of Lincoln's handwriting - authentic, true
 Leave everything exactly as it is.
 We have enough to do as it is without your latest orders!
 
-flat out
+flat out - super busy and tired
 btw - by the way
 lol - laugh out loud
 lmk - let me know
 imo - in my opinion
+roger - your message has been received
+
+[make a campaign]
 
 [uploading a png]
 
@@ -34,6 +37,7 @@ imo - in my opinion
 			data: {hash: "b735153d8bbc495b22ea4d5d52c9ae83"}
 			}
 		  ```
+	3. click an image: request URL - http://10.1.1.238/out/7e8265381303728d832e1d75a791d184.png
 
 [Media / refresh]
 http://localhost:8000/api/v1/media?limit=all&search=&team=353
