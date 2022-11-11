@@ -17,6 +17,11 @@ lol - laugh out loud
 lmk - let me know
 imo - in my opinion
 roger - your message has been received
+fyi - for your information
+brb - (I'll) be right back
+afaik - as far as I know
+tbc - to be confirmed
+tba - to be announced
 
 [make a campaign]
 
