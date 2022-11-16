@@ -203,3 +203,12 @@ $result
 	 require 和 use 函数调用 eval 函数来执行代码
 	 	use语句是编译时引入的，require是运行时引入的
 	 	use引入模块的同时，也引入了模块的子模块。而require则不能引入
+	 	
+14. for 等价于 foreach
+	```perl
+	my @a = (1..9);
+
+	for my $i (@a){
+	print("$i","\n");
+	}
+	```

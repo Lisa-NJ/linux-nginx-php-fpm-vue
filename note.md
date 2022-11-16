@@ -10,7 +10,10 @@ When used in a question, which form more often indicates that the asker is hesit
 a bona fide sample of Lincoln's handwriting - authentic, true
 Leave everything exactly as it is.
 We have enough to do as it is without your latest orders!
+Be open to learning new things
+Belair + Glenelta + Blackwood
 
+do the shoey - 
 flat out - super busy and tired
 btw - by the way
 lol - laugh out loud
