@@ -11,6 +11,10 @@ a bona fide sample of Lincoln's handwriting - authentic, true
 Leave everything exactly as it is.
 We have enough to do as it is without your latest orders!
 Be open to learning new things
+Before we make any decisions today, I'd like to make sure that everyone is on the same page.
+This could be done better
+
+Telfast - hayfever
 Belair + Glenelta + Blackwood
 
 do the shoey - 
@@ -25,6 +29,10 @@ brb - (I'll) be right back
 afaik - as far as I know
 tbc - to be confirmed
 tba - to be announced
+
+[todo]
+// debug global event bus
+// https://blog.huati365.com/9dc7d6666f2709ad - AnyEvent
 
 [make a campaign]
 
