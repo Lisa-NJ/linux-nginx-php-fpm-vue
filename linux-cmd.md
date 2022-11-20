@@ -28,6 +28,9 @@ $ netstat -i
 $ ls -l test.png
 $ grep 'PLAYLIST_ADDR' -rn *
 
+<!-- download file from Zotac -->
+$ scp root@10.1.1.39:/hadaly/cache/media/output ~
+
 <!-- ufw -->
 $ sudo ufw status verbose
 $ systemctl status ufw

@@ -1081,7 +1081,7 @@ scoped 样式
 【16-2】非单文件组件
 
 一个文件中包含有多个组件 *.html，弊病：样式不能跟着组件走
-
+ 
 Vue 中使用组件的三大步骤：
 
 ​	一、定义组件（创建组件）
@@ -1379,7 +1379,38 @@ JSON.parse(undefined) = null
 	2. 通过 this.$refs.xxx.$on('atguigu', 回调)绑定自定义事件时，回调要么配置在methods中，要么用箭头函数，否则this指向会出问题!
 	3. 如果 @click 用在组件上，会被vue当成自定义事件，如果想要被按照原生的点击事件解析，需要 @click.native="show"
 	
-待复习：this.$destroy && 强制销毁
+待复习：this.$destroy && 强制销毁 
+
+【23】全局事件总线
+0. x - 被所有组件看见，可以调用 $on $off $emit
+1. 一种组件间通信的方式，适用于任意组件间通信
+
+2. 安装全局事件总线
+	```vue
+	new Vue({
+	  ...
+	  beforeCreate() {
+	    VUe.prototype.$bus = this //安装全局事件总线
+	  },
+	  ...
+	})
+	```
+3. 使用事件总线：
+  (1) 接收数据：A组件想接收数据，则在 A组件中给 $bus 绑定自定义事件，事件的回调留在A组件自身
+  ```vue
+  methods(){
+    demo(data){...}
+  }
+  ...
+  mounted(){
+    this.$bus.$on('xxx', this.demo)
+  }
+  ```
+  (2) 提供数据：this.$bus.$emit('xxx', 数据)
+4. 最好在 beforeDestroy 钩子中，用 $off 去解绑当前组件所用到的事件
+
+待复习：VueComponent + 重要的内置关系
+
  
 [Bootstrap]
 

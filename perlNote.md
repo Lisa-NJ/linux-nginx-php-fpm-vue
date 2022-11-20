@@ -71,8 +71,9 @@ $result
 
 ```
 4. 弱类型语言，变量不需要指定类型，Perl 解释器会根据上下文自动选择匹配类型
-  Perl 有三个基本的数据类型：标量、数组、哈希，Perl 为每个类型设置了独立的命令空间
-  标量：可以是一个整数，浮点数，字符，字符串，段落或者一个完整的网页。
+    Perl 有三个基本的数据类型：标量、数组、哈希，Perl 为每个类型设置了独立的命令空间
+    标量：可以是一个整数，浮点数，字符，字符串，段落或者一个完整的网页。
+
   	 __FILE__, __LINE__, 和 __PACKAGE__ 分别表示当前执行脚本的文件名，行号，包名
   数组：
   	 
@@ -111,8 +112,8 @@ $result
 6. use strict 语句让所有变量需要强制声明类型。
 
 7. 数组操作：push, pop, unshift, shift, splice，
-  特殊变量 $[ - 数组的第一索引值
-  scalar @array - 数组长度
+    特殊变量 $[ - 数组的第一索引值
+    scalar @array - 数组长度
 
 8. 哈希 delete foreach while
   ```perl
@@ -211,7 +212,8 @@ $result
     ```
 
 13. package
-     require 和 use 将载入一个模块
+
+    require 和 use 将载入一个模块
      @INC -- Perl 内置的一个特殊数组，它包含指向库例程所在位置的目录路径
      require 和 use 函数调用 eval 函数来执行代码
      	use语句是编译时引入的，require是运行时引入的
@@ -257,4 +259,14 @@ $result
     - -A Same for access time.
     - -C Same for inode change time (Unix, may differ for other platforms)
 
-15. 
+15. for 等价于 foreach
+
+    ```perl
+    my @a = (1..9);
+    
+    for my $i (@a){
+    print("$i","\n");
+    }
+    ```
+
+16. 正则表达式
