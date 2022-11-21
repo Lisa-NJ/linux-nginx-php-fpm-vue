@@ -216,4 +216,38 @@ $result
 15. 正则表达式
 
 16. -e, -z, -s, -M, -A, -C, -r, -w, -x, -o, -f, -d , -l
+	eval
+
+17. AnyEvent
+	```perl
+	AnyEvent->timer()
+	AnyEvent->condvar 
+	AnyEvent->io()
 	
+	AnyEvent->timer(
+	    after       => $seconds,    # 多久之后做相应的操作.
+	    interval   => $seconds,    # 在上面条件生效后，每格多久进行一次 callback.
+	    cb => $cb,    # cb 是 callback 的简写，所以知道了吧，只要到了前面的条件，就会运行 cb => 指向的函数.
+	);
+	
+	
+	#条件变量
+	sub retrieve_e2v_playlist {
+	    my ($route, $parameters) = @_;
+	    my $cv = AnyEvent->condvar;
+	    http_post $route, $parameters, 'timeout' => $CONST{TIMEOUT_PLAY}, sub { $cv->send($_[0] || undef) };
+	    return $cv->recv;
+	}
+	
+	
+    	eval {...}; # 捕获运行时错误
+    	if($@) {...} # 处理错误
+	
+	```
+	- AnyEvent->condvar; 和 $cv->recv; 吧，这个其实就是条件，当达到什么条件退出事件循环;基本的 $cv->recv 是和 $cv->send 成对出现的，当事件调用 send 时 recv 收到这个调用，就会退出事件。
+	- eval BLOCK 形式是在编译时做语法检查的，所以它的效率相当高。如果有一个可捕获的错误存在（包括任何由 die 操作符生成的），eval 返回 undef 并且把错误信息放到 $@ 里。如果没有错误，Perl 保证把 $@ 设置为空字串，所以你稍后可以很可靠地做错误检查。eval 是一个在 Perl 里做全部例外处理的好地方。
+	- http_post, http_get: The callback will be called with the response body data as first argument (or undef if an error occurred), and a hash-ref with response headers (and trailers) as second argument.
+
+18. 数字0,字符串 '0'、"",空 list(),和 undef 为 false，其他值均为 true
+		undef 将指定键的值设置为未定义的值
+		
