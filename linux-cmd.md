@@ -27,6 +27,11 @@ $ netstat -l
 $ netstat -i
 $ ls -l test.png
 $ grep 'PLAYLIST_ADDR' -rn *
+$ hostname -I
+$ alias l='ls -haltr'
+$ grep localhost -r *
+$ grep 1234 assets/wrapper
+$ sed 's/127.0.0.1/10.1.1.38/g' -i assets/*
 
 <!-- download file from Zotac -->
 $ scp root@10.1.1.39:/hadaly/cache/media/output ~

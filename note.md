@@ -34,6 +34,9 @@ tba - to be announced
 // debug global event bus
 // https://blog.huati365.com/9dc7d6666f2709ad - AnyEvent
 
+[Linux - service]
+...
+
 [connect E2V to a Display]
 	- http://localhost:8000/api/v1/displays?include=bookings,e2vbookings,tags&limit=all&team=353
 	- http://localhost:8000/api/v1/campaigns?include=tags,media&limit=all&team=353

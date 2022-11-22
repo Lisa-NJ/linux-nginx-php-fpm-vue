@@ -279,7 +279,6 @@ $result
 	    cb => $cb,    # cb 是 callback 的简写，所以知道了吧，只要到了前面的条件，就会运行 cb => 指向的函数.
 	);
 	
-	
 	#条件变量
 	sub retrieve_e2v_playlist {
 	    my ($route, $parameters) = @_;
@@ -287,7 +286,6 @@ $result
 	    http_post $route, $parameters, 'timeout' => $CONST{TIMEOUT_PLAY}, sub { $cv->send($_[0] || undef) };
 	    return $cv->recv;
 	}
-	
 	
     	eval {...}; # 捕获运行时错误
     	if($@) {...} # 处理错误
@@ -300,5 +298,6 @@ $result
 18. 数字0,字符串 '0'、"",空 list(),和 undef 为 false，其他值均为 true
 		undef 将指定键的值设置为未定义的值
 		
+19. map 的用法
 
 
