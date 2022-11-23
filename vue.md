@@ -1411,6 +1411,36 @@ JSON.parse(undefined) = null
 
 待复习：VueComponent + 重要的内置关系
 
+【24】消息发布与订阅 - 使用第三方库 pubsub-js
+
+1. 一种组件间通信的方式，适用于任意组件间通信
+2. 使用步骤：
+	1. 安装 pubsub：npm i pubsub-js
+	2. 引入：import pubsub from 'pubsub-js'
+	3. 接收数据：A组件想要接收数据，则在A组件中订阅消息，订阅的回调留在A组件自身
+	```vue
+	methods() {
+	  demo(data){...}
+	}
+	...
+	mounted() {
+	  this.pid = pubsub.subsribe('xxx', this.demo) // 订阅消息
+	}
+	```
+	4. 提供数据：pubsub.publish('xxx', 数据)
+	5. 最好在 beforeDestroy 钩子中，用 pubsub.unsubscribe(pid) 去取消订阅
+ 
+=> 消息发布与订阅 在 Vue 中用的并不多
+待复习：this.$set(todo, 'isEdit', true)
+
+【25】nextTick
+1. 语法：this.$nextTick(回调函数)
+2. 作用：在下一次 DOM 更新结束后执行其指定的回调
+3. 什么时候用：当改变数据后，要基于更新后的新 DOM 进行某些操作时，要在 nextTick 所指定的回调函数中执行
+
+【26】过渡与动画
+
+
  
 [Bootstrap]
 
