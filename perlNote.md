@@ -5,8 +5,24 @@
 ??? eval字符串
 ??? our
 
-在命令行中使用 -e 选项来输入语句来执行代码
 
+ 
+0. Perl - Practical Extraction and Report Language
+具有高级语言的强大能力和灵活性
+提供脚本语言（如sed和awk）的所有功能，还具备它们不具备的很多功能 - 方便
+擅长扫描任意的文本文件，从这些文件中获取信息，也很适合于完成许多系统管理的功能
+约有90%与文字处理有关，10%与其他处理相关
+
+```bash
+//第一种运行方式
+$ perl file.pl
+//第二种运行方式
+$ chmod u+x file.ph
+$ ./file.pl
+```
+运行perl脚本的流程：perl脚本在解释执行时和shell脚本一样，自顶向下，跳过sub定义部分依次执行
+
+在命令行中使用 -e 选项来输入语句来执行代码
 ```bash
 $ perl -e 'print "Hello World\n"'
 ```
@@ -15,10 +31,18 @@ hello.pl
 
 ```perl
 #!/usr/bin/perl
+use feature qw(say state);  # either works for the use of say
+use 5.010; 
  
 # 输出 "Hello, World"
 print "Hello, world\n";
 print 'Hello, world\n';  # 单引号双引号均可，双引号可以正常解析一些转义字符与变量，而单引号会原样输出(可以使用多行文本)。
+
+my $var = "A variable";
+print "$var\n"; 
+say $var; # adds a new line \n to every call
+ 
+exit; # 整个 perl 脚本会退出
  
 =pod 注释
 这是一个多行注释
@@ -26,6 +50,21 @@ print 'Hello, world\n';  # 单引号双引号均可，双引号可以正常解�
 这是一个多行注释
 这是一个多行注释
 =cut
+
+# When used it is similar to my but it creates and initializes the variable only once. The same as static variable in C
+sub next_counter {
+   state $counter = 0;
+   $counter++;
+   return $counter;
+}
+
+{
+   my $counter = 0;
+   sub next_counter {
+      $counter++;
+      return $counter;
+   }
+}
 ```
 
 ```bash
@@ -162,6 +201,7 @@ $result
 10. sub - perl 子程序(函数)
     @_ 参数
     $_ [0] 第一个参数
+    $_ the default variable of Perl
     如果我们需要传入标量和数组参数时，需要把列表放在最后一个参数上;
     可以向子程序传入多个数组和哈希，但是在传入多个数组和哈希时，会导致丢失独立的标识。所以我们需要使用引用来传递
     如果没有使用 return 语句，则子程序的最后一行语句将作为返回值
@@ -296,8 +336,38 @@ $result
 	- http_post, http_get: The callback will be called with the response body data as first argument (or undef if an error occurred), and a hash-ref with response headers (and trailers) as second argument.
 
 18. 数字0,字符串 '0'、"",空 list(),和 undef 为 false，其他值均为 true
-		undef 将指定键的值设置为未定义的值
+	undef 将指定键的值设置为未定义的值
+	```perl
+	# 2-Some functions return undef to indicate failure. Others might return undef if they have nothing valuable to return.
+	my $x = do_something(); 
+	# 3-Use the undef() function to reset a variable to undef
+	undef $x
+	# 4-Use the return value of the undef() function to set a variable to undef, The parentheses after the function name are optional 
+	$x = undef;
+	
+	my $x; # 1-When declared withput assigning a value to it, the content will be undef
+	# The defined() function will return true if the given value is not undef. It will return false if the given value is undef.
+	if (defined $x) {
+	    say '$x is defined';
+	} else {
+	    say '$x is undef';
+	}
+	
+	# In a numerical operation --> 0; in a string operation --> empty string
+	my $x;
+	say $x + 4, ;  # 4
+	say 'Foo' . $x . 'Bar' ;  # FooBar
+	 
+	$x++;
+	say $x; # 1
+	```	
 		
 19. map 的用法
-
+	```perl
+	my @numbers = (1..5);
+	print "@numbers\n";       # 1 2 3 4 5
+	my @doubles = map {$_ * 2} @numbers;
+	print "@doubles\n";       # 2 4 6 8 10
+	```
+20. grep of Perl
 
