@@ -13,6 +13,8 @@ We have enough to do as it is without your latest orders!
 Be open to learning new things
 Before we make any decisions today, I'd like to make sure that everyone is on the same page.
 This could be done better
+a forward slash (/) character
+a backslash (\) character
 
 Telfast - hayfever
 Belair + Glenelta + Blackwood
@@ -38,10 +40,16 @@ tba - to be announced
 ...
 
 [connect E2V to a Display]
-	- http://localhost:8000/api/v1/displays?include=bookings,e2vbookings,tags&limit=all&team=353
-	- http://localhost:8000/api/v1/campaigns?include=tags,media&limit=all&team=353
-	- http://localhost:8000/api/v1/sources?limit=all&team=353
-
+	post - http://localhost:8000/api/v1/scheduleSource
+	get  - http://localhost:8000/api/v1/displays?include=bookings,e2vbookings,tags&limit=all&team=353
+	get  - http://localhost:8000/api/v1/campaigns?include=tags,media&limit=all&team=353
+	get  - http://localhost:8000/api/v1/sources?limit=all&team=353
+[delete E2V from a Display]
+	delete - http://10.1.1.238:8000/api/v1/displays/6675/sources/692
+	get - displays 同上
+	get - campaigns
+	get - sources
+	
 [make a campaign]
 
 [uploading a png]
@@ -167,8 +175,9 @@ How to make a new copy of Zotac
 	
 	- put the Hard Disk in the Zotac
 	- connect the Zotac to a screen --power_on--> show HWID 113.189.1b2
-	- delete --> BIOS setting: Power/Loss - on, Security/Secure boot/Secure boot - disabled, secure mode - custom,
-	                           Boot - legacy --> win8
+	- delete --> BIOS setting: Power/Loss - on, 
+				   Security/Secure boot/Secure boot - disabled, secure mode - custom,
+	                           Boot - legacy --> win8 or Pure UEFI
 
 	- check HexChat / noconf / :*:getID + :*:clearState
 	- Add a new Display on adverpost + change ACID to TEST.****
@@ -185,7 +194,6 @@ How to make a new copy of Zotac
 	- nano "..." interface=%s --> "ethe1" // Ln:66
 	- systemctl restart ac
 	
-
 
 [DHCP and DNS]
 DHCP 

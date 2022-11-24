@@ -6,6 +6,10 @@ mime - Multipurpose Internet Mail Extensions
 	- type/subtype
 	- text image audio video application
 
+[php debug]
+	最详细的phpstorm+xdebug调试详细教程，没有之一
+	https://www.cnblogs.com/endkoo/p/14849807.html
+
 [code]
 ``` php
 require './e2v_helper.php';

@@ -4,7 +4,7 @@
 ??? v字符串
 ??? eval字符串
 ??? our
-
+??? grep die open close async defer_exec
 
  
 0. Perl - Practical Extraction and Report Language
@@ -40,6 +40,7 @@ print 'Hello, world\n';  # 单引号双引号均可，双引号可以正常解�
 
 my $var = "A variable";
 print "$var\n"; 
+print $var, "\n";   # the same as the above line
 say $var; # adds a new line \n to every call
  
 exit; # 整个 perl 脚本会退出
@@ -267,7 +268,37 @@ $result
 	}
 	```
 
-15. 正则表达式
+15. 正则表达式 Perl regular expression
+	=~            is the binding operator
+	!~            negated form of the binding operator 
+	/Expression/i to match a pattern case insensitive
+	m"/"          to match a pattern that contains a forward slash (/) character
+	A*	Zero or more A
+	A+	One or more A
+	A?	A is optional
+	A{10}	Ten A
+	A{1,5}	From one to five A
+	A{2,}	Two A or more
+	
+	{}[]()^$.|*+?\ metacharacters - the regular expression engine treats these characters in a special way
+	
+	
+	```perl
+	my $s = 'Perl regular expression is powerful';
+	print "match found\n" if( $s =~ /ul/);
+	
+	my @words= (
+	   'Perl',
+	   'regular expression',
+	   'is',
+	   'a very powerul',
+	   'feature'
+	);
+
+	foreach(@words){
+	   print("$_ \n") if($_ !~ /er/);
+	}
+	```
 
 16. -e, -z, -s, -M, -A, -C, -r, -w, -x, -o, -f, -d , -l
 	eval
@@ -370,4 +401,6 @@ $result
 	print "@doubles\n";       # 2 4 6 8 10
 	```
 20. grep of Perl
+
+21. 
 
