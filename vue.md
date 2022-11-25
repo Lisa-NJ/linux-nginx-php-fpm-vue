@@ -1439,7 +1439,7 @@ JSON.parse(undefined) = null
 3. 什么时候用：当改变数据后，要基于更新后的新 DOM 进行某些操作时，要在 nextTick 所指定的回调函数中执行
 
 【26】过渡与动画
-
+补：css3动画
 
  
 [Bootstrap]
