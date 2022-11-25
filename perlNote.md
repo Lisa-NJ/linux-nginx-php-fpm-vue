@@ -366,6 +366,12 @@ $result
 	- eval BLOCK 形式是在编译时做语法检查的，所以它的效率相当高。如果有一个可捕获的错误存在（包括任何由 die 操作符生成的），eval 返回 undef 并且把错误信息放到 $@ 里。如果没有错误，Perl 保证把 $@ 设置为空字串，所以你稍后可以很可靠地做错误检查。eval 是一个在 Perl 里做全部例外处理的好地方。
 	- http_post, http_get: The callback will be called with the response body data as first argument (or undef if an error occurred), and a hash-ref with response headers (and trailers) as second argument.
 
+AnyEvent::Util - run_cmd, 
+	
+	```perl
+	$cv = run_cmd $cmd, key => value...
+	```
+
 18. 数字0,字符串 '0'、"",空 list(),和 undef 为 false，其他值均为 true
 	undef 将指定键的值设置为未定义的值
 	```perl
@@ -402,5 +408,5 @@ $result
 	```
 20. grep of Perl
 
-21. 
+21. AnyEvent
 

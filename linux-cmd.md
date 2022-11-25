@@ -31,7 +31,17 @@ $ hostname -I
 $ alias l='ls -haltr'
 $ grep localhost -r *
 $ grep 1234 assets/wrapper
+
+<!-- Replace String Using the sed, 
+     By default, sed only replaces the first occurrence of the specified string in each line
+     s - substitute
+     g - replace all occurrences of string, 
+    -i[SUFFIX], --in-place[=SUFFIX]
+                 edit files in place (makes backup if SUFFIX supplied)
+    # - a number flag such as 1, 2 - which occurrence of a specified string          
+ -->
 $ sed 's/127.0.0.1/10.1.1.38/g' -i assets/*
+$ sed 's/box/bin/2' foxinbox.txt 
 
 <!-- download file from Zotac -->
 $ scp root@10.1.1.39:/hadaly/cache/media/output ~
