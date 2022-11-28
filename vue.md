@@ -1440,8 +1440,65 @@ JSON.parse(undefined) = null
 
 【26】过渡与动画
 补：css3动画
+1. 作用：在插入、更新或移除DOM元素时，在合适的时候给元素添加样式类名
+2. Enter - v-enter, v-enter-active, v-enter-to
+   Leave - v-leave, v-leave-active, v-leave-to
+3. 写法
+	1.准备好样式：
+		元素进入的样式：v-enter 进入的起点，v-enter-actice 进入过程中，v-enter-to 进入的终点
+		元素离开的样式：v-leave 离开的起点，v-leave-active 离开过程中，v-leave-to 离开的终点
+ 	2.使用< transition> 包裹要过渡的元素，并配置 name 属性
+ 	```vue
+ 	<transition name="hellp">
+ 		<h1 v-show="isShow">Hello</h1>
+ 	</transition>
+ 	```
+ 	3.备注：若有多个元素需要过渡，则需要使用：<transition-group>，且每个元素都要使用 key 值
 
- 
+【26】配置代理
+待复习：Ajax请求 -- Ajax是前端技术
+同源策略：协议名、主机名、端口号 需要一致
+1. cors解决跨域：不用前端做任何事情，服务器返回响应的时候加上特殊的响应头，浏览器看到后，将数据提供给前端应用
+2. jsonp解决 script src，前后端都需要修改 -- 只能解决get请求，使用少
+3. 使用代理服务器
+
+   8080前端  <--->  8080代理服务器  <---> 5000 服务器
+
+   服务器之间打交道不使用 Ajax，而是使用传统的 http 请求，所以同源策略管不到 8080代理服务器和5000服务器之间的交互
+
+   开启代理服务器可以使用：1.Nginx 2.Vue-cli
+
+   ```vue
+   //方式一：vue.config.js 配置代理服务器
+   devServer: {
+     proxy: 'http://localhost:5000'
+   }
+   ```
+   上面的方式：
+     优点：配置简单，请求资源时直接发给前端（8080）即可
+     缺点：只能配置一个代理服务器，不能灵活控制走不走（如果本地有，不会走代理）
+     工作方式：当请求了前端不存在的资源时，那么该请求会转发给服务器（优先匹配前端资源）
+   
+   ```vue
+   //方式二：vue.config.js 配置代理服务器
+   devServer: {
+     proxy: {
+       '/api': { // 匹配所有以 '/api' 开头的请求路径
+         target: 'http://localhost:5000',
+         pathRewrite: { '^/atguigu':'' },  // 代理服务器发出的请求路径重写
+         ws: true,  // web socket
+         changeOrigin: false, // 代理服务器回答服务器问时：实话实说 - 用于控制请求头中的 host 值
+       },
+       '/foo': :{
+         target: '<other_url>'
+       }
+     },
+   }
+   ```
+   第二种方式：
+     优点：可以配置多个代理，且可以灵活控制请求是否走代理
+     缺点：配置略微繁琐，请求资源时必须加前缀
+   
 [Bootstrap]
 
 ```
