@@ -34,6 +34,25 @@ afaik - as far as I know
 tbc - to be confirmed
 tba - to be announced
 
+[Linux - tty]
+Ctrl + Alt + F1~F6 switch between different users;
+Debian GNU/Linux 10 ac-master tty2
+
+在大多数 发行版 中，你可以使用以下键盘快捷键来得到 TTY 屏幕：
+
+CTRL + ALT + F1 – 锁屏
+CTRL + ALT + F2 – 桌面环境
+CTRL + ALT + F3 – TTY3
+CTRL + ALT + F4 – TTY4
+CTRL + ALT + F5 – TTY5
+CTRL + ALT + F6 – TTY6
+你最多可以访问六个 TTY。但是，前两个快捷方式指向发行版的锁定屏幕和桌面环境。
+
+[E2V dev]
+// newsapiorg.php
+
+new E2V for Cyrus
+
 [todo]
 // debug global event bus
 // https://blog.huati365.com/9dc7d6666f2709ad - AnyEvent

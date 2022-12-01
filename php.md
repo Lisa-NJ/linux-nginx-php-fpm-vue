@@ -172,6 +172,26 @@ null = false
     file_get_contents() function: This function in PHP is used to read a file into a string.
     json_decode() function: This function takes a JSON string and converts it into a PHP variable that may be an array or an object.
 
+28. PDO
+	PDO::__construct — Creates a PDO instance representing a connection to a database
+	public PDO::__construct(
+	    string $dsn,
+	    ?string $username = null,
+	    ?string $password = null,
+	    ?array $options = null
+	)
+	The Data Source Name, or DSN, contains the information required to connect to the database.
+	In general, a DSN consists of the PDO driver name, followed by a colon, followed by the PDO driver-specific connection syntax. 	
+	PDO::prepare — Prepares a statement for execution and returns a statement object
+```php
+	$pdo = new PDO('mysql:host=127.0.0.1;dbname=carswap', 'root', 'OES12345@');
+
+	$stmt = $pdo->prepare("SELECT count(*) FROM cs_car");
+	$stmt->execute();
+	$total_cars = $stmt->fetchColumn();
+```
+
+
 ### PHP
 
 为了开始使用 PHP，找一个支持PHP和MySQL的Web主机，安装Web服务器、PHP及MySQL；
