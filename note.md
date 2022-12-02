@@ -34,6 +34,15 @@ afaik - as far as I know
 tbc - to be confirmed
 tba - to be announced
 
+[bug]
+Sid - Forty Winks - Narre Warren (Pro)
+		- CarSwap-VIC
+		- Genesis Fitness - Caulfield (Pro)
+		Downloading (2) files:
+		Genesis_FitnessHealth_ProLED_30daysTransform.jpg 0%
+		Genesis_FitnessHealth_ProLED_ReformerPilates.jpg 0%
+		45422918-E8CB-4BE0-B213-C350E9AAED31.png
+
 [Linux - tty]
 Ctrl + Alt + F1~F6 switch between different users;
 Debian GNU/Linux 10 ac-master tty2
