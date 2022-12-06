@@ -1390,7 +1390,7 @@ JSON.parse(undefined) = null
 	new Vue({
 	  ...
 	  beforeCreate() {
-	    VUe.prototype.$bus = this //安装全局事件总线
+	    Vue.prototype.$bus = this //安装全局事件总线
 	  },
 	  ...
 	})
@@ -1499,6 +1499,22 @@ JSON.parse(undefined) = null
      优点：可以配置多个代理，且可以灵活控制请求是否走代理
      缺点：配置略微繁琐，请求资源时必须加前缀
    
+
+【27】github案例 静态组件
+2:28 index.html
+
+vue-resource 
+可用来发送 Ajax 请求，是对 xhr 的封装，
+与 axios 使用以及返回完全相同，
+vue1.x 使用广泛，官方已不维护
+
+axios - 通用的Ajax请求库，官方推荐，使用广泛
+
+待复习：vue插件
+
+【28】slot插槽
+
+
 [Bootstrap]
 
 ```

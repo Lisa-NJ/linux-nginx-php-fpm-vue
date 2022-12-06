@@ -49,8 +49,8 @@ Debian GNU/Linux 10 ac-master tty2
 
 在大多数 发行版 中，你可以使用以下键盘快捷键来得到 TTY 屏幕：
 
-CTRL + ALT + F1 – 锁屏
-CTRL + ALT + F2 – 桌面环境
+CTRL + ALT + F1 – 锁屏 / Zotac-TTY1
+CTRL + ALT + F2 – 桌面环境 / Zotac-LCD
 CTRL + ALT + F3 – TTY3
 CTRL + ALT + F4 – TTY4
 CTRL + ALT + F5 – TTY5
@@ -188,6 +188,36 @@ root@ac-master:~# sudo systemctl enable --now ssh
 root@ac-master:~# sudo systemctl restart ssh
 ```
 
+[mailgun]
+```bash
+curl -s --user 'api:YOUR_API_KEY' \
+    https://api.mailgun.net/v3/YOUR_DOMAIN_NAME/messages \
+    -F from='Excited User <mailgun@YOUR_DOMAIN_NAME>' \
+    -F to=YOU@YOUR_DOMAIN_NAME \
+    -F to=bar@example.com \
+    -F subject='Hello' \
+    -F text='Testing some Mailgun awesomeness!'
+```
+
+```php
+$mgClient = Mailgun::create($this->di->getConfig()->mailgun->apiKey, $this->di->getConfig()->mailgun->apiUrl);
+$params = array(
+	'from'    => $this->di->getConfig()->mailgun->from,
+	'to'      => $this->di->getConfig()->mailgun->adminAccount,
+	'subject' => 'Pending Manual Approval',
+	'html'    => $this->view->getRender('emails', 'ManualApprovalEmail', [
+		"email" => $email,
+		"username" => $username,
+		"userId" => $user->getId()
+		])
+);
+try {
+	$mgClient->messages()->send($this->di->getConfig()->mailgun->domain, $params);	
+} catch (\Exception $e) {
+				return $this->respondServerError('The server failed to process your request');
+			}
+```
+
 [New Zotac]
 How to make a new copy of Zotac
 	- a new empty Zotac + a new M2 Hard disk 
@@ -212,7 +242,7 @@ How to make a new copy of Zotac
 	- check HexChat / noconf / :*:getID + :*:clearState
 	- Add a new Display on adverpost + change ACID to TEST.****
 		- LED: pixel is useful, physical width and height only for users 
-		- LCD: 0×0 -- use the maximum by default
+		- LCD: 0×0 -- use the maximum by default 
 		- block time -- the maximum of a campaign supported
 		- Brightness / censor -- not finished yet
 		- ACID connected to IRC, not for users, can be renamed to something meaningful
@@ -223,7 +253,16 @@ How to make a new copy of Zotac
 	- hadaly/Hadaly/System.pm  --> http://10.1.1.238:8000
 	- nano "..." interface=%s --> "ethe1" // Ln:66
 	- systemctl restart ac
-	
+note:
+	- On a LED, contents can be rotated: 
+		Displays / A-TEST / Edit / Type:LCD + Pixel Width/Height:0 + Screen Rotation: 180
+	- change wifi password to custom
+		nano /etc/wpa_supplicant.conf
+		network={
+		ssid="name"
+		psk="pwd"
+		}		
+		
 
 [DHCP and DNS]
 DHCP 
