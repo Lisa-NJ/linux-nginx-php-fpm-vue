@@ -34,6 +34,10 @@ afaik - as far as I know
 tbc - to be confirmed
 tba - to be announced
 
+[bug] 
+When only E2V campaign is booked, nothing is shown on the Display but the AP logo, and "connected" button is orange
+When E2V + normal campaign are booked, both campaign and e2v are shown on the Display, and "connected" button is green
+
 [bug]
 Sid - Forty Winks - Narre Warren (Pro)
 		- CarSwap-VIC
@@ -61,7 +65,9 @@ CTRL + ALT + F6 – TTY6
 // newsapiorg.php
 
 new E2V for Cyrus
-
+	- database: carswap root/OES12345@
+	- tables: cs_car + cs_users + cs_images + dealer_slots + dealer_screens
+	
 [todo]
 // debug global event bus
 // https://blog.huati365.com/9dc7d6666f2709ad - AnyEvent

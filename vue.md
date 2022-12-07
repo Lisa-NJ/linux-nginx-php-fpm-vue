@@ -1514,6 +1514,48 @@ axios - 通用的Ajax请求库，官方推荐，使用广泛
 
 【28】slot插槽
 
+1. 作用：让父组件可以向子组件指定位置插入html结构，也是一种组件间通信的方式，适用于 父组件-->子组件
+2. 分类：默认插槽、具名插槽、作用域插槽slot-scope(104 跳过)
+3. 作用域插槽：数据在组件的自身，但根据数据生成的结构需要组件的使用者来决定。（games数据在Category组件中，但使用数据所遍历出来的机构由App组件决定）
+4. 使用方式
+
+```vue
+	<!-- 1.默认插槽 -->
+	<slot>插槽默认内容...</slot>
+	
+	<!-- 2.具名插槽 -->
+	<slot name="footer">具名插槽默认内容...</slot>
+	<template slot="footer">
+		<div>html结构1</div>
+	</template>
+	
+	<template v-slot:footer>
+		<div>html结构1</div>
+	</template>
+	
+	<!-- 3.作用域插槽 -->
+	<Category>
+		<template slot-scope="{games}">
+			<h4 v-for="g in games" :key="g"></h4>
+		</template>
+	</Category>
+	
+	<template>
+		<div>
+			<slot :games="games"></slot>
+		</div>
+	</template>
+```
+注意：作用域插槽也可以有名字
+
+【29】Vuex
+1. 概念：专门在Vue中实现集中式状态（数据）管理的一个Vue插件，对vue应用中多个组件的共享状态进行集中式的管理（读/写），也是一种组件间通信的方式，且适用与任意组件间通信
+2. Github地址：https://github.com/vuejx/vuex
+3. 使用场合：
+	1. 多个组件依赖于同一状态
+	2. 来自不同组件的行为需要变更同一状态
+	
+//待补充 select + option
 
 [Bootstrap]
 
