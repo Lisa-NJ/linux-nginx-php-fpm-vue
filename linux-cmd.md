@@ -31,6 +31,8 @@ $ hostname -I
 $ alias l='ls -haltr'
 $ grep localhost -r *
 $ grep 1234 assets/wrapper
+$ journalctl -fan -u ac
+
 
 <!-- Replace String Using the sed, 
      By default, sed only replaces the first occurrence of the specified string in each line
@@ -127,7 +129,8 @@ $nvm use system //use installed nodeJs version in the system
 
 $ sudo apt update
 $ sudo apt install diffutils
-$ diff file1 file2
+<!-- compare 2 files side by side in 2 columns -->
+$ diff file1 file2 -y 
 
 https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-ubuntu-18-04
 $ ip addr show | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'

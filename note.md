@@ -33,6 +33,7 @@ brb - (I'll) be right back
 afaik - as far as I know
 tbc - to be confirmed
 tba - to be announced
+tbh - to be honest
 
 [bug] 
 When only E2V campaign is booked, nothing is shown on the Display but the AP logo, and "connected" button is orange
@@ -67,7 +68,11 @@ CTRL + ALT + F6 – TTY6
 new E2V for Cyrus
 	- database: carswap root/OES12345@
 	- tables: cs_car + cs_users + cs_images + dealer_slots + dealer_screens
-	
+	- dealer's picture: https://api.carswap.me/e2v/logos/122809.png - not in use
+
+[Ray White E2V]
+	- A new boss means new api-key and token 9/12
+
 [todo]
 // debug global event bus
 // https://blog.huati365.com/9dc7d6666f2709ad - AnyEvent
@@ -257,10 +262,10 @@ How to make a new copy of Zotac
 	- Ctrl + Alt + F1: enter cmd window
 	- root / elitem
 	- hadaly/Hadaly/System.pm  --> http://10.1.1.238:8000
-	- nano "..." interface=%s --> "ethe1" // Ln:66
+	- nano "..." interface=%s --> "eth1" // Ln:66 or "eth0"
 	- systemctl restart ac
 note:
-	- On a LED, contents can be rotated: 
+	- On a LCD, contents can be rotated: 
 		Displays / A-TEST / Edit / Type:LCD + Pixel Width/Height:0 + Screen Rotation: 180
 	- change wifi password to custom
 		nano /etc/wpa_supplicant.conf
