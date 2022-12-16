@@ -35,6 +35,9 @@ tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
 
+[Books needed]
+A Practical Guide to Linux Commands, Editors, and Shell Programming; Edition. 4th - Michael
+
 [bug] 
 When only E2V campaign is booked, nothing is shown on the Display but the AP logo, and "connected" button is orange
 When E2V + normal campaign are booked, both campaign and e2v are shown on the Display, and "connected" button is green
@@ -65,10 +68,18 @@ CTRL + ALT + F6 – TTY6
 [E2V dev]
 // newsapiorg.php
 
-new E2V for Cyrus
+// new E2V for Cyrus
 	- database: carswap root/OES12345@
 	- tables: cs_car + cs_users + cs_images + dealer_slots + dealer_screens
 	- dealer's picture: https://api.carswap.me/e2v/logos/122809.png - not in use
+
+1. agent name from database or UI
+2. https://api.carswap.me/e2v/cs_lorbek_v.php
+3. 图片位置调整
+4. 去掉白色背景图
+5. 字体更新
+6. 加上agent名字
+7. 换 Carswap logo
 
 [Ray White E2V]
 	- A new boss means new api-key and token 9/12
@@ -298,6 +309,9 @@ MAC Address
 	- a unique ID assigned to network interface cards (NICs)
 	- also known as a physical or hardware address
 
+[LAN]
+LAN cable - Local Area Network
+Ethernet cables can have different lengths, colors and transmission speeds. But they all have one thing in common: they have an RJ45 connector at both ends.
 
 [linux shortcut]
 ```

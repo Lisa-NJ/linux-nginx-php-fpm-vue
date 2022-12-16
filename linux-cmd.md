@@ -19,8 +19,7 @@ $ alias l='ls -ahltr'
 $ lscpu 
 $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{print $1"|"$3"|"$4}'|more
 $ service apache2 status
-$ ifconfig 
-$ ifconfig -a
+
 $ gedit php.ini
 $ hostname -I
 $ netstat -l
@@ -55,9 +54,14 @@ $ sudo ufw allow http
 $ sudo ufw allow 80
 $ sudo ufw allow 8000
 
+<!-- Mac Address: HWaddr or ether or lladdr -->
+$ ifconfig 
+$ ifconfig -a
+$ ip address
+$ ip a
 
 <!-- can not use ifconfig -->
-$ apt install net-tools  
+$ apt install net-tools
 
 <!-- history -->
 $ history | grep ssh
