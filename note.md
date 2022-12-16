@@ -14,6 +14,7 @@ Be open to learning new things
 Before we make any decisions today, I'd like to make sure that everyone is on the same page.
 This could be done better
 Don't you dare!
+So sick - means cool or excellent, Sic/sick is an internet slang expresion that is used as an adjective to compliment someone or something.
 
 a forward slash (/) character
 a backslash (\) character
@@ -50,6 +51,32 @@ Sid - Forty Winks - Narre Warren (Pro)
 		Genesis_FitnessHealth_ProLED_30daysTransform.jpg 0%
 		Genesis_FitnessHealth_ProLED_ReformerPilates.jpg 0%
 		45422918-E8CB-4BE0-B213-C350E9AAED31.png
+
+[ssh key]
+1. ssh keys work much like 2 pieces of a puzzle
+unique because they only match with each other and nothing else
+2. Generate a pair of keys: private key - on your computer, public key - copy public key onto remote machines
+3. rsa - encoding method
+4. default path for rsa key pair on Debian: /home/username/.ssh/id_rsa
+
+```bash
+<!-- only one key -->
+$ ssh-keygen -t rsa     // generate(id_rsa + id_rsa.pub) + location + passphrase
+// --> give the content of id_rsa.pub to Dartagnan to add to the list on the server
+$ ssh-add               // include into the authentication agent of SSH
+$ ssh-copy-id user@host // copy it onto the remote machine
+$ nano sshd_config      // AUthentication/PermitRootLogin without-password
+
+// reload SSH
+$ reload SSH
+$ sudo service ssh restart  // path: /User/lisah/ssh/id_rsa
+
+<!-- mutiple keys -->
+$ ssh-keygen -C "carswap-key-19" -t ed25519 // file: key_cs_123  passphrase: pp123
+$ ssh-copy-id -i ~/.ssh/key_cs_123.pub acme.learnlinux.cloud
+$ ssh -i ~/.ssh/key_cs_123.pub acme.learnlinux.cloud // to unlock the key, input passphrase
+
+```
 
 [Linux - tty]
 Ctrl + Alt + F1~F6 switch between different users;
