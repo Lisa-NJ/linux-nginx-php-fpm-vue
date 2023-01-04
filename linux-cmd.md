@@ -39,16 +39,16 @@ $ ssh-keygen -t rsa     // generate(id_rsa + id_rsa.pub) + location + passphrase
 // --> give the content of id_rsa.pub to Dartagnan to add to the list on the server
 $ ssh-add               // include into the authentication agent of SSH
 $ ssh-copy-id user@host // copy it onto the remote machine
-$ nano sshd_config      // AUthentication/PermitRootLogin without-password
+$ nano sshd_config      // Authentication/PermitRootLogin without-password
 
 // reload SSH
 $ reload SSH
-$ sudo service ssh restart  // path: /User/lisah/ssh/id_rsa
+$ sudo service ssh restart  // path: /User/lisa/ssh/id_rsa
 
 <!-- mutiple keys -->
 $ ssh-keygen -C "carswap-key-19" -t ed25519 // file: key_cs_123  passphrase: pp123
 $ ssh-copy-id -i ~/.ssh/key_cs_123.pub acme.learnlinux.cloud
-$ ssh -i ~/.ssh/key_cs_123.pub acme.learnlinux.cloud // to unlock the key, input passphrase
+$ ssh -i ~/.ssh/key_cs_123 acme.learnlinux.cloud // to unlock the key, input passphrase
 
 
 <!-- Replace String Using the sed, 

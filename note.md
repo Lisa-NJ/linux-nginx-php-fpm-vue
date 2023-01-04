@@ -36,6 +36,7 @@ tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
 
+
 [Books needed]
 A Practical Guide to Linux Commands, Editors, and Shell Programming; Edition. 4th - Michael
 
@@ -51,6 +52,10 @@ Sid - Forty Winks - Narre Warren (Pro)
 		Genesis_FitnessHealth_ProLED_30daysTransform.jpg 0%
 		Genesis_FitnessHealth_ProLED_ReformerPilates.jpg 0%
 		45422918-E8CB-4BE0-B213-C350E9AAED31.png
+
+[AP Tracking]
+GPS - Global Positioning System
+LBS - Location Based System
 
 [ssh key]
 1. ssh keys work much like 2 pieces of a puzzle
@@ -69,12 +74,12 @@ $ nano sshd_config      // AUthentication/PermitRootLogin without-password
 
 // reload SSH
 $ reload SSH
-$ sudo service ssh restart  // path: /User/lisah/ssh/id_rsa
+$ sudo service ssh restart  // path: /User/lisa/.ssh/id_rsa
 
 <!-- mutiple keys -->
 $ ssh-keygen -C "carswap-key-19" -t ed25519 // file: key_cs_123  passphrase: pp123
 $ ssh-copy-id -i ~/.ssh/key_cs_123.pub acme.learnlinux.cloud
-$ ssh -i ~/.ssh/key_cs_123.pub acme.learnlinux.cloud // to unlock the key, input passphrase
+$ ssh -i ~/.ssh/key_cs_123 acme.learnlinux.cloud // to unlock the key, input passphrase
 
 ```
 
