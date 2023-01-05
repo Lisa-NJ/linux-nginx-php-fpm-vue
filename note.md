@@ -15,6 +15,7 @@ Before we make any decisions today, I'd like to make sure that everyone is on th
 This could be done better
 Don't you dare!
 So sick - means cool or excellent, Sic/sick is an internet slang expresion that is used as an adjective to compliment someone or something.
+Under-representing 
 
 a forward slash (/) character
 a backslash (\) character
@@ -36,6 +37,9 @@ tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
 
+[RayWhite]
+VaultRE - Real Estate CRM Software
+CRM - Customer relationship management
 
 [Books needed]
 A Practical Guide to Linux Commands, Editors, and Shell Programming; Edition. 4th - Michael

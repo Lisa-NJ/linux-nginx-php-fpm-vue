@@ -9,7 +9,8 @@ mime - Multipurpose Internet Mail Extensions
 [php debug]
 	最详细的phpstorm+xdebug调试详细教程，没有之一
 	https://www.cnblogs.com/endkoo/p/14849807.html
-
+	
+	/tmp/php_errors.log
 [code]
 ``` php
 require './e2v_helper.php';
@@ -163,7 +164,9 @@ null = false
 25. return declare
 	- declare(ticks) encoding
 	- declare(strict_types=1) : write in every file when needed
-26. curl_init
+26. In order to use PHP's cURL functions you need to install the libcurl package. php7.4-curl
+	- https://www.php.net/manual/en/book.curl.php
+    curl_init
     curl_setopt
     curl_exec
     curl_getinfo
