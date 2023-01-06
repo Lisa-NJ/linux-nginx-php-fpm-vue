@@ -37,6 +37,25 @@ tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
 
+[E2V Endpoint Development Process]
+1. Make a .php file in local "helpers" folder, for example: "abc.php"
+2. Dev environment - localhost:8080
+ 	(1). E2V Sources + a source named "testABC", with "URI" refering to "http://10.1.1.238:8001/abc.php"
+	(2). Private Booking / Connect E2V source "testABC" with Display "A-TEST"
+	(3). Check "http://10.1.1.38:1234/" to see if the E2V endpoint works as expected
+5. Upload "abc.php" to CarSwap Server via ssh
+	- scp 
+6. Pre-pro environment - https://adverpost.com/ - (Team)One Wolrd LED
+	(1). E2V Sources + a source named "proABC", "URI" refering to "https://api.carswap.me/e2v/abc.php"
+	(2). Private Booking / Connect E2V source "proABC" with Display(owl-showcase)
+	(3). Check https://adverpost.com/ Display(owl-showcase) / Dashboard to see if the liveview works
+	(4). Check the Screen to see if the contents are shown as expected
+7. Pro environment - https://adverpost.com/ - (Real Team)One Wolrd LED
+	(1)
+	(2)
+	(3)
+	(4)
+
 [RayWhite]
 VaultRE - Real Estate CRM Software
 CRM - Customer relationship management
@@ -85,6 +104,9 @@ $ ssh-keygen -C "carswap-key-19" -t ed25519 // file: key_cs_123  passphrase: pp1
 $ ssh-copy-id -i ~/.ssh/key_cs_123.pub acme.learnlinux.cloud
 $ ssh -i ~/.ssh/key_cs_123 acme.learnlinux.cloud // to unlock the key, input passphrase
 
+$ sudo chown username path + password for username
+
+$ scp -i key-file local-file username@server.com:/srv/html/path 
 ```
 
 [Linux - tty]
