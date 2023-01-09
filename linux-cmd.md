@@ -136,12 +136,16 @@ $sudo apt install ./google-chrome-stable_current_amd64.deb
 <!-- upgrade -->
 $sudo apt install -y google-chrome-stable
 
+<!-- install nvm -->
 <!--install multiple node versions with nvm-->
-$wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+$ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+$ source ~/.bashrc
 <!-- close and reopen Terminal-->
 $nvm -version
+$nvm -v
  => v0.38.0
 $nvm install node //install latest NodeJs version
+$nvm install 12 //install node12
 $nvm use node 
  => now using node v18.6.0 (npm v8.13.2)
 $nvm ls //get a list of installed NodeJs version
@@ -159,11 +163,6 @@ $ ip addr show | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
 $ curl -4 icanhazip.com
 $ sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
 $ sudo unlink /etc/nginx/sites-enabled/default
-
-<!-- install nvm -->
-$ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
-$ source ~/.bashrc
-$ nvm -v <!-- v0.35.2 -->
 
 <!-- 1. Dumping database into files -->
 $ mysqldump -u root -p dcdb >dcdb-0817.sql
