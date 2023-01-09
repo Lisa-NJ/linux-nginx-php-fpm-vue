@@ -138,7 +138,16 @@ The $GLOBALS array is an associative array with the name of the global variable 
 	# bool - true / false
 	# int - 1, 2, 3, -5
 	# float - 1.4, -9.8
-	# string
+	# string - Heredoc
+	
+	```php
+	echo <<< EOF
+	      a
+	     b
+	    c
+	\n
+	EOF;
+	```
 // 4 Compound Types
 	# array
 	# object 
@@ -166,9 +175,10 @@ null = false
 	- declare(strict_types=1) : write in every file when needed
 26. In order to use PHP's cURL functions you need to install the libcurl package. php7.4-curl
 	- https://www.php.net/manual/en/book.curl.php
-    curl_init
-    curl_setopt
-    curl_exec
+    $req = curl_init($url);
+    curl_setopt($req, CURLOPT_HTTPHEADER,'Accept: application/json');
+    $result = curl_exec($req);
+    file_put_contents($cache_name, $result);
     curl_getinfo
     curl_errno
 27. php://input: This is a read-only stream that allows us to read raw data from the request body. It returns all the raw data after the HTTP headers of the request, regardless of the content type.
