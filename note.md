@@ -77,8 +77,280 @@ Sid - Forty Winks - Narre Warren (Pro)
 		45422918-E8CB-4BE0-B213-C350E9AAED31.png
 
 [AP Tracking]
-GPS - Global Positioning System
+GPS - Global Positioning System / USA-24
+GLONASS - Russia-24
+BDS - China-35
 LBS - Location Based System
+GNSS - Global Navigation Satellite System
+
+这套系统给个简单的描述，就是:
+	- 天上有24颗卫星在不断的绕地球运动（图1），
+	- 每颗卫星不断发送“我是谁，我在哪里”的信号（电文）
+	- 接收机（比如手机GPS芯片/接收模块）收到了多颗卫星发出的这样的信号，根据信号传播时间推算出离卫星的距离，进而解出了接收机自己的位置，顺便可以得到当前准确时间
+	- c*c*(t-t1)(t-t1) = (x-x1)(x-x1) + (y-y1)(y-y1) + (z-z1)(z-z1) -- 需要4颗
+	- 卫星时刻发送连续循环的信号
+	- GPS卫星发送30秒一次的循环电文
+
+手机GPS芯片
+	- 多是作为一个IP核放在CPU处理器芯片内的，没有单独封装成一个芯片
+	- GPS芯片/核的内部结构，主要分为射频和基带两大块
+	- 射频部分把卫星信号下变频为中频信号并模数转换为数字信号
+	- 基带部分实现信号捕获跟踪处理
+
+https://www.youtube.com/watch?v=Rhq18MV6LtU
+GPS 24
+BDS 35
+欧盟 俄罗斯 ==> 授时、定位、导航、差分定位修正误差
+
+[嵌入式系统上实现GPS全球定位功能]
+1.1 GPS模块与ARM开发板的物理连接
+GPS模块属于字符设备，只需要和FL2440开发板的第二个串口连接既可以，然后将GPS测试模块放在室外便可以每隔一段时间向开发板的串口发一个数据包。
+1.2 GPS数据解析
+1.3 ARM+linux串口编程介绍
+1.4 编写GPS数据解析程序
+	- gps_test.c     测试程序，包含 主函数
+	- gps_analysis.c GPS数据解析函数设计
+	- set_com.c      设置GPS串口设备函数设计
+	- gpsd.h         头文件
+1.5 编译下载GPS数据解析程序到开发板上
+
+
+```c
+// 1/4 gps_test.c
+
+#include <stdio.h>
+#include <string.h>
+#include <sys/types.h>
+#include <errno.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <termios.h>
+#include <stdlib.h>
+#include "gpsd.h"
+#define GPS_LEN 512         /* GPS数据长度宏定义 */
+int main (int argc, char **argv)
+{
+    int fd = 0;
+    int nread = 0;
+    GPRMC gprmc;
+    //GPRMC *gprmc;
+    char gps_buff[GPS_LEN];
+    char *dev_name = "/dev/ttyS1";
+    fd = open_com(dev_name);
+    set_opt(fd,4800,8,'N',1);
+    while(1)
+    {
+        sleep(2);  //注意这个时间的设置，设置不恰好的话，会导致GPS数据读取不完成，数据解析出错误
+        nread = read(fd,gps_buff,sizeof(gps_buff));
+        //printf("gps_buff: %s", gps_buff);
+        memset(&gprmc, 0 , sizeof(gprmc));
+        gprmc_analysis(gps_buff, &gprmc);
+        if(nread > 0)
+        {
+		printf("===========  GPS全球定位模块  ==============\n");
+		printf("==            开发者：韦书胜                  ==\n");
+		printf("==            版本：  1.0.0                    ==\n");
+		printf("===========================================\n");
+		printf("===========================================\n");
+		printf("= GPS状态位 : %c  [A:有效状态 V:无效状态]=\n" ,gprmc.pos_state);
+		printf("= GPS模式位 : %c  [A:自主定位 D:差分定位]=\n" , gprmc.mode);
+		printf("=日期 : 20%02d-%02d-%02d=\n", gprmc.date%100, (gprmc.date%10000)/100,
+		  gprmc.date/10000);
+		printf("=时间 : %02d:%02d:%02d=\n",(gprmc.time/10000+8)%24,(gprmc.time%10000)/100,
+		gprmc.time%100);
+		printf("=纬度 : 北纬:%.3f=\n",(gprmc.latitude/100));
+		printf("=经度 : 东经:%.3f=\n",(gprmc.longitude/100));
+		printf("=速度 : %.3f =\n",gprmc.speed);
+		printf("===========================================\n");
+         }
+    }
+    close(fd);
+    return 0;
+} /* ----- End of main() ----- */
+
+// 2/4 gps_analysis.c
+
+#include <stdio.h> 
+#include <string.h> 
+#include <stdlib.h> 
+#include <sys/types.h> 
+#include <errno.h> 
+#include <sys/stat.h> 
+#include <fcntl.h> 
+#include "gpsd.h" 
+int gprmc_analysis (char *buff,GPRMC *gprmc) 
+{ 
+	char *ptr = NULL; 
+	if(gprmc == NULL) return -1; 
+	if(strlen(buff) < 10) return -1; 
+	if(NULL == (ptr = strstr(buff,"$GPRMC"))) return -1; 
+	sscanf(ptr,"$GPRMC,%d.000,%c,%f,N,%f,E,%f,%f,%d,,,%c*",\             
+	&(gprmc->time),&(gprmc->pos_state),&(gprmc->latitude),&(gprmc->longitude),&(gprmc->speed),&(gprmc->direction),&(gprmc->date),&(gprmc->mode)); 
+	return 0; 
+} /*  ----- End of gprmc_analysis()  ----- */ 
+
+//strstr(str1,str2) 函数用于判断字符串str2是否是str1的子串。如果是，则该函数返回str2在str1中首次出现的地址；否则，返回NULL。 
+//sscanf() 从一个字符串中读进与指定格式相符的数据。 
+/* 例子： 
+#include <stdio.h>  
+#include <stdlib.h>  
+#include <string.h>   
+int main(int argc, char **argv)  
+{  
+	int ret;  
+	char *string;  
+	int digit;  
+	char buf1[255];  
+	char buf2[255];   
+	string = "china beijing 123";  
+	ret = sscanf(string, "%s %s %d", buf1, buf2, &digit);  
+	printf("1.string=%s\n", string);  
+	printf("1.ret=%d, buf1=%s, buf2=%s, digit=%d\n\n", ret, buf1, buf2, digit); 
+	return 0; 
+}  
+执行结果:  1.ret=3, buf1=china, buf2=beijing, digit=123  
+可以看出,sscanf的返回值是读取的参数个数  
+*/
+
+// 3/4 set_com.c  GPS串口设备配置函数
+
+
+#include <stdio.h> 
+#include <string.h> 
+#include <errno.h> 
+#include <sys/stat.h> 
+#include <fcntl.h> 
+#include <unistd.h> 
+#include <termios.h> 
+#include <sys/types.h> 
+#include <stdlib.h> 
+#include "gpsd.h" 
+
+int set_opt(int fd,int nSpeed, int nBits, char nEvent, int nStop) 
+{     
+	struct termios newtio,oldtio; 
+	if( tcgetattr( fd,&oldtio) != 0) 
+	{ 
+		perror("SetupSerial 1"); 
+		return -1; 
+	} 
+	bzero( &newtio, sizeof( newtio ) );     
+	newtio.c_cflag  |= CLOCAL | CREAD;     
+	newtio.c_cflag &= ~CSIZE; 
+	switch( nBits ) { 
+	case 7:             
+	newtio.c_cflag |= CS7; break; 
+	case 8:             
+	newtio.c_cflag |= CS8; break; 
+	} 
+	switch( nEvent ) { 
+	case 'O': //奇校验                     
+		newtio.c_cflag |= PARENB;             
+		newtio.c_cflag |= PARODD;             
+		newtio.c_iflag |= (INPCK | ISTRIP); 
+		break; 
+	case 'E': //偶校验                     
+		newtio.c_iflag |= (INPCK | ISTRIP);             
+		newtio.c_cflag |= PARENB;             
+		newtio.c_cflag &= ~PARODD; 
+		break; 
+	case 'N':             
+		newtio.c_cflag &= ~PARENB; break; 
+	} 
+	switch( nSpeed ) { 
+	case 2400: 
+		cfsetispeed(&newtio, B2400); 
+		cfsetospeed(&newtio, B2400); 
+		break; 
+	case 4800: 
+		cfsetispeed(&newtio, B4800); 
+		cfsetospeed(&newtio, B4800); 
+		break; 
+	case 9600: 
+		cfsetispeed(&newtio, B9600); 
+		cfsetospeed(&newtio, B9600); 
+		break; 
+	case 115200: 
+		cfsetispeed(&newtio, B115200); 
+		cfsetospeed(&newtio, B115200); 
+		break; 
+	default: 
+		cfsetispeed(&newtio, B9600); 
+		cfsetospeed(&newtio, B9600); 
+		break; 
+	} 
+	if( nStop == 1 ) 
+	{      	newtio.c_cflag &= ~CSTOPB; 
+	} 
+	else if ( nStop == 2 ) 
+	{        newtio.c_cflag |= CSTOPB; }    
+	newtio.c_cc[VTIME] = 0;     
+	newtio.c_cc[VMIN] = 0; 
+	tcflush(fd,TCIFLUSH); 
+	if((tcsetattr(fd,TCSANOW,&newtio))!=0) 
+	{ 
+		perror("com set error"); 
+		return -1; 
+	} 
+	return 0; 
+} 
+
+int open_com(char *device_name) {
+	int fd = 0; if (0 > (fd = open(device_name, O_RDWR|O_NOCTTY|O_NDELAY))) //要设置非阻塞模式打开设备否则会出错！ 		{ 
+		perror("Open Comport Fail:"); 
+		return 0; 
+	} 
+	return fd; 
+}/*  ----- End of open_com()  ----- */
+
+// 4/4 gpsd.h
+
+#ifndef __GPSD_H__ 
+#define __GPSD_H__ 
+typedef unsigned int UINT; 
+typedef int BYTE; 
+typedef long int WORD; 
+typedef struct __gprmc__ 
+{ 
+	UINT time; //时间     
+	char pos_state; //定位状态     
+	float latitude; //纬度     
+	float longitude; //经度     
+	float speed; //移动速度     
+	float direction; //方向 
+	UINT date; //日期     
+	float declination; //磁偏角     
+	char dd; //磁偏角方向     
+	char mode; 
+} GPRMC; 
+extern int open_com(char *device_name); 
+extern int gprmc_analysis(char *buff,GPRMC *gprmc); 
+extern int set_opt(int fd,int nSpeed, int nBits, char nEvent, int nStop); 
+#endif
+
+```
+
+```bash
+// 1.交叉编译器编译GPS数据解析程序
+$ ls gps_analysis.c  gpsd.h  gps_test  gps_test.c  makefile  set_com.c  version.h 
+$ /opt/buildroot-2011.11/arm920t/usr/bin/arm-linux-gcc set_com.c gps_test.c gps_analysis.c -o gps_wei_test 
+$ ls gps_analysis.c gpsd.h gps_test.c gps_wei_test set_com.c
+
+// 2.在开发板上直接运行gps_test可执行程序，便可以获取解析后的GPS数据了
+
+/fl2440/gps >: ./gps_wei_test  
+gps infomation :8,53,332,24,30,52,231,43*77GPGSV,3,2,12,11,47,043,15,07,33,192,48,17,32,284,34,20,28,140,14*7CGPGSV,3,3,12,08,24,176,47,32,23,091,13,19,11,064,22,06,03,218,24*7FGPRMC,030323.000,A,3029.6405,N,11423.6222,E,0.34,332.13,210914,,,A*69GPGGA,030324.000,3029.6408,N,11423.6220,E,1,09,1.0,106.1,M,-13.7,M,,0000*7DGPGSA,A,3,04,08,28,30,07,17,01,11,19,,,,1.8,1.0,1.5*33GPRMC,030324.000,A,3029.6408,N,11423.6220,E,0.29,346.94,210914,,,A*61GPGGA,030325.000,3029.6410,N,11423.6218,E,1,09,1.0,105.2,M,-13.7,M,,0000*7EGPGSA,A,3,04,08,28,30,07,17,01,11,19,,,,1.8,1.0,1.5*33GPRMC,030325.000,A,3029.6410,N,11423.6218,E,0.28,315.50,210914,,,A*6DGPGGA,030326.000,3029.6412,N,11423.6216,E,1,09,1.0,104.5,M,-13.7,M,,0000*77GPGSA,A,3,04,08,28,30,07,17,01,11,19,,,,1.8,1.0,1.5*33GPRMC,030326.000,A,3029.6412,N,11423.621
+
+=========== GPS全球定位模块  
+= GPS状态位 : A [A:有效状态 V:无效状态]
+= 日期 : 2014-09-21 
+时间 : 11:03:23 
+纬度 : 北纬:30.296 
+经度 : 东经:114.236 
+速度 : 0.340
+```
+到此，我们的GPS定位成功！
 
 [ssh key]
 1. ssh keys work much like 2 pieces of a puzzle
