@@ -79,13 +79,28 @@ Sid - Forty Winks - Narre Warren (Pro)
 		45422918-E8CB-4BE0-B213-C350E9AAED31.png
 
 [AP Tracking]
+1. Plug in the GPS reveiver(GPS/GLONASS U-blox7) to the Linux PC
+2. Check the file: /dev/ttyACM0 to see if the input stream is coming
+	- $ sudo cat /dev/ttyACM0
+3. Install gpsd
+	- $ sudo apt install gpsd
+	- $ gpsd --v
+	- $ sudo apt install gpsd-clients
+	- $ xgps --v
+	- $ xgps  // open the UI window
+
+
 GPS - Global Positioning System / USA-24
 GLONASS - Russia-24
 BDS - China-35
 LBS - Location Based System
 GNSS - Global Navigation Satellite System
 
-这套系统给个简单的描述，就是:
+u-center 是由 ublox 公司提供的 GPS 评估软件，可以对 ATK-NED-6M GPS 模块进行全面测试
+将 ATK-NEO-6M GPS 模块通过 ALIENTEK STM32 开发板板载的 USB 转串口连接到电脑，并给 GPS 模块供电
+	注意：这里的模块和电脑的连接，中间没有经过单片机处理！直接是模块的 TXD 接开发板 USB 转串口的 RXD，模块的 RXD 接开发板 USB 转串口的 TXD
+
+//GNSS 这套系统给个简单的描述，就是:
 	- 天上有24颗卫星在不断的绕地球运动（图1），
 	- 每颗卫星不断发送“我是谁，我在哪里”的信号（电文）
 	- 接收机（比如手机GPS芯片/接收模块）收到了多颗卫星发出的这样的信号，根据信号传播时间推算出离卫星的距离，进而解出了接收机自己的位置，顺便可以得到当前准确时间
@@ -93,18 +108,63 @@ GNSS - Global Navigation Satellite System
 	- 卫星时刻发送连续循环的信号
 	- GPS卫星发送30秒一次的循环电文
 
-手机GPS芯片
+//手机GPS芯片
 	- 多是作为一个IP核放在CPU处理器芯片内的，没有单独封装成一个芯片
 	- GPS芯片/核的内部结构，主要分为射频和基带两大块
 	- 射频部分把卫星信号下变频为中频信号并模数转换为数字信号
 	- 基带部分实现信号捕获跟踪处理
 
-https://www.youtube.com/watch?v=Rhq18MV6LtU
+参考：https://www.youtube.com/watch?v=Rhq18MV6LtU
 GPS 24
 BDS 35
-欧盟 俄罗斯 ==> 授时、定位、导航、差分定位修正误差
+欧盟 
+俄罗斯 ==> 授时、定位、导航、差分定位修正误差
 
-[嵌入式系统上实现GPS全球定位功能]
+// Raspberry Pi 
+is a series of small single-board computers developed in the United Kingdom by the Raspberry Pi Foundation in association with Broadcom. The Raspberry Pi project originally leaned towards the promotion of teaching basic computer science in schools and in developing countries.
+
+参考：GPS NEO 6M模块 https://www.youtube.com/watch?v=TzeBuOYn76Q
+
+参考：SKYLAB-GPS Module
+	- 在定位终端产品中嵌入GPS模块
+	- 通过GPS模块的串口获取定位数据，位置数据
+	- GPS模块只要处于工作状态就会源源不断地把接收并计算出的GPS导航定位信息传送单片机中
+	- GPS模块遵循NMEA-0183协议
+	- GPGGA：GPS固定数据输出语句，这是一帧GPS定位的主要数据，也是使用最广的数据。
+		```
+		$GPGGA,<1>,<2>,<3>,<4>,<5>,<6>,<7>,<8>,<9>,<10>,<11>,<12>,<13>,<14>*<15>
+
+		<1> UTC时间，格式为hhmmss.sss。
+
+		<2> 纬度，格式为ddmm.mmmm（前导位数不足则补0）。
+
+		<3> 纬度半球，N或S（北纬或南纬）。
+
+		<4> 经度，格式为dddmm.mmmm（前导位数不足则补0）。
+
+		<5> 经度半球，E或W（东经或西经）。
+
+		<6> 定位质量指示，0=定位无效，1=定位有效。
+
+		<7> 使用卫星数量，从00到12（前导位数不足则补0）。
+
+		<8> 水平精确度，0.5到99.9。
+
+		<9> 天线离海平面的高度，-9999.9到9999.9米
+
+		<10> 高度单位，M表示单位米。
+
+		<11> 大地椭球面相对海平面的高度（-9999.9到9999.9）。
+
+		<12> 高度单位，M表示单位米。
+
+		<13> 差分GPS数据期限（RTCM SC-104），最后设立RTCM传送的秒数量。
+
+		<14> 差分参考基站标号，从0000到1023（前导位数不足则补0）。
+
+		<15> 校验和。
+		```
+//嵌入式系统上实现GPS全球定位功能
 1.1 GPS模块与ARM开发板的物理连接
 GPS模块属于字符设备，只需要和FL2440开发板的第二个串口连接既可以，然后将GPS测试模块放在室外便可以每隔一段时间向开发板的串口发一个数据包。
 1.2 GPS数据解析
