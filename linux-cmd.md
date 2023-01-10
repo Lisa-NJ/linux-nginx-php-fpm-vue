@@ -19,6 +19,7 @@ $ alias l='ls -ahltr'
 $ lscpu 
 $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{print $1"|"$3"|"$4}'|more
 $ service apache2 status
+$ cat /etc/os-release  // to check os version in command line
 
 $ gedit php.ini
 $ hostname -I

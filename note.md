@@ -93,6 +93,8 @@ Sid - Forty Winks - Narre Warren (Pro)
 GPS - Global Positioning System / USA-24
 GLONASS - Russia-24
 BDS - China-35
+Galileo - Europe
+
 LBS - Location Based System
 GNSS - Global Navigation Satellite System
 
