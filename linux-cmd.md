@@ -17,9 +17,11 @@ $ apt list --installed | grep apache2
 $ sudo apt-get remove apache2-bin  --purge 
 $ alias l='ls -ahltr'
 $ lscpu 
+$ lspci // show Hardware Info - intel corporation comet lake-s gt2 uhd graphics 630 (rev 03)
 $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{print $1"|"$3"|"$4}'|more
 $ service apache2 status
 $ cat /etc/os-release  // to check os version in command line
+
 
 $ gedit php.ini
 $ hostname -I
