@@ -79,7 +79,8 @@ Sid - Forty Winks - Narre Warren (Pro)
 		45422918-E8CB-4BE0-B213-C350E9AAED31.png
 
 [AP Tracking]
-参考l文件：
+方案一：GPS/GLONASS
+参考文件：
 	- u-blox7 (V14) Receiver Description Protocol Specification
 	- GPS/GLONASS/QZSS Firmware 1.00 for u-blox 7 
 1. Plug in the GPS reveiver(GPS/GLONASS U-blox7) to the Linux PC
@@ -184,6 +185,10 @@ is a series of small single-board computers developed in the United Kingdom by t
 
 		<15> 校验和。
 		```
+		
+方案二：Google Maps API
+	- https://www.googleapis.com/geolocation/v1/geolocate?key=YOUR_API_KEY
+
 //嵌入式系统上实现GPS全球定位功能
 1.1 GPS模块与ARM开发板的物理连接
 GPS模块属于字符设备，只需要和FL2440开发板的第二个串口连接既可以，然后将GPS测试模块放在室外便可以每隔一段时间向开发板的串口发一个数据包。
