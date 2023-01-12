@@ -79,29 +79,29 @@ Sid - Forty Winks - Narre Warren (Pro)
 		45422918-E8CB-4BE0-B213-C350E9AAED31.png
 
 [AP Tracking]
-参考文件：
+参考l文件：
 	- u-blox7 (V14) Receiver Description Protocol Specification
 	- GPS/GLONASS/QZSS Firmware 1.00 for u-blox 7 
 1. Plug in the GPS reveiver(GPS/GLONASS U-blox7) to the Linux PC
 2. Check the file: /dev/ttyACM0 to see if the input stream is coming
-	- $ sudo cat /dev/ttyACM0	
-	- $ sudo stty -F /dev/ttyACM0 ispeed 4800 && cat < /dev/ttyACM0
+	- $ sudo cat /dev/ttyACM0	// Lon, Lat, Time are okay + green light on
+	?- $ sudo stty -F /dev/ttyACM0 ispeed 4800 && cat < /dev/ttyACM0
 	
 3. Install gpsd
 	- $ sudo apt install gpsd
 	- $ gpsd --v
 	- $ sudo gpsmon /dev/ttyACM0
 	- $ sudo apt install gpsd-clients
+	- $ cgps
 	- $ xgps --v
 	
-4. Config /etc/default/gpsd
-	- DEVICES="/dev/ttyACM0"
 	
-5. Test gpsd with xgps
-	- $ xgps // display data
-	- $ cgps
+4. Config /etc/default/gpsd && Restart
+	- DEVICES="/dev/ttyACM0"	
 
-6. ubxtool // https://manpages.ubuntu.com/manpages/focal/man1/ubxtool.1.html
+5. - $ xgps  // display data after 4.
+
+//6. ubxtool // https://manpages.ubuntu.com/manpages/focal/man1/ubxtool.1.html
 	- $ ubxtool -e GPS
 	- $ ubxtool -e NMEA
 	- $ ubxtool -p MON-VER
