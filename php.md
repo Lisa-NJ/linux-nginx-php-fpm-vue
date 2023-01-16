@@ -11,6 +11,34 @@ mime - Multipurpose Internet Mail Extensions
 	https://www.cnblogs.com/endkoo/p/14849807.html
 	
 	/tmp/php_errors.log
+
+[Phalcon\MVC] - Models, Views, Controllers
+	1. Isolation of business logic(Models) from the user interface(Views) and the database layer
+	2. Every request to your application resources will be managed by the MVC architecture
+	3. The controllers provide the ‘flow’ between models and views. Controllers are responsible for 
+		- processing the incoming requests from the web browser, 
+		- interrogating the models for data, and 
+		- passing that data on to the views for presentation.
+
+```
+             Web Browser   --requests-->   Controller --interrogating--> Models
+                                                      <---  date ----              
+                                               |
+                                               |
+                                               v
+                                             Views           
+```
+[Phalcon\Mvc\Model]
+	1. an implementation of the object-relational mapping (ORM)
+	2. Models are primarily used for managing the rules of interaction with a corresponding database table
+	3. Each table in your database will correspond to one model in your application
+	4. The bulk of your application’s business logic will be concentrated in the models
+```
+             business objects    ----  Model ---- database tables
+                                     1 model ---- 1 table 
+             
+```
+
 [code]
 ``` php
 require './e2v_helper.php';

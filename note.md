@@ -38,7 +38,6 @@ tba - to be announced
 tbh - to be honest
 
 
-
 [E2V Endpoint Development Process]
 1. Make a .php file in local "helpers" folder, for example: "abc.php"
 2. Dev environment - localhost:8080
@@ -107,7 +106,10 @@ Sid - Forty Winks - Narre Warren (Pro)
 	- $ ubxtool -e NMEA
 	- $ ubxtool -p MON-VER
 	- $ ubxtool -p CFG-GNSS
-	
+
+6. 
+ - $ tail -f /var/log/syslog
+
 
 GPS - Global Positioning System / USA-24
 GLONASS - Russia-24

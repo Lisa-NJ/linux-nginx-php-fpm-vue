@@ -35,6 +35,14 @@ $ grep localhost -r *
 $ grep 1234 assets/wrapper
 $ journalctl -fan -u ac
 
+
+<!-- Install phpStorm -->
+$ sudo apt update
+$ sudo apt upgrade
+$ sudo apt install snapd
+$ sudo snap install phpstorm --classic
+$ phpstorm
+
 <!-- ssh -->
 
 <!-- only one key -->
