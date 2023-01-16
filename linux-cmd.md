@@ -35,6 +35,8 @@ $ grep localhost -r *
 $ grep 1234 assets/wrapper
 $ journalctl -fan -u ac
 
+<!-- Install GIMP -->
+$ sudo snap install gimp
 
 <!-- Install phpStorm -->
 $ sudo apt update
