@@ -16,6 +16,7 @@ This could be done better
 Don't you dare!
 So sick - means cool or excellent, Sic/sick is an internet slang expresion that is used as an adjective to compliment someone or something.
 Under-representing 
+OP Shop
 
 a forward slash (/) character
 a backslash (\) character
@@ -43,9 +44,10 @@ tbh - to be honest
 2. Dev environment - localhost:8080
  	(1). E2V Sources + a source named "testABC", with "URI" refering to "http://10.1.1.238:8001/abc.php"
 	(2). Private Booking / Connect E2V source "testABC" with Display "A-TEST"
-	(3). Check "http://10.1.1.38:1234/" to see if the E2V endpoint works as expected
-5. Upload "abc.php" to CarSwap Server via ssh
-	- scp 
+	(2-1). HexChat / #au / TEST -- $TEST:channelRefresh
+	(3). Check "http://10.1.1.38:1234/" (Inspect / responsive 1080*1920 ) to see if the E2V endpoint works as expected
+5. Upload "abc.php" to CarSwap Server via ssh, if a new png file is needed, it needs to be uploaded as well
+	- scp -i key_name path/abc.php name@api.carswap.me:srv/html/e2v/
 6. Pre-pro environment - https://adverpost.com/ - (Team)One Wolrd LED
 	(1). E2V Sources + a source named "proABC", "URI" refering to "https://api.carswap.me/e2v/abc.php"
 	(2). Private Booking / Connect E2V source "proABC" with Display(owl-showcase)
@@ -62,7 +64,7 @@ VaultRE - Real Estate CRM Software
 CRM - Customer relationship management
 
 [Books needed]
-A Practical Guide to Linux Commands, Editors, and Shell Programming; Edition. 4th - Michael
+A Practical Guide to Linux Commands, Editors, and Shell Programming; Edition. 4th
 
 [bug] 
 When only E2V campaign is booked, nothing is shown on the Display but the AP logo, and "connected" button is orange
