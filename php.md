@@ -6,6 +6,42 @@ mime - Multipurpose Internet Mail Extensions
 	- type/subtype
 	- text image audio video application
 
+
+[Phalcon / Installation]
+$ composer global require phalcon/devtools
+$ phalcon
+$ phalcon create-project store
+$ cd store
+$ phalcon create-controller --name test
+```
+MVC
+ |----app
+ |     |----controllers
+ |     |----core
+ |     |----models
+ |     |----views
+ |            |----home
+ |
+ |----public
+        |----css
+        |     |----
+        |
+        |----index.php     // The entry point for the app, direct all this running to the single point handler
+
+```
+
+1. Users land in your public directory, index.php --> building the bootsrapping
+2. --> Call a new application instance (an object /spp/core)
+3. --> Read the URL 
+4. --> render/call the right controller
+5. --> Go and render view (/models)
+
+```php
+public/css/.htaccess -- handles the ability to have them short URLs
+public/css/index.php -- the bootstrap file which creates a new app
+The routing system
+The initialization file -- require all the core components that you need
+```
 [php debug]
 	最详细的phpstorm+xdebug调试详细教程，没有之一
 	https://www.cnblogs.com/endkoo/p/14849807.html
