@@ -13,20 +13,34 @@ $ phalcon
 $ phalcon create-project store
 $ cd store
 $ phalcon create-controller --name test
+$ phalcon serve --help
+$ phalcon serve --port=8888
 ```
+1. One of the key features of Phalcon is that it is loosely coupled
+2. 
+
+External Libraries
+	- $ git clone https://github.com/phalcon/phalcon-devtools.git 3.1.x (the latest version with ide)
+	- open phpStorm / External Libraries / Right Mouse Click --> Config Php Include Paths
+	- choose: phalcon-devtools / ide / stubs / Phalcon
+
 MVC
  |----app
  |     |----controllers
+ |     |      |----indexController.php   // 
  |     |----core
  |     |----models
  |     |----views
  |            |----home
  |
  |----public
-        |----css
-        |     |----
-        |
-        |----index.php     // The entry point for the app, direct all this running to the single point handler
+ |      |----css
+ |      |     |----
+ |      |
+ |      |----index.php     // The entry point for the app( autoloader + DI + HTTP requests ) 
+ |
+ |----.htaccess
+ |----.htrouter.php   // If it sees files existing in public, deliver directly, not to give to Phalcon
 
 ```
 
