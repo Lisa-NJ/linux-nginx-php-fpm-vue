@@ -7,9 +7,10 @@ mime - Multipurpose Internet Mail Extensions
 	- text image audio video application
 
 
-[Phalcon / Installation]
+[Phalcon devtools / Installation]
 $ composer global require phalcon/devtools
 $ phalcon
+$ phalcon -V
 $ phalcon create-project store
 $ cd store
 $ phalcon create-controller --name test
@@ -17,7 +18,19 @@ $ phalcon serve --help
 $ phalcon serve --port=8888
 ```
 1. One of the key features of Phalcon is that it is loosely coupled
-2. 
+2. Setting up Debug 
+	- + (new Phalcon\Debug)->listen(); //index.php
+	- refresh the url
+3. Install Xdebug
+	- $ sudo apt install php7.4-xdebug  // install php8.2-xdebug by default
+4. Integrate Xdebug with the PHP interpreter
+	- $ php -m
+	- $ sudo updatedb
+	- $ locate xdebug.so  // /usr/lib/php/20220829/xdebug.so
+	- edit php.ini, + [xdebug] section
+	- localhost:8001 can see xdebug info
+5. Configure Xdebug in PhpStorm﻿
+	- phpStorm / File / Settings / PHP / Debug
 
 External Libraries
 	- $ git clone https://github.com/phalcon/phalcon-devtools.git 3.1.x (the latest version with ide)
