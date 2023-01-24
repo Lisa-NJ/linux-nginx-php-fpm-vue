@@ -7,7 +7,11 @@ mime - Multipurpose Internet Mail Extensions
 	- text image audio video application
 
 
-[Phalcon devtools / Installation]
+phtml??? 
+transformers???
+Invo???
+
+[Phalcon devtools / Installation / Create Controllers + Models]
 $ composer global require phalcon/devtools
 $ phalcon
 $ phalcon -V
@@ -16,6 +20,12 @@ $ cd store
 $ phalcon create-controller --name test
 $ phalcon serve --help
 $ phalcon serve --port=8888
+
+- mysql> create database ...
+- mysql> create table ... 
+
+$ phalcon migration generate
+$ phalcon migration run 
 ```
 1. One of the key features of Phalcon is that it is loosely coupled
 2. Setting up Debug 
@@ -31,6 +41,7 @@ $ phalcon serve --port=8888
 	- localhost:8001 can see xdebug info
 5. Configure Xdebug in PhpStorm﻿
 	- phpStorm / File / Settings / PHP / Debug
+
 
 External Libraries
 	- $ git clone https://github.com/phalcon/phalcon-devtools.git 3.1.x (the latest version with ide)
@@ -54,6 +65,9 @@ MVC
  |
  |----.htaccess
  |----.htrouter.php   // If it sees files existing in public, deliver directly, not to give to Phalcon
+
+1. To connect our application to the database = the database setup + to set up the autoloader
+	- so that our application is aware of where to search for files required
 
 ```
 
@@ -83,14 +97,14 @@ The initialization file -- require all the core components that you need
 		- interrogating the models for data, and 
 		- passing that data on to the views for presentation.
 
-```
-             Web Browser   --requests-->   Controller --interrogating--> Models
+``` part1
+             Web Browser   --requests-->   Controller --interrogating--> Models  -- database
                                                       <---  date ----              
                                                |
                                                |
                                                v
                                              Views           
-```
+```part2
 [Phalcon\Mvc\Model]
 	1. an implementation of the object-relational mapping (ORM)
 	2. Models are primarily used for managing the rules of interaction with a corresponding database table
