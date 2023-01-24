@@ -21,8 +21,15 @@ $ phalcon create-controller --name test
 $ phalcon serve --help
 $ phalcon serve --port=8888
 
-- mysql> create database ...
-- mysql> create table ... 
+- mysql> CREATE DATABASE `robotics`;
+- mysql> CREATE TABLE `robotics`.`robots` (
+ `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+ `name` varchar(200) COLLATE utf8_bin NOT NULL,
+ `type` varchar(200) COLLATE utf8_bin NOT NULL,
+ `year` smallint(2) unsigned NOT NULL,
+ PRIMARY KEY (`id`);
+)
+- 参考： https://docs.phalcon.io/4.0/en/tutorial-rest-advanced#defining-the-api
 
 $ phalcon migration generate
 $ phalcon migration run 
