@@ -7,8 +7,6 @@ $ curl localhost:8000 -I
 $ echo "$PATH"
 $ echo "${PATH//:/$'\n'}"
 $ sudo apt update && sudo apt upgrade
-$ cd /
-$ phpize -v
 $ apt search php7.4-phalcon
 $ lsof -i:80
 $ sudo apt-get remove apache2 --purge
@@ -29,7 +27,16 @@ $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{p
 $ service apache2 status
 $ cat /etc/os-release  // to check os version in command line
 
-<!-- Phalcon / Installation-->
+<!-- install mysql -->
+https://www.cloudbooklet.com/how-to-install-mysql-on-debian-11/
+$ sudo apt install wget
+$ wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb
+$ sudo apt install ./mysql-apt-config_0.8.22-1_all.deb
+$ sudo apt update
+$ sudo apt install mysql-server
+$ sudo service mysql status
+
+<!-- Phalcon devtools / Installation-->
 $ composer global require phalcon/devtools
 $ phalcon
 
@@ -114,6 +121,8 @@ $ ssh root@10.1.1.39
 
 <!-- curl + jq -->
 https://curl.se/docs/manual.html
+$ sudo apt install curl
+$ curl --help
 $ sudo apt install jq
 $ curl https://e2v.adverpost.com/simple.php?_path=/status | jq .
 $ curl https://e2v.adverpost.com/simple.php?_path=/parameters | jq .
@@ -211,33 +220,52 @@ $ sudo vendor/bin/phinx seed:run -s DisplayOwnersSeeder -s AdvertiserSeeder
 <!--install phalcon4-->
 https://docs.phalcon.io/4.0/en/installation#deb-based-distributions-debian-ubuntu-etc
 <!-- 1. extensions needed -->
-# imagick
-$ sudo apt-get install php7.4-imagick
+<!-- psr Not In Use -->
+$ git clone https://github.com/jbboehr/php-psr.git
+$ cd php-psr  // where 'config.m4' is
+$ sudo apt install php7.4-dev // to install phpize command
+$ phpize
+$ ./configure
+$ make
+$ make test
+$ sudo make install
+<!-- psr extension -->
+$ sudo apt install php7.4-psr
 
-# memcached
+<!-- imagick -->
+$ sudo apt-get install php7.4-imagick
+<!-- memcached -->
 $ sudo apt update
 $ sudo apt install memcached libmemcached-tools
 $ sudo systemctl status memcached
 
 $ sudo apt-get install php7.4-gd 
 $ sudo apt-get install php7.4-mbstring
+<!-- libpcre3-dev -->
+$ sudo apt-get install libpcre3-dev
+
 <!-- 2. add the repo to your distribution -->
 $ curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash 
 <!-- 3. install phalcon4 -->
 $ sudo apt-get install php7.4-phalcon4
+// --> Unable to locate package php7.4-phalcon4 + Couldn't find any package by glob 'php7.4-phalcon4'
+<!-- 3.1 Install with Pecl -->
+$ sudo pecl channel-update pecl.php.net
+$ sudo pecl install phalcon-4.1.2
+
 <!-- 4. to check -->
 $ php -m <!-- phalcon is on the list -->
  
 <!-- another way to install phalcon4:  --> 
 $ cd /tmp
 $ git clone https://github.com/phalcon/cphalcon
-$ cd phalcon
+$ cd cphalcon/
 $ git checkout tags/v4.0.0 ./
 $ cd build
 $ compose install
 // ...
 
-<!-- install phalcon DevTools -->
+<!-- install phalcon DevTools Not In Use-->
 https://github.com/phalcon/phalcon-devtools#installing-via-composer
 <!-- 1.Installation via Git -->
 $ cd ~
