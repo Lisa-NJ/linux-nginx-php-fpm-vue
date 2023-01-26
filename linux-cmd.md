@@ -36,11 +36,6 @@ $ sudo apt update
 $ sudo apt install mysql-server
 $ sudo service mysql status
 
-<!-- Phalcon devtools / Installation-->
-$ composer global require phalcon/devtools
-$ phalcon
-
-
 $ gedit php.ini
 $ hostname -I
 $ netstat -l
@@ -263,16 +258,21 @@ $ cd cphalcon/
 $ git checkout tags/v4.0.0 ./
 $ cd build
 $ compose install
-// ...
+// ...to be finished
 
-<!-- install phalcon DevTools Not In Use-->
+<!-- 1 Install Phalcon DevTools-->
+$ composer global require phalcon/devtools
+$ phalcon
+
+
+<!-- 2 Install phalcon DevTools-->
 https://github.com/phalcon/phalcon-devtools#installing-via-composer
 <!-- 1.Installation via Git -->
 $ cd ~
 $ git clone https://github.com/phalcon/phalcon-devtools.git
 $ cd phalcon-devtools
 $ composer install
-$ ln -s $(pwd)/phalcon /usr/bin/phalcon
+$ ln -s $(pwd)/phalcon /usr/bin/phalcon  // ln -s a b 中的 a 就是源文件，b是链接文件名; 删除软链接:rm -rf b 注意不是rm -rf b/
 $ chmod ugo+x /usr/bin/phalcon
 <!-- 2. to check -->
 $ phalcon -v <!-- 4.1.0 -->
