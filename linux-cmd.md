@@ -209,8 +209,13 @@ $ sudo mysql -uroot -p owl < owl-0817.sql
 MariaDB > source /.../dcdb-0817.sql
 <!-- 3. Migrating the Database -->
 $ cd ~/owl/program/api
-$ sudo vendor/bin/phinx migrate
-$ sudo vendor/bin/phinx seed:run -s DisplayOwnersSeeder -s AdvertiserSeeder
+$ sudo vendor/bin/phinx migrate  // --> create tebles;
+$ sudo vendor/bin/phinx seed:run -s DisplayOwnersSeeder -s AdvertiserSeeder  // --> add fake data
+
+<!-- 3.1 another way of migrating -->
+$ phalcon migration generate
+$ phalcon migration run 
+
 
 <!--install phalcon4-->
 https://docs.phalcon.io/4.0/en/installation#deb-based-distributions-debian-ubuntu-etc

@@ -33,6 +33,9 @@ $ phalcon serve --port=8888
 
 $ phalcon migration generate
 $ phalcon migration run 
+
+生成的迁移在目标服务器上上传后，您可以轻松运行它们
+
 ```
 1. One of the key features of Phalcon is that it is loosely coupled
 2. Setting up Debug 
