@@ -12,6 +12,45 @@ transformers???
 Invo???
 phar???
 
+[Phinx]
+	- Rob Morgan
+	- does not depend on doctrine
+	- example: https://github.com/robmorgan/phinx-screencast
+```bash
+$ git clone https://github.com/robmorgan/phinx-screencast
+$ cd phinx-screencast
+mysql> create database phinx_screencast
+$ curl -s https://getcomposer.org/installer | php
+$ php composer.phar install //--> vendor/
+$ php vendor/bin/phinx init //initialise the project for Phinx--> ./phinx.yml
+Todo: db connection setting: ./phinx.yml + db, user, password
+$ mkdir migrations
+$ php vendor/bin/phinx create CreatePostsTable //in CamelCase--> 2023..._create_posts_table.php {up(), down()}
+Todo: up() down() or change() + code -- create table, add column ...
+$ vendor/bin/phinx migrate -e development -v  // db create table posts + phinxlog
+$ vendor/bin/phinx status -e development -v  // check
+$ vendor/bin/phinx rollback -e development -v  // 
+$ php vendor/bin/phinx create CreateAuthorIndex
+Todo: change()+code; delete up() and down()
+
+```
+
+[DB deploy]
+	- first introduced in Java
+	- one php file you write your sql
+	- use a fing task to execute it
+		
+
+[Ruby on rails]
+	- had active migration, active record migrations
+	- 3.1 reversible migrations
+
+[Pear]
+
+[Composer]
+	- used as the default migration tool in Cake PHP
+	- built on top of symphony components
+
 [Phalcon devtools / Installation / Create Controllers + Models]
 $ composer global require phalcon/devtools
 $ phalcon

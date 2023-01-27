@@ -39,26 +39,6 @@ tba - to be announced
 tbh - to be honest
 
 
-[DB deploy]
-	- first introduced in Java
-	- one php file you write your sql
-	- use a fing task to execute it
-	
-[Phinx]
-	- Rob Morgan
-	- does not depend on doctrine
-	
-
-[Ruby on rails]
-	- had active migration, active record migrations
-	- 3.1 reversible migrations
-
-[Pear]
-
-[Composer]
-	- used as the default migration tool in Cake PHP
-	- built on top of symphony components
-
 [E2V Endpoint Development Process]
 1. Make a .php file in local "helpers" folder, for example: "abc.php"
 2. Dev environment - localhost:8080
