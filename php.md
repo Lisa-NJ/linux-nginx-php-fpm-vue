@@ -10,6 +10,7 @@ mime - Multipurpose Internet Mail Extensions
 phtml??? 
 transformers???
 Invo???
+phar???
 
 [Phalcon devtools / Installation / Create Controllers + Models]
 $ composer global require phalcon/devtools

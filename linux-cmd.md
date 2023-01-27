@@ -201,21 +201,22 @@ $ sudo mysql
 MariaDB > create database owl;
 MariaDB > create database csdb;
 MariaDB > create database dcdb;
-<!-- 2. Import data from files -->
+
+<!-- 2. Migrating the Database -->
+$ cd ~/owl/program/api
+$ sudo vendor/bin/phinx migrate  // --> create tebles;
+$ sudo vendor/bin/phinx seed:run -s DisplayOwnersSeeder -s AdvertiserSeeder  // --> add fake data
+
+<!-- 2.1 another way of migrating -->
+$ phalcon migration generate
+$ phalcon migration run 
+
+<!-- 3. Import data from files -->
 $ sudo mysql -uroot -p dcdb < dcdb-0817.sql
 $ sudo mysql -uroot -p csdb < csdb-0817.sql
 $ sudo mysql -uroot -p owl < owl-0817.sql
 <!-- or -->
 MariaDB > source /.../dcdb-0817.sql
-<!-- 3. Migrating the Database -->
-$ cd ~/owl/program/api
-$ sudo vendor/bin/phinx migrate  // --> create tebles;
-$ sudo vendor/bin/phinx seed:run -s DisplayOwnersSeeder -s AdvertiserSeeder  // --> add fake data
-
-<!-- 3.1 another way of migrating -->
-$ phalcon migration generate
-$ phalcon migration run 
-
 
 <!--install phalcon4-->
 https://docs.phalcon.io/4.0/en/installation#deb-based-distributions-debian-ubuntu-etc
@@ -262,7 +263,7 @@ $ git clone https://github.com/phalcon/cphalcon
 $ cd cphalcon/
 $ git checkout tags/v4.0.0 ./
 $ cd build
-$ compose install
+$ composer install
 // ...to be finished
 
 <!-- 1 Install Phalcon DevTools-->
@@ -333,7 +334,6 @@ $ sudo systemctl start mysql.service
 $ fg
 $ sudo systemctl status mysql.service
 $ mysqld_safe --skip-grant-tables --skip-networking &
-$ mysql -u root
 $ fg
 $ sudo kill $(cat /var/lib/mysql/$HOSTNAME.pid)
 $ sudo systemctl start mariadb.service
@@ -349,18 +349,7 @@ $ ll /etc/mysql/debian-start
 $ sudo systemctl start mysql
 $ sudo systemctl restart mysql
 $ sudo systemctl status mysql
-$ mysql -uroot -p
-$ cd ~/work-lisa/vue
-$ cat .env.development.local
 $ curl localhost:8000 -I
-$ cd work-lisa/vue
-$ npm run serve
-$ cat .env.development.local
-$ cd ../api
-$ composer install
-$ cat phinx.yml
-$ sudo nano phinx.yml
-$ sudo nano app/config/config.ini
 
 $ clear
 $ reset
@@ -484,10 +473,14 @@ $ php -v
 $ echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/info.php
 localhost/info.php --> show info 
 
-<!-- install composer -->
+<!-- 1 install composer ??? -->
 $ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 $ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 $ sudo chmod +x /usr/local/bin/composer
+
+<!-- 2 install composer-->
+$ curl -s https://getcomposer.org/installer | php
+$ php composer.phar install
 
 <!-- install phalcon in ~/software -->
 $ git clone https://github.com/phalcon/cphalcon.git
