@@ -192,11 +192,12 @@ $ curl -4 icanhazip.com
 $ sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
 $ sudo unlink /etc/nginx/sites-enabled/default
 
-<!-- 1. Dumping database into files -->
+<!-- 0. Dumping database(table+data) into files on source server -->
 $ mysqldump -u root -p dcdb >dcdb-0817.sql
 $ mysqldump -u root -p csdb >csdb-0817.sql
 $ mysqldump -u root -p owl >owl-0817.sql
 
+<!-- 1. Create db on target server -->
 $ sudo mysql
 MariaDB > create database owl;
 MariaDB > create database csdb;
@@ -204,14 +205,14 @@ MariaDB > create database dcdb;
 
 <!-- 2. Migrating the Database -->
 $ cd ~/owl/program/api
-$ sudo vendor/bin/phinx migrate  // --> create tebles;
+$ sudo vendor/bin/phinx migrate  // --> create tables;
 $ sudo vendor/bin/phinx seed:run -s DisplayOwnersSeeder -s AdvertiserSeeder  // --> add fake data
 
 <!-- 2.1 another way of migrating -->
 $ phalcon migration generate
 $ phalcon migration run 
 
-<!-- 3. Import data from files -->
+<!-- 3. Import data from files: create table + import data -->
 $ sudo mysql -uroot -p dcdb < dcdb-0817.sql
 $ sudo mysql -uroot -p csdb < csdb-0817.sql
 $ sudo mysql -uroot -p owl < owl-0817.sql
