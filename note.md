@@ -63,6 +63,9 @@ tbh - to be honest
 VaultRE - Real Estate CRM Software
 CRM - Customer relationship management
 
+[Error Reading Lock File...Not enough data read]
+	- $ rm *.swp
+
 [Books needed]
 A Practical Guide to Linux Commands, Editors, and Shell Programming; Edition. 4th
 
