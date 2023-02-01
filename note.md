@@ -39,6 +39,7 @@ tba - to be announced
 tbh - to be honest
 
 
+
 [E2V Endpoint Development Process]
 1. Make a .php file in local "helpers" folder, for example: "abc.php"
 2. Dev environment - localhost:8080
@@ -599,10 +600,11 @@ $ sudo ufw allow 8000
 [HexChat / IRC]
 1. all commands are in 00.html / External API
 2. Server: root.cdn.adverpost.com
+3. If a display has quit, it is not on the list of the HexChat anymore.
 
 http://root.cdn.adverpost.com:2222/clients
 
-[connect to zotac]
+[connect to zotac using ssh]
 ```bash
 $ ssh root@10.1.1.134
 // password + enter
