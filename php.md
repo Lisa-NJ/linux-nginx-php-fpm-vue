@@ -23,6 +23,13 @@ Swagger-ui -- UI 工具，用来渲染Swagger文档，使其看起来更加美�
 Swagger-editor -- 可用来编写 Swagger 文档，在编辑的同时，可检测 Swagger 文档是否符合规范
 Swagger Codegen -- 
 
+
+[A server stub]
+	- is intended to be a ready-to-deploy application that routes HTTP requests to your actual business logic on the backend.
+	- Routing to your business logic. The framework will handle the HTTP specification, but actually mapping from a "controller" to your service layer is being handled by the code generator, based on your API specification.
+	- Serialization and Deserialization of your models (applies to strongly-typed languages like Java/C#).
+	- AuthN/AuthZ may be handled, to some degree, based on the framework's support for your API's chosen auth scheme.
+
 ### PHP 生态
 
 #### Phinx
