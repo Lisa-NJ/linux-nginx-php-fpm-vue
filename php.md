@@ -12,7 +12,27 @@ transformers???
 Invo???
 phar???
 
-[Phinx]
+### Docker
+Install - https://docs.docker.com/engine/install/debian/
+
+### Swagger
+https://www.jianshu.com/p/4fdac2a10c79
+
+Swagger 文档（用特定语法编写的 API文件）-- 指的是符合 Swagger 规范的文件，用于对 API 的信息进行完整地描述。
+Swagger-ui -- UI 工具，用来渲染Swagger文档，使其看起来更加美观
+Swagger-editor -- 可用来编写 Swagger 文档，在编辑的同时，可检测 Swagger 文档是否符合规范
+Swagger Codegen -- 
+
+
+[A server stub]
+	- is intended to be a ready-to-deploy application that routes HTTP requests to your actual business logic on the backend.
+	- Routing to your business logic. The framework will handle the HTTP specification, but actually mapping from a "controller" to your service layer is being handled by the code generator, based on your API specification.
+	- Serialization and Deserialization of your models (applies to strongly-typed languages like Java/C#).
+	- AuthN/AuthZ may be handled, to some degree, based on the framework's support for your API's chosen auth scheme.
+
+### PHP 生态
+
+#### Phinx
 	- Rob Morgan
 	- does not depend on doctrine
 	- example: https://github.com/robmorgan/phinx-screencast
@@ -51,6 +71,7 @@ Todo: change()+code; delete up() and down()
 	- used as the default migration tool in Cake PHP
 	- built on top of symphony components
 
+#### Phalcon
 [Phalcon devtools / Installation / Create Controllers + Models]
 $ composer global require phalcon/devtools
 $ phalcon
