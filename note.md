@@ -38,7 +38,20 @@ tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
 
+[Open pdf in browsers]
+	- word press
+	- https://oneworldled.com/wp-content/uploads/2017/11/Architecture-Primer-II.pdf
 
+	- Setting Chrome
+		- chrome://settings/content/pdfDocuments -- Open PDFs in Chrome
+		- Settings / Privacy and security / Site Settings / PDF documents 
+		- PDF and PowerPoint viewer 
+
+	- Setting Firefox
+		- Settings / General / Applications / Portable Document Format(PDF) --> Open in Firefox
+
+[Android apk]
+1. for installation
 
 [E2V Endpoint Development Process]
 1. Make a .php file in local "helpers" folder, for example: "abc.php"
