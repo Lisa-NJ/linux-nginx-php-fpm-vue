@@ -447,6 +447,7 @@ $ sudo apt-get install nginx -y <!-- y -->
 $ sudo systemctl status nginx
 $ sudo systemctl is-enabled nginx
 $ sudo systemctl is-active nginx
+Todo: restart
 
 
 <!-- reinstall desktop tool -->

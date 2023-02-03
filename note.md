@@ -1013,11 +1013,11 @@ Nginx ideally has one worker process per CPU/core. Each one can handle hundreds 
 ```
 $ pcre-config --version
 	8.44
-$ cd /usr/sbin
-$ nginx
-$ nginx -v       <!-- nginx/1.18.0 -->
+$ cd /etc/nginx
+$ sudo nginx
+$ sudo nginx -v       <!-- nginx/1.18.0 -->
 $ ps -aux|grep nginx
-$ nginx -s quit
+$ sudo nginx -s quit
 $ nginx -s reload
 $ sudo nginx -t  <!--to check config file-->
 ```
