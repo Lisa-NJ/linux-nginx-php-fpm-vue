@@ -1,3 +1,8 @@
+Tadartagnan@hotmail.com
+schumann@oneworldled.com
+michael@oneworldled.com
+dartagnan@oneworldled.com.au
+
 [English]
 Dash delimited format
 a comma-separated list of parameters
@@ -736,6 +741,11 @@ DHCP
 	- DHCPRequest - The host requests to lease the address
 	- DHCPACK / sends < IP addr + subnet mask + the default gateway + dns server >
 	- UDP Port / Client 68 + Server 67
+dhcpcd
+	- an implementation of the DHCP client
+	- gets the host information (IP address, routes, etc) from a DHCP server 
+	- configures the network interface of the machine on which it is running 
+	
 OpenWrt luci feed 
 	- LuCI - OpenWrt Configuration Interface
 	- https://github.com/Lisa-NJ/luci

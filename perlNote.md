@@ -12,6 +12,9 @@
 提供脚本语言（如sed和awk）的所有功能，还具备它们不具备的很多功能 - 方便
 擅长扫描任意的文本文件，从这些文件中获取信息，也很适合于完成许多系统管理的功能
 约有90%与文字处理有关，10%与其他处理相关
+A .pl is a single script.
+In .pm (Perl Module) you have functions that you can use from other Perl scripts:
+A Perl module is a self-contained piece of Perl code that can be used by a Perl program or by other Perl modules. 
 
 ```bash
 //第一种运行方式
