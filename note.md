@@ -43,6 +43,50 @@ tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
 
+[shell program]
+Shell是用户与内核进行交互操作的一种接口，目前最流行的Shell称为bash Shell
+Shell是解释执行的脚本语言，所谓脚本语言就是不用编译就可以直接执行的语言。在Shell中可以调用Linux系统命令。
+
+$ cat /etc/shells  # 查看系统中安装的 shell
+
++file:
+$ cd /usr/local/bin
+$ sudo touch hello.sh
+```
+echo"###############################"
+echo"######### Hello World! ########"
+```
+$ sudo chmod ugo+x hello.sh
+$ hello.sh
+1. Shell 基本的执行方式
+	- 1.1 输入脚本的绝对或相对路径
+		/root/hello.sh
+	- 1.2 bash 或 sh +脚本
+		$ sh hello.sh 
+	- 1.3 在脚本的路径前加 "."
+		$ . /root/hello.sh
+
+[.service]
+service unit file
+	- /etc/systemd/system/ac.service
+```
+[Unit]
+Description=Hadaly
+After=nginx.service memcached.service
+
+[Service]
+Type=idle
+RemainAfterExit=yes
+WorkingDirectory=/hadaly
+ExecStart=/hadaly/adclient
+ExecStop=/usr/bin/pkill adclient
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+```
+
 [Open pdf in browsers]
 	- word press
 	- https://oneworldled.com/wp-content/uploads/2017/11/Architecture-Primer-II.pdf

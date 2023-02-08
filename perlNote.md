@@ -7,7 +7,7 @@
 ??? grep die open close async defer_exec
 
  
-0. Perl - Practical Extraction and Report Language
+00. Perl - Practical Extraction and Report Language
 具有高级语言的强大能力和灵活性
 提供脚本语言（如sed和awk）的所有功能，还具备它们不具备的很多功能 - 方便
 擅长扫描任意的文本文件，从这些文件中获取信息，也很适合于完成许多系统管理的功能
@@ -78,8 +78,8 @@ Hello, world                   # 输出结果
 Hello, world\n
 ```
 
-1. Perl 解释器不会关心有多少个空白, 但是如果空格和分行出现在字符串内，他会原样输出。
-2. Here document grammer - << EOF ... EOF
+01. Perl 解释器不会关心有多少个空白, 但是如果空格和分行出现在字符串内，他会原样输出。
+1. Here document grammer - << EOF ... EOF
 
 ```perl
 #!/usr/bin/perl
@@ -99,7 +99,7 @@ print "$var\n";
 可以在这输入字符串和变量。
 例如：a = 10
 ```
-3. 使用反斜线（\）来转义
+2. 使用反斜线（\）来转义
 ```perl
 #!/usr/bin/perl
  
@@ -113,6 +113,14 @@ print "\$result\n";
 $result
 
 ```
+3. Perl variable scopes
+```perl
+$color = 'red';              # global
+{
+	my $color = 'blue';  # local
+}
+our $color1 = 'white';       # global variables visible throughout the program or from external packages
+```
 4. 弱类型语言，变量不需要指定类型，Perl 解释器会根据上下文自动选择匹配类型
     Perl 有三个基本的数据类型：标量、数组、哈希，Perl 为每个类型设置了独立的命令空间
     标量：可以是一个整数，浮点数，字符，字符串，段落或者一个完整的网页。
@@ -121,7 +129,7 @@ $result
   数组：
   	 
   ```perl
-  $myfirst=123;　    #标量-数字123　
+  $myfirst=123;　    #标量-数字123 global variable
   
   $mysecond="123";   #标量-字符串123
   $str = "hello" . "world";       # 字符串连接
@@ -413,3 +421,9 @@ AnyEvent::Util - run_cmd,
 
 21. AnyEvent
 
+22. Perl Module - .pm
+	- create a file named FileLogger.pm
+	- make the FileLogger module a package by:  package FileLogger at the top of the  FileLogger.pm file.
+	- write the code for subroutines and variables into the  FileLogger.pm
+	- put the last statement in the  FileLogger.pm file: 1; to make the file returns true
+	- three ways to use modules from other programs: do, require, and use
