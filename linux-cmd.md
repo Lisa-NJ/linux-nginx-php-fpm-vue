@@ -15,6 +15,17 @@ $ apt list --installed | grep apache2
 $ sudo apt-get remove apache2-bin  --purge 
 $ alias l='ls -ahltr'
 $ lsusb
+
+$ systemctl start [name.service]
+$ systemctl stop [name.service]
+$ systemctl restart [name.service]
+$ systemctl reload [name.service]
+$ systemctl status [name.service]
+$ systemctl is-active [name.service]
+$ systemctl list-units --type service --all
+$ systemctl list-unit-files --type=service
+$ systemctl enable [name.service]  # 将服务设置为开机自启动
+
 ```
 Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 Bus 001 Device 003: ID 045e:00cb Microsoft Corp. Basic Optical Mouse v2.0
