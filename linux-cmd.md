@@ -15,6 +15,7 @@ $ apt list --installed | grep apache2
 $ sudo apt-get remove apache2-bin  --purge 
 $ alias l='ls -ahltr'
 $ lsusb
+$ ps -efj #内核守护进程
 
 $ systemctl start [name.service]
 $ systemctl stop [name.service]
