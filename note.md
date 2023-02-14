@@ -22,6 +22,7 @@ Don't you dare!
 So sick - means cool or excellent, Sic/sick is an internet slang expresion that is used as an adjective to compliment someone or something.
 Under-representing 
 OP Shop
+It's my bad
 
 a forward slash (/) character
 a backslash (\) character
@@ -42,6 +43,23 @@ afaik - as far as I know
 tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
+
+[Postman]
+Authorization
+	- Inherit Auth from p...
+	- No Auth
+	- API Key
+	- Bearer Token
+	- Basic Auth
+	- Digest Auth
+	- OAuth 1.0
+	- OAuth 2.0
+	- Hawk Authentication
+	- AWS Signature
+	- NTLM Authentication
+	- Akamai EdgeGrid
+Postman doesn't save header data or query parameters to avoid exposing sensitive data such as API keys.
+
 
 [shell program]
 Shell是用户与内核进行交互操作的一种接口，目前最流行的Shell称为bash Shell
