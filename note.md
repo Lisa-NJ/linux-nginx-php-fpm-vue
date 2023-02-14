@@ -44,6 +44,7 @@ tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
 
+549.107.3a5
 [Postman]
 Authorization
 	- Inherit Auth from p...
@@ -60,6 +61,13 @@ Authorization
 	- Akamai EdgeGrid
 Postman doesn't save header data or query parameters to avoid exposing sensitive data such as API keys.
 
+// 选中当前 collection
+	/ Authorization / Type-->Bearer Token + Token {{token}}
+// 设置环境变量
+	点击右上角的小眼睛，然后点击Add token + secret + ......(request/Headers/authorization 的值)
+// request 
+	Bearer Token --> {{token}} ok
+	Inherit auth from parent   ok
 
 [shell program]
 Shell是用户与内核进行交互操作的一种接口，目前最流行的Shell称为bash Shell
