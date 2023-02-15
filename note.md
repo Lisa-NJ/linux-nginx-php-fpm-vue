@@ -68,6 +68,8 @@ Postman doesn't save header data or query parameters to avoid exposing sensitive
 // request 
 	Bearer Token --> {{token}} ok
 	Inherit auth from parent   ok
+// post
+	Body / Key - Value / longitude - 138.57
 
 [shell program]
 Shell是用户与内核进行交互操作的一种接口，目前最流行的Shell称为bash Shell
