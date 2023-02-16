@@ -23,6 +23,8 @@ So sick - means cool or excellent, Sic/sick is an internet slang expresion that 
 Under-representing 
 OP Shop
 It's my bad
+It's been a minute
+It is a one off set up
 
 a forward slash (/) character
 a backslash (\) character
@@ -45,9 +47,13 @@ tba - to be announced
 tbh - to be honest
 
 549.107.3a5
+
+[VaultRE]
+
+
 [Postman]
 Authorization
-	- Inherit Auth from p...
+	- Inherit Auth from parent
 	- No Auth
 	- API Key
 	- Bearer Token
@@ -842,8 +848,11 @@ Ctrl+R ==> reverse-i-search
 
 ```
 [Postman]
-Cloud Agent Error: Can not send requests to localhost. Select a different agent.
+1. Postman doesn't save header data or query parameters to avoid exposing sensitive data such as API keys.
+2. Cloud Agent Error: Can not send requests to localhost. Select a different agent.
 	- 不能给 localhost 发请求
+	- $ snap install postman  // Install Postman Desktop Agent
+3. If you're integrating a third-party API, the required authorization will be specified by the API provider.	
 
 [Rex API]
 	- The Rex application is accessible at https://app.rexsoftware.com
