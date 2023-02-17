@@ -23,6 +23,8 @@ So sick - means cool or excellent, Sic/sick is an internet slang expresion that 
 Under-representing 
 OP Shop
 It's my bad
+It's been a minute
+It is a one off set up
 
 a forward slash (/) character
 a backslash (\) character
@@ -44,9 +46,14 @@ tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
 
+549.107.3a5
+
+[VaultRE]
+
+
 [Postman]
 Authorization
-	- Inherit Auth from p...
+	- Inherit Auth from parent
 	- No Auth
 	- API Key
 	- Bearer Token
@@ -60,6 +67,15 @@ Authorization
 	- Akamai EdgeGrid
 Postman doesn't save header data or query parameters to avoid exposing sensitive data such as API keys.
 
+// 选中当前 collection
+	/ Authorization / Type-->Bearer Token + Token {{token}}
+// 设置环境变量
+	点击右上角的小眼睛，然后点击Add token + secret + ......(request/Headers/authorization 的值)
+// request 
+	Bearer Token --> {{token}} ok
+	Inherit auth from parent   ok
+// post
+	Body / Key - Value / longitude - 138.57
 
 [shell program]
 Shell是用户与内核进行交互操作的一种接口，目前最流行的Shell称为bash Shell
@@ -832,8 +848,11 @@ Ctrl+R ==> reverse-i-search
 
 ```
 [Postman]
-Cloud Agent Error: Can not send requests to localhost. Select a different agent.
+1. Postman doesn't save header data or query parameters to avoid exposing sensitive data such as API keys.
+2. Cloud Agent Error: Can not send requests to localhost. Select a different agent.
 	- 不能给 localhost 发请求
+	- $ snap install postman  // Install Postman Desktop Agent
+3. If you're integrating a third-party API, the required authorization will be specified by the API provider.	
 
 [Rex API]
 	- The Rex application is accessible at https://app.rexsoftware.com

@@ -33,11 +33,15 @@ Bus 001 Device 003: ID 045e:00cb Microsoft Corp. Basic Optical Mouse v2.0
 Bus 001 Device 002: ID 045e:07f8 Microsoft Corp. Wired Keyboard 600 (model 1576)
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 ```
+
 $ lscpu 
 $ lspci // show Hardware Info - intel corporation comet lake-s gt2 uhd graphics 630 (rev 03)
 $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{print $1"|"$3"|"$4}'|more
 $ service apache2 status
 $ cat /etc/os-release  // to check os in command line
+
+<!-- Install Postman Desktop Agent -->
+$ snap install postman
 
 <!-- install mysql -->
 https://www.cloudbooklet.com/how-to-install-mysql-on-debian-11/
