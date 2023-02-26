@@ -19,7 +19,7 @@ A Perl module is a self-contained piece of Perl code that can be used by a Perl 
 //第一种运行方式
 $ perl file.pl
 //第二种运行方式
-$ chmod u+x file.ph
+$ chmod u+x file.pl
 $ ./file.pl
 ```
 运行perl脚本的流程：perl脚本在解释执行时和shell脚本一样，自顶向下，跳过sub定义部分依次执行
@@ -78,6 +78,8 @@ Hello, world\n
 ```
 
 01. Perl 解释器不会关心有多少个空白, 但是如果空格和分行出现在字符串内，他会原样输出。
+02. Perl only interpolates scalar variables and arrays, not hashes. 
+    In addition, the interpolation is only applied to the double-quoted string, but not the single-quoted string.
 1. Here document grammer - << EOF ... EOF
 
 ```perl
@@ -125,17 +127,27 @@ our $color1 = 'white';       # global variables visible throughout the program o
     标量：可以是一个整数，浮点数，字符，字符串，段落或者一个完整的网页。
 
   	 __FILE__, __LINE__, 和 __PACKAGE__ 分别表示当前执行脚本的文件名，行号，包名
-  数组：
+  
   	 
   ```perl
   $myfirst=123;　    #标量-数字123 global variable
+  $myBigN = 123_456_789; #123456789   
   
   $mysecond="123";   #标量-字符串123
   $str = "hello" . "world";       # 字符串连接
+  $str1 = q/"Are you learning Perl String today?" We asked./;
+  my $name = 'Jack';
+  my $s2 = qq/"Are you learning Perl String today?"$name asked./;
+  my $s = q^A string with different delimiter ^;
+  
+  # string functions:
+  # length($s) uc($s) lc($s)
   
   $var1 = 047;       # 0开头为8进制的数 - 等于十进制的39
   $var2 = 0x1f;      # 0x开头为16进制 - 等于十进制的31　
   
+  
+  # 数组：
   @arr=(1,2,3)       #数组-索引从 0 开始，$ages[0]取数组第一个值
   
   @array = qw/这是 一个 数组/; #使用 qw// 运算符，它返回字符串列表，数组元素以空格分隔。
@@ -156,6 +168,10 @@ our $color1 = 'white';       # global variables visible throughout the program o
   $size = @arr;   # 数组赋值给标量，返回数组元素个数
   
   ```
+  Perl already uses a comma (,) as a separator in the list so for integer numbers Perl uses an underscore character ( _) instead.
+  0b123 Binary integer using a prefix of 0b
+  0255 Octal integer using a prefix of 0
+  0xABC Hexadecimal integer using a prefix of 0x
 
 5. 转义字符 \l \L \u \U
 
