@@ -1557,8 +1557,64 @@ axios - 通用的Ajax请求库，官方推荐，使用广泛
 	
 //待补充 select + option
 
-[Bootstrap]
+【30】 vue-router
+0. vue的一个插件库，专门用来实现SPA应用
+1. 路由就是一组 key-value 的映射关系：key 为路径，value 可能是 function 或者 component
+2. 路由分类：
+	- 前端路由：value 是 component, 用于展示页面内容;当浏览器的路径改变时，对应的组件就会显示
+	- 后端路由：value 是 function, 用于处理客户端提交的请求;服务器接收到一个请求时，根据请求路径找到匹配的函数来处理请求，返回响应数据
+3. 多个路由，需要经过路由器的管理
+4. SPA应用 - single page web application 
+	- 整个应用只有一个完整的页面 index.html
+	- 导航区 + 展示区
+	- 点击页面中的导航链接不会刷新页面，只会做页面的局部更新
+	- 数据需要通过 ajax 请求获取
+5. 需要自己写的：导航名 + 路径名 + 路由对应关系 + 组件
+6. 路由的两种工作模式
+7. 使用路由实现单页面应用：
+	- (1)安装 vue-router，命令：```npm i vue-router```
+	- (2)应用插件：Vue.use(VueRouter)
+	- (3)编写router配置项：
+```vue
+//引入 VueRouter
+import VueRouter from 'vue-router'
+//引入路由组件
+import About from '../components/About'
+import Home from '../components/Home'
 
+//创建router实例对象，去管理一组一组的路由规则
+const router = new VueRouter({
+	routes:[
+	{
+		path:'/about',
+		component:About
+	},
+	{
+		path:'/home',
+		component:Home
+	}
+	]
+})
+//暴露router
+export default router
+```
+	- (4)实现切换(active-class可配置高亮样式)
+	  router-link标签 to active-class="active" 实现路由的切换，不走网络请求
+	- (5)router-view标签 指定展示位置
+8. 路由组件 && 一般组件 使用上有区别，路由组件放在 pages 下面，一般组件在 components 下面，为了便于管理
+	
+[复习]多页面应用的实现方式：
+1. about.html + home.html
+2. 以 home.html 为例，与 about.html 不同的地方在于 active 的位置：	
+```
+<div>
+	<a class="list-group-item" href="./about.html">About</a>
+	<a class="list-group-item active" href="./home.html">Home</a>
+</div>
+```	
+
+	
+[Bootstrap]
 ```
  |---+--- Vanilla.js  ------
  |	                    |--->Vue
@@ -1576,6 +1632,8 @@ axios - 通用的Ajax请求库，官方推荐，使用广泛
 ```
 BootStrap     includes CSS files, 
 BootStrapVue  includes components
+
+
 
 ### 风格指南
 模板中简单的表达式 - 组件模板应该只包含简单的表达式，复杂的表达式应该重构为计算属性或方法
