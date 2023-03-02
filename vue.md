@@ -1601,8 +1601,39 @@ export default router
 	- (4)实现切换(active-class可配置高亮样式)
 	  router-link标签 to active-class="active" 实现路由的切换，不走网络请求
 	- (5)router-view标签 指定展示位置
-8. 路由组件 && 一般组件 使用上有区别，路由组件放在 pages 下面，一般组件在 components 下面，为了便于管理
-	
+8. 路由组件通常存放在 pages 下面，一般组件通常在 components 下面
+9. 通过切换，'隐藏了的'路由组件，默认是被销毁的，需要的时候再去挂载
+10. 每个路由组件都有自己的 $route 属性，里面存储着自己的路由信息
+11. 整个应用只有一个 router，可以通过组件的 $router 属性获取到
+12. 多级/嵌套路由
+	- 配置路由规则，使用 children 配置项
+```vue
+routes:[
+	{
+		path:'/about',
+		component:About,
+	},
+	{
+		path:'/home',
+		component:Home,
+		children:[ //通过children配置子级路由
+			{
+				path:'news', //此处一定不要写：/news
+				component:News,
+			},
+			{
+				path:'message',
+				component:Message,
+			}
+		]
+	}
+]
+```
+	- 跳转（要写完整路径）:
+```vue
+<router-link to="/home/news">News</router-link>
+```
+
 [复习]多页面应用的实现方式：
 1. about.html + home.html
 2. 以 home.html 为例，与 about.html 不同的地方在于 active 的位置：	
