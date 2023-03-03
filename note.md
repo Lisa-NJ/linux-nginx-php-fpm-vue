@@ -164,6 +164,8 @@ WantedBy=multi-user.target
 VaultRE - Real Estate CRM Software
 CRM - Customer relationship management
 
+https://ap-southeast-2.api.vaultre.com.au/api/v1.3/pagesize=50&status=listing&portalStatus=listing&propertyClass=residential&availableOnly=true
+
 [Error Reading Lock File...Not enough data read]
 	- $ rm *.swp
 
