@@ -141,7 +141,7 @@ our $color1 = 'white';       # global variables visible throughout the program o
   my $s = q^A string with different delimiter ^;
   
   # string functions:
-  # length($s) uc($s) lc($s)
+  # length($s) uc($s) lc($s) index() rindex()
   
   $var1 = 047;       # 0开头为8进制的数 - 等于十进制的39
   $var2 = 0x1f;      # 0x开头为16进制 - 等于十进制的31　

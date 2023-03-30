@@ -1644,7 +1644,6 @@ routes:[
 </div>
 ```	
 
-	
 [Bootstrap]
 ```
  |---+--- Vanilla.js  ------
