@@ -35,6 +35,13 @@ Bus 001 Device 002: ID 045e:07f8 Microsoft Corp. Wired Keyboard 600 (model 1576)
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 ```
 
+<!-- Bad Zotac -->
+<!-- Adverclient has a file system with errors... -->
+$ fsck /dev/sda2
+$ df -h
+$ sudo badblocks -wsv -t 0x00 /dev/sdc  <!-- Testing with pattern 0x00 -->
+$ sudo badblocks -wsc /dev/sdc          <!-- Testing with pattern 0xaa -->
+
 $ lscpu 
 $ lspci // show Hardware Info - intel corporation comet lake-s gt2 uhd graphics 630 (rev 03)
 $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{print $1"|"$3"|"$4}'|more
