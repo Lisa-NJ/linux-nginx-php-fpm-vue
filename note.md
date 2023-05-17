@@ -5,6 +5,7 @@ dartagnan@oneworldled.com.au
 darius@elitem.com.au
 
 [English]
+Facebook - 3/5 Harry Gathenport
 Dash delimited format
 a comma-separated list of parameters
 touch base - to talk to someone for a short time to find out how they are or what they think about something
@@ -47,7 +48,6 @@ tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
 
-549.107.3a5
 
 [ORZ]
 https://orz.adverpost.com/collate?client=owl-384x640.5039.sa.owl.adverpost.com
@@ -55,6 +55,17 @@ https://orz.adverpost.com/collate?client=owl-384x640.5039.sa.owl.adverpost.com
 
 [VaultRE]
 
+[Linux查看服务状态指令]
+1. 利用进程
+ps -aux | grep xxx  //查看某个进程或服务是否存在
+2. Systemctl
+systemctl status httpd //查看 httpd 服务的运行状态 
+3. 利用 chkconfig 配置工具
+(1) 查看单个服务的运行状态
+chkconfig --list 服务名
+(2) 查看所有服务的运行状态
+chkconfig --list
+4. 利用 top 命令进行 实时的进程监控
 
 [Postman]
 Authorization
