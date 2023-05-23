@@ -70,7 +70,10 @@ $ hostname -I
 $ alias l='ls -haltr'
 $ grep localhost -r *
 $ grep 1234 assets/wrapper
-$ journalctl -fan -u ac
+
+<!-- Debug Info -->
+$ journalctl -fan -u ac  # begin from current time (f/follow, a/all, n/lines, u/unit)
+$ systemctl status ac
 
 <!-- Install GIMP -->
 $ sudo snap install gimp

@@ -3,8 +3,13 @@ schumann@oneworldled.com
 michael@oneworldled.com
 dartagnan@oneworldled.com.au
 darius@elitem.com.au
+Vick - placement
+2.24x1.28
 
 [English]
+We look forward to engaging with you on 8 June, 2023.
+Balance is indicative of: the amount in your account
+allow for
 Facebook - 3/5 Harry Gathenport
 Dash delimited format
 a comma-separated list of parameters
@@ -32,7 +37,6 @@ a forward slash (/) character
 a backslash (\) character
 
 Telfast - hayfever
-Belair + Glenelta + Blackwood
 
 do the shoey - 
 flat out - super busy and tired
