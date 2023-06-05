@@ -553,3 +553,11 @@ php -v //查看php的版本
 
 
 ### 工具
+
+phpStorm
+ctrl + /  //...
+ctrl + shift + / /*...*/
+shiftx2   search
+php -v 或者 --version
+phalcon -V
+composer -V

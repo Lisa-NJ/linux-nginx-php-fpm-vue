@@ -98,7 +98,7 @@ $ nano sshd_config      // Authentication/PermitRootLogin without-password
 $ reload SSH
 $ sudo service ssh restart  // path: /User/lisa/ssh/id_rsa
 
-<!-- mutiple keys -->
+<!-- multiple keys -->
 $ ssh-keygen -C "carswap-key-19" -t ed25519 // file: key_cs_123  passphrase: pp123
 $ ssh-copy-id -i ~/.ssh/key_cs_123.pub acme.learnlinux.cloud
 $ ssh -i ~/.ssh/key_cs_123 acme.learnlinux.cloud // to unlock the key, input passphrase
@@ -117,6 +117,8 @@ $ sed 's/box/bin/2' foxinbox.txt
 
 <!-- download file from Zotac -->
 $ scp root@10.1.1.39:/hadaly/cache/media/output ~
+
+$ scp -i key-file local-file username@server.com:/srv/html/path
 
 <!-- ufw -->
 $ sudo ufw status verbose
@@ -550,4 +552,6 @@ MariaDB $ exit;
 $ mysqladmin --version
 $ sudo mysql  <!-- log into directly without password -->
 $ 
+
+X Window System (X视窗系统) 是服务于Unix系统的GUI系统
 

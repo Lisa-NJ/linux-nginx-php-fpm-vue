@@ -2,7 +2,6 @@
 ??? 插值
 ??? 布尔
 ??? v字符串
-??? eval字符串
 ??? grep die open close async defer_exec
 
  
@@ -372,7 +371,7 @@ our $color1 = 'white';       # global variables visible throughout the program o
 	
 	AnyEvent->timer(
 	    after       => $seconds,    # 多久之后做相应的操作.
-	    interval   => $seconds,    # 在上面条件生效后，每格多久进行一次 callback.
+	    interval   => $seconds,    # 在上面条件生效后，每隔多久进行一次 callback.
 	    cb => $cb,    # cb 是 callback 的简写，所以知道了吧，只要到了前面的条件，就会运行 cb => 指向的函数.
 	);
 	
@@ -388,7 +387,9 @@ our $color1 = 'white';       # global variables visible throughout the program o
     	if($@) {...} # 处理错误
 	
 	```
-	- AnyEvent->condvar; 和 $cv->recv; 吧，这个其实就是条件，当达到什么条件退出事件循环;基本的 $cv->recv 是和 $cv->send 成对出现的，当事件调用 send 时 recv 收到这个调用，就会退出事件。
+	- AnyEvent->condvar： 用于创建条件变量（Condition Variable）的方法，用于在异步事件驱动编程中进行协调和同步
+	- $cv->send 来触发条件变量
+	- $cv->recv 阻塞等待条件变量的触发；一旦条件变量被触发，recv 方法会返回触发时传递的值
 	- eval BLOCK 形式是在编译时做语法检查的，所以它的效率相当高。如果有一个可捕获的错误存在（包括任何由 die 操作符生成的），eval 返回 undef 并且把错误信息放到 $@ 里。如果没有错误，Perl 保证把 $@ 设置为空字串，所以你稍后可以很可靠地做错误检查。eval 是一个在 Perl 里做全部例外处理的好地方。
 	- http_post, http_get: The callback will be called with the response body data as first argument (or undef if an error occurred), and a hash-ref with response headers (and trailers) as second argument.
 
@@ -397,6 +398,7 @@ AnyEvent::Util - run_cmd,
 	```perl
 	$cv = run_cmd $cmd, key => value...
 	```
+AnyEvent::Coro->run_cmd 方法，可以启动一个非阻塞的命令执行，并立即返回一个 AnyEvent::Coro::Guard 对象。通过该对象，可以对命令进行进一步的控制，例如等待命令执行完成、发送信号给命令进程等
 
 18. 数字0,字符串 '0'、"",空 list(),和 undef 为 false，其他值均为 true
 	undef 将指定键的值设置为未定义的值
@@ -442,3 +444,57 @@ AnyEvent::Util - run_cmd,
 	- write the code for subroutines and variables into the  FileLogger.pm
 	- put the last statement in the  FileLogger.pm file: 1; to make the file returns true
 	- three ways to use modules from other programs: do, require, and use
+
+23. Coro::AIO
+	- aio_open
+	- aio_read
+	- aio_write
+	- aio_close
+	
+[A&Q]
+1. $| 是一个特殊变量，用于控制输出缓冲。当 $| 的值为 0 时，输出会被缓冲起来，直到达到一定条件（比如输出换行符 \n 或者缓冲区满）才会被刷新到输出设备上。当 $| 的值为 1 时，输出是无缓冲的，每次写入都会立即刷新到输出设备上。
+因此，将 $| 设置为 1 可以确保输出是实时的，即写入输出后立即可见。这在某些情况下很有用，特别是当你需要实时更新进度条、日志或与其他程序进行实时通信时。
+1-1. $! 是一个特殊变量，用于存储最后一次系统错误的相关信息
+2. $SIG 变量是一个哈希引用，用于存储不同信号的处理程序。每个键值对表示一个信号和对应的处理程序。键是信号名称（如 INT、HUP、TERM 等），值是处理程序的引用。
+3. INT：SIGINT，中断信号，通常由用户按下 Ctrl+C 发送。
+4. $$：这是一种特殊的Shell变量，代表当前进程的进程ID（PID）
+5. use Coro: 使用Coro模块的async函数可以将子例程转换为协程
+	- https://www.junmajinlong.com/coding/process_thread_coroutine/
+	- 在正常情况（非coroutine）下，routine 跳转运行后必须原地等待跳转后的那个 routine 执行完返回才能继续从原地向下执行；
+	- 使用 coroutine 的时候，假设 routine1 和 coroutine2 互为 coroutine，那么 routine1 跳转到 routine2 去执行的时候，它会等待 routine2 才能继续向下执行，但是不一定是等待 routine2 执行完
+
+	- coroutine:协同运行
+	```
+	var q := new queue
+
+	coroutine produce
+	    loop
+		while q is not full
+		    create some new items
+		    add the items to q
+		yield to consume
+
+	coroutine consume
+	    loop
+		while q is not empty
+		    remove some items from q
+		    use the items
+		yield to produce
+
+	```
+6. shell 中的 coproc：协同运行的进程
+7. freeze：将数据结构序列化为字符串或字节流，以便在稍后的时间点进行存储或传输
+	- use Storable
+8. q 创建单引号字符串
+   qq, qx 创建双引号字符串
+9. Coro::Twiggy->new用于创建一个基于Twiggy的异步Web服务器对象，可以用于处理并发的HTTP请求。
+   Twiggy是一个基于AnyEvent的高性能异步Web服务器框架，而Coro是一个用于协程和并发编程的模块。通过结合使用Coro和Twiggy，可以实现高效的异步Web服务器。
+10. defined 关键字用于检查变量是否已定义，对于已定义的变量返回true，对于未定义的变量返回false
+11. $:: 全局命名空间的简写形式，相当于：'$main::'
+12. unblock_sub是Coro::AnyEvent模块中的一个函数。它用于将一个阻塞的子例程（subroutine）转换为非阻塞的协程（coroutine）
+13. !~ 不包含，不匹配 =~包含匹配
+14. eval 是一个内置函数，用于动态地执行包含 Perl 代码的字符串或者代码块，并捕获和处理任何可能发生的错误；
+如果 BLOCK 中的代码正常执行，eval 函数将返回 undef。如果 BLOCK 中的代码发生错误，eval 函数将捕获错误，并返回一个表示错误的字符串。可以使用 $@ 变量访问捕获的错误信息;
+    $@ 是一个特殊变量，用于存储最近一次 eval 函数执行过程中捕获的错误信息。
+    如果在 eval 块中使用了 eval BLOCK 形式，而不是字符串形式的 eval EXPR，则在执行过程中的语法错误将被捕获到 $@ 中。对于字符串形式的 eval，语法错误将在执行 eval 前引发一个编译时错误。
+

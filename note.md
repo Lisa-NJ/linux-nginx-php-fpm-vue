@@ -52,6 +52,56 @@ tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
 
+[set up apnc & adclient]
+# set up apnc on Local PC
+$ sudo perl apn
+$ sudo apt search anyevent-irc
+$ sudo apt install -y libanyevent-irc-perl
+$ sudo apt search anyevent-irc
+$ sudo perl apn
+$ sudo apt search uniqid
+$ sudo apt install -y libdata-uniqid-perl
+$ sudo perl apn
+	
+# Set up adclient on Local Environment
+$ cd ~/work-lisa/hadaly
+$ sudo perl adclient
+Can't locate Coro.pm....
+$ apt search coro | grep perl
+libcoro-perl/stable 6.570-1+b1 amd64
+libcoro-twiggy-perl/stable 0.03-1.1 all
+libcorona-perl/stable 0.1004-4 all
+libnet-server-coro-perl/stable 1.3-2 all
+$ sudo apt install libcoro-perl
+
+$ sudo perl adclient
+Can't locate Cache/Memcached/Fast.pm in @INC (you may need to install the Cache::Memcached::Fast module)...
+$ apt search memcached-fast | grep perl
+libcache-memcached-fast-perl/stable 0.25-1+b3 amd64
+$ sudo apt install libcache-memcached-fast-perl
+
+$ sudo perl adclient
+Can't locate AnyEvent/HTTP.pm in @INC (you may need to install the AnyEvent::HTTP module)
+$ apt search anyevent-http | grep perl
+libanyevent-http-perl/stable 2.25-1 all
+libanyevent-http-scopedclient-perl/stable 0.0.5-2 all
+libanyevent-httpd-perl/stable 0.93-5 all
+$ sudo apt install -y libanyevent-http-perl
+
+$ sudo perl adclient
+Can't locate Coro/Twiggy.pm in @INC (you may need to install the Coro::Twiggy module) ...
+$ sudo apt install libcoro-twiggy-perl
+
+$ sudo perl adclient
+Can't locate Perl/Titdy.pm in @INC (you may need to install the Perl::Tidy module)...
+$ apt search tidy-perl | grep perl
+libexporter-tidy-perl/stable 0.08-1 all
+libhtml-tidy-perl/stable 1.60-4+b2 amd64
+libxml-tidy-perl/stable 1.20-1 all
+$ sudo apt install perltidy
+
+# localhost:1234 --> tmp.html
+Copy Element to a new html, remove <script/>, Live Server
 
 [ORZ]
 https://orz.adverpost.com/collate?client=owl-384x640.5039.sa.owl.adverpost.com
@@ -570,7 +620,7 @@ gps infomation :8,53,332,24,30,52,231,43*77GPGSV,3,2,12,11,47,043,15,07,33,192,4
 unique because they only match with each other and nothing else
 2. Generate a pair of keys: private key - on your computer, public key - copy public key onto remote machines
 3. rsa - encoding method
-4. default path for rsa key pair on Debian: /home/username/.ssh/id_rsa
+4. default path for rsa key pair on Debian: ~/.ssh/id_rsa
 
 ```bash
 <!-- only one key -->

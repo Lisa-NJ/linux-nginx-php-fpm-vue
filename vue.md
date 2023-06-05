@@ -2,6 +2,16 @@ camelCase (驼峰命名法)
 kebab-case(短横线分隔命名)
 PascalCase(首字母大写命名)
 
+b-model
+b-skeleton-img
+b-col
+b-button
+b-row
+b-form-text
+b-card-text
+b-form-input
+b-card
+
 待补：
 
 ```bash
