@@ -75,6 +75,24 @@ $ ./hello.pl
 Hello, world                   # 输出结果
 Hello, world\n
 ```
+$ xset -dpms  // 在 X Window System 中，xset 命令用于配置和控制 X 服务器的各种参数和属性。其中，xset -dpms 是一条 xset 命令的参数组合，用于禁用 DPMS（Display Power Management Signaling）功能。
+$ xset s off  // 用于禁用屏幕保护功能
+$ dwm ??? // 是一个轻量级的、动态布局的窗口管理器；dwm 使用动态布局，意味着窗口在运行时可以自动重新排列和调整大小，而不需要手动调整。
+$ unclutter -display :1 -idle 0 -root&	// unclutter 是一个用于 X Window System 的小型实用程序，它的作用是自动隐藏鼠标指针当它在一段时间内没有移动时。
+$ xsetbg // 通常用于在 X Window System 中窗口管理器启动时设置桌面背景图片
+
+[X Window System]
+	- https://muicoder.github.io/linux_basic/0590xwindow.html
+X Window System 是个利用网络架构的图形用户接口软件;
+分成 X Server 与 X Client 两个组件, 其中 X Server 在管理硬件，而 X Client 则是应用程序。
+在运作上，X Client 应用程序会将所想要呈现的画面告知 X Server ，最终由 X server 来将结果透过他所管理的硬件绘制出来！
+
+Xorg（也称为X.Org）是一个开源的图形显示服务器，用于在 Linux、Unix 和类Unix系统上提供图形界面支持。它是X Window System的一个实现，负责管理图形显示、窗口管理和用户输入等功能。
+
+Xvfb 是一个虚拟 X 服务器的缩写，它代表 "X Virtual Framebuffer"。Xvfb 允许在没有物理显示器的情况下运行图形应用程序，它模拟了一个完整的 X 服务器环境。
+传统上，X 服务器用于显示图形用户界面 (GUI) 应用程序，需要连接到物理显示器或远程显示器。但是，在某些情况下，可能没有可用的显示器，或者你希望在没有显示器的情况下运行应用程序。这时，就可以使用 Xvfb 来创建一个虚拟的 X 服务器，它只存在于内存中而不需要物理显示器。
+Xvfb 将图形输出渲染到内存中的虚拟帧缓冲区，而不是发送到实际的显示设备。这使得你可以在后台运行图形应用程序，无需图形界面的实际显示。Xvfb 的输出可以被重定向到其他 X 应用程序进行处理，或者可以使用工具（如 Xvnc）将图形显示到远程计算机上。
+Xvfb 在许多情况下都非常有用，例如在服务器上运行测试套件、自动化测试、无头浏览器（Headless Browser）以及需要图形环境的脚本和应用程序等。它提供了一种轻量级的方法来模拟和处理图形输出，而不依赖于物理显示器。
 
 01. Perl 解释器不会关心有多少个空白, 但是如果空格和分行出现在字符串内，他会原样输出。
 02. Perl only interpolates scalar variables and arrays, not hashes. 
