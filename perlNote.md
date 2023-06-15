@@ -6,7 +6,7 @@
 ??? our
 ??? grep die open close async defer_exec
 
- 
+
 0. Perl - Practical Extraction and Report Language
 具有高级语言的强大能力和灵活性
 提供脚本语言（如sed和awk）的所有功能，还具备它们不具备的很多功能 - 方便
@@ -261,11 +261,11 @@ $result
 	 require 和 use 函数调用 eval 函数来执行代码
 	 	use语句是编译时引入的，require是运行时引入的
 	 	use引入模块的同时，也引入了模块的子模块。而require则不能引入
-	 	
+	
 14. for 等价于 foreach
 	```perl
 	my @a = (1..9);
-
+	
 	for my $i (@a){
 	print("$i","\n");
 	}
@@ -297,7 +297,7 @@ $result
 	   'a very powerul',
 	   'feature'
 	);
-
+	
 	foreach(@words){
 	   print("$_ \n") if($_ !~ /er/);
 	}
@@ -371,45 +371,50 @@ $result
 
 AnyEvent::Util - run_cmd, 
 	
-	```perl
-	$cv = run_cmd $cmd, key => value...
-	```
+```perl
+$cv = run_cmd $cmd, key => value...
+```
 
 18. 数字0,字符串 '0'、"",空 list(),和 undef 为 false，其他值均为 true
-	undef 将指定键的值设置为未定义的值
-	```perl
-	# 2-Some functions return undef to indicate failure. Others might return undef if they have nothing valuable to return.
-	my $x = do_something(); 
-	# 3-Use the undef() function to reset a variable to undef
-	undef $x
-	# 4-Use the return value of the undef() function to set a variable to undef, The parentheses after the function name are optional 
-	$x = undef;
-	
-	my $x; # 1-When declared withput assigning a value to it, the content will be undef
-	# The defined() function will return true if the given value is not undef. It will return false if the given value is undef.
-	if (defined $x) {
-	    say '$x is defined';
-	} else {
-	    say '$x is undef';
-	}
-	
-	# In a numerical operation --> 0; in a string operation --> empty string
-	my $x;
-	say $x + 4, ;  # 4
-	say 'Foo' . $x . 'Bar' ;  # FooBar
-	 
-	$x++;
-	say $x; # 1
-	```	
-		
+    undef 将指定键的值设置为未定义的值
+    ```perl
+    # 2-Some functions return undef to indicate failure. Others might return undef if they have nothing valuable to return.
+    my $x = do_something(); 
+    # 3-Use the undef() function to reset a variable to undef
+    undef $x
+    # 4-Use the return value of the undef() function to set a variable to undef, The parentheses after the function name are optional 
+    $x = undef;
+    
+    my $x; # 1-When declared withput assigning a value to it, the content will be undef
+    # The defined() function will return true if the given value is not undef. It will return false if the given value is undef.
+    if (defined $x) {
+        say '$x is defined';
+    } else {
+        say '$x is undef';
+    }
+    
+    # In a numerical operation --> 0; in a string operation --> empty string
+    my $x;
+    say $x + 4, ;  # 4
+    say 'Foo' . $x . 'Bar' ;  # FooBar
+     
+    $x++;
+    say $x; # 1
+    ```
+
 19. map 的用法
-	```perl
-	my @numbers = (1..5);
-	print "@numbers\n";       # 1 2 3 4 5
-	my @doubles = map {$_ * 2} @numbers;
-	print "@doubles\n";       # 2 4 6 8 10
-	```
+    ```perl
+    my @numbers = (1..5);
+    print "@numbers\n";       # 1 2 3 4 5
+    my @doubles = map {$_ * 2} @numbers;
+    print "@doubles\n";       # 2 4 6 8 10
+    ```
+
 20. grep of Perl
 
-21. AnyEvent
+21. defer_exec
+
+    async_read
+
+    async
 
