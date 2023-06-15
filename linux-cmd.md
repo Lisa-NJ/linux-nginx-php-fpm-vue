@@ -1,3 +1,28 @@
+$ echo $TERM  // xterm-256color, linux; "xterm"表示X Window系统下的终端仿真器
+$ sudo dpkg-reconfigure tzdata
+$ sudo dpkg-reconfigure keyboard-configuration
+
+$ ps // bash ps
+
+$ stty ek // to set the erase and kill keys to their default values
+$ su -c 'ls -l /lost+found' // su spawns a new shell running with root privileges
+$ su
+'# ls -l /lost+found
+'# exit
+$ sudo ls -l /lost+found
+$ sudo -i
+$ exit
+
+$ ls --help | less   //space + h + enter + q
+
+$ who
+$ apropos who // 快速查找命令和函数的工具
+
+$ info coreutils
+
+$ less /usr/share/doc/grep/README
+$ zcat /usr/share/doc/info/README.gz | less
+
 $ sudo apt remove php8.1* --purge
 $ dpkg -l | grep php
 $ apt list --installed | grep php
@@ -554,4 +579,9 @@ $ sudo mysql  <!-- log into directly without password -->
 $ 
 
 X Window System (X视窗系统) 是服务于Unix系统的GUI系统
+
+[utility]
+bison: generates parsing code that makes it easier to write programs to build compilers
+flex: generates scanners (code that recognizes lexical patterns in text)
+make + GNU Configure + Build System: make it easier to manage complex development projects
 
