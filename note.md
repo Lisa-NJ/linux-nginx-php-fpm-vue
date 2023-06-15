@@ -2,8 +2,15 @@ Tadartagnan@hotmail.com
 schumann@oneworldled.com
 michael@oneworldled.com
 dartagnan@oneworldled.com.au
+darius@elitem.com.au
+Vick - placement
+2.24x1.28
 
 [English]
+We look forward to engaging with you on 8 June, 2023.
+Balance is indicative of: the amount in your account
+allow for
+Facebook - 3/5 Harry Gathenport
 Dash delimited format
 a comma-separated list of parameters
 touch base - to talk to someone for a short time to find out how they are or what they think about something
@@ -22,12 +29,14 @@ Don't you dare!
 So sick - means cool or excellent, Sic/sick is an internet slang expresion that is used as an adjective to compliment someone or something.
 Under-representing 
 OP Shop
+It's my bad
+It's been a minute
+It is a one off set up
 
 a forward slash (/) character
 a backslash (\) character
 
 Telfast - hayfever
-Belair + Glenelta + Blackwood
 
 do the shoey - 
 flat out - super busy and tired
@@ -42,6 +51,145 @@ afaik - as far as I know
 tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
+
+[set up apnc & adclient]
+# set up apnc on Local PC
+$ sudo perl apn
+$ sudo apt search anyevent-irc
+$ sudo apt install -y libanyevent-irc-perl
+$ sudo apt search anyevent-irc
+$ sudo perl apn
+$ sudo apt search uniqid
+$ sudo apt install -y libdata-uniqid-perl
+$ sudo perl apn
+	
+# Set up adclient on Local Environment
+$ cd ~/work-lisa/hadaly
+$ sudo perl adclient
+Can't locate Coro.pm....
+$ apt search coro | grep perl
+libcoro-perl/stable 6.570-1+b1 amd64
+libcoro-twiggy-perl/stable 0.03-1.1 all
+libcorona-perl/stable 0.1004-4 all
+libnet-server-coro-perl/stable 1.3-2 all
+$ sudo apt install libcoro-perl
+
+$ sudo perl adclient
+Can't locate Cache/Memcached/Fast.pm in @INC (you may need to install the Cache::Memcached::Fast module)...
+$ apt search memcached-fast | grep perl
+libcache-memcached-fast-perl/stable 0.25-1+b3 amd64
+$ sudo apt install libcache-memcached-fast-perl
+
+$ sudo perl adclient
+Can't locate AnyEvent/HTTP.pm in @INC (you may need to install the AnyEvent::HTTP module)
+$ apt search anyevent-http | grep perl
+libanyevent-http-perl/stable 2.25-1 all
+libanyevent-http-scopedclient-perl/stable 0.0.5-2 all
+libanyevent-httpd-perl/stable 0.93-5 all
+$ sudo apt install -y libanyevent-http-perl
+
+$ sudo perl adclient
+Can't locate Coro/Twiggy.pm in @INC (you may need to install the Coro::Twiggy module) ...
+$ sudo apt install libcoro-twiggy-perl
+
+$ sudo perl adclient
+Can't locate Perl/Titdy.pm in @INC (you may need to install the Perl::Tidy module)...
+$ apt search tidy-perl | grep perl
+libexporter-tidy-perl/stable 0.08-1 all
+libhtml-tidy-perl/stable 1.60-4+b2 amd64
+libxml-tidy-perl/stable 1.20-1 all
+$ sudo apt install perltidy
+
+# localhost:1234 --> tmp.html
+Copy Element to a new html, remove <script/>, Live Server
+
+[ORZ]
+https://orz.adverpost.com/collate?client=owl-384x640.5039.sa.owl.adverpost.com
+
+
+[VaultRE]
+
+[Linux查看服务状态指令]
+1. 利用进程
+ps -aux | grep xxx  //查看某个进程或服务是否存在
+2. Systemctl
+systemctl status httpd //查看 httpd 服务的运行状态 
+3. 利用 chkconfig 配置工具
+(1) 查看单个服务的运行状态
+chkconfig --list 服务名
+(2) 查看所有服务的运行状态
+chkconfig --list
+4. 利用 top 命令进行 实时的进程监控
+
+[Postman]
+Authorization
+	- Inherit Auth from parent
+	- No Auth
+	- API Key
+	- Bearer Token
+	- Basic Auth
+	- Digest Auth
+	- OAuth 1.0
+	- OAuth 2.0
+	- Hawk Authentication
+	- AWS Signature
+	- NTLM Authentication
+	- Akamai EdgeGrid
+Postman doesn't save header data or query parameters to avoid exposing sensitive data such as API keys.
+
+// 选中当前 collection
+	/ Authorization / Type-->Bearer Token + Token {{token}}
+// 设置环境变量
+	点击右上角的小眼睛，然后点击Add token + secret + ......(request/Headers/authorization 的值)
+// request 
+	Bearer Token --> {{token}} ok
+	Inherit auth from parent   ok
+// post
+	Body / Key - Value / longitude - 138.57
+
+[shell program]
+Shell是用户与内核进行交互操作的一种接口，目前最流行的Shell称为bash Shell
+Shell是解释执行的脚本语言，所谓脚本语言就是不用编译就可以直接执行的语言。在Shell中可以调用Linux系统命令。
+
+$ cat /etc/shells  # 查看系统中安装的 shell
+
++file:
+$ cd /usr/local/bin
+$ sudo touch hello.sh
+```
+echo"###############################"
+echo"######### Hello World! ########"
+```
+$ sudo chmod ugo+x hello.sh
+$ hello.sh
+1. Shell 基本的执行方式
+	- 1.1 输入脚本的绝对或相对路径
+		/root/hello.sh
+	- 1.2 bash 或 sh +脚本
+		$ sh hello.sh 
+	- 1.3 在脚本的路径前加 "."
+		$ . /root/hello.sh
+
+[.service]
+service unit file
+	- /etc/systemd/system/ac.service
+```
+[Unit]
+Description=Hadaly
+After=nginx.service memcached.service
+
+[Service]
+Type=idle
+RemainAfterExit=yes
+WorkingDirectory=/hadaly
+ExecStart=/hadaly/adclient
+ExecStop=/usr/bin/pkill adclient
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+```
 
 [Open pdf in browsers]
 	- word press
@@ -81,6 +229,8 @@ tbh - to be honest
 [RayWhite]
 VaultRE - Real Estate CRM Software
 CRM - Customer relationship management
+
+https://ap-southeast-2.api.vaultre.com.au/api/v1.3/pagesize=50&status=listing&portalStatus=listing&propertyClass=residential&availableOnly=true
 
 [Error Reading Lock File...Not enough data read]
 	- $ rm *.swp
@@ -470,7 +620,7 @@ gps infomation :8,53,332,24,30,52,231,43*77GPGSV,3,2,12,11,47,043,15,07,33,192,4
 unique because they only match with each other and nothing else
 2. Generate a pair of keys: private key - on your computer, public key - copy public key onto remote machines
 3. rsa - encoding method
-4. default path for rsa key pair on Debian: /home/username/.ssh/id_rsa
+4. default path for rsa key pair on Debian: ~/.ssh/id_rsa
 
 ```bash
 <!-- only one key -->
@@ -770,8 +920,11 @@ Ctrl+R ==> reverse-i-search
 
 ```
 [Postman]
-Cloud Agent Error: Can not send requests to localhost. Select a different agent.
+1. Postman doesn't save header data or query parameters to avoid exposing sensitive data such as API keys.
+2. Cloud Agent Error: Can not send requests to localhost. Select a different agent.
 	- 不能给 localhost 发请求
+	- $ snap install postman  // Install Postman Desktop Agent
+3. If you're integrating a third-party API, the required authorization will be specified by the API provider.	
 
 [Rex API]
 	- The Rex application is accessible at https://app.rexsoftware.com

@@ -2,12 +2,10 @@
 ??? 插值
 ??? 布尔
 ??? v字符串
-??? eval字符串
-??? our
 ??? grep die open close async defer_exec
 
-
-0. Perl - Practical Extraction and Report Language
+ 
+00. Perl - Practical Extraction and Report Language
 具有高级语言的强大能力和灵活性
 提供脚本语言（如sed和awk）的所有功能，还具备它们不具备的很多功能 - 方便
 擅长扫描任意的文本文件，从这些文件中获取信息，也很适合于完成许多系统管理的功能
@@ -20,7 +18,7 @@ A Perl module is a self-contained piece of Perl code that can be used by a Perl 
 //第一种运行方式
 $ perl file.pl
 //第二种运行方式
-$ chmod u+x file.ph
+$ chmod u+x file.pl
 $ ./file.pl
 ```
 运行perl脚本的流程：perl脚本在解释执行时和shell脚本一样，自顶向下，跳过sub定义部分依次执行
@@ -77,9 +75,29 @@ $ ./hello.pl
 Hello, world                   # 输出结果
 Hello, world\n
 ```
+$ xset -dpms  // 在 X Window System 中，xset 命令用于配置和控制 X 服务器的各种参数和属性。其中，xset -dpms 是一条 xset 命令的参数组合，用于禁用 DPMS（Display Power Management Signaling）功能。
+$ xset s off  // 用于禁用屏幕保护功能
+$ dwm ??? // 是一个轻量级的、动态布局的窗口管理器；dwm 使用动态布局，意味着窗口在运行时可以自动重新排列和调整大小，而不需要手动调整。
+$ unclutter -display :1 -idle 0 -root&	// unclutter 是一个用于 X Window System 的小型实用程序，它的作用是自动隐藏鼠标指针当它在一段时间内没有移动时。
+$ xsetbg // 通常用于在 X Window System 中窗口管理器启动时设置桌面背景图片
 
-1. Perl 解释器不会关心有多少个空白, 但是如果空格和分行出现在字符串内，他会原样输出。
-2. Here document grammer - << EOF ... EOF
+[X Window System]
+	- https://muicoder.github.io/linux_basic/0590xwindow.html
+X Window System 是个利用网络架构的图形用户接口软件;
+分成 X Server 与 X Client 两个组件, 其中 X Server 在管理硬件，而 X Client 则是应用程序。
+在运作上，X Client 应用程序会将所想要呈现的画面告知 X Server ，最终由 X server 来将结果透过他所管理的硬件绘制出来！
+
+Xorg（也称为X.Org）是一个开源的图形显示服务器，用于在 Linux、Unix 和类Unix系统上提供图形界面支持。它是X Window System的一个实现，负责管理图形显示、窗口管理和用户输入等功能。
+
+Xvfb 是一个虚拟 X 服务器的缩写，它代表 "X Virtual Framebuffer"。Xvfb 允许在没有物理显示器的情况下运行图形应用程序，它模拟了一个完整的 X 服务器环境。
+传统上，X 服务器用于显示图形用户界面 (GUI) 应用程序，需要连接到物理显示器或远程显示器。但是，在某些情况下，可能没有可用的显示器，或者你希望在没有显示器的情况下运行应用程序。这时，就可以使用 Xvfb 来创建一个虚拟的 X 服务器，它只存在于内存中而不需要物理显示器。
+Xvfb 将图形输出渲染到内存中的虚拟帧缓冲区，而不是发送到实际的显示设备。这使得你可以在后台运行图形应用程序，无需图形界面的实际显示。Xvfb 的输出可以被重定向到其他 X 应用程序进行处理，或者可以使用工具（如 Xvnc）将图形显示到远程计算机上。
+Xvfb 在许多情况下都非常有用，例如在服务器上运行测试套件、自动化测试、无头浏览器（Headless Browser）以及需要图形环境的脚本和应用程序等。它提供了一种轻量级的方法来模拟和处理图形输出，而不依赖于物理显示器。
+
+01. Perl 解释器不会关心有多少个空白, 但是如果空格和分行出现在字符串内，他会原样输出。
+02. Perl only interpolates scalar variables and arrays, not hashes. 
+    In addition, the interpolation is only applied to the double-quoted string, but not the single-quoted string.
+1. Here document grammer - << EOF ... EOF
 
 ```perl
 #!/usr/bin/perl
@@ -99,7 +117,7 @@ print "$var\n";
 可以在这输入字符串和变量。
 例如：a = 10
 ```
-3. 使用反斜线（\）来转义
+2. 使用反斜线（\）来转义
 ```perl
 #!/usr/bin/perl
  
@@ -113,22 +131,40 @@ print "\$result\n";
 $result
 
 ```
+3. Perl variable scopes
+```perl
+$color = 'red';              # global
+{
+	my $color = 'blue';  # local
+}
+our $color1 = 'white';       # global variables visible throughout the program or from external packages
+```
 4. 弱类型语言，变量不需要指定类型，Perl 解释器会根据上下文自动选择匹配类型
     Perl 有三个基本的数据类型：标量、数组、哈希，Perl 为每个类型设置了独立的命令空间
     标量：可以是一个整数，浮点数，字符，字符串，段落或者一个完整的网页。
 
   	 __FILE__, __LINE__, 和 __PACKAGE__ 分别表示当前执行脚本的文件名，行号，包名
-  数组：
+  
   	 
   ```perl
-  $myfirst=123;　    #标量-数字123　
+  $myfirst=123;　    #标量-数字123 global variable
+  $myBigN = 123_456_789; #123456789   
   
   $mysecond="123";   #标量-字符串123
   $str = "hello" . "world";       # 字符串连接
+  $str1 = q/"Are you learning Perl String today?" We asked./;
+  my $name = 'Jack';
+  my $s2 = qq/"Are you learning Perl String today?"$name asked./;
+  my $s = q^A string with different delimiter ^;
+  
+  # string functions:
+  # length($s) uc($s) lc($s) index() rindex()
   
   $var1 = 047;       # 0开头为8进制的数 - 等于十进制的39
   $var2 = 0x1f;      # 0x开头为16进制 - 等于十进制的31　
   
+  
+  # 数组：
   @arr=(1,2,3)       #数组-索引从 0 开始，$ages[0]取数组第一个值
   
   @array = qw/这是 一个 数组/; #使用 qw// 运算符，它返回字符串列表，数组元素以空格分隔。
@@ -149,6 +185,10 @@ $result
   $size = @arr;   # 数组赋值给标量，返回数组元素个数
   
   ```
+  Perl already uses a comma (,) as a separator in the list so for integer numbers Perl uses an underscore character ( _) instead.
+  0b123 Binary integer using a prefix of 0b
+  0255 Octal integer using a prefix of 0
+  0xABC Hexadecimal integer using a prefix of 0x
 
 5. 转义字符 \l \L \u \U
 
@@ -349,7 +389,7 @@ $result
 	
 	AnyEvent->timer(
 	    after       => $seconds,    # 多久之后做相应的操作.
-	    interval   => $seconds,    # 在上面条件生效后，每格多久进行一次 callback.
+	    interval   => $seconds,    # 在上面条件生效后，每隔多久进行一次 callback.
 	    cb => $cb,    # cb 是 callback 的简写，所以知道了吧，只要到了前面的条件，就会运行 cb => 指向的函数.
 	);
 	
@@ -365,15 +405,18 @@ $result
     	if($@) {...} # 处理错误
 	
 	```
-	- AnyEvent->condvar; 和 $cv->recv; 吧，这个其实就是条件，当达到什么条件退出事件循环;基本的 $cv->recv 是和 $cv->send 成对出现的，当事件调用 send 时 recv 收到这个调用，就会退出事件。
+	- AnyEvent->condvar： 用于创建条件变量（Condition Variable）的方法，用于在异步事件驱动编程中进行协调和同步
+	- $cv->send 来触发条件变量
+	- $cv->recv 阻塞等待条件变量的触发；一旦条件变量被触发，recv 方法会返回触发时传递的值
 	- eval BLOCK 形式是在编译时做语法检查的，所以它的效率相当高。如果有一个可捕获的错误存在（包括任何由 die 操作符生成的），eval 返回 undef 并且把错误信息放到 $@ 里。如果没有错误，Perl 保证把 $@ 设置为空字串，所以你稍后可以很可靠地做错误检查。eval 是一个在 Perl 里做全部例外处理的好地方。
 	- http_post, http_get: The callback will be called with the response body data as first argument (or undef if an error occurred), and a hash-ref with response headers (and trailers) as second argument.
 
 AnyEvent::Util - run_cmd, 
 	
-```perl
-$cv = run_cmd $cmd, key => value...
-```
+	```perl
+	$cv = run_cmd $cmd, key => value...
+	```
+AnyEvent::Coro->run_cmd 方法，可以启动一个非阻塞的命令执行，并立即返回一个 AnyEvent::Coro::Guard 对象。通过该对象，可以对命令进行进一步的控制，例如等待命令执行完成、发送信号给命令进程等
 
 18. 数字0,字符串 '0'、"",空 list(),和 undef 为 false，其他值均为 true
     undef 将指定键的值设置为未定义的值
@@ -417,4 +460,64 @@ $cv = run_cmd $cmd, key => value...
     async_read
 
     async
+
+22. Perl Module - .pm
+	- create a file named FileLogger.pm
+	- make the FileLogger module a package by:  package FileLogger at the top of the  FileLogger.pm file.
+	- write the code for subroutines and variables into the  FileLogger.pm
+	- put the last statement in the  FileLogger.pm file: 1; to make the file returns true
+	- three ways to use modules from other programs: do, require, and use
+
+23. Coro::AIO
+	- aio_open
+	- aio_read
+	- aio_write
+	- aio_close
+	
+[A&Q]
+1. $| 是一个特殊变量，用于控制输出缓冲。当 $| 的值为 0 时，输出会被缓冲起来，直到达到一定条件（比如输出换行符 \n 或者缓冲区满）才会被刷新到输出设备上。当 $| 的值为 1 时，输出是无缓冲的，每次写入都会立即刷新到输出设备上。
+因此，将 $| 设置为 1 可以确保输出是实时的，即写入输出后立即可见。这在某些情况下很有用，特别是当你需要实时更新进度条、日志或与其他程序进行实时通信时。
+1-1. $! 是一个特殊变量，用于存储最后一次系统错误的相关信息
+2. $SIG 变量是一个哈希引用，用于存储不同信号的处理程序。每个键值对表示一个信号和对应的处理程序。键是信号名称（如 INT、HUP、TERM 等），值是处理程序的引用。
+3. INT：SIGINT，中断信号，通常由用户按下 Ctrl+C 发送。
+4. $$：这是一种特殊的Shell变量，代表当前进程的进程ID（PID）
+5. use Coro: 使用Coro模块的async函数可以将子例程转换为协程
+	- https://www.junmajinlong.com/coding/process_thread_coroutine/
+	- 在正常情况（非coroutine）下，routine 跳转运行后必须原地等待跳转后的那个 routine 执行完返回才能继续从原地向下执行；
+	- 使用 coroutine 的时候，假设 routine1 和 coroutine2 互为 coroutine，那么 routine1 跳转到 routine2 去执行的时候，它会等待 routine2 才能继续向下执行，但是不一定是等待 routine2 执行完
+
+	- coroutine:协同运行
+	```
+	var q := new queue
+
+	coroutine produce
+	    loop
+		while q is not full
+		    create some new items
+		    add the items to q
+		yield to consume
+
+	coroutine consume
+	    loop
+		while q is not empty
+		    remove some items from q
+		    use the items
+		yield to produce
+
+	```
+6. shell 中的 coproc：协同运行的进程
+7. freeze：将数据结构序列化为字符串或字节流，以便在稍后的时间点进行存储或传输
+	- use Storable
+8. q 创建单引号字符串
+   qq, qx 创建双引号字符串
+9. Coro::Twiggy->new用于创建一个基于Twiggy的异步Web服务器对象，可以用于处理并发的HTTP请求。
+   Twiggy是一个基于AnyEvent的高性能异步Web服务器框架，而Coro是一个用于协程和并发编程的模块。通过结合使用Coro和Twiggy，可以实现高效的异步Web服务器。
+10. defined 关键字用于检查变量是否已定义，对于已定义的变量返回true，对于未定义的变量返回false
+11. $:: 全局命名空间的简写形式，相当于：'$main::'
+12. unblock_sub是Coro::AnyEvent模块中的一个函数。它用于将一个阻塞的子例程（subroutine）转换为非阻塞的协程（coroutine）
+13. !~ 不包含，不匹配 =~包含匹配
+14. eval 是一个内置函数，用于动态地执行包含 Perl 代码的字符串或者代码块，并捕获和处理任何可能发生的错误；
+如果 BLOCK 中的代码正常执行，eval 函数将返回 undef。如果 BLOCK 中的代码发生错误，eval 函数将捕获错误，并返回一个表示错误的字符串。可以使用 $@ 变量访问捕获的错误信息;
+    $@ 是一个特殊变量，用于存储最近一次 eval 函数执行过程中捕获的错误信息。
+    如果在 eval 块中使用了 eval BLOCK 形式，而不是字符串形式的 eval EXPR，则在执行过程中的语法错误将被捕获到 $@ 中。对于字符串形式的 eval，语法错误将在执行 eval 前引发一个编译时错误。
 

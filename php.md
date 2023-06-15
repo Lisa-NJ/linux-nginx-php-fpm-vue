@@ -14,6 +14,27 @@ phar???
 
 ### Docker
 Install - https://docs.docker.com/engine/install/debian/
+```bash
+$ sudo apt-get update
+$ sudo apt-get install ca-certificates curl gnupg lsb-release
+ 
+$ sudo mkdir -p /etc/apt/keyrings
+$ curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+ 
+$ echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  
+$ sudo apt-get update
+
+$ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+$ sudo docker run hello-world  
+
+$ sudo docker pull swaggerapi/swagger-editor
+$ sudo docker run -d -p 81:8080 swaggerapi/swagger-editor
+==> 启动，81:8080 将容器的8080端口暴露给localhost的81端口, 在浏览中输入：localhost:81，就可以在容器中编辑api文档
+```
 
 ### Swagger
 https://www.jianshu.com/p/4fdac2a10c79
@@ -532,3 +553,11 @@ php -v //查看php的版本
 
 
 ### 工具
+
+phpStorm
+ctrl + /  //...
+ctrl + shift + / /*...*/
+shiftx2   search
+php -v 或者 --version
+phalcon -V
+composer -V

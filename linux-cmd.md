@@ -1,3 +1,28 @@
+$ echo $TERM  // xterm-256color, linux; "xterm"表示X Window系统下的终端仿真器
+$ sudo dpkg-reconfigure tzdata
+$ sudo dpkg-reconfigure keyboard-configuration
+
+$ ps // bash ps
+
+$ stty ek // to set the erase and kill keys to their default values
+$ su -c 'ls -l /lost+found' // su spawns a new shell running with root privileges
+$ su
+'# ls -l /lost+found
+'# exit
+$ sudo ls -l /lost+found
+$ sudo -i
+$ exit
+
+$ ls --help | less   //space + h + enter + q
+
+$ who
+$ apropos who // 快速查找命令和函数的工具
+
+$ info coreutils
+
+$ less /usr/share/doc/grep/README
+$ zcat /usr/share/doc/info/README.gz | less
+
 $ sudo apt remove php8.1* --purge
 $ dpkg -l | grep php
 $ apt list --installed | grep php
@@ -15,17 +40,41 @@ $ apt list --installed | grep apache2
 $ sudo apt-get remove apache2-bin  --purge 
 $ alias l='ls -ahltr'
 $ lsusb
+$ ps -efj #内核守护进程
+$ ssh-keygen -t rsa -b 4096 -f .ssh/ap_lisa
+
+$ systemctl start [name.service]
+$ systemctl stop [name.service]
+$ systemctl restart [name.service]
+$ systemctl reload [name.service]
+$ systemctl status [name.service]
+$ systemctl is-active [name.service]
+$ systemctl list-units --type service --all
+$ systemctl list-unit-files --type=service
+$ systemctl enable [name.service]  # 将服务设置为开机自启动
+
 ```
 Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 Bus 001 Device 003: ID 045e:00cb Microsoft Corp. Basic Optical Mouse v2.0
 Bus 001 Device 002: ID 045e:07f8 Microsoft Corp. Wired Keyboard 600 (model 1576)
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 ```
+
+<!-- Bad Zotac -->
+<!-- Adverclient has a file system with errors... -->
+$ fsck /dev/sda2
+$ df -h
+$ sudo badblocks -wsv -t 0x00 /dev/sdc  <!-- Testing with pattern 0x00 -->
+$ sudo badblocks -wsc /dev/sdc          <!-- Testing with pattern 0xaa -->
+
 $ lscpu 
 $ lspci // show Hardware Info - intel corporation comet lake-s gt2 uhd graphics 630 (rev 03)
 $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{print $1"|"$3"|"$4}'|more
 $ service apache2 status
 $ cat /etc/os-release  // to check os in command line
+
+<!-- Install Postman Desktop Agent -->
+$ snap install postman
 
 <!-- install mysql -->
 https://www.cloudbooklet.com/how-to-install-mysql-on-debian-11/
@@ -46,7 +95,10 @@ $ hostname -I
 $ alias l='ls -haltr'
 $ grep localhost -r *
 $ grep 1234 assets/wrapper
-$ journalctl -fan -u ac
+
+<!-- Debug Info -->
+$ journalctl -fan -u ac  # begin from current time (f/follow, a/all, n/lines, u/unit)
+$ systemctl status ac
 
 <!-- Install GIMP -->
 $ sudo snap install gimp
@@ -71,7 +123,7 @@ $ nano sshd_config      // Authentication/PermitRootLogin without-password
 $ reload SSH
 $ sudo service ssh restart  // path: /User/lisa/ssh/id_rsa
 
-<!-- mutiple keys -->
+<!-- multiple keys -->
 $ ssh-keygen -C "carswap-key-19" -t ed25519 // file: key_cs_123  passphrase: pp123
 $ ssh-copy-id -i ~/.ssh/key_cs_123.pub acme.learnlinux.cloud
 $ ssh -i ~/.ssh/key_cs_123 acme.learnlinux.cloud // to unlock the key, input passphrase
@@ -90,6 +142,8 @@ $ sed 's/box/bin/2' foxinbox.txt
 
 <!-- download file from Zotac -->
 $ scp root@10.1.1.39:/hadaly/cache/media/output ~
+
+$ scp -i key-file local-file username@server.com:/srv/html/path
 
 <!-- ufw -->
 $ sudo ufw status verbose
@@ -523,4 +577,11 @@ MariaDB $ exit;
 $ mysqladmin --version
 $ sudo mysql  <!-- log into directly without password -->
 $ 
+
+X Window System (X视窗系统) 是服务于Unix系统的GUI系统
+
+[utility]
+bison: generates parsing code that makes it easier to write programs to build compilers
+flex: generates scanners (code that recognizes lexical patterns in text)
+make + GNU Configure + Build System: make it easier to manage complex development projects
 
