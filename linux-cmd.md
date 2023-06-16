@@ -23,6 +23,32 @@ $ info coreutils
 $ less /usr/share/doc/grep/README
 $ zcat /usr/share/doc/info/README.gz | less
 
+$ passwd
+$ pwgen
+
+$ echo xxxxxx CONTROL-V CONTROL-U   // CONTROL-U: the erase character
+$ echo xxxxxx CONTROL-V CONTROL-U | od -c  // od: octal display
+
+$ rm -i toollist // waits for you to respond with y (yes) before it deletes the file
+
+$ cp -i orange orange.2 // waits for you to respond with y (yes) before it overwrites a file
+$ mv -i orange orange.2 // interactive mode
+
+$ lpstat –p // display a list of available printers
+$ lpr report // print file report using the default printer
+$ lpr -P mailroom report // using the printer named mailroom
+$ lpstat –o // to see which jobs are in the print queue
+$ lpq // same as the above
+$ lprm 86 // to remove the job from the print queue and stop it from printing
+$ lpr -P laser1 05.txt 108.txt 12.txt // prints three files on the printer named laser1
+
+$ head months
+$ tail -5 months
+$ tail -f logfile // monitor lines as they are added to the end of the growing file named logfile
+$ sort -u -n days // -n 待测试
+$ uniq days.txt // skipping adjacent duplicate lines
+
+
 $ sudo apt remove php8.1* --purge
 $ dpkg -l | grep php
 $ apt list --installed | grep php
@@ -95,6 +121,7 @@ $ hostname -I
 $ alias l='ls -haltr'
 $ grep localhost -r *
 $ grep 1234 assets/wrapper
+$ grep -w localhost -r *   // -w -- to match only whole words
 
 <!-- Debug Info -->
 $ journalctl -fan -u ac  # begin from current time (f/follow, a/all, n/lines, u/unit)
@@ -144,6 +171,8 @@ $ sed 's/box/bin/2' foxinbox.txt
 $ scp root@10.1.1.39:/hadaly/cache/media/output ~
 
 $ scp -i key-file local-file username@server.com:/srv/html/path
+
+//...ftp rsync
 
 <!-- ufw -->
 $ sudo ufw status verbose
@@ -239,6 +268,13 @@ $ sudo apt update
 $ sudo apt install diffutils
 <!-- compare 2 files side by side in 2 columns -->
 $ diff file1 file2 -y 
+$ diff -u colors.1 colors.2 // -u hunks with @@
+
+$ file letter.bz2  // to learn about the contents of a file
+
+$ sort months | head -4
+$ ls | wc -w // wc(word count) -w(words) -- displays the number of words
+$ tail months | lpr  // to send output of a program to the printer
 
 https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-ubuntu-18-04
 $ ip addr show | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
