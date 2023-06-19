@@ -1,22 +1,59 @@
+# cron + updatedb + 
+
 $ echo $TERM  // xterm-256color, linux; "xterm"表示X Window系统下的终端仿真器
 $ sudo dpkg-reconfigure tzdata
 $ sudo dpkg-reconfigure keyboard-configuration
+
+$ echo 'My new file.' > myfile  // Create a file by redirecting echo's output to a file
+$ date  // Wed Mar 18 17:12:20 PDT 2009
+$ date +"%A %B %d" // Wednesday March 18
+$ script -a filename// recordss a session to filename/typesript, -a 追加 not overwriting
+$ ...
+$ exit
+
+$ bzip2 -v letter_e  // compresses a file; –v (verbose): to report how much bzip2 was able to reduce the size of the file
+$ bzip2 -k letter_e  // -k(keep): to keep the original file while compressing a file
+$ bunzip2 letter_e.bz2
+$ bzcat letter_e.bz2 | head -2  // decompresses the compressed data and displays the decompressed data
+
+$ gzip / gunzip / zcat -- GNU zip .gz
+$ compress file // .z
+
+$ tar -cvf all.tar g b d  // –c (create), –v (verbose), and –f (write to or read from a file)
+$ tar -tvf all.tar  // -t(table)
+$ tar -xvf all.tar
+$ tar -xf all.tar  // -x(extract) silently 
+
+$ gunzip -c make-3.81.tar.gz | tar -xvf -  // "–c" and "-" when using pipe
+$ tar -xvzf make-3.81.tar.gz   // tar calls gunzip directly
+$ tar -xvjf make-3.81.tar.bz2
+
+$ todos memo.txt  // UNIT --> Windows/OS X
+$ unix2dos memo.txt  // -b(backup) -n(new)
+$ cat memo | tr -d '\r' > memo.txt      //-d(delete)
+
+$ locate motd // search for files on the local system
 
 $ ps // bash ps
 
 $ stty ek // to set the erase and kill keys to their default values
 $ su -c 'ls -l /lost+found' // su spawns a new shell running with root privileges
 $ su
-'# ls -l /lost+found
+'# ls -l /lost+found   //-l(long): to display more information about a file
 '# exit
 $ sudo ls -l /lost+found
 $ sudo -i
 $ exit
 
+$ ls -ld mak * // –d (directory): causes ls to display only file and directory names
+
 $ ls --help | less   //space + h + enter + q
 
 $ who
 $ apropos who // 快速查找命令和函数的工具
+$ who am i
+$ finger
+$ finger lisa // + a username; search for .plan in lisa's home directory; not case sensitive
 
 $ info coreutils
 
@@ -25,6 +62,7 @@ $ zcat /usr/share/doc/info/README.gz | less
 
 $ passwd
 $ pwgen
+
 
 $ echo xxxxxx CONTROL-V CONTROL-U   // CONTROL-U: the erase character
 $ echo xxxxxx CONTROL-V CONTROL-U | od -c  // od: octal display
@@ -512,7 +550,10 @@ $ sudo apt autoremove
 $ sudo rm -rf /var/www
 $ sudo rm -rf /etc/libapache2-mod-jk
 
-$ whereis nginx
+$ whereis nginx // displays all the files it finds by looking in standard locations 
+$ which nginx // search path
+$ type echo // to determine whether a command is a builtin(utilities that are built into a shell)
+echo is a shell builtin 
 
 $ sudo usr/sbin/groupadd www
 $ sudo usr/sbin/useradd -g www www
