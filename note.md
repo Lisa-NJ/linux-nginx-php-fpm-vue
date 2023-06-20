@@ -52,6 +52,17 @@ tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
 
+[chromium]
+/usr/bin/chromium
+/usr/lib/chromium/
+$ chromium --version
+Chromium 73.0.3683.75 built on Debian buster/sid,running on Debian 10.11
+$ apt search chromium
+chromium/oldstable 90.0.4430.212-1~deb10u1 amd64 [upgradable from: 73.0.3683.75-1]
+  web browser
+chromium-l10n/oldstable, oldstable 90.0.4430.212-1~deb10u1 all
+  web browser - language packs
+
 [set up apnc & adclient]
 # set up apnc on Local PC
 $ sudo perl apn
