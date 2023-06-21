@@ -34,6 +34,11 @@ $ cat memo | tr -d '\r' > memo.txt      //-d(delete)
 
 $ locate motd // search for files on the local system
 
+$ stat -f /home | grep -i name // –f(filesystem status), –i (case insensitive)
+
+$ lpr my\ file
+$ lpr "my file"
+
 $ ps // bash ps
 
 $ stty ek // to set the erase and kill keys to their default values

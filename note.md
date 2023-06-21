@@ -52,6 +52,13 @@ tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
 
+[port]
+https://blog.51cto.com/u_15349616/3717562
+VGA - Video Graphics Array
+DVI - Digital Visual Interface
+DP - Display Port
+HDMI - High-Definition Multimedia Interface 
+
 [chromium]
 /usr/bin/chromium
 /usr/lib/chromium/
