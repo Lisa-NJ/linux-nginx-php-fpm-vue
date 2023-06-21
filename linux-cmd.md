@@ -54,6 +54,12 @@ $ apropos who // 快速查找命令和函数的工具
 $ who am i
 $ finger
 $ finger lisa // + a username; search for .plan in lisa's home directory; not case sensitive
+$ w  // displays a list of the users who are logged in on the local system
+
+$ write username
+write: you have write permission turned off //...??? to test more
+$ mesg y
+$ mesg n
 
 $ info coreutils
 
