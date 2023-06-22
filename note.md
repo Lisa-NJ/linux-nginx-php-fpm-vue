@@ -7,6 +7,7 @@ Vick - placement
 2.24x1.28
 
 [English]
+It's your call = It's up to you
 We look forward to engaging with you on 8 June, 2023.
 Balance is indicative of: the amount in your account
 allow for

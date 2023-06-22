@@ -1,4 +1,5 @@
 # cron + updatedb + 
+# type codes & creator codes
 
 $ echo $TERM  // xterm-256color, linux; "xterm"表示X Window系统下的终端仿真器
 $ sudo dpkg-reconfigure tzdata
@@ -40,6 +41,8 @@ $ lpr my\ file
 $ lpr "my file"
 
 $ ps // bash ps
+
+$ less ~sam/.bashrc
 
 $ stty ek // to set the erase and kill keys to their default values
 $ su -c 'ls -l /lost+found' // su spawns a new shell running with root privileges
