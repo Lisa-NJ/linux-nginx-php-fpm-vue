@@ -40,6 +40,21 @@ $ stat -f /home | grep -i name // –f(filesystem status), –i (case insensitiv
 $ lpr my\ file
 $ lpr "my file"
 
+# create a new directory in 2 ways
+$ pwd
+/home/charlie
+$ mkdir lite/promo
+$ mkdir /home/charlie/lite/promo
+$ mkdir -p lite/promo  // -p: create both the lite and promo directories with one command . & ..
+$ cd // = $ cd home/charlie: makes charlie’s home directory the working directory
+$ rmdir /home/charlie/lite/promo  // delete a directory without files
+$ rm -r /home/charlie/lite  // delete files and directories within a directory
+
+$ touch letter // create an empty file
+$ echo ''
+$ mv names temp lite   // move 2 files 'names' and 'temp' to the directory 'lite' + can move directories
+$ cp names temp lite/promo  // copy 2 files
+
 $ ps // bash ps
 
 $ less ~sam/.bashrc
@@ -56,6 +71,8 @@ $ exit
 $ ls -ld mak * // –d (directory): causes ls to display only file and directory names
 
 $ ls --help | less   //space + h + enter + q
+$ ls -F  // -F: add '/' after each directory and '*' after each executable file
+$ ls ~ // show the contents of the current user's home directory
 
 $ who
 $ apropos who // 快速查找命令和函数的工具
@@ -484,6 +501,7 @@ $ sudo systemctl status mariadb.service
 $ mysqlcheck -A -auto-repair -u root -p
 $ sudo systemctl --failed
 $ cd /var/lib/mysql/
+
 $ ll
 $ sudo rm aria_log_control ib_logfile0
 $ pgrep -af mysql
