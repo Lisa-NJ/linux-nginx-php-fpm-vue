@@ -3,6 +3,8 @@
 # sticky bit (page 980)
 # the pwd shell builtin && the pwd utility(/bin/pwd)
 # getfacl  setfacl
+# xargs/881
+# the linux tty device driver
 
 $ echo $TERM  // xterm-256color, linux; "xterm"表示X Window系统下的终端仿真器
 $ sudo dpkg-reconfigure tzdata
@@ -69,7 +71,8 @@ $ ls -l myprog *
 # Never give shell scripts setuid permission
 
 $ ls -ld /home/max/info  // -d: directory
-
+$ ls -rx // -x: in lines; -r: from Z->a
+$ ls -lh // -h: human readable
 
 $ ln --symbolic /home/max/sum /tmp/s3    // --symbolic = -s
 $ ls -l /home/max/sum /tmp/s3
