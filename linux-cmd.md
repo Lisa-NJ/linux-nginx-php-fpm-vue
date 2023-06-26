@@ -1,5 +1,8 @@
 # cron + updatedb + 
 # type codes & creator codes
+# sticky bit (page 980)
+# the pwd shell builtin && the pwd utility(/bin/pwd)
+# getfacl  setfacl
 
 $ echo $TERM  // xterm-256color, linux; "xterm"表示X Window系统下的终端仿真器
 $ sudo dpkg-reconfigure tzdata
@@ -54,6 +57,26 @@ $ touch letter // create an empty file
 $ echo ''
 $ mv names temp lite   // move 2 files 'names' and 'temp' to the directory 'lite' + can move directories
 $ cp names temp lite/promo  // copy 2 files
+
+$ chmod u+s myprog1   // setuid permission
+$ chmod 4755 myprog1  // same as above command
+$ chmod g+s myprog2   // setgid permission
+$ chmod 2755 myprog2  // same as above cmd
+$ ls -l myprog *
+-rwsr-xr-x 1 root pubs 19704 Jul 31 14:30 myprog1
+-rwxr-sr-x 1 root pubs 19704 Jul 31 14:30 myprog2
+
+# Never give shell scripts setuid permission
+
+$ ls -ld /home/max/info  // -d: directory
+
+
+$ ln --symbolic /home/max/sum /tmp/s3    // --symbolic = -s
+$ ls -l /home/max/sum /tmp/s3
+-rw-rw-r-- 1 max max 38 Jun 12 09:51 /home/max/sum
+lrwxrwxrwx 1 max max 14 Jun 12 09:52 /tmp/s3 -> /home/max/sum   // "l": link
+$ cat /tmp/s3
+This is sum.
 
 $ ps // bash ps
 
