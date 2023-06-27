@@ -81,6 +81,10 @@ lrwxrwxrwx 1 max max 14 Jun 12 09:52 /tmp/s3 -> /home/max/sum   // "l": link
 $ cat /tmp/s3
 This is sum.
 
+$ cat // copy every line until Ctrl+D is typed 
+$ cat > sample.txt  // create a file "sample.txt" without using an editor, Caution - will overwrite the file if it is an existing one
+$ cat stationery tape pens > supply_orders  // catenate several files into one larger one
+
 $ ps // bash ps
 
 $ less ~sam/.bashrc
@@ -106,6 +110,9 @@ $ who am i
 $ finger
 $ finger lisa // + a username; search for .plan in lisa's home directory; not case sensitive
 $ w  // displays a list of the users who are logged in on the local system
+
+$ tty
+
 
 $ write username
 write: you have write permission turned off //...??? to test more
