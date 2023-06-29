@@ -85,6 +85,38 @@ $ cat // copy every line until Ctrl+D is typed
 $ cat > sample.txt  // create a file "sample.txt" without using an editor, Caution - will overwrite the file if it is an existing one
 $ cat stationery tape pens > supply_orders  // catenate several files into one larger one
 
+$ cat pear >> orange  // append output symbol
+
+# noclobber -- bash
+$ touch tmp
+$ set -o noclobber
+$ echo "hi there" > tmp
+bash: tmp: cannot overwrite existing file
+$ set +o noclobber
+$ echo "hi there" > tmp
+
+# noclobber -- tsch
+$ set noclobber
+$ unset noclobber
+
+# override coclobber with >|
+$ set -o noclobber
+$ date > tmp2
+bash: a: cannot overwrite existing file
+$ date >| tmp2
+
+$ echo "hi there" > /dev/null
+$ cat /dev/null > messages  // truncate the file to zero length while preserving the ownership and permissions
+
+$ cat abstract | tr abc ABC   // tr cannot change the original file
+$ tr abc ABC < abstract
+
+$ ls | lpr
+
+$ who | tee who.out | grep sam
+
+$ ls -l | lpr &  // &: background
+
 $ ps // bash ps
 
 $ less ~sam/.bashrc

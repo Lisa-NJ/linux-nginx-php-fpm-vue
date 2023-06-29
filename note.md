@@ -54,6 +54,10 @@ tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
 
+[GRUB]
+GNU GRUB（GRand Unified Bootloader简称“GRUB”）是一个来自GNU项目的多操作系统启动程序
+在开机过程中按下Esc键或Shift键，这将打开GRUB菜单。 然后，您可以通过选择“Ubuntu”并按下e键来进入GRUB编辑界面
+
 [port]
 https://blog.51cto.com/u_15349616/3717562
 VGA - Video Graphics Array
