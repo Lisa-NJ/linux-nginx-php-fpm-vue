@@ -860,6 +860,7 @@ try {
 
 [New Zotac]
 How to make a new copy of Zotac
+	# Jobs at Office
 	- a new empty Zotac + a new M2 Hard disk 
 
 	[no use most of the time]
@@ -902,8 +903,14 @@ note:
 		ssid="name"
 		psk="pwd"
 		}		
+	# Jobs on site
+	- move the newly imaged Zotac to onsite
+	- turn on wifi hotspot: AP + ba...123 
+	- connect: wifi antenna + LED cable + Power cable
+	
+	- check the status of Display --> online :)
+	 
 		
-
 [DHCP and DNS]
 DHCP 
 	- Dynamic Host Configuration Protocol

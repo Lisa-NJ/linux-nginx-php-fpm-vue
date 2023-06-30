@@ -5,6 +5,7 @@
 # getfacl  setfacl
 # xargs/881
 # the linux tty device driver
+# background tasks /283 + job contrl
 
 $ echo $TERM  // xterm-256color, linux; "xterm"表示X Window系统下的终端仿真器
 $ sudo dpkg-reconfigure tzdata
@@ -178,9 +179,11 @@ $ lpr -P laser1 05.txt 108.txt 12.txt // prints three files on the printer named
 
 $ head months
 $ tail -5 months
-$ tail -f logfile // monitor lines as they are added to the end of the growing file named logfile
+$ tail -f logfile // -f: monitor lines as they are added to the end of the growing file named logfile
 $ sort -u -n days // -n 待测试
 $ uniq days.txt // skipping adjacent duplicate lines
+
+$ ls tty??  // ?: matches any single character
 
 
 $ sudo apt remove php8.1* --purge
