@@ -74,6 +74,9 @@ $ ls -l myprog *
 $ ls -ld /home/max/info  // -d: directory
 $ ls -rx // -x: in lines; -r: from Z->a
 $ ls -lh // -h: human readable
+$ ls -a
+$ echo * // not display . .. .aa 
+$ echo .* // display only . .. .aa
 
 $ ln --symbolic /home/max/sum /tmp/s3    // --symbolic = -s
 $ ls -l /home/max/sum /tmp/s3
@@ -184,7 +187,34 @@ $ sort -u -n days // -n 待测试
 $ uniq days.txt // skipping adjacent duplicate lines
 
 $ ls tty??  // ?: matches any single character
+$ echo tty??
+$ ls tty*   // *: 0到任意多
+$ echo tty*
+$ lpr part0 part1 part2 part3 part5  // 3 ways to print the same contents
+$ lpr part[01235]  // [abc] 只取其一
+$ lpr part[0-35]   // 0-3取其中一个 或者 只取5
+$ ls * [^ab] // ^: 非
+$ ls [^b-d]* 
+$ ls ?old
+$ ls \?old
 
+// 常见 bash 内置指令
+1. cd：切换当前工作目录。
+2. echo：输出文本或变量的内容。
+3. pwd：显示当前工作目录的路径。
+4. export：设置环境变量。
+5. alias：创建命令别名。
+6. unset：取消设置的变量或别名。
+7. source：在当前Shell环境中执行指定脚本。
+8. history：显示最近执行的命令历史记录。
+9. help：获取Bash内置命令的帮助信息。
+10. type：显示指定命令的类型，如内置命令还是外部命令。
+11. read：从标准输入读取用户输入。
+12. exec：用新的命令替换当前进程。
+13. shift：将命令行参数左移一位。
+14. break：跳出循环。
+15. continue：跳过循环的当前迭代。
+16. exit：退出当前Shell会话。
 
 $ sudo apt remove php8.1* --purge
 $ dpkg -l | grep php
