@@ -6,6 +6,8 @@
 # xargs/881
 # the linux tty device driver
 # background tasks /283 + job contrl
+# the compatible parameter (page 158) set
+# a swap file (Figure 6-7, page 162)
 
 $ echo $TERM  // xterm-256color, linux; "xterm"表示X Window系统下的终端仿真器
 $ sudo dpkg-reconfigure tzdata
@@ -197,6 +199,16 @@ $ ls * [^ab] // ^: 非
 $ ls [^b-d]* 
 $ ls ?old
 $ ls \?old
+
+$ vim practice 
+ESCAPE
+:q!
+:set nonumber
+:set nonumber
+:help
+:help insert
+:help compatible
+:help vi-diff
 
 // 常见 bash 内置指令
 1. cd：切换当前工作目录。
