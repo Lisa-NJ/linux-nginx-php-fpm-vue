@@ -8,6 +8,10 @@
 # background tasks /283 + job contrl
 # the compatible parameter (page 158) set
 # a swap file (Figure 6-7, page 162)
+# .(dot) builtin page 274
+# LANG page304 and VIMINIT(for vim initialization)
+# The lnks script (page 406)
+# PATH page297 -- change the environment so the shell searches the working directory automatically
 
 $ echo $TERM  // xterm-256color, linux; "xterm"表示X Window系统下的终端仿真器
 $ sudo dpkg-reconfigure tzdata
@@ -227,6 +231,16 @@ ESCAPE
 14. break：跳出循环。
 15. continue：跳过循环的当前迭代。
 16. exit：退出当前Shell会话。
+
+$ cat x y | tr "[a-z]" "[A-Z]"
+$ cat x y 1> hold1 2> hold2
+$ cat x y &> hold
+$ cat x y 1> hold 2>&1
+$ cat x y 2>&1 1> hold
+$ cat x y 2>&1 | tr "[a-z]" "[A-Z]"
+
+$ bash --version
+$ chsh  // change login shell permanently
 
 $ sudo apt remove php8.1* --purge
 $ dpkg -l | grep php

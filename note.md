@@ -3,7 +3,7 @@ schumann@oneworldled.com
 michael@oneworldled.com
 dartagnan@oneworldled.com.au
 darius@elitem.com.au
-Vick - placement
+
 2.24x1.28
 
 [English]
@@ -53,6 +53,15 @@ afaik - as far as I know
 tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
+
+[bash]
+the bash-doc package provides the more complete bash info pages.
+$ sudo apt install tcsh
+$ sudo apt install dash
+$ tcsh
+$ exit
+$ dash
+$ exit
 
 [GRUB]
 GNU GRUB（GRand Unified Bootloader简称“GRUB”）是一个来自GNU项目的多操作系统启动程序
