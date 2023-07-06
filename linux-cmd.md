@@ -13,6 +13,9 @@
 # The lnks script (page 406)
 # PATH page297 -- change the environment so the shell searches the working directory automatically
 
+$ lsblk
+$ python3 -m http.server 7777   // http://localhost:7777
+
 $ echo $TERM  // xterm-256color, linux; "xterm"表示X Window系统下的终端仿真器
 $ sudo dpkg-reconfigure tzdata
 $ sudo dpkg-reconfigure keyboard-configuration
