@@ -12,6 +12,7 @@
 # LANG page304 and VIMINIT(for vim initialization)
 # The lnks script (page 406)
 # PATH page297 -- change the environment so the shell searches the working directory automatically
+# huponexit (page 333)
 
 $ lsblk
 $ python3 -m http.server 7777   // http://localhost:7777
@@ -244,6 +245,36 @@ $ cat x y 2>&1 | tr "[a-z]" "[A-Z]"
 
 $ bash --version
 $ chsh  // change login shell permanently
+
+$ sleep 60 &
+[1] 7809
+$ jobs
+[1] + Running
+sleep 60 &
+
+$ xclock &
+[2] 1247
+$ fg 2
+$ %2
+$ fg %xc
+$ fg %?clo
+$ fg
+
+$ dirs
+$ pushd ../vue
+$ cd -  // change the working to the previous dir + change the 1st in the stack
+$ pushd +2  //  stack order --> +2, the number of dirs remains the same
+$ popd
+$ popd +1 // removes one from the dirs list, the length of the list -1
+
+$ echo $person
+max
+$ echo "$person"
+max
+$ echo '$person'
+$person
+$ echo \$person
+$person
 
 $ sudo apt remove php8.1* --purge
 $ dpkg -l | grep php
