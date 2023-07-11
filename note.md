@@ -63,6 +63,22 @@ $ exit
 $ dash
 $ exit
 
+Table 8-4
+PS1 symbols
+Symbol Display in prompt
+\$ # if the user is running with root privileges; otherwise, $
+\w Pathname of the working directory
+\W Basename of the working directory
+\! Current event (history) number (page 313)
+\d Date in Weekday Month Date format
+\h Machine hostname, without the domain
+\H Full machine hostname, including the domain
+\u Username of the current user
+\@ Current time of day in 12-hour, AM / PM format
+\T Current time of day in 12-hour HH:MM:SS format
+\A Current time of day in 24-hour HH:MM format
+\t Current time of day in 24-hour HH:MM:SS format
+
 [GRUB]
 GNU GRUB（GRand Unified Bootloader简称“GRUB”）是一个来自GNU项目的多操作系统启动程序
 在开机过程中按下Esc键或Shift键，这将打开GRUB菜单。 然后，您可以通过选择“Ubuntu”并按下e键来进入GRUB编辑界面

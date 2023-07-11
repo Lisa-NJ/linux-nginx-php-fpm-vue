@@ -13,6 +13,7 @@
 # The lnks script (page 406)
 # PATH page297 -- change the environment so the shell searches the working directory automatically
 # huponexit (page 333)
+# set MAIL + MAILPATH + MAILCHECK
 
 $ lsblk
 $ python3 -m http.server 7777   // http://localhost:7777
