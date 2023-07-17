@@ -14,6 +14,20 @@
 # PATH page297 -- change the environment so the shell searches the working directory automatically
 # huponexit (page 333)
 # set MAIL + MAILPATH + MAILCHECK
+# menu prompt page 374
+# select control structure page 428
+# bash debugging symbol page 410
+# ps page 796
+
+//word splitting - no expansion, no splitting
+$ IFS="p"
+$ aa=export
+$ echo $aa
+ex ort
+
+$ ps -f  // -f: full
+$ ps --forest
+$ pstree -p
 
 $ lsblk
 $ python3 -m http.server 7777   // http://localhost:7777
