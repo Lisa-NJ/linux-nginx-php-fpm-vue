@@ -25,6 +25,20 @@ $ aa=export
 $ echo $aa
 ex ort
 
+// reexecuting and editing commands
+$ fc -l 1020 1025
+$ fc -l view whereis
+$ fc -e
+$ fc 1029
+$ fc -s 1029
+$ fc -s adams=john 1029
+
+$ !! 
+$ !!44
+$ !!-6
+$ !ca
+$ !?cat?
+
 $ ps -f  // -f: full
 $ ps --forest
 $ pstree -p
@@ -242,6 +256,8 @@ ESCAPE
 6. unset：取消设置的变量或别名。
 7. source：在当前Shell环境中执行指定脚本。
 8. history：显示最近执行的命令历史记录。
+$ history 10
+$ history | tail
 9. help：获取Bash内置命令的帮助信息。
 10. type：显示指定命令的类型，如内置命令还是外部命令。
 11. read：从标准输入读取用户输入。
