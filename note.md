@@ -55,6 +55,15 @@ tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
 
+[keyring]
+Fix - "Current Password No Longer Matches Keyring"
+Forgotten the old password + is ok to delete items in the old keyring + want to safaguard new keyring with matching password
+$ cd .local/share/keyrings
+$ rm *.keyring
+$ sudo shutdown -r now  // 立刻重启
+$ cd .local/share/keyrings // Verify the new keyring exists
+$ ls -ltr *.keyring
+
 [bash]
 the bash-doc package provides the more complete bash info pages.
 $ sudo apt install tcsh
@@ -82,7 +91,7 @@ Symbol Display in prompt
 
 [GRUB]
 GNU GRUB（GRand Unified Bootloader简称“GRUB”）是一个来自GNU项目的多操作系统启动程序
-在开机过程中按下Esc键或Shift键，这将打开GRUB菜单。 然后，您可以通过选择“Ubuntu”并按下e键来进入GRUB编辑界面
+GRUB菜单出现后：e键 --> GRUB编辑界面; Esc --> grub> 命令行界面
 
 [port]
 https://blog.51cto.com/u_15349616/3717562
