@@ -249,7 +249,7 @@ WantedBy=multi-user.target
 		- chrome://settings/content/pdfDocuments -- Open PDFs in Chrome
 		- Settings / Privacy and security / Site Settings / PDF documents 
 		- PDF and PowerPoint viewer 
-
+	
 	- Setting Firefox
 		- Settings / General / Applications / Portable Document Format(PDF) --> Open in Firefox
 
@@ -257,12 +257,14 @@ WantedBy=multi-user.target
 1. for installation
 
 [E2V Endpoint Development Process]
+
 1. Make a .php file in local "helpers" folder, for example: "abc.php"
 2. Dev environment - localhost:8080
+
  	(1). E2V Sources + a source named "testABC", with "URI" refering to "http://10.1.1.238:8001/abc.php"
-	(2). Private Booking / Connect E2V source "testABC" with Display "A-TEST"
-	(2-1). HexChat / #au / TEST -- $TEST:channelRefresh
-	(3). Check "http://10.1.1.38:1234/" (Inspect / responsive 1080*1920 ) to see if the E2V endpoint works as expected
+ 	(2). Private Booking / Connect E2V source "testABC" with Display "A-TEST"
+ 	(2-1). HexChat / #au / TEST -- $TEST:channelRefresh
+ 	(3). Check "http://10.1.1.38:1234/" (Inspect / responsive 1080*1920 ) to see if the E2V endpoint works as expected
 5. Upload "abc.php" to CarSwap Server via ssh, if a new png file is needed, it needs to be uploaded as well
 	- scp -i key_name path/abc.php name@api.carswap.me:srv/html/e2v/
 6. Pre-pro environment - https://adverpost.com/ - (Team)One Wolrd LED
@@ -318,7 +320,6 @@ Sid - Forty Winks - Narre Warren (Pro)
 	- $ sudo apt install gpsd-clients
 	- $ cgps
 	- $ xgps --v
-	
 	
 4. Config /etc/default/gpsd && Restart
 	- DEVICES="/dev/ttyACM0"	
@@ -382,36 +383,36 @@ is a series of small single-board computers developed in the United Kingdom by t
 		$GPGGA,<1>,<2>,<3>,<4>,<5>,<6>,<7>,<8>,<9>,<10>,<11>,<12>,<13>,<14>*<15>
 
 		<1> UTC时间，格式为hhmmss.sss。
-
+	
 		<2> 纬度，格式为ddmm.mmmm（前导位数不足则补0）。
-
+	
 		<3> 纬度半球，N或S（北纬或南纬）。
-
+	
 		<4> 经度，格式为dddmm.mmmm（前导位数不足则补0）。
-
+	
 		<5> 经度半球，E或W（东经或西经）。
-
+	
 		<6> 定位质量指示，0=定位无效，1=定位有效。
-
+	
 		<7> 使用卫星数量，从00到12（前导位数不足则补0）。
-
+	
 		<8> 水平精确度，0.5到99.9。
-
+	
 		<9> 天线离海平面的高度，-9999.9到9999.9米
-
+	
 		<10> 高度单位，M表示单位米。
-
+	
 		<11> 大地椭球面相对海平面的高度（-9999.9到9999.9）。
-
+	
 		<12> 高度单位，M表示单位米。
-
+	
 		<13> 差分GPS数据期限（RTCM SC-104），最后设立RTCM传送的秒数量。
-
+	
 		<14> 差分参考基站标号，从0000到1023（前导位数不足则补0）。
-
+	
 		<15> 校验和。
 		```
-		
+
 方案二：Google Maps API
 	- https://www.googleapis.com/geolocation/v1/geolocate?key=YOUR_API_KEY
 
@@ -905,7 +906,7 @@ How to make a new copy of Zotac
 	- delete --> BIOS setting: Power/Loss - on, 
 				   Security/Secure boot/Secure boot - disabled, secure mode - custom,
 	                           Boot - legacy --> win8 or Pure UEFI
-
+	
 	- check HexChat / noconf / :*:getID + :*:clearState
 	- Add a new Display on adverpost + change ACID to TEST.****
 		- LED: pixel is useful, physical width and height only for users 
@@ -914,7 +915,7 @@ How to make a new copy of Zotac
 		- Brightness / censor -- not finished yet
 		- ACID connected to IRC, not for users, can be renamed to something meaningful
 	- check HexChat / noconf: h_14... has quit --> / #au: TEST
-
+	
 	- Ctrl + Alt + F1: enter cmd window
 	- root / elitem
 	- hadaly/Hadaly/System.pm  --> http://10.1.1.238:8000
@@ -940,29 +941,30 @@ note:
 	- reimage the damaged zotac --> new HWID
 	- remove all booked campaign
 	- edit Display --> change HWID to the new one & save
-	
-		
+
+
+​		
 [DHCP and DNS]
 DHCP 
-	- Dynamic Host Configuration Protocol
-	- Assigns IP addresses to hosts
-	- Comes as a client and a server
-	- DHCP Discover + DHCPOffer + DHCPRequest + DHCPACK
-	- DHCPDiscover - Looks for a DHCP server
-	- DHCPOffer - The DHCP server offers an address
-	- DHCPRequest - The host requests to lease the address
-	- DHCPACK / sends < IP addr + subnet mask + the default gateway + dns server >
-	- UDP Port / Client 68 + Server 67
+​	- Dynamic Host Configuration Protocol
+​	- Assigns IP addresses to hosts
+​	- Comes as a client and a server
+​	- DHCP Discover + DHCPOffer + DHCPRequest + DHCPACK
+​	- DHCPDiscover - Looks for a DHCP server
+​	- DHCPOffer - The DHCP server offers an address
+​	- DHCPRequest - The host requests to lease the address
+​	- DHCPACK / sends < IP addr + subnet mask + the default gateway + dns server >
+​	- UDP Port / Client 68 + Server 67
 dhcpcd
-	- an implementation of the DHCP client
-	- gets the host information (IP address, routes, etc) from a DHCP server 
-	- configures the network interface of the machine on which it is running 
-	
+​	- an implementation of the DHCP client
+​	- gets the host information (IP address, routes, etc) from a DHCP server 
+​	- configures the network interface of the machine on which it is running 
+​	
 OpenWrt luci feed 
-	- LuCI - OpenWrt Configuration Interface
-	- https://github.com/Lisa-NJ/luci
+​	- LuCI - OpenWrt Configuration Interface
+​	- https://github.com/Lisa-NJ/luci
 UPD (User Datagram Protocol)
-	- UDP ports include the DNS port (53), the Dynamic Host Configuration Protocol port (68), and the Kerberos port (88)
+​	- UDP ports include the DNS port (53), the Dynamic Host Configuration Protocol port (68), and the Kerberos port (88)
 dnsmasq
 
 MAC Address
@@ -1337,7 +1339,22 @@ $ man curl
 $ curl --help
 ```
 
-[flight]
 
-		Singapore --> Shanghai    Monday   ￥2000
-Adelaide <---   Singapore                 Sunday   ￥1600
+
+[login keyring 22/7/2023]
+
+在Linux中，login keyring（登录密钥环）是一种安全存储用户敏感数据的机制。它主要用于存储和管理用户的密码、私钥、数字证书、认证令牌等敏感信息。当用户登录到图形界面或通过终端登录时，系统**会自动创建和管理**一个登录密钥环。
+
+登录密钥环的目的是**避免在用户会话期间频繁输入**密码和敏感信息，从而提高用户体验和安全性。一旦用户提供了登录密码，系统将解锁登录密钥环，并且在用户登录期间始终保持解锁状态。这样，其他应用程序和服务可以使用登录密钥环来获取存储在其中的敏感数据，而不需要用户再次输入密码。
+
+例如，当用户登录到一个使用电子邮件客户端的图形界面时，该客户端可能需要访问存储在登录密钥环中的用户邮箱密码。登录密钥环可以在用户登录后自动解锁，并提供必要的密码信息给邮件客户端，从而无需用户手动输入密码。
+
+尽管登录密钥环提供了方便和安全性，但同时也需要谨慎对待。如果恶意软件或攻击者能够访问解锁的密钥环，他们可能会获取到其中存储的敏感信息。因此，在使用登录密钥环时，用户需要保证自己的系统处于良好的安全状态，并避免安装来自不可信来源的软件。
+
+需要注意的是，不同的Linux发行版可能有不同的登录密钥环实现方式和工具。常见的工具包括 GNOME Keyring 和 KWallet（用于KDE桌面环境）。这些工具通常与特定的桌面环境相关联，并且提供图形界面来管理和查看存储在登录密钥环中的数据。
+
+//1. Seahorse is the tool to manage keys and passwords.
+
+//2. Most desktop environments like GNOME, KDE, Xfce etc use an implementation of [gnome-keyring](https://wiki.archlinux.org/index.php/GNOME/Keyring?ref=itsfoss.com) to provide this keyring feature in Linux.
+
+//...待完成 https://itsfoss.com/ubuntu-keyring/
