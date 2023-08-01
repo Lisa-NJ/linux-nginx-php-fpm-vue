@@ -19,6 +19,28 @@
 # bash debugging symbol page 410
 # ps page 796
 
+// network - network-manager
+$ apt update
+$ apt install network-manager
+$ systemctl status network-manager
+$ nmcli connection show
+$ nmcli device wifi rescan
+$ nmcli device wifi list
+$ nmcli device wifi connect SSID password PASSWORD
+$ nmcli connection down SSID 
+
+// ifupdown - 配置网络接口的工具
+ifupdown 是一个用于配置网络接口的工具，它在 Linux 系统中发挥着重要的作用。具体来说，ifupdown 用于启用（up）或禁用（down）网络接口，以及为网络接口分配 IP 地址、设置路由和配置其他网络参数。
+当 Linux 系统启动时，ifupdown 负责根据预定义的配置文件来激活网络接口，使得系统能够正常与网络通信。同时，在系统运行过程中，ifupdown 也能够通过命令行或脚本的方式进行网络接口的手动启用或禁用。
+ifupdown 的主要作用包括：
+1.管理网络接口：ifupdown 通过配置文件来管理网络接口的状态，可以启用或禁用网络接口。
+2.分配 IP 地址：ifupdown 可以为网络接口分配 IP 地址，使得系统能够通过网络进行通信。
+3.配置路由：ifupdown 可以设置网络接口的路由，帮助系统找到正确的网络路径来发送和接收数据。
+4.配置其他网络参数：除了 IP 地址和路由，ifupdown 还可以配置其他网络参数，如子网掩码、网关、DNS 服务器等。
+总的来说，ifupdown 是一个在 Linux 系统中负责网络接口配置和管理的重要工具，它确保了网络接口在启动时能够正确地配置，并能够随时进行调整和管理。
+
+$ nc -q0 localhost 11211  // 0 s 后 quit //...???
+
 //word splitting - no expansion, no splitting
 $ IFS="p"
 $ aa=export
