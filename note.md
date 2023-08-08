@@ -104,7 +104,7 @@ HDMI - High-Definition Multimedia Interface
 /usr/bin/chromium
 /usr/lib/chromium/
 $ chromium --version
-Chromium 73.0.3683.75-1 built on Debian buster/sid,running on Debian 10.11
+Chromium 73.0.3683.75-1 built on Debian buster/sid,running on Debian 10.110
 $ apt search chromium
 chromium/oldstable 90.0.4430.212-1~deb10u1 amd64 [upgradable from: 73.0.3683.75-1]
   web browser
