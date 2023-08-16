@@ -54,6 +54,7 @@ afaik - as far as I know
 tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
+COB - close of business
 
 [keyring]
 Fix - "Current Password No Longer Matches Keyring"
@@ -1367,3 +1368,4 @@ $ curl --help
 //2. Most desktop environments like GNOME, KDE, Xfce etc use an implementation of [gnome-keyring](https://wiki.archlinux.org/index.php/GNOME/Keyring?ref=itsfoss.com) to provide this keyring feature in Linux.
 
 //...待完成 https://itsfoss.com/ubuntu-keyring/
+收回昨天的话，只旁观，不折腾了，好累 9/8/2023

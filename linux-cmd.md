@@ -1,23 +1,63 @@
-# cron + updatedb + 
-# type codes & creator codes
-# sticky bit (page 980)
-# the pwd shell builtin && the pwd utility(/bin/pwd)
-# getfacl  setfacl
-# xargs/881
-# the linux tty device driver
-# background tasks /283 + job contrl
-# the compatible parameter (page 158) set
-# a swap file (Figure 6-7, page 162)
-# .(dot) builtin page 274
-# LANG page304 and VIMINIT(for vim initialization)
-# The lnks script (page 406)
-# PATH page297 -- change the environment so the shell searches the working directory automatically
-# huponexit (page 333)
-# set MAIL + MAILPATH + MAILCHECK
-# menu prompt page 374
-# select control structure page 428
-# bash debugging symbol page 410
-# ps page 796
+//# cron + updatedb + 
+//# type codes & creator codes
+//# sticky bit (page 980)
+//# the pwd shell builtin && the pwd utility(/bin/pwd)
+//# getfacl  setfacl
+//# xargs/881
+//# the linux tty device driver
+//# background tasks /283 + job contrl
+//# the compatible parameter (page 158) set
+//# a swap file (Figure 6-7, page 162)
+//# LANG page304 and VIMINIT(for vim initialization)
+//# The lnks script (page 406)
+//# PATH page297 -- change the environment so the shell searches the working directory automatically
+//# huponexit (page 333)
+//# set MAIL + MAILPATH + MAILCHECK
+//# menu prompt page 374
+//# select control structure page 428
+//# bash debugging symbol page 410
+//# ps page 796
+//# Functions page 437 -- the use of local and global variables within a function
+//# bash features and options page 330
+//# test utility - page 854
+//# shell builtin - page 446
+
+<!-- Special parameters -->
+$# the number of cmd-line arguments
+
+
+<!-- Programming tools -->
+1. do not name a shell script test
+
+<!-- Processing the Cmd Line -->
+1. Reading a command line
+2. Applies history expansion
+3. Applied alias substitution to the line
+4. Parsing the cmd line into tokens and 
+	scanning each token for special characters and patterns -- to take certain actions
+	command-line expansion in the following order:
+	`
+	1. Brace expansion (page 336)
+	2. Tilde expansion (page 337)
+	3. Parameter and variable expansion (page 338)
+	4. Arithmetic expansion (page 338)
+	5. Command substitution (page 340)
+	6. Word splitting (page 341)
+	7. Pathname expansion (page 341)
+	8. Process substitution (page 343)
+	`
+5. Quote removal
+
+// a function to exchange the names of two files
+function switch() 
+{
+	local tmp=$$switch
+	mv "$1" $tmp         // positional parameters
+	mv "$2" "$1"
+	mv $tmp "$2"
+}
+
+$ . ~/.bash_profile // .(dot) command -- put the changes into effect immediately
 
 // network - network-manager
 $ apt update
@@ -152,13 +192,17 @@ $ cat stationery tape pens > supply_orders  // catenate several files into one l
 
 $ cat pear >> orange  // append output symbol
 
+$ set -o // list each of the features controlled by set, followed by its state(on or off)
+$ set +o // 
+
 # noclobber -- bash
 $ touch tmp
-$ set -o noclobber
+$ set -o noclobber  // turns on the feature
 $ echo "hi there" > tmp
 bash: tmp: cannot overwrite existing file
-$ set +o noclobber
+$ set +o noclobber  // turns off the feature
 $ echo "hi there" > tmp
+$ set +o histexpand // turn off history expansion
 
 # noclobber -- tsch
 $ set noclobber
@@ -169,6 +213,14 @@ $ set -o noclobber
 $ date > tmp2
 bash: a: cannot overwrite existing file
 $ date >| tmp2
+
+$ shopt -s dotglob    // turn on
+$ shopt -u dotglob    // off
+$ shopt dotglob       // diaplay how a feature is set
+$ shopt               // list the features controlled by shopt and their state
+$ shopt -s            // list the features controlled by shopt that are set or on
+$ shopt -u            // list the features that are unset or off
+$ shopt -u expand_aliases  // turn aliases off
 
 $ echo "hi there" > /dev/null
 $ cat /dev/null > messages  // truncate the file to zero length while preserving the ownership and permissions
@@ -288,6 +340,11 @@ $ history | tail
 14. break：跳出循环。
 15. continue：跳过循环的当前迭代。
 16. exit：退出当前Shell会话。
+17. if case
+18. trap
+19. kill
+20. getopts
+
 
 $ cat x y | tr "[a-z]" "[A-Z]"
 $ cat x y 1> hold1 2> hold2
@@ -344,7 +401,7 @@ $ sudo apt-get remove apache2 --purge
 $ sudo apt-get autoremove
 $ apt list --installed | grep apache2
 $ sudo apt-get remove apache2-bin  --purge 
-$ alias l='ls -ahltr'
+$ alias l='ls -ahltr'   // -t: sort by time newest first; -r: reverse the order
 $ lsusb
 $ ps -efj #内核守护进程
 $ ssh-keygen -t rsa -b 4096 -f .ssh/ap_lisa
@@ -366,6 +423,7 @@ Bus 001 Device 002: ID 045e:07f8 Microsoft Corp. Wired Keyboard 600 (model 1576)
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 ```
 
+
 <!-- Bad Zotac -->
 <!-- Adverclient has a file system with errors... -->
 $ fsck /dev/sda2
@@ -378,6 +436,21 @@ $ lspci // show Hardware Info - intel corporation comet lake-s gt2 uhd graphics 
 $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{print $1"|"$3"|"$4}'|more
 $ service apache2 status
 $ cat /etc/os-release  // to check os in command line
+
+<!-- alias -->
+$ echo $PWD
+/home/max
+$ alias dirA = "echo Working directory is $PWD"  // expanded created
+$ alias dirA
+$ alias dirB = 'echo Working directory is $PWD"  // expanded used
+$ alias dirB
+$ cd cars
+$ dirA
+Working directory is /home/max                   // displays the name of the dir the alias was created in
+$ dirB
+Working directory is /home/max/cars              // displays the proper name of the working directory
+
+$ unalias dirA  // remove
 
 <!-- Install Postman Desktop Agent -->
 $ snap install postman
@@ -588,6 +661,15 @@ $ sudo mysql -uroot -p csdb < csdb-0817.sql
 $ sudo mysql -uroot -p owl < owl-0817.sql
 <!-- or -->
 MariaDB > source /.../dcdb-0817.sql
+
+$ mysql -uroot -p -e "SELECT d.id, d.name, t.name team_name, d.last_connected
+	FROM display d
+	INNER JOIN team t
+	ON d.team_id = t.id;" > raw.csv
+
+
+
+
 
 <!--install phalcon4-->
 https://docs.phalcon.io/4.0/en/installation#deb-based-distributions-debian-ubuntu-etc
