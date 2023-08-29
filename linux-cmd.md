@@ -22,6 +22,56 @@
 //# test utility - page 854
 //# shell builtin - page 446
 
+$ uname -r  // Linux kernal version
+$ $ apt-cache showpkg firmware-realtek
+
+<!-- How to use usb disk on Linux -->
+$ lsblk
+`
+NAME                  MOUNTPOINT
+sda
+ |----sda1            /boot/efi
+ |----sda2            /
+
+sdb
+ |----sdb1
+`
+$ mkdir /media/usb
+$ mount /dev/sdb1 /media/usb
+$ umount /media/usb
+
+<!-- Adverclient Generation 10.11.0 + 331 -->
+1. Make changes to the current version
+	- 1.1 /grub-ifname-patch  -+->  "pci=nommconf"
+	- 1.2 /bootstrap.sh/L115  --> "git checkout 31-extend-e2v-support-iframe" (correct version)
+	- 1.3 /bootstrap.sh： 10.1.1.253 --> 10.1.1.238; 
+	- 1.4 /preseed.cfg：10.1.1.253 --> 10.1.1.238; 
+	      10.1.1.249 --> mirror/http/proxy string;
+	      xfonts-unifont
+		
+2. debian-10.11.0-amd64-netinst.iso --> usb boot drive (Rufus/Windows)
+
+// verify iso (optional)
+$ ls -l ~/Downloads/debian-12.1.0-amd64-netinst.iso
+$ gpg --keyserver keyring.debian.org --recv-keys 0x$(wget -q -O - https://ftp-master.debian.org/keys/release-12.asc | gpg --dry-run --import --import-options show-only | awk -F'/' '/^pub/{print $NF; exit}')
+$ gpg --verify debian-12.1.0-amd64-netinst.iso.gpg debian-12.1.0-amd64-netinst.iso
+
+// make usb boot disk using dd (optional to test)
+$ sudo dd bs=4M if=path/to/debian-12.1.0-amd64-netinst.iso of=/dev/sdX status=progress
+$ sudo apt update
+$ sudo apt install qemu-utils
+$ qemu-img --version
+
+$ dpkg --get-selections | tee selections
+$ xz -zvve9 -T0 [image].img
+$ xz -dk file.xz // extract xz file
+
+
+$ apt-get source -d [list of packages]
+$ apt-get download [list of packageds]
+
+$ free -h
+
 <!-- Special parameters -->
 $# the number of cmd-line arguments
 
@@ -233,6 +283,7 @@ $ ls | lpr
 $ who | tee who.out | grep sam
 
 $ ls -l | lpr &  // &: background
+$ ls -lt  // sort by time
 
 $ ps // bash ps
 

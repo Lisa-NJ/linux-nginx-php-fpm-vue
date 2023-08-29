@@ -56,6 +56,77 @@ tba - to be announced
 tbh - to be honest
 COB - close of business
 
+[将前端 Vue 项目部署到 Linux 服务器上]
+1. **准备 Linux 服务器**：
+   - 获得访问 Linux 服务器的 SSH 权限。
+   - 确保服务器上已经安装了 Node.js 和 npm，以便运行 Vue 项目。
+2. **在本地构建 Vue 项目**：
+   - 在本地计算机上使用 Vue CLI 或其他构建工具构建 Vue 项目。运行以下命令将项目打包成生产版本：  
+     ```bash
+     npm run build
+     ```
+   - 这将生成一个 `dist` 目录，其中包含了打包后的项目文件。
+3. **传输项目文件到服务器**：
+   - 使用 SCP、SFTP 或其他文件传输工具将本地构建的项目文件传输到服务器上。例如，可以使用 SCP 命令：
+     ```bash
+     scp -r /local/path/to/dist user@server:/path/to/destination
+     ```
+     这将 `dist` 目录传输到服务器的指定目录。
+4. **在服务器上安装 Web 服务器**：
+   - 如果服务器上没有安装 Web 服务器（如 Nginx 或 Apache），请安装一个。以下是在 Debian/Ubuntu 上安装 Nginx 的示例命令：
+
+     ```bash
+     sudo apt update
+     sudo apt install nginx
+     ```
+5. **配置 Web 服务器**：
+   - 配置 Web 服务器以提供 Vue 项目。例如，在 Nginx 上，您可以创建一个配置文件，将请求代理到 Vue 项目的 `dist` 目录。以下是一个示例 Nginx 配置：
+
+     ```nginx
+     server {
+         listen 80;
+         server_name your_domain.com;
+
+         location / {
+             root /path/to/your/vue/project/dist;
+             try_files $uri $uri/ /index.html;
+         }
+     }
+     ```
+   - 确保替换 `your_domain.com` 为您的域名，`/path/to/your/vue/project/dist` 为项目的实际路径。
+6. **重启 Web 服务器**：
+   - 根据您的 Web 服务器类型，使用适当的命令重启它。例如，在 Nginx 上，您可以运行：
+     ```bash
+     sudo systemctl restart nginx
+     ```
+7. **配置域名和 DNS**（可选）：
+   - 如果您使用域名访问您的网站，请确保您的域名已配置为指向服务器的 IP 地址，并在 DNS 中设置了适当的记录。
+8. **测试**：
+   - 打开 Web 浏览器，并通过域名或服务器的 IP 地址访问您的 Vue 项目。您应该能够看到部署在服务器上的 Vue 项目。
+
+这些步骤将帮助您将 Vue 项目成功部署到 Linux 服务器上。根据您的特定需求和服务器环境，某些步骤可能会有所不同。
+
+[Fixed ZBOX-CI331NANO PCIe Bus Error / Tanami 18/8]
+  -- https://unix.stackexchange.com/questions/327730/what-causes-this-pcieport-00000003-0-pcie-bus-error-aer-bad-tlp Tip2
+// pci=nommconf disables Memory-Mapped PCI Configuration Space
+-1. $ cd /etc/modprobe.d/
+    $ cat adclient.conf
+    $ lsmod | grep eth
+    $ modinfo r8169
+    $ apt-cache showpkg firmware-realtek  // 查询和显示指定软件包的详细信息
+    $ dmesg  // 查看系统的消息日志，特别是内核消息; 用于诊断和排查与硬件、内核或设备驱动程序相关的问题
+    $ demesg | less
+    $ modinfo pcieport
+    $ cd /etc/
+    $ grep -ir 'ADCLIENT'
+   --------------------------------- test --------------------------------------- 
+0. $ lspci -vvv | grep -ia 'in use'  // -i: case insensitive, -a: search binary files
+1. edit /etc/default/grub
+	- GRUB_CMDLINE_LINUX="net.ifnames=0 pci=nommconf"
+2. $ update-grub
+
+https://www.debian.org/releases/buster/debian-installer/
+
 [keyring]
 Fix - "Current Password No Longer Matches Keyring"
 Forgotten the old password + is ok to delete items in the old keyring + want to safaguard new keyring with matching password
@@ -1261,7 +1332,7 @@ $ sudo nginx -t  <!--to check config file-->
 PCRE: for Nginx to Rewrite
 /usr/share/nginx/html/index.html
 
-edit etc/nginx/sites-avaliable/default
+edit etc/nginx/sites-availiable/default
 ```
 server {
 	listen 80;
