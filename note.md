@@ -969,15 +969,9 @@ try {
 [New Zotac]
 How to make a new copy of Zotac
 	# Jobs at Office
-	- a new empty Zotac + a new M2 Hard disk 
-
-	[no use most of the time]
-		- U plugged into Zotac and starts system
-		- find AdverClient in two ways
-			1. download from https://docs.adverpost.com 
-			2. desktop when the system is ready 
+	- a new empty Zotac + a new M2 Hard disk
 	- Hard Disk connected to the computer next to Michael
-	- double-click Adverclient(adclient-318-amd64.img.xz) --> target new Hard disk
+	- double-click Adverclient(adclient-318-amd64.img.xz(https://docs.adverpost.com )) --> target new Hard disk
 	
 	- a warning window appears + fix
 	- system / GParted -- choose the 2nd part(apclient) + expand the volume to 120G	
@@ -1420,6 +1414,14 @@ $ man curl
 $ curl --help
 ```
 
+[Xvfb]
+Xvfb 是一个虚拟 X 服务器的缩写，它代表 "X Virtual Framebuffer"。Xvfb 允许在没有物理显示器的情况下运行图形应用程序，它模拟了一个完整的 X 服务器环境。
+
+传统上，X 服务器用于显示图形用户界面 (GUI) 应用程序，需要连接到物理显示器或远程显示器。但是，在某些情况下，可能没有可用的显示器，或者你希望在没有显示器的情况下运行应用程序。这时，就可以使用 Xvfb 来创建一个虚拟的 X 服务器，它只存在于内存中而不需要物理显示器。
+
+Xvfb 将图形输出渲染到内存中的虚拟帧缓冲区，而不是发送到实际的显示设备。这使得你可以在后台运行图形应用程序，无需图形界面的实际显示。Xvfb 的输出可以被重定向到其他 X 应用程序进行处理，或者可以使用工具（如 Xvnc）将图形显示到远程计算机上。
+
+Xvfb 在许多情况下都非常有用，例如在服务器上运行测试套件、自动化测试、无头浏览器（Headless Browser）以及需要图形环境的脚本和应用程序等。它提供了一种轻量级的方法来模拟和处理图形输出，而不依赖于物理显示器。
 
 
 [login keyring 22/7/2023]

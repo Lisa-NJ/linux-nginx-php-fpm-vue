@@ -25,6 +25,13 @@
 $ uname -r  // Linux kernal version
 $ $ apt-cache showpkg firmware-realtek
 
+<!-- System Command -->
+(1) Installation & Log in: login、shutdown、halt、reboot、mount、umount、chsh
+(2) Security: passwd、su、umask、chgrp、chmod、chown、chattr、sudo、pswho
+(3) Management: df、top、free、quota、at、lp、adduser、groupadd kill、crontab、tar、unzip、gunzip、last
+(4) Network: ifconfig、ip、ping、netstat、telnet、ftp、route、rlogin rcp、finger、mail、nslookup
+(5) File: file、mkdir、grep、dd、find、mv、ls、diff、cat、ln
+
 <!-- How to use usb disk on Linux -->
 $ lsblk
 `
@@ -69,6 +76,11 @@ $ xz -dk file.xz // extract xz file
 
 $ apt-get source -d [list of packages]
 $ apt-get download [list of packageds]
+
+// 启动 Xorg
+自定义 Xorg 启动脚本： 对于高级用户或需要自定义 Xorg 启动选项的情况，您可以编写自定义的 Xorg 启动脚本并使用 xinit 命令来启动 Xorg。例如：
+xinit /path/to/custom-xorg-config
+这将使用指定的 Xorg 配置文件启动 Xorg 服务器。
 
 $ free -h
 
