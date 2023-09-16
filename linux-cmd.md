@@ -508,17 +508,19 @@ $ ssh-keygen -C "carswap-key-19" -t ed25519 // file: key_cs_123  passphrase: pp1
 $ ssh-copy-id -i ~/.ssh/key_cs_123.pub acme.learnlinux.cloud
 $ ssh -i ~/.ssh/key_cs_123 acme.learnlinux.cloud // to unlock the key, input passphrase
 
-
 <!-- Replace String Using the sed, 
      By default, sed only replaces the first occurrence of the specified string in each line
      s - substitute
      g - replace all occurrences of string, 
     -i[SUFFIX], --in-place[=SUFFIX]
                  edit files in place (makes backup if SUFFIX supplied)
+
     # - a number flag such as 1, 2 - which occurrence of a specified string          
  -->
 $ sed 's/127.0.0.1/10.1.1.38/g' -i assets/*
 $ sed 's/box/bin/2' foxinbox.txt 
+
+$ sed 's/10.1.1.253/192.168.0.197/g' -i ./*
 
 <!-- download file from Zotac -->
 $ scp root@10.1.1.39:/hadaly/cache/media/output ~
@@ -709,7 +711,7 @@ $ sudo pecl install phalcon-4.1.2
 
 <!-- 4. to check -->
 $ php -m <!-- phalcon is on the list -->
- 
+
 <!-- another way to install phalcon4:  --> 
 $ cd /tmp
 $ git clone https://github.com/phalcon/cphalcon
