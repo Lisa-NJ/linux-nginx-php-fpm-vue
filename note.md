@@ -1,8 +1,13 @@
+dartagnan@oneworldled.com.au
 Tadartagnan@hotmail.com
+
 schumann@oneworldled.com
 michael@oneworldled.com
-dartagnan@oneworldled.com.au
+ashley@oneworldled.com
 darius@elitem.com.au
+thushan@oneworldled.com.au
+mondona@oneworldled.com
+
 Tanami 045 010 7311
 
 2.24x1.28
@@ -35,6 +40,7 @@ OP Shop
 It's my bad
 It's been a minute
 It is a one off set up
+I need it yesterday
 
 a forward slash (/) character
 a backslash (\) character
@@ -111,7 +117,7 @@ COB - close of business
 // pci=nommconf disables Memory-Mapped PCI Configuration Space
 -1. $ cd /etc/modprobe.d/
     $ cat adclient.conf
-    $ lsmod | grep eth
+    $ lsmod | grep eth   //查看已加载的内核模块
     $ modinfo r8169
     $ apt-cache showpkg firmware-realtek  // 查询和显示指定软件包的详细信息
     $ dmesg  // 查看系统的消息日志，特别是内核消息; 用于诊断和排查与硬件、内核或设备驱动程序相关的问题
@@ -1441,4 +1447,4 @@ Xvfb 在许多情况下都非常有用，例如在服务器上运行测试套件
 //2. Most desktop environments like GNOME, KDE, Xfce etc use an implementation of [gnome-keyring](https://wiki.archlinux.org/index.php/GNOME/Keyring?ref=itsfoss.com) to provide this keyring feature in Linux.
 
 //...待完成 https://itsfoss.com/ubuntu-keyring/
-收回昨天的话，只旁观，不折腾了，好累 9/8/2023
+

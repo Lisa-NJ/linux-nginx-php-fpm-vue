@@ -23,7 +23,12 @@
 //# shell builtin - page 446
 
 $ uname -r  // Linux kernal version
-$ $ apt-cache showpkg firmware-realtek
+$ apt-cache showpkg firmware-realtek
+$ apt-cache search linux-image // to list kernals available
+$ apt list --upgradable   // to show what packages can be upgraded
+$ lsmod | grep i915 // 如果已加载 i915 模块，说明您已经在使用 Intel 显卡的开源驱动程序
+$ lspci -v -s `lspci | awk '/ VGA / {print $1}'`
+$ lspci -k // pci + driver info
 
 <!-- System Command -->
 (1) Installation & Log in: login、shutdown、halt、reboot、mount、umount、chsh
@@ -77,7 +82,7 @@ $ xz -dk file.xz // extract xz file
 $ apt-get source -d [list of packages]
 $ apt-get download [list of packageds]
 
-// 启动 Xorg
+// 
 自定义 Xorg 启动脚本： 对于高级用户或需要自定义 Xorg 启动选项的情况，您可以编写自定义的 Xorg 启动脚本并使用 xinit 命令来启动 Xorg。例如：
 xinit /path/to/custom-xorg-config
 这将使用指定的 Xorg 配置文件启动 Xorg 服务器。
@@ -499,6 +504,13 @@ $ lspci // show Hardware Info - intel corporation comet lake-s gt2 uhd graphics 
 $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{print $1"|"$3"|"$4}'|more
 $ service apache2 status
 $ cat /etc/os-release  // to check os in command line
+
+$ lspci // 列出所有已连接的 PCI 设备
+$ lspci -v -s `lspci | awk '/ VGA / {print $1}'` // display card driver
+$ lsmod   //查看已加载的内核模块
+$ modinfo video // 显示名为 "video" 的内核模块的信息
+$ lsmod | grep i915 // 如果看到输出，其中包含 "i915"，这表示 Intel 显卡的内核驱动程序已经加载
+
 
 <!-- alias -->
 $ echo $PWD
