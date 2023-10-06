@@ -2,12 +2,24 @@ dartagnan@oneworldled.com.au
 Tadartagnan@hotmail.com
 
 schumann@oneworldled.com
+mondona@oneworldled.com
 michael@oneworldled.com
+shay@oneworldled.com.au
 ashley@oneworldled.com
+steve@oneworldled.com
 darius@elitem.com.au
 thushan@oneworldled.com.au
-mondona@oneworldled.com
+thushannirudaka@gmail.com
+lisa@oneworldled.com.au
 
+
+schumann@oneworldled.com, mondona@oneworldled.com, michael@oneworldled.com, shay@oneworldled.com.au, ashley@oneworldled.com, darius@elitem.com.au, thushan@oneworldled.com.au, thushannirudaka@gmail.com, lisa@oneworldled.com.au
+
+thushannirudaka@gmail.com, lisa@oneworldled.com.au, lisahuangade19@gmail.com
+
+kiumars@oneworldled.com
+
+tanami@oneworldled.com
 Tanami 045 010 7311
 
 2.24x1.28
@@ -61,6 +73,13 @@ tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
 COB - close of business
+
+[Certbot]
+http --> https
+
+[partition & Gparted]
+	https://www.linuxbabe.com/desktop-linux/fix-cant-read-superblock-error
+	
 
 [将前端 Vue 项目部署到 Linux 服务器上]
 1. **准备 Linux 服务器**：
@@ -987,12 +1006,20 @@ How to make a new copy of Zotac
 	- delete --> BIOS setting: Power/Loss - on, 
 				   Security/Secure boot/Secure boot - disabled, secure mode - custom,
 	                           Boot - legacy --> win8 or Pure UEFI
-	
+	- Darius:
+		```
+		- System.pm / args => ' --static --width=%d --height=%d --interface=%s
+			-- set %s to eth1 and mark for Model CI341 (>=327) + LED + other state
+			-- interface means the LED connection port
+			-- no problem with LCD, only for LED as above
+			- Zotac boots too fast to get a result by 'ldetect' and give it to System
+			- If LED cable and Internet cable are put in the wrong ports, the traffic on the internet is caused and the inernet
+		```
 	- check HexChat / noconf / :*:getID + :*:clearState
 	- Add a new Display on adverpost + change ACID to TEST.****
 		- LED: pixel is useful, physical width and height only for users 
 		- LCD: 0×0 -- use the maximum by default 
-		- block time -- the maximum of a campaign supported
+		- block time --> 3600s(not 120s) -- the maximum of a campaign supported
 		- Brightness / censor -- not finished yet
 		- ACID connected to IRC, not for users, can be renamed to something meaningful
 	- check HexChat / noconf: h_14... has quit --> / #au: TEST

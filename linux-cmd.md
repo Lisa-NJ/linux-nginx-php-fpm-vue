@@ -28,7 +28,7 @@ $ apt-cache search linux-image // to list kernals available
 $ apt list --upgradable   // to show what packages can be upgraded
 $ lsmod | grep i915 // 如果已加载 i915 模块，说明您已经在使用 Intel 显卡的开源驱动程序
 $ lspci -v -s `lspci | awk '/ VGA / {print $1}'`
-$ lspci -k // pci + driver info
+$ lspci -k // pci + driver
 
 <!-- System Command -->
 (1) Installation & Log in: login、shutdown、halt、reboot、mount、umount、chsh
@@ -51,6 +51,10 @@ sdb
 $ mkdir /media/usb
 $ mount /dev/sdb1 /media/usb
 $ umount /media/usb
+
+<!-- wrong fs type, bad option, bad superblock on /dev/sdc, missing codepage or helper program... -->
+$ mkfs -t ext4 /dev/sdc         // (1)Format
+$ mount /dev/sdc /media/usb     // (2)Then can be Mounted  (3)Shown in Files
 
 <!-- Adverclient Generation 10.11.0 + 331 -->
 1. Make changes to the current version
@@ -743,7 +747,11 @@ $ mysql -uroot -p -e "SELECT d.id, d.name, t.name team_name, d.last_connected
 	ON d.team_id = t.id;" > raw.csv
 
 
-
+<!-- Cannot delete or update a parent row: a foreign key constraint fails -->
+MariaDB > SET FOREIGN_KEY_CHECKS=0; -- to disable them
+MariaDB > drop table team, application;
+MariaDB > ...
+MariaDB > SET FOREIGN_KEY_CHECKS=1; -- to re-enable them
 
 
 <!--install phalcon4-->
