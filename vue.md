@@ -12,18 +12,45 @@ b-card-text
 b-form-input
 b-card
 
+Bootstrap-Vue
+```
+ <div class="col-md m-5 pt-3 border rounded"> 
+col-md：这是 Bootstrap 的栅格系统类名，指定了在中等屏幕（medium）上占据的列宽。在这里，col-md 表示该元素在中等屏幕上占据一个等宽的列。
+m-5：这是 Bootstrap 的外边距类名，表示在四个方向上都添加 5 个单位的外边距。
+pt-3：这是 Bootstrap 的上内边距类名，表示在顶部添加 3 个单位的内边距。
+border：这是 Bootstrap 的边框类名，表示添加一个默认样式的边框。
+rounded：这是 Bootstrap 的类名，表示为元素添加圆角。
+```
+
 待补：
 
 ```bash
 $ npm view webpack versions
 $ npm view less-loader versions
 ```
+20/10 
+使用插值表达式来访问环境变量时，不需要使用双大括号 ({{ }}) 包裹 process.env.VUE_APP_MAP_PROVIDER_URL;
+```
+<v-tilelayer
+  :options="{ maxZoom: 13 }"
+  :url="process.env.VUE_APP_MAP_PROVIDER_URL"
+></v-tilelayer>
+
+```
+环境变量赋值 模板字面量（Template Literals）语法
+```
+ANOTHER_STRING=`这是另一个长字符串，
+也可以跨多行输入。`
+```
+在Vue CLI项目中，以VUE_APP_开头的环境变量会自动注入到应用程序中，您可以在Vue组件或代码中使用process.env.VUE_APP_API_URL来访问它们
 
 vue-cli 生成一个项目，使用 bootstrap 后，不需要自己的样式，使用 bootstrap 的样式
 
 html模板+template模板-->对象-->虚拟DOM，通过 render 调用
 
 [Vue devtools] 
+Inspect / Vue panel
+
 has two main tabs:cd
 
 the Inspector to display debugging information in a structured way (for example inspecting a component),
@@ -856,8 +883,6 @@ component 里面也可以有 methods
 当使用 kebab-case (短横线分隔命名) 定义一个组件时，你也必须在引用这个自定义元素时使用 kebab-case，例如 <my-component-name>;
 
 当使用 PascalCase (首字母大写命名) 定义一个组件时，<my-component-name> 和 <MyComponentName> 均可，在 DOM (即非字符串的模板) 中使用时只能用前者; 
-
-
 
 【9】Props
 功能：让组件接收外部传进来的数据

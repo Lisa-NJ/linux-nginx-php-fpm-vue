@@ -1,28 +1,27 @@
-dartagnan@oneworldled.com.au
-Tadartagnan@hotmail.com
+[Map Issue]
+1. sign up on stadiamaps.com
+	Account: One World LED
+	Email:	mondona@oneworldled.com
+	Passwd: ****
+2. Create a property & set domain 
+	"ap-dev" -- "adverdev.com"
+	"ap" -- "adverpost.com"
+3. Update urls used in vue
+	url + attribution + tilelayer
+4. $ ssh -i ... root@adverpost.com
+   # cd staging_vue
+   # mv dist dist-old
+   $ scp local / staging_vue / dist --> server / staging_vue / 
+   # systemctl reload nginx
 
-schumann@oneworldled.com
-mondona@oneworldled.com
-michael@oneworldled.com
-shay@oneworldled.com.au
-ashley@oneworldled.com
-steve@oneworldled.com
-darius@elitem.com.au
-thushan@oneworldled.com.au
-thushannirudaka@gmail.com
-lisa@oneworldled.com.au
+https://cors.adverpost.com/https/stamen-tiles-a.a.ssl.fastly.net/terrain/12/3625/2475.png
+https://cors.adverpost.com/https/stamen-tiles-a.a.ssl.fastly.net/terrain/12/3624/2475.png
+https://cors.adverpost.com/https/stamen-tiles-c.a.ssl.fastly.net/terrain/12/3626/2475.png
 
+https://tiles.stadiamaps.com/tiles/stamen_terrain/12/3625/2475.png
+https://tiles.stadiamaps.com/tiles/stamen_terrain/12/3624/2475.png
+https://tiles.stadiamaps.com/tiles/stamen_terrain/12/3626/2475.png
 
-schumann@oneworldled.com, mondona@oneworldled.com, michael@oneworldled.com, shay@oneworldled.com.au, ashley@oneworldled.com, darius@elitem.com.au, thushan@oneworldled.com.au, thushannirudaka@gmail.com, lisa@oneworldled.com.au
-
-thushannirudaka@gmail.com, lisa@oneworldled.com.au, lisahuangade19@gmail.com
-
-kiumars@oneworldled.com
-
-tanami@oneworldled.com
-Tanami 045 010 7311
-
-2.24x1.28
 
 [English]
 You don't go there = don't mention that topic
