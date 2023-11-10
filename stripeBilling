@@ -1,0 +1,153 @@
+As discussed, if you're looking to bill your customers on a recurring basis, you can check out the features of Stripe Billing [0]. As you may know, this engine will allow you to create subscription plans, customers, product type, add taxes and discounts.
+
+With Billing, you can create subscriptions that:
+Add one-time costs
+Discount a few subscription payments, or all of them
+Charge taxes
+Create a free trial period
+Subscribe a customer to multiple plans
+Control when the customer is billed
+You may also offer our Customer portal [1] for your clients to manage their own subscriptions. 
+
+Once ready to proceed, here's the link for you to set up a new account [2].
+
+[0] https://stripe.com/billing
+[1] https://stripe.com/docs/customer-management
+[2] https://dashboard.stripe.com/register
+
+------------------------------------------------------------------------------------------------------------------------
+
+[Quickstart guide] stripe.com/docs/billing
+[api] https://stripe.com/docs/api
+
+// Videos
+Accept a one-time payment with Stripte Checkout  /done
+Getting started with Stripe Invoicing  /done
+An Introduction to Stripe Billing   /done
+Set up future payments with Checkout /done
+
+Webhooks Developer Dashboard
+
+
+// Billing
+1. Create your products
+2. Sell your products
+3. Set up and customise a self-serve customer portal
+
+
+// Use cases
+1. One time payment
+	- Customers add products or services to their cart on your site
+	- When they are ready to complete their transaction, they click "checkout" button and will be redirected to checkout page to provide their shipping and payment information by selecting the button on your site to pay donate or purchase this
+	- This creates a checkout session
+	- After a customer makes a payment you can view the payment details in the stripe dashboard
+	- or Set up a web hook to automatically notify you when you have completed orders ready to fulfill
+	- 25 languages
+
+1. When Setting up the integration, create subscription options based on the products and prices
+2. If you create subscriptions, the customer ID is passed to the subscription object.
+3. Subscriptions automatically generate invoices.
+4. 
+5. Invoices create payment intents automatically.
+6. At the end of each interval, Stripe sends the customer an invoice; If your customer has a balance and a defined payment method, you can also choose to automatically charge them or send the an invoice.
+
+// Q&A
+1. Is it an intergrated with AP or a separare website?
+2. What your business offers — whether that’s a good or a service?
+3. How much and how often to charge for products?
+4. You want to use one of our Official client libraries for accessing the stripe api from your application
+5. Integration options: Dashboard, No-code, 
+
+// Basics about Stripe
+-1. Customer Portal
+	- Your customers can manage their billing information and subscriptions on a Stripe-hosted page
+0. A product catalog 
+1. Checkout
+	- For: one time && recurring payments 
+	- Code a little bit --> build an intergration: 
+ 		- Developers build client and server side code that redirects your user to a stripe hosted payments page
+	- enables you to create a secure stripe hosted payments page 
+		- Developers just need to add some buttons to your website
+	- to rapidly get started collecting payments 
+	- while still having the felxibility to customize your branding， accept payment methods 
+	- and add additional features like automatic tax calculatinons or promotion codes
+	
+	- "setup mode" uses the SetupIntent a pi under the hood to create payment methods
+	- Website:Add a checkout button + 
+		Server: Create a checkout session(mode, payment_method_types+success_url+cancel_url+customer id)
+		Redirect your customer to the url returned in the response (redirect sesion.url) +  
+		Fire up the server, click the button +
+		We are redirected back to the success url with checkout session id +
+		retrieve the session object (listen for the checkout session completed webhook event type containing a session object || from the url when a customer redirects back to your site) and expand its setup intent and related payment method +
+		Use that payment method --> create a new payment intent to charge the customer later
+	- Handling web hooks prevents your integration from being susceptible to this form of drop-off
+	- Session Object
+		```
+		"setup_intent": "...id...", // id of the setup intent object - having a related payment method
+		```
+		--> id of the payment method
+	- Charge later  Script + $ run charge later
+	
+2. Payment links
+	- No code
+	- to easily share recurring products with your customers & let them set up subscriptions
+3. Invoicing
+	- stripe.com/docs/invoicing
+	- No code
+	- product items + price information + customer
+	- You can create and send customized invoices to bill your customers in minutes
+	- Each invoice has a unique stripe hosted page where your customer can make a payment using their preferred payment method
+	- Create an invoice using the dashboard
+	- Code: or Leverage the invoicing api and build a custom integration
+	- Invoicing api users create light items first
+	- Creating a new invoice pulls in these pending line items automatically
+	- Product object --> to define the good or service you sell
+	- and then set its price and supported currencies using the Price object 
+	- Draft --> Open(ready to pay) --> Paid: different states
+	- You can void invoices if you need to cancel them
+	- Invoices are maked as paid automatically or you can manually do this if you accept payments outside of stripe
+	- You can send customers a unique link to a stripe hosted page to view and pay
+	- You can customize the appearance of invoices to match your company's branding
+	- lets you automatically Retry failed payments and send email reminders when invoices are overdue
+4. Elements
+	- You can build an intergration with Stripe Elements for a fully customizable user experience
+5. webhook
+	- essential for many stripe integrations
+	- /Developers/Webhooks/Test in a local environment/...
+	- (1) Left: stripe CLI instructions
+	- (2) Right: a code example
+	- (3) stripe samples application running on local machine
+	
+6. MRR - Monthly Recurring Revenue
+	- Monthly Recurring Revenue (MRR) is the predictable total revenue generated by your business from all the active subscriptions in a particular month. It includes recurring charges from discounts, coupons, and recurring add-ons, but excludes one-time fees.
+7. Pricing Models
+	- one product, good-better-best model with different tiers of service, usage-based or tiered pricing, free trials, offer discounts 
+8. Revenue recognition
+	- help you understand your recurring revenue model
+	- produces reports -- to understand when to recognize or defer recurring revenue and close your books at the end of the quarter
+9. Revenue Recovery
+	- Smart Retries
+	- Reminder Emails
+10. Stripe Tax
+	- automatically calculate sales tax based on your customers location
+11. Test Clocks 
+	- used before you go live
+
+12. Setup intent + payment intent
+
+13. Stripe Shell
+	- Ctrl + ` --> launches a Stripe Shell session
+	- Alt + Shift + D -->  to open a new pane
+	
+14. How webhooks work
+	```
+	(0) webhook endpoints are hosted by your APP
+	(1) Register webhook endpoints in your STRIPE Account
+	(2) webhook endpoints listen for some events
+	(3) When events happen, STRIPE generate event data + push to webhook endpoints
+	(4) After webhook endpoints receives the event, your APP runs backend actions
+	```
+    Scenarios:
+    	- when a customer's bank confirms a payment
+    	- a recurring payment succeeds
+    	- when collecting subscription payments
