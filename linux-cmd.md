@@ -22,6 +22,17 @@
 //# test utility - page 854
 //# shell builtin - page 446
 
+$ top
+$ ps -p <PID> -o etime
+	ELAPSED
+	256-23:17:05  `DAYS-HOURS:MIN:SEC`
+$ date -d "257 days ago"
+	Thu 08 Mar 2023 10:34:22 AM ACDT
+$ ps -eo user,pid,cmd | grep 10049
+	root 10049 /tmp/go-build3807.../b001/exe/nerkmid
+$ ps -p <PID> -o cmd
+$ pwdx <PID>
+
 $ uname -r  // Linux kernal version
 $ apt-cache showpkg firmware-realtek
 $ apt-cache search linux-image // to list kernals available
@@ -580,7 +591,7 @@ $ nano sshd_config      // Authentication/PermitRootLogin without-password
 
 // reload SSH
 $ reload SSH
-$ sudo service ssh restart  // path: /User/lisa/ssh/id_rsa
+$ sudo service ssh restart  // path: /User/lisa/.ssh/id_rsa
 
 <!-- multiple keys -->
 $ ssh-keygen -C "carswap-key-19" -t ed25519 // file: key_cs_123  passphrase: pp123
