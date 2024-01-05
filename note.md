@@ -79,6 +79,9 @@ http --> https
 [partition & Gparted]
 	https://www.linuxbabe.com/desktop-linux/fix-cant-read-superblock-error
 	
+[disks]
+	Disks / Create Disk Image
+	
 
 [将前端 Vue 项目部署到 Linux 服务器上]
 1. **准备 Linux 服务器**：
@@ -129,6 +132,9 @@ http --> https
    - 打开 Web 浏览器，并通过域名或服务器的 IP 地址访问您的 Vue 项目。您应该能够看到部署在服务器上的 Vue 项目。
 
 这些步骤将帮助您将 Vue 项目成功部署到 Linux 服务器上。根据您的特定需求和服务器环境，某些步骤可能会有所不同。
+
+[linux user+group]
+https://juejin.cn/post/6844903991592091656
 
 [Fixed ZBOX-CI331NANO PCIe Bus Error / Tanami 18/8]
   -- https://unix.stackexchange.com/questions/327730/what-causes-this-pcieport-00000003-0-pcie-bus-error-aer-bad-tlp Tip2

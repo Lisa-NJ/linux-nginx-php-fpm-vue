@@ -22,6 +22,17 @@
 //# test utility - page 854
 //# shell builtin - page 446
 
+$ useradd <tom>
+$ passwd <tom>
+
+
+$ id lisa
+uid=1013(lisa) gid=1013(lisa) groups=1013(lisa),27(sudo)
+
+$ nohup command &
+
+$ tail -n 100 example.txt   // show the last 100 lines of "example.txt"
+
 $ top
 $ ps -p <PID> -o etime
 	ELAPSED
@@ -30,7 +41,7 @@ $ date -d "257 days ago"
 	Thu 08 Mar 2023 10:34:22 AM ACDT
 $ ps -eo user,pid,cmd | grep 10049
 	root 10049 /tmp/go-build3807.../b001/exe/nerkmid
-$ ps -p <PID> -o cmd
+$ ps -p <PID> -o cmdcd 
 $ pwdx <PID>
 
 $ uname -r  // Linux kernal version
@@ -93,6 +104,7 @@ $ dpkg --get-selections | tee selections
 $ xz -zvve9 -T0 [image].img
 $ xz -dk file.xz // extract xz file
 
+$ xz -v abc  // compress abc to abc.xz + delete abc when it is done
 
 $ apt-get source -d [list of packages]
 $ apt-get download [list of packageds]
@@ -627,6 +639,7 @@ $ sudo ufw allow 8000
 <!-- Mac Address: HWaddr or ether or lladdr -->
 $ ifconfig 
 $ ifconfig -a
+$ ifconfig en0
 $ ip address
 $ ip a
 
@@ -1025,14 +1038,11 @@ $ php -v
 $ echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/info.php
 localhost/info.php --> show info 
 
-<!-- 1 install composer ??? -->
-$ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-$ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-$ sudo chmod +x /usr/local/bin/composer
+<!-- install composer-->
+$ curl -s https://getcomposer.org/installer | php -- --version=2.5.1
+$ php composer.phar install   // local use
+$ sudo mv composer.phar /user/local/bin/composer  // --> can be used anywhere
 
-<!-- 2 install composer-->
-$ curl -s https://getcomposer.org/installer | php
-$ php composer.phar install
 
 <!-- install phalcon in ~/software -->
 $ git clone https://github.com/phalcon/cphalcon.git

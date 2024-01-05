@@ -12,6 +12,11 @@ transformers???
 Invo???
 phar???
 
+### Yii 
+	URL Management
+		- get format: /index.php?r=post/read&id=100
+		- path format: /index.php/post/read/id/100
+
 ### Docker
 Install - https://docs.docker.com/engine/install/debian/
 ```bash
