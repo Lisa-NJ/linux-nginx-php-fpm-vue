@@ -13,6 +13,13 @@ b-form-input
 b-card
 
 Bootstrap-Vue
+
+[moment]
+```
+moment() 当前日期和时间对象
+moment().unix() 1970.1.1 至今的 timestamp in seconds
+```
+
 ```
  <div class="col-md m-5 pt-3 border rounded"> 
 col-md：这是 Bootstrap 的栅格系统类名，指定了在中等屏幕（medium）上占据的列宽。在这里，col-md 表示该元素在中等屏幕上占据一个等宽的列。

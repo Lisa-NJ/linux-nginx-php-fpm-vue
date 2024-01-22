@@ -25,6 +25,8 @@
 $ useradd <tom>
 $ passwd <tom>
 
+$ lsattr
+$ chattr +i .env
 
 $ id lisa
 uid=1013(lisa) gid=1013(lisa) groups=1013(lisa),27(sudo)
@@ -769,6 +771,8 @@ $ mysql -uroot -p -e "SELECT d.id, d.name, t.name team_name, d.last_connected
 	FROM display d
 	INNER JOIN team t
 	ON d.team_id = t.id;" > raw.csv
+
+mysql> select * from table_name where abc='ABC' \G; // show in a readable format
 
 
 <!-- Cannot delete or update a parent row: a foreign key constraint fails -->

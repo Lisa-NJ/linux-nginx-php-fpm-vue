@@ -1,3 +1,6 @@
+[debug / vue]
+Inspect(Ctrl+Shift+i) / Sources / "webpack://" + code + bp / trigger the bp
+
 [Map Issue]
 1. sign up on stadiamaps.com
 	Account: One World LED
