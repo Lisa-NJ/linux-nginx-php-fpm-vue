@@ -404,7 +404,47 @@ null = false
 	$stmt->execute();
 	$total_cars = $stmt->fetchColumn();
 ```
+29. mysqli_connect, mysqli_select_db, mysqli_set_charset, mysqli_query, mysqli_fetch_array, mysqli_free_result， mysqli_close
+	是 PHP 中用于连接 MySQL 数据库的函数。它创建一个新的 MySQL 连接，并返回一个表示该连接的对象。这个函数通常用于在 PHP 脚本中与 MySQL 数据库建立连接。
 
+```php
+	$con = mysqli_connect('localhost','root','123456');
+	if (!$con)
+	{
+	    die('Could not connect: ' . mysqli_error($con));
+	}
+	// 选择数据库
+	mysqli_select_db($con,"test");
+	// 设置编码，防止中文乱码
+	mysqli_set_charset($con, "utf8");
+	 
+	$sql="SELECT * FROM Websites WHERE id = '".$q."'";
+	 
+	$result = mysqli_query($con,$sql);
+	 
+	echo "<table border='1'>
+	<tr>
+	<th>ID</th>
+	<th>网站名</th>
+	<th>网站 URL</th>
+	<th>Alexa 排名</th>
+	<th>国家</th>
+	</tr>";
+	 
+	while($row = mysqli_fetch_array($result))
+	{
+	    echo "<tr>";
+	    echo "<td>" . $row['id'] . "</td>";
+	    echo "<td>" . $row['name'] . "</td>";
+	    echo "<td>" . $row['url'] . "</td>";
+	    echo "<td>" . $row['alexa'] . "</td>";
+	    echo "<td>" . $row['country'] . "</td>";
+	    echo "</tr>";
+	}
+	echo "</table>";
+	 
+	mysqli_close($con);
+```
 
 ### PHP
 
