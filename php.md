@@ -122,27 +122,29 @@ $ phalcon migration run
 
 生成的迁移在目标服务器上上传后，您可以轻松运行它们
 
+[Debug Phalcon with XDebug and VSCode]
+[The Codeholic / Debugging PHP7.4 with XDebug 2 and VSCode](https://www.youtube.com/watch?v=LNIvugvmCyQ)
 ```
 1. One of the key features of Phalcon is that it is loosely coupled
-2. Setting up Debug 
-	- + (new Phalcon\Debug)->listen(); //index.php
-	- refresh the url
+2. Config Nginx to refer to path/to/Phalcon_project
 3. Install Xdebug
-	- $ sudo apt install php7.4-xdebug  // install php8.2-xdebug by default
+	- $ sudo apt install php7.4-xdebug
+	- $ php -m => can see xdebug on the list
 4. Integrate Xdebug with the PHP interpreter
+	- edit php.ini, + [xdebug] section
+	- edit /etc/php/7.4/fpm/conf.d/20-xdebug.ini + xdebug.start_with_request=yes
+	- restart php-fpm
 	- $ php -m
 	- $ sudo updatedb
-	- $ locate xdebug.so  // /usr/lib/php/20220829/xdebug.so
-	- edit php.ini, + [xdebug] section
+	- $ locate xdebug.so  // /usr/lib/php/20220829/xdebug.so	
 	- localhost:8001 can see xdebug info
-5. Configure Xdebug in PhpStorm﻿
-	- phpStorm / File / Settings / PHP / Debug
-
-
-External Libraries
-	- $ git clone https://github.com/phalcon/phalcon-devtools.git 3.1.x (the latest version with ide)
-	- open phpStorm / External Libraries / Right Mouse Click --> Config Php Include Paths
-	- choose: phalcon-devtools / ide / stubs / Phalcon
+5. Configure Xdebug in VSCode
+	- install "php debug" extension
+	- Run + Add Configuration / "php" => .VScode/launch.json
+	- set breakpoints + Listen for Xdebug + Play
+6. Run front end
+	- $ cd path/to/front_pro
+	- $ npm run serve 	
 
 MVC
  |----app
@@ -179,11 +181,6 @@ public/css/index.php -- the bootstrap file which creates a new app
 The routing system
 The initialization file -- require all the core components that you need
 ```
-[php debug]
-	最详细的phpstorm+xdebug调试详细教程，没有之一
-	https://www.cnblogs.com/endkoo/p/14849807.html
-	
-	/tmp/php_errors.log
 
 [Phalcon\MVC] - Models, Views, Controllers
 	1. Isolation of business logic(Models) from the user interface(Views) and the database layer
@@ -395,7 +392,7 @@ null = false
 	    ?array $options = null
 	)
 	The Data Source Name, or DSN, contains the information required to connect to the database.
-	In general, a DSN consists of the PDO driver name, followed by a colon, followed by the PDO driver-specific connection syntax. 	
+	In general, a DSN consists of the PDO driver name, followed by a colon, followed by the PDO driver-specific connection syntax.
 	PDO::prepare — Prepares a statement for execution and returns a statement object
 ```php
 	$pdo = new PDO('mysql:host=127.0.0.1;dbname=carswap', 'root', 'OES12345@');

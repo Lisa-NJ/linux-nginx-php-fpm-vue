@@ -1,6 +1,10 @@
 [debug / vue]
 Inspect(Ctrl+Shift+i) / Sources / "webpack://" + code + bp / trigger the bp
 
+[debug / api]
+controller / this ??? 
+	   / $this->auth->getIdentity() ???
+
 [Map Issue]
 1. sign up on stadiamaps.com
 	Account: One World LED

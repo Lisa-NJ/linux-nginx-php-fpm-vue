@@ -22,6 +22,9 @@
 //# test utility - page 854
 //# shell builtin - page 446
 
+
+$ echo "Your message here" | wall  // send broadcast message to all users online
+
 $ useradd <tom>
 $ passwd <tom>
 
@@ -223,6 +226,9 @@ $ bzcat letter_e.bz2 | head -2  // decompresses the compressed data and displays
 $ gzip / gunzip / zcat -- GNU zip .gz
 $ compress file // .z
 
+$ gzip -d file.gz // extract to file
+$ gunzip file.gz  // extract and replace file.gz
+
 $ tar -cvf all.tar g b d  // –c (create), –v (verbose), and –f (write to or read from a file)
 $ tar -tvf all.tar  // -t(table)
 $ tar -xvf all.tar
@@ -231,6 +237,7 @@ $ tar -xf all.tar  // -x(extract) silently
 $ gunzip -c make-3.81.tar.gz | tar -xvf -  // "–c" and "-" when using pipe
 $ tar -xvzf make-3.81.tar.gz   // tar calls gunzip directly
 $ tar -xvjf make-3.81.tar.bz2
+
 
 $ todos memo.txt  // UNIT --> Windows/OS X
 $ unix2dos memo.txt  // -b(backup) -n(new)
@@ -528,8 +535,9 @@ $ df -h
 $ sudo badblocks -wsv -t 0x00 /dev/sdc  <!-- Testing with pattern 0x00 -->
 $ sudo badblocks -wsc /dev/sdc          <!-- Testing with pattern 0xaa -->
 
-$ lscpu 
+$ lscpu
 $ lspci // show Hardware Info - intel corporation comet lake-s gt2 uhd graphics 630 (rev 03)
+$ cat /proc/cpuinfo // show every cpu info
 $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{print $1"|"$3"|"$4}'|more
 $ service apache2 status
 $ cat /etc/os-release  // to check os in command line
@@ -539,6 +547,7 @@ $ lspci -v -s `lspci | awk '/ VGA / {print $1}'` // display card driver
 $ lsmod   //查看已加载的内核模块
 $ modinfo video // 显示名为 "video" 的内核模块的信息
 $ lsmod | grep i915 // 如果看到输出，其中包含 "i915"，这表示 Intel 显卡的内核驱动程序已经加载
+
 
 
 <!-- alias -->
@@ -959,9 +968,11 @@ $ echo "$PS1"
 $ pcre-config --version <!-- 8.44 -->
 $ sudo nginx
 $ nginx -v       <!-- nginx/1.18.0 -->
-$ ps -aux|grep nginx
+$ ps aux|grep nginx
 $ sudo nginx -s quit
 $ sudo nginx -s reload
+
+$ pgrep your_process_name // get process ID from process name
 
 <!-- Dartagnan -->
 $ sudo systemctl status nginx.service <!-- status of nginx -->

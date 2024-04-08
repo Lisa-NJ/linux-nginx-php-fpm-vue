@@ -31,18 +31,28 @@ $ perl -e 'print "Hello World\n"'
 hello.pl
 
 ```perl
-#!/usr/bin/perl
+#!/usr/bin/perl -w
+use strict
 use feature qw(say state);  # either works for the use of say
 use 5.010; 
+ 
+#!/usr/bin/perl  // 这两行与上面等价
+use warnings;
  
 # 输出 "Hello, World"
 print "Hello, world\n";
 print 'Hello, world\n';  # 单引号双引号均可，双引号可以正常解析一些转义字符与变量，而单引号会原样输出(可以使用多行文本)。
 
 my $var = "A variable";
+my $sub_str = substr($var, 2, 3); # 从2号位置开始取长度为3的子串
+my $find = index($var, "ble"); # 查找子串在父串中的位置 -1表示没找到
 print "$var\n"; 
-print $var, "\n";   # the same as the above line
+print $var, "\n";   # the same as the above line, "," 作为连接符
 say $var; # adds a new line \n to every call
+
+my $region = "chr1\t100\t200";
+my ($chrom, $start, $end) = split("\t", $region)  # split 将字串分割
+print "$chrom, $start, $end\n";
  
 exit; # 整个 perl 脚本会退出
  
@@ -151,6 +161,7 @@ our $color1 = 'white';       # global variables visible throughout the program o
   $myBigN = 123_456_789; #123456789   
   
   $mysecond="123";   #标量-字符串123
+  my $len = length $mysecond; # 取字串长度
   $str = "hello" . "world";       # 字符串连接
   $str1 = q/"Are you learning Perl String today?" We asked./;
   my $name = 'Jack';
@@ -194,11 +205,28 @@ our $color1 = 'white';       # global variables visible throughout the program o
 
 6. use strict 语句让所有变量需要强制声明类型。
 
-7. 数组操作：push, pop, unshift, shift, splice，
+7. 数组操作：push, pop(取走最后一个), unshift, shift(取走第一个), splice，
     特殊变量 $[ - 数组的第一索引值
     scalar @array - 数组长度
+    ```
+    my @gen_arr = (1, 2, 3);
+    my $len = @gen_arr;                           // length - 1
+    my $len1 = $#gen_arr + 1;                  	  // length - 2
+    
+    my $new_gen = 10;
+    push @gen_arr, $new_gen;
+    $len = @gen_arr;
+    print "New_array: @gen_arr\n";
+    print "Length of array: ", $len, "\n";
+    
+    my @new_gen_arr = (8, 5);
+    push @gen_arr, @new_gen_arr;
+    $len = scalar @gen_arr;                       // length - 3
+    print "New_array: @gen_arr\n";
+    print "Length of array: ", $len, "\n";
+    ```
 
-8. 哈希 delete foreach while
+8. 哈希 delete foreach while keys
   ```perl
   %data = ('google', 'google.com', 'runoob', 'runoob.com', 'taobao', 'taobao.com');
   %data = ('google'=>'google.com', 'runoob'=>'runoob.com', 'taobao'=>'taobao.com');
