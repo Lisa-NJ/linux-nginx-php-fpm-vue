@@ -1,11 +1,24 @@
-??? Void
 ??? 插值
 ??? 布尔
 ??? v字符串
 ??? grep die async defer_exec
 ??? regular expressions / regexes
-
+??? an anonymous hash, bless
+??? the <perldiag> man page
+??? perlfunc page - all of Perl’s built-in functions 
+??? bareword
+??? use v5.10; use feature 'say'; v5.32.1
  
+00. Installation
+```bash
+$ sudo apt update
+$ sudo install perl
+$ perl -V
+$ sudo apt install perl-doc
+$ perldoc strict
+$ perldoc perlop
+```
+
 00. Perl - Practical Extraction and Report Language
 具有高级语言的强大能力和灵活性
 提供脚本语言（如sed和awk）的所有功能，还具备它们不具备的很多功能 - 方便
@@ -308,16 +321,21 @@ unless else
 while
 until
 
-9. File operation 文件读写 <> open close > >> $! or die and
+9. File operation 文件读写 <> readline open close > >> $! or die and
 ```perl
 open (LOGFILE, "log.txt") or die "I couldn't get at log.txt";
 
-
 $title = <LOGFILE>;
+$tile = readline LOGFILE;
 print "Report Title: $title";
 for $line (<LOGFILE>) {
 print $line;
 }
+
+while (<LOGFILE>) {
+print;
+}
+
 close LOGFILE;
 
 open (OVERWRITE, ">overwrite.txt") or die "$! error trying to overwrite";
@@ -397,7 +415,11 @@ chomp($s = <STDIN>);  # <STDIN> is used to get input from users
     # 列表参数
     PrintList($a, @b);
     ```
-
+    @ARGV contains the command-line arguments provided to the program outside of all functions. Perl's array operations (including shift and pop) operate on @ARGV implicitly outside of functions. 
+    
+10. Void, Scalar and List Context (Amount context) 子程序调用上下文
+	- how many items you expect an operation to produce
+	
 10. regexp: matching expressions + metacharacters + wildcards + character classes + flags + subexpressions
 	 + replacing 
 	=~ 
@@ -617,6 +639,7 @@ AnyEvent::Coro->run_cmd 方法，可以启动一个非阻塞的命令执行，�
     ```
 
 19. map 的用法
+	使用map函数对@numbers数组中的每个元素应用了一个匿名子程序{ $_ * 2 }。$_是Perl中的默认变量，表示当前正在处理的元素。
     ```perl
     my @numbers = (1..5);
     print "@numbers\n";       # 1 2 3 4 5
