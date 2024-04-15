@@ -8,6 +8,9 @@
 ??? perlfunc page - all of Perl’s built-in functions 
 ??? bareword
 ??? use v5.10; use feature 'say'; v5.32.1
+??? Invoking functions or methods indirectly or looking up symbols in a namespace lets you bypass Perl's parser. 
+??? 'killChrome'        => ['irc' => q!pkill -9 chromium!], 数组引用 
+??? Postfix Dereference Syntax 
  
 00. Installation
 ```bash
@@ -131,7 +134,6 @@ Xvfb 将图形输出渲染到内存中的虚拟帧缓冲区，而不是发送到
 Xvfb 在许多情况下都非常有用，例如在服务器上运行测试套件、自动化测试、无头浏览器（Headless Browser）以及需要图形环境的脚本和应用程序等。它提供了一种轻量级的方法来模拟和处理图形输出，而不依赖于物理显示器。
 
 01. Perl 解释器不会关心有多少个空白, 但是如果空格和分行出现在字符串内，他会原样输出。
-02. Perl only interpolates scalar variables and arrays, not hashes. 
     In addition, the interpolation is only applied to the double-quoted string, but not the single-quoted string.
 1. Here document grammer - << EOF ... EOF
 
@@ -277,6 +279,12 @@ $len = scalar @gen_arr;                       // length - 3
 print "New_array: @gen_arr\n";
 print "Length of array: ", $len, "\n";
 ```
+7-1. 匿名数组 / anonymous arrays
+To create an anonymous array, surround a list-producing expression with square brackets:
+
+    my $suits_ref = [qw( Monkeys Robots Dinos Cheese )];
+    
+This array reference behaves the same as named array references, except that the anonymous array brackets always create a new reference. 
 
 8. 哈希 Hash delete foreach while keys
 ```perl
@@ -315,6 +323,24 @@ print "$i has $days_in_summer{$i} days.\n";
 }
 
 ```
+
+8. Dereference
+```perl
+## @* an array splat notation
+    my $recipients = [qw(
+        Mother
+        Father
+        Partner
+        Nephew
+        Niece
+        Neighbor
+    )];
+
+    for my $recipient ($recipients->@*) {
+        say "Need to find a gift for $recipient";
+    }
+```	
+
 9. Flow control 流程控制
 if elseif else 
 unless else
@@ -488,12 +514,24 @@ $cref = \&PrintHash;
 object = bless reference, classname;
 ```
 
-13. package
+13. package & namespace
+	By convention, the Perl core reserves lowercase package names for core pragmas (Pragmas), such as strict and warnings. User-defined packages all start with uppercase letters.
+	DessertShop::IceCream, add_sprinkles() refers to the same function as does DessertShop::IceCream::add_sprinkles() outside of the namespace.
+	All namespaces in Perl are globally visible.
+	the main:: symbol table
+	
 	 require 和 use 将载入一个模块
 	 @INC -- Perl 内置的一个特殊数组，它包含指向库例程所在位置的目录路径
 	 require 和 use 函数调用 eval 函数来执行代码
 	 	use语句是编译时引入的，require是运行时引入的
 	 	use引入模块的同时，也引入了模块的子模块。而require则不能引入
+
+13. Variable Sigils
+
+The sigil you use determines amount context in an lvalue situation.
+在左值（lvalue）的情况下，所使用的符号决定了上下文的类型。在 Perl 中，左值上下文通常用于赋值操作，符号的选择会影响到赋值操作的行为。
+... or gets coerced in an rvalue situation.
+在右值（rvalue）的情况下，符号会根据需要进行类型转换。右值上下文通常用于取值操作，符号的选择会影响到取值操作的行为。
 	
 14. for 等价于 foreach
 ```perl

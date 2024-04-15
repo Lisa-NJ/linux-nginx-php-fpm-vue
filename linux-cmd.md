@@ -21,7 +21,20 @@
 //# bash features and options page 330
 //# test utility - page 854
 //# shell builtin - page 446
+??? sra - binary
 
+[irssi]
+$ sudo apt update
+$ sudo apt install irssi
+$ irssi -c irc.server.com -n nickname
+$ /oper Name Pwd
+$ /j #channelName
+
+$ sudo apt install r-base
+
+$ du -h filename  // show the size of a file 
+$ vi newfilename
+$ wc -l filename  // show how many lines in a file
 
 $ echo "Your message here" | wall  // send broadcast message to all users online
 
@@ -397,7 +410,7 @@ $ lpq // same as the above
 $ lprm 86 // to remove the job from the print queue and stop it from printing
 $ lpr -P laser1 05.txt 108.txt 12.txt // prints three files on the printer named laser1
 
-$ head months
+$ head months   // 默认显示文件months前10行
 $ tail -5 months
 $ tail -f logfile // -f: monitor lines as they are added to the end of the growing file named logfile
 $ sort -u -n days // -n 待测试
@@ -531,7 +544,7 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 <!-- Bad Zotac -->
 <!-- Adverclient has a file system with errors... -->
 $ fsck /dev/sda2
-$ df -h
+$ df -h 
 $ sudo badblocks -wsv -t 0x00 /dev/sdc  <!-- Testing with pattern 0x00 -->
 $ sudo badblocks -wsc /dev/sdc          <!-- Testing with pattern 0xaa -->
 
