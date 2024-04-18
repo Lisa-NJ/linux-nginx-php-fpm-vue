@@ -242,6 +242,9 @@ $ compress file // .z
 $ gzip -d file.gz // extract to file
 $ gunzip file.gz  // extract and replace file.gz
 
+$ unzip filename.zip // extract
+$ zip -r file.zip foldername // compress
+
 $ tar -cvf all.tar g b d  // –c (create), –v (verbose), and –f (write to or read from a file)
 $ tar -tvf all.tar  // -t(table)
 $ tar -xvf all.tar
