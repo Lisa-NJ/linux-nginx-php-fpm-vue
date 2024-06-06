@@ -87,10 +87,53 @@ sda
 
 sdb
  |----sdb1
+
+sdc
+
+|----sdc1
+
+|----sdc2
+
 `
 $ mkdir /media/usb
 $ mount /dev/sdb1 /media/usb
 $ umount /media/usb
+
+
+
+<!-- sdc 60G, resize to 20G, make .img, compress to .img.xz -->
+
+$ sudo umount /dev/sdc2           // ensure sdc2 is not mounted
+
+$ sudo e2fsck -f /dev/sdc2          // check the file system
+
+$ sudo resize2fs /dev/sdc2 20G // resize to 20G
+
+$ sudo fdisk /dev/sdc
+
+$ sudo e2fsck -f /dev/sdc2
+
+$  sudo resize2fs /dev/sdc2
+
+=> partition2 is resized to 20G, can be seen with Disks
+
+$ sudo mount /dev/sdc2 /mnt
+
+$ cd /mnt && ls
+
+$ sudo umount /dev/sdc2
+
+$ sudo dd if=/dev/sdc of=/path/to/output.img bs=1M count=21000
+
+=> output.img size of 20+G
+
+$ xz -zvve9 -T0 ./output.img
+
+=> output.img.zx size of 816.2M is created
+
+Alternatively, if generated with Disks/Create Disk Image, the size of img file is 56G, and .img.xz is 1.5G
+
+
 
 <!-- wrong fs type, bad option, bad superblock on /dev/sdc, missing codepage or helper program... -->
 $ mkfs -t ext4 /dev/sdc         // (1)Format
@@ -104,7 +147,7 @@ $ mount /dev/sdc /media/usb     // (2)Then can be Mounted  (3)Shown in Files
 	- 1.4 /preseed.cfg：10.1.1.253 --> 10.1.1.238; 
 	      10.1.1.249 --> mirror/http/proxy string;
 	      xfonts-unifont
-		
+	
 2. debian-10.11.0-amd64-netinst.iso --> usb boot drive (Rufus/Windows)
 
 // verify iso (optional)
