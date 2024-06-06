@@ -21,9 +21,54 @@
 //# bash features and options page 330
 //# test utility - page 854
 //# shell builtin - page 446
+??? sra - binary
+
+[irssi]
+$ sudo apt update
+$ sudo apt install irssi
+$ irssi -c irc.server.com -n nickname
+$ /oper Name Pwd
+$ /j #channelName
+
+$ sudo apt install r-base
+
+$ du -h filename  // show the size of a file 
+$ vi newfilename
+$ wc -l filename  // show how many lines in a file
+
+$ echo "Your message here" | wall  // send broadcast message to all users online
+
+$ useradd <tom>
+$ passwd <tom>
+
+$ lsattr
+$ chattr +i .env
+
+$ id lisa
+uid=1013(lisa) gid=1013(lisa) groups=1013(lisa),27(sudo)
+
+$ nohup command &
+
+$ tail -n 100 example.txt   // show the last 100 lines of "example.txt"
+
+$ top
+$ ps -p <PID> -o etime
+	ELAPSED
+	256-23:17:05  `DAYS-HOURS:MIN:SEC`
+$ date -d "257 days ago"
+	Thu 08 Mar 2023 10:34:22 AM ACDT
+$ ps -eo user,pid,cmd | grep 10049
+	root 10049 /tmp/go-build3807.../b001/exe/nerkmid
+$ ps -p <PID> -o cmdcd 
+$ pwdx <PID>
 
 $ uname -r  // Linux kernal version
-$ $ apt-cache showpkg firmware-realtek
+$ apt-cache showpkg firmware-realtek
+$ apt-cache search linux-image // to list kernals available
+$ apt list --upgradable   // to show what packages can be upgraded
+$ lsmod | grep i915 // 如果已加载 i915 模块，说明您已经在使用 Intel 显卡的开源驱动程序
+$ lspci -v -s `lspci | awk '/ VGA / {print $1}'`
+$ lspci -k // pci + driver
 
 <!-- System Command -->
 (1) Installation & Log in: login、shutdown、halt、reboot、mount、umount、chsh
@@ -46,6 +91,10 @@ sdb
 $ mkdir /media/usb
 $ mount /dev/sdb1 /media/usb
 $ umount /media/usb
+
+<!-- wrong fs type, bad option, bad superblock on /dev/sdc, missing codepage or helper program... -->
+$ mkfs -t ext4 /dev/sdc         // (1)Format
+$ mount /dev/sdc /media/usb     // (2)Then can be Mounted  (3)Shown in Files
 
 <!-- Adverclient Generation 10.11.0 + 331 -->
 1. Make changes to the current version
@@ -73,11 +122,12 @@ $ dpkg --get-selections | tee selections
 $ xz -zvve9 -T0 [image].img
 $ xz -dk file.xz // extract xz file
 
+$ xz -v abc  // compress abc to abc.xz + delete abc when it is done
 
 $ apt-get source -d [list of packages]
 $ apt-get download [list of packageds]
 
-// 启动 Xorg
+// 
 自定义 Xorg 启动脚本： 对于高级用户或需要自定义 Xorg 启动选项的情况，您可以编写自定义的 Xorg 启动脚本并使用 xinit 命令来启动 Xorg。例如：
 xinit /path/to/custom-xorg-config
 这将使用指定的 Xorg 配置文件启动 Xorg 服务器。
@@ -189,6 +239,12 @@ $ bzcat letter_e.bz2 | head -2  // decompresses the compressed data and displays
 $ gzip / gunzip / zcat -- GNU zip .gz
 $ compress file // .z
 
+$ gzip -d file.gz // extract to file
+$ gunzip file.gz  // extract and replace file.gz
+
+$ unzip filename.zip // extract
+$ zip -r file.zip foldername // compress
+
 $ tar -cvf all.tar g b d  // –c (create), –v (verbose), and –f (write to or read from a file)
 $ tar -tvf all.tar  // -t(table)
 $ tar -xvf all.tar
@@ -197,6 +253,7 @@ $ tar -xf all.tar  // -x(extract) silently
 $ gunzip -c make-3.81.tar.gz | tar -xvf -  // "–c" and "-" when using pipe
 $ tar -xvzf make-3.81.tar.gz   // tar calls gunzip directly
 $ tar -xvjf make-3.81.tar.bz2
+
 
 $ todos memo.txt  // UNIT --> Windows/OS X
 $ unix2dos memo.txt  // -b(backup) -n(new)
@@ -356,7 +413,7 @@ $ lpq // same as the above
 $ lprm 86 // to remove the job from the print queue and stop it from printing
 $ lpr -P laser1 05.txt 108.txt 12.txt // prints three files on the printer named laser1
 
-$ head months
+$ head months   // 默认显示文件months前10行
 $ tail -5 months
 $ tail -f logfile // -f: monitor lines as they are added to the end of the growing file named logfile
 $ sort -u -n days // -n 待测试
@@ -490,15 +547,24 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 <!-- Bad Zotac -->
 <!-- Adverclient has a file system with errors... -->
 $ fsck /dev/sda2
-$ df -h
+$ df -h 
 $ sudo badblocks -wsv -t 0x00 /dev/sdc  <!-- Testing with pattern 0x00 -->
 $ sudo badblocks -wsc /dev/sdc          <!-- Testing with pattern 0xaa -->
 
-$ lscpu 
+$ lscpu
 $ lspci // show Hardware Info - intel corporation comet lake-s gt2 uhd graphics 630 (rev 03)
+$ cat /proc/cpuinfo // show every cpu info
 $ cat /etc/passwd | grep -v nologin|grep -v halt|grep -v shutdown| awk -F":" '{print $1"|"$3"|"$4}'|more
 $ service apache2 status
 $ cat /etc/os-release  // to check os in command line
+
+$ lspci // 列出所有已连接的 PCI 设备
+$ lspci -v -s `lspci | awk '/ VGA / {print $1}'` // display card driver
+$ lsmod   //查看已加载的内核模块
+$ modinfo video // 显示名为 "video" 的内核模块的信息
+$ lsmod | grep i915 // 如果看到输出，其中包含 "i915"，这表示 Intel 显卡的内核驱动程序已经加载
+
+
 
 <!-- alias -->
 $ echo $PWD
@@ -564,7 +630,7 @@ $ nano sshd_config      // Authentication/PermitRootLogin without-password
 
 // reload SSH
 $ reload SSH
-$ sudo service ssh restart  // path: /User/lisa/ssh/id_rsa
+$ sudo service ssh restart  // path: /User/lisa/.ssh/id_rsa
 
 <!-- multiple keys -->
 $ ssh-keygen -C "carswap-key-19" -t ed25519 // file: key_cs_123  passphrase: pp123
@@ -602,6 +668,7 @@ $ sudo ufw allow 8000
 <!-- Mac Address: HWaddr or ether or lladdr -->
 $ ifconfig 
 $ ifconfig -a
+$ ifconfig en0
 $ ip address
 $ ip a
 
@@ -732,8 +799,14 @@ $ mysql -uroot -p -e "SELECT d.id, d.name, t.name team_name, d.last_connected
 	INNER JOIN team t
 	ON d.team_id = t.id;" > raw.csv
 
+mysql> select * from table_name where abc='ABC' \G; // show in a readable format
 
 
+<!-- Cannot delete or update a parent row: a foreign key constraint fails -->
+MariaDB > SET FOREIGN_KEY_CHECKS=0; -- to disable them
+MariaDB > drop table team, application;
+MariaDB > ...
+MariaDB > SET FOREIGN_KEY_CHECKS=1; -- to re-enable them
 
 
 <!--install phalcon4-->
@@ -913,9 +986,11 @@ $ echo "$PS1"
 $ pcre-config --version <!-- 8.44 -->
 $ sudo nginx
 $ nginx -v       <!-- nginx/1.18.0 -->
-$ ps -aux|grep nginx
+$ ps aux|grep nginx
 $ sudo nginx -s quit
 $ sudo nginx -s reload
+
+$ pgrep your_process_name // get process ID from process name
 
 <!-- Dartagnan -->
 $ sudo systemctl status nginx.service <!-- status of nginx -->
@@ -996,14 +1071,11 @@ $ php -v
 $ echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/info.php
 localhost/info.php --> show info 
 
-<!-- 1 install composer ??? -->
-$ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-$ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-$ sudo chmod +x /usr/local/bin/composer
+<!-- install composer-->
+$ curl -s https://getcomposer.org/installer | php -- --version=2.5.1
+$ php composer.phar install   // local use
+$ sudo mv composer.phar /user/local/bin/composer  // --> can be used anywhere
 
-<!-- 2 install composer-->
-$ curl -s https://getcomposer.org/installer | php
-$ php composer.phar install
 
 <!-- install phalcon in ~/software -->
 $ git clone https://github.com/phalcon/cphalcon.git

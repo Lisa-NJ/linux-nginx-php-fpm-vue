@@ -1,10 +1,27 @@
-??? Void
 ??? 插值
 ??? 布尔
 ??? v字符串
-??? grep die open close async defer_exec
-
+??? grep die async defer_exec
+??? regular expressions / regexes
+??? an anonymous hash, bless
+??? the <perldiag> man page
+??? perlfunc page - all of Perl’s built-in functions 
+??? bareword
+??? use v5.10; use feature 'say'; v5.32.1
+??? Invoking functions or methods indirectly or looking up symbols in a namespace lets you bypass Perl's parser. 
+??? 'killChrome'        => ['irc' => q!pkill -9 chromium!], 数组引用 
+??? Postfix Dereference Syntax 
  
+00. Installation
+```bash
+$ sudo apt update
+$ sudo install perl
+$ perl -V
+$ sudo apt install perl-doc
+$ perldoc strict
+$ perldoc perlop
+```
+
 00. Perl - Practical Extraction and Report Language
 具有高级语言的强大能力和灵活性
 提供脚本语言（如sed和awk）的所有功能，还具备它们不具备的很多功能 - 方便
@@ -31,19 +48,41 @@ $ perl -e 'print "Hello World\n"'
 hello.pl
 
 ```perl
-#!/usr/bin/perl
+#!/usr/bin/perl -w
+use strict
 use feature qw(say state);  # either works for the use of say
 use 5.010; 
  
+#!/usr/bin/perl  // 这两行与上面等价
+use warnings;
+
 # 输出 "Hello, World"
 print "Hello, world\n";
 print 'Hello, world\n';  # 单引号双引号均可，双引号可以正常解析一些转义字符与变量，而单引号会原样输出(可以使用多行文本)。
 
 my $var = "A variable";
+my $sub_str = substr($var, 2, 3); # 从2号位置开始取长度为3的子串
+my $sub_str1 = substr($var, 2); # 从2号位置开始取直到末尾的子串
+my $find = index($var, "ble"); # 查找子串在父串中的位置 -1表示没找到
 print "$var\n"; 
-print $var, "\n";   # the same as the above line
+print $var, "\n";   # the same as the above line, "," 作为连接符
 say $var; # adds a new line \n to every call
+$a = "Welcome to Perl!\n";
+print substr($a, -6, 4);      # "Perl", 倒数第6个位置取长度为4的子串
+
+$a = "Welcome to Java!\n";
+substr($a, 11, 4) = "Perl";   # $a is now "Welcome to Perl!\n";
+substr($a, 7, 3) = "";        #       ... "Welcome Perl!\n";
+substr($a, 0, 0) = "Hello. "; #       ... "Hello. Welcome Perl!\n";
+
+my $region = "chr1\t100\t200";
+my ($chrom, $start, $end) = split("\t", $region)  # split 将字串分割
+print "$chrom, $start, $end\n";
  
+$a = "Hello. Welcome Perl!\n";
+@a = split(/ /, $a, 2);   # Two items: "Hello.", "Welcome Perl!\n";
+$b = join(' ', @a); 
+
 exit; # 整个 perl 脚本会退出
  
 =pod 注释
@@ -95,7 +134,6 @@ Xvfb 将图形输出渲染到内存中的虚拟帧缓冲区，而不是发送到
 Xvfb 在许多情况下都非常有用，例如在服务器上运行测试套件、自动化测试、无头浏览器（Headless Browser）以及需要图形环境的脚本和应用程序等。它提供了一种轻量级的方法来模拟和处理图形输出，而不依赖于物理显示器。
 
 01. Perl 解释器不会关心有多少个空白, 但是如果空格和分行出现在字符串内，他会原样输出。
-02. Perl only interpolates scalar variables and arrays, not hashes. 
     In addition, the interpolation is only applied to the double-quoted string, but not the single-quoted string.
 1. Here document grammer - << EOF ... EOF
 
@@ -146,88 +184,220 @@ our $color1 = 'white';       # global variables visible throughout the program o
   	 __FILE__, __LINE__, 和 __PACKAGE__ 分别表示当前执行脚本的文件名，行号，包名
   
   	 
-  ```perl
-  $myfirst=123;　    #标量-数字123 global variable
-  $myBigN = 123_456_789; #123456789   
-  
-  $mysecond="123";   #标量-字符串123
-  $str = "hello" . "world";       # 字符串连接
-  $str1 = q/"Are you learning Perl String today?" We asked./;
-  my $name = 'Jack';
-  my $s2 = qq/"Are you learning Perl String today?"$name asked./;
-  my $s = q^A string with different delimiter ^;
-  
-  # string functions:
-  # length($s) uc($s) lc($s) index() rindex()
-  
-  $var1 = 047;       # 0开头为8进制的数 - 等于十进制的39
-  $var2 = 0x1f;      # 0x开头为16进制 - 等于十进制的31　
-  
-  
-  # 数组：
-  @arr=(1,2,3)       #数组-索引从 0 开始，$ages[0]取数组第一个值
-  
-  @array = qw/这是 一个 数组/; #使用 qw// 运算符，它返回字符串列表，数组元素以空格分隔。
-  print "$array[-1]\n"; # 负数，反向读取 - '数组'
-  $new_size = push(@array, "对吧");
-  @array2 = @array[1,2]; # 一个 数组
-  @array3 = @array[1..2]; # 连续的索引
-  splice(@array, 1, 2, 21..22); 
-  
-  @var_20 = (10..20);
-  @var_abc = ('a'..'z');
-  print "@var_20\n";   # 输出 10 到 20
-  print "@var_abc\n";  # 输出 a 到 z
-  
-  %h=('a'=>1,'b'=>2); #哈希-无序的 key/value 对集合
-  %data = ('google', 45, 'runoob', 30, 'taobao', 40); #定义哈希，$data{'google'}访问哈希值	
-  
-  $size = @arr;   # 数组赋值给标量，返回数组元素个数
-  
-  ```
+```perl
+$myfirst=123;　    #标量-数字123 global variable
+$myBigN = 123_456_789; #123456789   
+
+$mysecond="123";   #标量-字符串123
+my $len = length $mysecond; # 取字串长度
+$str = "hello" . "world";       # 字符串连接
+$str1 = q/"Are you learning Perl String today?" We asked./;
+my $name = 'Jack';
+my $s2 = qq/"Are you learning Perl String today?"$name asked./;
+my $s = q^A string with different delimiter ^;
+
+# string functions:
+# length($s) uc($s) lc($s) index() rindex()
+
+# string comparison
+	unless ($pie eq 'apple') {
+	print "Ew, I don't like $pie flavored pie.\n";
+	} else {
+	print "Apple!  My favorite!\n";
+	}
+
+# Perl automatically converts strings to numbers whenever it’s necessary, 
+# the == operator implies that you’re using numbers, so Perl converts the value of $yes_no ("no") to the number 0, 
+	$a = 5;
+	if ($a == " 5 ") { print "Numeric equality!\n"; }
+	if ($a eq " 5 ") { print "String equality!\n"; }
+
+$var1 = 047;       # 0开头为8进制的数 - 等于十进制的39
+$var2 = 0x1f;      # 0x开头为16进制 - 等于十进制的31　
+
+
+# 数组：
+@arr=(1,2,3)       #数组-索引从 0 开始，$ages[0]取数组第一个值
+
+@array = qw/这是 一个 数组/; #使用 qw// 运算符，它返回字符串列表，数组元素以空格分隔。
+print "$array[-1]\n"; # 负数，反向读取 - '数组'
+$new_size = push(@array, "对吧");
+@array2 = @array[1,2]; # 一个 数组
+@array3 = @array[1..2]; # 连续的索引
+splice(@array, 1, 2, 21..22); 
+
+@var_20 = (10..20);
+@var_abc = ('a'..'z');
+print "@var_20\n";   # 输出 10 到 20
+print "@var_abc\n";  # 输出 a 到 z
+
+%h=('a'=>1,'b'=>2); #哈希-无序的 key/value 对集合
+%data = ('google', 45, 'runoob', 30, 'taobao', 40); #定义哈希，$data{'google'}访问哈希值	
+
+$size = @arr;   # 数组赋值给标量，返回数组元素个数
+
+```
   Perl already uses a comma (,) as a separator in the list so for integer numbers Perl uses an underscore character ( _) instead.
   0b123 Binary integer using a prefix of 0b
   0255 Octal integer using a prefix of 0
   0xABC Hexadecimal integer using a prefix of 0x
 
+```perl
+	# Loops over array
+	for $i (1, 2, 3, 4, 5) {
+	 print "$i\n";
+	}
+	
+	@one_to_ten = (1 .. 10);
+	$top_limit = 25;
+	for $i (@one_to_ten, 15, 20 .. $top_limit) {
+	print "$i\n";
+	}
+```
+
 5. 转义字符 \l \L \u \U
 
 6. use strict 语句让所有变量需要强制声明类型。
 
-7. 数组操作：push, pop, unshift, shift, splice，
+7. 数组操作：push, pop(取走最后一个), unshift, shift(取走第一个), splice，
     特殊变量 $[ - 数组的第一索引值
     scalar @array - 数组长度
+```
+my @gen_arr = (1, 2, 3);
+my $len = @gen_arr;                           // length - 1
+my $len1 = $#gen_arr + 1;                  	  // length - 2
 
-8. 哈希 delete foreach while
-  ```perl
-  %data = ('google', 'google.com', 'runoob', 'runoob.com', 'taobao', 'taobao.com');
-  %data = ('google'=>'google.com', 'runoob'=>'runoob.com', 'taobao'=>'taobao.com');
-  %data = (-google=>'google.com', -runoob=>'runoob.com', -taobao=>'taobao.com');  # - 来代替引号
-  
-  $data{'google'} = 'google.com';
-  $data{'runoob'} = 'runoob.com';
-  $data{'taobao'} = 'taobao.com';
-  
-  @names = keys %data; # 获取 data 所有 key 的数组
-  @urls = values %data; # 获取 data 所有 value 的数组
-  
-  if( exists($data{'facebook'} ) ){  # 判断key是否存在
-     print "facebook 的网址为 $data{'facebook'} \n";
-  }
-  else
-  {
-     print "facebook 键不存在\n";
-  }
-  
-  %data = ('google'=>'google.com', 'runoob'=>'runoob.com', 'taobao'=>'taobao.com');
-  foreach $key (keys %data){
-      print "$data{$key}\n";
-  }
-  
-  while(($key, $value) = each(%data)){
-      print "$data{$key}\n";
-  }
-  ```
+my $new_gen = 10;
+push @gen_arr, $new_gen;
+$len = @gen_arr;
+print "New_array: @gen_arr\n";
+print "Length of array: ", $len, "\n";
+
+my @new_gen_arr = (8, 5);
+push @gen_arr, @new_gen_arr;
+$len = scalar @gen_arr;                       // length - 3
+print "New_array: @gen_arr\n";
+print "Length of array: ", $len, "\n";
+```
+7-1. 匿名数组 / anonymous arrays
+To create an anonymous array, surround a list-producing expression with square brackets:
+
+    my $suits_ref = [qw( Monkeys Robots Dinos Cheese )];
+    
+This array reference behaves the same as named array references, except that the anonymous array brackets always create a new reference. 
+
+8. 哈希 Hash delete foreach while keys
+```perl
+%data = ('google', 'google.com', 'runoob', 'runoob.com', 'taobao', 'taobao.com');
+%data = ('google'=>'google.com', 'runoob'=>'runoob.com', 'taobao'=>'taobao.com');
+%data = (-google=>'google.com', -runoob=>'runoob.com', -taobao=>'taobao.com');  # - 来代替引号
+
+$data{'google'} = 'google.com';
+$data{'runoob'} = 'runoob.com';
+$data{'taobao'} = 'taobao.com';
+
+@names = keys %data; # 获取 data 所有 key 的数组
+@urls = values %data; # 获取 data 所有 value 的数组
+
+if( exists($data{'facebook'} ) ){  # 判断key是否存在
+print "facebook 的网址为 $data{'facebook'} \n";
+}
+else
+{
+print "facebook 键不存在\n";
+}
+
+%data = ('google'=>'google.com', 'runoob'=>'runoob.com', 'taobao'=>'taobao.com');
+foreach $key (keys %data){
+print "$data{$key}\n";
+}
+
+while(($key, $value) = each(%data)){
+print "$data{$key}\n";
+}
+
+# Loops over hash
+%days_in_summer = ( "July" => 31, "August" => 31, "September" => 30 );
+for $i (keys %days_in_summer) {
+print "$i has $days_in_summer{$i} days.\n";
+}
+
+```
+
+8. Dereference
+```perl
+## @* an array splat notation
+    my $recipients = [qw(
+        Mother
+        Father
+        Partner
+        Nephew
+        Niece
+        Neighbor
+    )];
+
+    for my $recipient ($recipients->@*) {
+        say "Need to find a gift for $recipient";
+    }
+```	
+
+9. Flow control 流程控制
+if elseif else 
+unless else
+while
+until
+
+9. File operation 文件读写 <> readline open close > >> $! or die and
+```perl
+open (LOGFILE, "log.txt") or die "I couldn't get at log.txt";
+
+$title = <LOGFILE>;
+$tile = readline LOGFILE;
+print "Report Title: $title";
+for $line (<LOGFILE>) {
+print $line;
+}
+
+while (<LOGFILE>) {
+print;
+}
+
+close LOGFILE;
+
+open (OVERWRITE, ">overwrite.txt") or die "$! error trying to overwrite";
+# The original contents are gone, wave goodbye.
+
+open VITAL, ">vitalreport.txt" or die "Can't write vital report: $!";
+
+open (APPEND, ">>append.txt") or die "$! error trying to append";
+# Original contents still there, we're adding to the end of the file
+
+print OVERWRITE "This is the new content.\n";
+print APPEND "We're adding to the end here.\n", "And here too.\n";
+```
+
+9. sorting
+< lt
+> gt
+<==> cmp
+By default, the sort will happen alphanumerically: numbers before letters, uppercase before lowercase. 
+The other 1 percent of the time, you can write a custom sorting routine for Perl to use.
+This sorting routine is just like a small sub. 
+In it, you compare two special variables, $a and $b, 
+	- Returning -1 : “$a should come before $b in the sorted list,” 
+	- 1 means “$b should come before $a in the sorted list” 
+	- 0 means “they’re equal, so I don’t care which comes first.” 
+ 
+```perl
+ort {
+        if ($type{$b} > $type{$a}) { return 1; }
+ if ($type{$b} < $type{$a}) { return -1; }
+ return 0;
+    } keys %type;
+    
+# 或改写成下面的形式实现逆序：
+sort { $type{$b} <=> $type{$a}; } keys %type
+```
 
 9. ** 乘幂
    <=> 比较运算符 返回 -1 0 或者 1
@@ -238,12 +408,12 @@ our $color1 = 'white';       # global variables visible throughout the program o
    ..  范围运算符
    chomp - remove the last character in a string
 
-   ```perl
-   chomp($s = <STDIN>);  # <STDIN> is used to get input from users
-   ```
+```perl
+chomp($s = <STDIN>);  # <STDIN> is used to get input from users
+```
 
-10. sub - perl 子程序(函数)
-    @_ 参数
+10. Subs - perl 子程序(函数)
+    @_ Whenever you call a sub, any parameters you pass to it are placed in the special array @_
     $_ [0] 第一个参数
     $_ the default variable of Perl
     如果我们需要传入标量和数组参数时，需要把列表放在最后一个参数上;
@@ -251,6 +421,7 @@ our $color1 = 'white';       # global variables visible throughout the program o
     如果没有使用 return 语句，则子程序的最后一行语句将作为返回值
     默认情况下，Perl 中所有的变量都是全局变量
     my @list = @_ my操作符 - 用于创建词法作用域变量，通过 my 创建的变量，存活于声明开始的地方，直到闭合作用域的结尾
+    If you don’t expressly use the return statement, the sub returns the result of the last statement.
 
     local 定义的变量不存在于主程序中，但存在于该子程序和该子程序调用的子程序中
 
@@ -270,46 +441,106 @@ our $color1 = 'white';       # global variables visible throughout the program o
     # 列表参数
     PrintList($a, @b);
     ```
+    @ARGV contains the command-line arguments provided to the program outside of all functions. Perl's array operations (including shift and pop) operate on @ARGV implicitly outside of functions. 
+    
+10. Void, Scalar and List Context (Amount context) 子程序调用上下文
+	- how many items you expect an operation to produce
+	
+10. regexp: matching expressions + metacharacters + wildcards + character classes + flags + subexpressions
+	 + replacing 
+	=~ 
+	^ / / $ 
+	. + * ? \d \w \s \n \r {4} {2,5} {2,} \D \W \S 
+	[aeiou] [a-f] [0-9] [^aeiou]
+	i | g
+	() $1 $2 $3
+	s/regex/replacement string/g s{regex}{replacement string}
+	
+```perl
+/foo/  m{foo}
+$user_location = "I see thirteen black cats under a ladder.";
+if ($user_location =~ /thirteen/) {
+	print "Eek, bad luck!\n";
+}
+
+$string = "The time is 12:25:30 and I'm hungry.";
+$string =~ /((\d{1,2}):(\d{2}):(\d{2}))/;
+@time = ($1, $2, $3, $4);
+
+($time, $hours, $minutes, $seconds) = ($1, $2, $3, $4);
+
+($time, $hours, $minutes, $seconds) = ($string =~ /((\d{1,2}):(\d{2}):(\d{2}))/);
+
+$number = "Look, 200 5-sided, 4-colored pentagon maps.";
+    while ($number =~ /(\d+)/g) {
+        print "I found the number $1.\n";
+        $number_count++;
+    }
+    print "There are $number_count numbers here.\n";
+    
+$book_pref = "The cat in the hat is where it's at.\n";
+    $book_pref =~ /(cat.*at)/;                  # /(cat.*?hat)/ 
+    print $1, "\n";
+ 
+#  127.12.20.59 - - [01/Nov/2000:00:00:37 -0500] 
+#    "GET /gfx2/page/home.gif HTTP/1.1" 200 2285
+
+ @fields = split(/\s/, $line);
+ $fields[6] =~ s/\/$/\/index.html/; 
+ $fields[6] =~ s{/$}{/index.html}; 
+```
 
 11. Perl 引用/指针
     (1)匿名哈希引用, 使用{}定义 
-    ```perl
-    $href= { APR =>4, AUG =>8 };
-    ```
+```perl
+$href= { APR =>4, AUG =>8 };
+```
     (2)函数引用格式: \&
     调用引用函数格式: & + 创建的引用名。
-    ```perl
-    # 创建函数的引用
-    $cref = \&PrintHash;
-     
-    # 使用引用调用函数
-    &$cref(%hash);
-    ```
+```perl
+# 创建函数的引用
+$cref = \&PrintHash;
+
+# 使用引用调用函数
+&$cref(%hash);
+```
 
 12. Perl类的定义
     文件后缀为 .pm
     把一个包当作一个类用，并且把包里的函数当作类的方法来用。
     Perl 的包提供了独立的命名空间，所以不同包的方法与变量名不会冲突。
     bless() 函数 -- 用来构造对象， 通过 bless 把一个引用和这个类名相关联，返回这个引用就构造出一个对象
-    ```perl
-    object = bless reference, classname;
-    ```
+```perl
+object = bless reference, classname;
+```
 
-13. package
+13. package & namespace
+	By convention, the Perl core reserves lowercase package names for core pragmas (Pragmas), such as strict and warnings. User-defined packages all start with uppercase letters.
+	DessertShop::IceCream, add_sprinkles() refers to the same function as does DessertShop::IceCream::add_sprinkles() outside of the namespace.
+	All namespaces in Perl are globally visible.
+	the main:: symbol table
+	
 	 require 和 use 将载入一个模块
 	 @INC -- Perl 内置的一个特殊数组，它包含指向库例程所在位置的目录路径
 	 require 和 use 函数调用 eval 函数来执行代码
 	 	use语句是编译时引入的，require是运行时引入的
 	 	use引入模块的同时，也引入了模块的子模块。而require则不能引入
+
+13. Variable Sigils
+
+The sigil you use determines amount context in an lvalue situation.
+在左值（lvalue）的情况下，所使用的符号决定了上下文的类型。在 Perl 中，左值上下文通常用于赋值操作，符号的选择会影响到赋值操作的行为。
+... or gets coerced in an rvalue situation.
+在右值（rvalue）的情况下，符号会根据需要进行类型转换。右值上下文通常用于取值操作，符号的选择会影响到取值操作的行为。
 	
 14. for 等价于 foreach
-	```perl
-	my @a = (1..9);
-	
-	for my $i (@a){
-	print("$i","\n");
-	}
-	```
+```perl
+my @a = (1..9);
+
+for my $i (@a){
+print("$i","\n");
+}
+```
 
 15. 正则表达式 Perl regular expression
 	=~            is the binding operator
@@ -446,6 +677,7 @@ AnyEvent::Coro->run_cmd 方法，可以启动一个非阻塞的命令执行，�
     ```
 
 19. map 的用法
+	使用map函数对@numbers数组中的每个元素应用了一个匿名子程序{ $_ * 2 }。$_是Perl中的默认变量，表示当前正在处理的元素。
     ```perl
     my @numbers = (1..5);
     print "@numbers\n";       # 1 2 3 4 5

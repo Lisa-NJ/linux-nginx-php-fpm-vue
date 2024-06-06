@@ -23,7 +23,18 @@ JSON is used as the de-facto standard for data serialization
 How to marshal (encode) and unmarshal (decode) JSON in Go
 
 [development settings]
-	- Zotac: 10.1.1.134 + /hadaly/Hadaly/Config.pm 'PLAYLIST_ADDR' => 'http://10.1.1238:8000'
+	- Zotac: 10.1.1.134 + /hadaly/Hadaly/Config.pm 'PLAYLIST_ADDR' => 'http://10.1.1.238:8000'
 	- $ sudo ufw allow 8000 + 80
-	- ~/work-lisa/api/public - $ php -S 0.0.0.0:8000 index.php
+	- $ cd ~/work-lisa/api/public 
+	- $ php -S 0.0.0.0:8000 index.php
 
+
+```bash
+$ go version
+go version go1.15.6 linux/amd64
+```
+
+```bash
+$ cd ~/work-lisa/nerkmid
+$ go run nerkmid.go -config config/nerkmide.cfg.json
+```

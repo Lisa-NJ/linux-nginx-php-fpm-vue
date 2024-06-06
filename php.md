@@ -6,11 +6,15 @@ mime - Multipurpose Internet Mail Extensions
 	- type/subtype
 	- text image audio video application
 
-
 phtml??? 
 transformers???
 Invo???
 phar???
+
+### Yii 
+	URL Management
+		- get format: /index.php?r=post/read&id=100
+		- path format: /index.php/post/read/id/100
 
 ### Docker
 Install - https://docs.docker.com/engine/install/debian/
@@ -118,27 +122,29 @@ $ phalcon migration run
 
 生成的迁移在目标服务器上上传后，您可以轻松运行它们
 
+[Debug Phalcon with XDebug and VSCode]
+[The Codeholic / Debugging PHP7.4 with XDebug 2 and VSCode](https://www.youtube.com/watch?v=LNIvugvmCyQ)
 ```
 1. One of the key features of Phalcon is that it is loosely coupled
-2. Setting up Debug 
-	- + (new Phalcon\Debug)->listen(); //index.php
-	- refresh the url
+2. Config Nginx to refer to path/to/Phalcon_project
 3. Install Xdebug
-	- $ sudo apt install php7.4-xdebug  // install php8.2-xdebug by default
+	- $ sudo apt install php7.4-xdebug
+	- $ php -m => can see xdebug on the list
 4. Integrate Xdebug with the PHP interpreter
+	- edit php.ini, + [xdebug] section
+	- edit /etc/php/7.4/fpm/conf.d/20-xdebug.ini + xdebug.start_with_request=yes
+	- restart php-fpm
 	- $ php -m
 	- $ sudo updatedb
-	- $ locate xdebug.so  // /usr/lib/php/20220829/xdebug.so
-	- edit php.ini, + [xdebug] section
+	- $ locate xdebug.so  // /usr/lib/php/20220829/xdebug.so	
 	- localhost:8001 can see xdebug info
-5. Configure Xdebug in PhpStorm﻿
-	- phpStorm / File / Settings / PHP / Debug
-
-
-External Libraries
-	- $ git clone https://github.com/phalcon/phalcon-devtools.git 3.1.x (the latest version with ide)
-	- open phpStorm / External Libraries / Right Mouse Click --> Config Php Include Paths
-	- choose: phalcon-devtools / ide / stubs / Phalcon
+5. Configure Xdebug in VSCode
+	- install "php debug" extension
+	- Run + Add Configuration / "php" => .VScode/launch.json
+	- set breakpoints + Listen for Xdebug + Play
+6. Run front end
+	- $ cd path/to/front_pro
+	- $ npm run serve 	
 
 MVC
  |----app
@@ -175,11 +181,6 @@ public/css/index.php -- the bootstrap file which creates a new app
 The routing system
 The initialization file -- require all the core components that you need
 ```
-[php debug]
-	最详细的phpstorm+xdebug调试详细教程，没有之一
-	https://www.cnblogs.com/endkoo/p/14849807.html
-	
-	/tmp/php_errors.log
 
 [Phalcon\MVC] - Models, Views, Controllers
 	1. Isolation of business logic(Models) from the user interface(Views) and the database layer
@@ -391,7 +392,7 @@ null = false
 	    ?array $options = null
 	)
 	The Data Source Name, or DSN, contains the information required to connect to the database.
-	In general, a DSN consists of the PDO driver name, followed by a colon, followed by the PDO driver-specific connection syntax. 	
+	In general, a DSN consists of the PDO driver name, followed by a colon, followed by the PDO driver-specific connection syntax.
 	PDO::prepare — Prepares a statement for execution and returns a statement object
 ```php
 	$pdo = new PDO('mysql:host=127.0.0.1;dbname=carswap', 'root', 'OES12345@');
@@ -400,7 +401,47 @@ null = false
 	$stmt->execute();
 	$total_cars = $stmt->fetchColumn();
 ```
+29. mysqli_connect, mysqli_select_db, mysqli_set_charset, mysqli_query, mysqli_fetch_array, mysqli_free_result， mysqli_close
+	是 PHP 中用于连接 MySQL 数据库的函数。它创建一个新的 MySQL 连接，并返回一个表示该连接的对象。这个函数通常用于在 PHP 脚本中与 MySQL 数据库建立连接。
 
+```php
+	$con = mysqli_connect('localhost','root','123456');
+	if (!$con)
+	{
+	    die('Could not connect: ' . mysqli_error($con));
+	}
+	// 选择数据库
+	mysqli_select_db($con,"test");
+	// 设置编码，防止中文乱码
+	mysqli_set_charset($con, "utf8");
+	 
+	$sql="SELECT * FROM Websites WHERE id = '".$q."'";
+	 
+	$result = mysqli_query($con,$sql);
+	 
+	echo "<table border='1'>
+	<tr>
+	<th>ID</th>
+	<th>网站名</th>
+	<th>网站 URL</th>
+	<th>Alexa 排名</th>
+	<th>国家</th>
+	</tr>";
+	 
+	while($row = mysqli_fetch_array($result))
+	{
+	    echo "<tr>";
+	    echo "<td>" . $row['id'] . "</td>";
+	    echo "<td>" . $row['name'] . "</td>";
+	    echo "<td>" . $row['url'] . "</td>";
+	    echo "<td>" . $row['alexa'] . "</td>";
+	    echo "<td>" . $row['country'] . "</td>";
+	    echo "</tr>";
+	}
+	echo "</table>";
+	 
+	mysqli_close($con);
+```
 
 ### PHP
 

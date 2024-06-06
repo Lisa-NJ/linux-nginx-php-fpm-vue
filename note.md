@@ -1,11 +1,34 @@
-Tadartagnan@hotmail.com
-schumann@oneworldled.com
-michael@oneworldled.com
-dartagnan@oneworldled.com.au
-darius@elitem.com.au
-Tanami 045 010 7311
+[debug / vue]
+Inspect(Ctrl+Shift+i) / Sources / "webpack://" + code + bp / trigger the bp
 
-2.24x1.28
+[debug / api]
+controller / this ??? 
+	   / $this->auth->getIdentity() ???
+
+[Map Issue]
+1. sign up on stadiamaps.com
+	Account: One World LED
+	Email:	mondona@oneworldled.com
+	Passwd: ****
+2. Create a property & set domain 
+	"ap-dev" -- "adverdev.com"
+	"ap" -- "adverpost.com"
+3. Update urls used in vue
+	url + attribution + tilelayer
+4. $ ssh -i ... root@adverpost.com
+   # cd staging_vue
+   # mv dist dist-old
+   $ scp local / staging_vue / dist --> server / staging_vue / 
+   # systemctl reload nginx
+
+https://cors.adverpost.com/https/stamen-tiles-a.a.ssl.fastly.net/terrain/12/3625/2475.png
+https://cors.adverpost.com/https/stamen-tiles-a.a.ssl.fastly.net/terrain/12/3624/2475.png
+https://cors.adverpost.com/https/stamen-tiles-c.a.ssl.fastly.net/terrain/12/3626/2475.png
+
+https://tiles.stadiamaps.com/tiles/stamen_terrain/12/3625/2475.png
+https://tiles.stadiamaps.com/tiles/stamen_terrain/12/3624/2475.png
+https://tiles.stadiamaps.com/tiles/stamen_terrain/12/3626/2475.png
+
 
 [English]
 You don't go there = don't mention that topic
@@ -35,6 +58,7 @@ OP Shop
 It's my bad
 It's been a minute
 It is a one off set up
+I need it yesterday
 
 a forward slash (/) character
 a backslash (\) character
@@ -55,6 +79,16 @@ tbc - to be confirmed
 tba - to be announced
 tbh - to be honest
 COB - close of business
+
+[Certbot]
+http --> https
+
+[partition & Gparted]
+	https://www.linuxbabe.com/desktop-linux/fix-cant-read-superblock-error
+	
+[disks]
+	Disks / Create Disk Image
+	
 
 [将前端 Vue 项目部署到 Linux 服务器上]
 1. **准备 Linux 服务器**：
@@ -106,12 +140,15 @@ COB - close of business
 
 这些步骤将帮助您将 Vue 项目成功部署到 Linux 服务器上。根据您的特定需求和服务器环境，某些步骤可能会有所不同。
 
+[linux user+group]
+https://juejin.cn/post/6844903991592091656
+
 [Fixed ZBOX-CI331NANO PCIe Bus Error / Tanami 18/8]
   -- https://unix.stackexchange.com/questions/327730/what-causes-this-pcieport-00000003-0-pcie-bus-error-aer-bad-tlp Tip2
 // pci=nommconf disables Memory-Mapped PCI Configuration Space
 -1. $ cd /etc/modprobe.d/
     $ cat adclient.conf
-    $ lsmod | grep eth
+    $ lsmod | grep eth   //查看已加载的内核模块
     $ modinfo r8169
     $ apt-cache showpkg firmware-realtek  // 查询和显示指定软件包的详细信息
     $ dmesg  // 查看系统的消息日志，特别是内核消息; 用于诊断和排查与硬件、内核或设备驱动程序相关的问题
@@ -981,12 +1018,20 @@ How to make a new copy of Zotac
 	- delete --> BIOS setting: Power/Loss - on, 
 				   Security/Secure boot/Secure boot - disabled, secure mode - custom,
 	                           Boot - legacy --> win8 or Pure UEFI
-	
+	- Darius:
+		```
+		- System.pm / args => ' --static --width=%d --height=%d --interface=%s
+			-- set %s to eth1 and mark for Model CI341 (>=327) + LED + other state
+			-- interface means the LED connection port
+			-- no problem with LCD, only for LED as above
+			- Zotac boots too fast to get a result by 'ldetect' and give it to System
+			- If LED cable and Internet cable are put in the wrong ports, the traffic on the internet is caused and the inernet
+		```
 	- check HexChat / noconf / :*:getID + :*:clearState
 	- Add a new Display on adverpost + change ACID to TEST.****
 		- LED: pixel is useful, physical width and height only for users 
 		- LCD: 0×0 -- use the maximum by default 
-		- block time -- the maximum of a campaign supported
+		- block time --> 3600s(not 120s) -- the maximum of a campaign supported
 		- Brightness / censor -- not finished yet
 		- ACID connected to IRC, not for users, can be renamed to something meaningful
 	- check HexChat / noconf: h_14... has quit --> / #au: TEST
@@ -1441,4 +1486,4 @@ Xvfb 在许多情况下都非常有用，例如在服务器上运行测试套件
 //2. Most desktop environments like GNOME, KDE, Xfce etc use an implementation of [gnome-keyring](https://wiki.archlinux.org/index.php/GNOME/Keyring?ref=itsfoss.com) to provide this keyring feature in Linux.
 
 //...待完成 https://itsfoss.com/ubuntu-keyring/
-收回昨天的话，只旁观，不折腾了，好累 9/8/2023
+
