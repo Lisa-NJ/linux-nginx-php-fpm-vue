@@ -123,7 +123,7 @@ $ phalcon migration run
 生成的迁移在目标服务器上上传后，您可以轻松运行它们
 
 [Debug Phalcon with XDebug and VSCode]
-[The Codeholic / Debugging PHP7.4 with XDebug 2 and VSCode](https://www.youtube.com/watch?v=LNIvugvmCyQ)
+[The Codeholic / Debugging PHP7.4 with XDebug 2 and VSCode]
 ```
 1. One of the key features of Phalcon is that it is loosely coupled
 2. Config Nginx to refer to path/to/Phalcon_project
@@ -392,7 +392,7 @@ null = false
 	    ?array $options = null
 	)
 	The Data Source Name, or DSN, contains the information required to connect to the database.
-	In general, a DSN consists of the PDO driver name, followed by a colon, followed by the PDO driver-specific connection syntax.
+	In general, a DSN consists of the PDO driver name, followed by a colon, followed by the PDO driver-specific connection syntax. 	
 	PDO::prepare — Prepares a statement for execution and returns a statement object
 ```php
 	$pdo = new PDO('mysql:host=127.0.0.1;dbname=carswap', 'root', 'OES12345@');

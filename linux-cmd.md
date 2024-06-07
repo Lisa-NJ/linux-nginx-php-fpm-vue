@@ -506,6 +506,8 @@ $person
 $ echo \$person
 $person
 
+$ apt policy chromium // Installed + Candidate + Version table
+
 $ sudo apt remove php8.1* --purge
 $ dpkg -l | grep php
 $ apt list --installed | grep php
