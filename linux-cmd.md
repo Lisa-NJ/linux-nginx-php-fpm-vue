@@ -87,10 +87,53 @@ sda
 
 sdb
  |----sdb1
+
+sdc
+
+|----sdc1
+
+|----sdc2
+
 `
 $ mkdir /media/usb
 $ mount /dev/sdb1 /media/usb
 $ umount /media/usb
+
+
+
+<!-- sdc 60G, resize to 20G, make .img, compress to .img.xz -->
+
+$ sudo umount /dev/sdc2           // ensure sdc2 is not mounted
+
+$ sudo e2fsck -f /dev/sdc2          // check the file system
+
+$ sudo resize2fs /dev/sdc2 20G // resize to 20G
+
+$ sudo fdisk /dev/sdc
+
+$ sudo e2fsck -f /dev/sdc2
+
+$  sudo resize2fs /dev/sdc2
+
+=> partition2 is resized to 20G, can be seen with Disks
+
+$ sudo mount /dev/sdc2 /mnt
+
+$ cd /mnt && ls
+
+$ sudo umount /dev/sdc2
+
+$ sudo dd if=/dev/sdc of=/path/to/output.img bs=1M count=21000
+
+=> output.img size of 20+G
+
+$ xz -zvve9 -T0 ./output.img
+
+=> output.img.zx size of 816.2M is created
+
+Alternatively, if generated with Disks/Create Disk Image, the size of img file is 56G, and .img.xz is 1.5G
+
+
 
 <!-- wrong fs type, bad option, bad superblock on /dev/sdc, missing codepage or helper program... -->
 $ mkfs -t ext4 /dev/sdc         // (1)Format
@@ -104,7 +147,7 @@ $ mount /dev/sdc /media/usb     // (2)Then can be Mounted  (3)Shown in Files
 	- 1.4 /preseed.cfg：10.1.1.253 --> 10.1.1.238; 
 	      10.1.1.249 --> mirror/http/proxy string;
 	      xfonts-unifont
-		
+	
 2. debian-10.11.0-amd64-netinst.iso --> usb boot drive (Rufus/Windows)
 
 // verify iso (optional)
@@ -639,17 +682,19 @@ $ ssh-keygen -C "carswap-key-19" -t ed25519 // file: key_cs_123  passphrase: pp1
 $ ssh-copy-id -i ~/.ssh/key_cs_123.pub acme.learnlinux.cloud
 $ ssh -i ~/.ssh/key_cs_123 acme.learnlinux.cloud // to unlock the key, input passphrase
 
-
 <!-- Replace String Using the sed, 
      By default, sed only replaces the first occurrence of the specified string in each line
      s - substitute
      g - replace all occurrences of string, 
     -i[SUFFIX], --in-place[=SUFFIX]
                  edit files in place (makes backup if SUFFIX supplied)
+
     # - a number flag such as 1, 2 - which occurrence of a specified string          
  -->
 $ sed 's/127.0.0.1/10.1.1.38/g' -i assets/*
 $ sed 's/box/bin/2' foxinbox.txt 
+
+$ sed 's/10.1.1.253/192.168.0.197/g' -i ./*
 
 <!-- download file from Zotac -->
 $ scp root@10.1.1.39:/hadaly/cache/media/output ~
@@ -847,7 +892,7 @@ $ sudo pecl install phalcon-4.1.2
 
 <!-- 4. to check -->
 $ php -m <!-- phalcon is on the list -->
- 
+
 <!-- another way to install phalcon4:  --> 
 $ cd /tmp
 $ git clone https://github.com/phalcon/cphalcon
