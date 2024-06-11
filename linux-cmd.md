@@ -99,7 +99,11 @@ $ mkdir /media/usb
 $ mount /dev/sdb1 /media/usb
 $ umount /media/usb
 
-
+<!-- The backup GPT table is corrupt, but the primary appears ok, so that will be used -->
+$ sudo gdisk /dev/sdc
+$ e
+$ w
+$ sudo gdisk -l /dev/sdc 
 
 <!-- sdc 60G, resize to 20G, make .img, compress to .img.xz -->
 
