@@ -1452,12 +1452,20 @@ On Mac: Shift + Option + F
 
 [curl]
 curl command is a tool to download or transfer files/data from or to a server using FTP, HTTP, HTTPS, SCP, SFTP, SMB and other supported protocols on Linux or Unix-like system.
+image
+
 ```
 $ curl --version
 $ curl -I https://www.google.co.in/
 $ man curl
 $ curl --help
 ```
+
+[Linux Error]
+1. Reboot and Select proper Boot device
+or Insert Boot Media in selected Boot device and press a key	
+	- There is a problem with the hard drive and ssd is not recognized on Bios, or the boot files were corrupted. 
+	- change bios settings / Boot - legacy --> win8 or Pure UEFI ==> work
 
 [Xvfb]
 Xvfb 是一个虚拟 X 服务器的缩写，它代表 "X Virtual Framebuffer"。Xvfb 允许在没有物理显示器的情况下运行图形应用程序，它模拟了一个完整的 X 服务器环境。
