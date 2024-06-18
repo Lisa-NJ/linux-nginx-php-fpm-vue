@@ -138,6 +138,31 @@ $ xz -zvve9 -T0 ./output.img
 Alternatively, if generated with Disks/Create Disk Image, the size of img file is 56G, and .img.xz is 1.5G
 
 
+<!-- sdc 60G, resize to 5G, make .img, compress to .img.xz by Darius-->
+
+Disks + GParted + Cmd / 60GB source ssd + 8GB target ssd
+
+[1/4 Resize]
+GParted / Resize  4279MB --> 4900MB
+$ sgdisk -e /dev/sdx 
+=> move the secondary GPT to the back of the disk
+
+[2/4 Clone]
+$ dd larger disk to smaller disk
+=> blank small ssd on Disks, no Partition Table
+$ sgdisk /dev/sdX -R /dev/sdY
+=> replicate Partiotion Table
+caution! Secondary header was placed beyond the disk's limits! Moving the header, but other problems may occur!
+
+-- can be fixed by opening up GParted ...
+
+[3/4 Img]
+use: 8GB target ssd
+GDisks / Create Disk Image...
+=> disk.img
+
+[4/4 Shrink]
+$ sudo xz -t -k -T0 -e9 -zvv 'path/to/disk.img
 
 <!-- wrong fs type, bad option, bad superblock on /dev/sdc, missing codepage or helper program... -->
 $ mkfs -t ext4 /dev/sdc         // (1)Format
