@@ -77,6 +77,13 @@ $ lspci -k // pci + driver
 (4) Network: ifconfig、ip、ping、netstat、telnet、ftp、route、rlogin rcp、finger、mail、nslookup
 (5) File: file、mkdir、grep、dd、find、mv、ls、diff、cat、ln
 
+<!-- GPT & file system -->
+GPT 分区表：GPT 使用主分区表和备份分区表来维护分区信息。主分区表位于磁盘的开头，备份分区表位于磁盘的末端。
+分区和文件系统：调整文件系统大小和调整分区大小是两个不同的操作。调整文件系统大小通常不会自动更新 GPT 的备份分区表位置，因此需要手动修复。
+$ sudo resize2fs -p /dev/sdb2 10G           // 调整文件系统大小
+$ sudo parted /dev/sdb resizepart 2 10GB    // 调整分区大小
+$ sudo sgdisk -e /dev/sdb                   // 修复 GPT 备份分区表位置
+
 <!-- How to use usb disk on Linux -->
 $ lsblk
 `
@@ -113,13 +120,17 @@ $ sudo e2fsck -f /dev/sdc2          // check the file system
 
 $ sudo resize2fs /dev/sdc2 20G // resize to 20G
 
-$ sudo fdisk /dev/sdc
+$ sudo fdisk /dev/sdc  (d 2 n 2 +20G w) => on Disks, 20G && restart GParted would display the update 
+or $ sudo parted /dev/sdb resizepart 2 20GB
 
 $ sudo e2fsck -f /dev/sdc2
 
 $  sudo resize2fs /dev/sdc2
 
 => partition2 is resized to 20G, can be seen with Disks
+
+$ sudo sgdisk -e /dev/sdc 
+=> fix backup GPT
 
 $ sudo mount /dev/sdc2 /mnt
 
@@ -143,18 +154,19 @@ Alternatively, if generated with Disks/Create Disk Image, the size of img file i
 Disks + GParted + Cmd / 60GB source ssd + 8GB target ssd
 
 [1/4 Resize]
-GParted / Resize  4279MB --> 4900MB
+GParted / Resize  4279MB --> 4900MB ～ same as $ resize2fs -p '/dev/sdx2' 4900M
 $ sgdisk -e /dev/sdx 
 => move the secondary GPT to the back of the disk
 
 [2/4 Clone]
-$ dd larger disk to smaller disk
+$ sudo dd if=/dev/sdX of=/dev/sdY status=progress
 => blank small ssd on Disks, no Partition Table
+
 $ sgdisk /dev/sdX -R /dev/sdY
 => replicate Partiotion Table
 caution! Secondary header was placed beyond the disk's limits! Moving the header, but other problems may occur!
 
--- can be fixed by opening up GParted ...
+-- can be fixed by rerunning GParted & Resize
 
 [3/4 Img]
 use: 8GB target ssd
