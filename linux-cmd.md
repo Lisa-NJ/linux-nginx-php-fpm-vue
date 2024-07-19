@@ -23,6 +23,67 @@
 //# shell builtin - page 446
 ??? sra - binary
 
+[grub]
+
+```
+┌───────────────────────┐
+│  1. BIOS/UEFI 固件    │  计算机通电后，首先执行 BIOS 或 UEFI 固件，进行硬件初始化和自检
+└──────────┬────────────┘
+           │
+           ▼
+┌───────────────────────┐
+│  2. 第1阶段加载程序     │   BIOS/UEFI 移交控制权 (位于磁盘的 MBR 中，大小通常为 512 字节)
+│    (boot.img)         │
+└──────────┬────────────┘
+           │
+           ▼
+┌───────────────────────┐
+│  3. 第1.5阶段加载程序   │  由第1阶段加载程序加载，位于磁盘的第一个分区或文件系统的引导扇区; 提供文件系统支持，能够读取磁盘上的文件
+│    (core.img)         │
+└──────────┬────────────┘
+           │
+           ▼
+┌───────────────────────┐
+│  4. 第2阶段加载程序     │ 由第1.5阶段加载程序加载，负责读取 GRUB 配置文件，并据此显示启动菜单
+│    (grub.cfg)         │
+└──────────┬────────────┘
+           │
+           ▼
+┌──────────────────────┐
+│  5. 显示启动菜单       │
+│    (等待用户选择)      │
+└──────────┬───────────┘
+           │
+           ▼
+┌───────────────────────┐
+│  6. 加载内核和initrd    │
+│    (vmlinuz, initrd)  │
+└──────────┬────────────┘
+           │
+           ▼
+┌───────────────────────┐
+│  7. 启动操作系统        │
+└───────────────────────┘
+```
+
+
+[wifi check]
+Q: iwconfig 命令只显示 lo eth0 eth1  没有显示 wlan0?
+A:
+// 查看系统是否识别到无线网卡
+$ lspci | grep -i wireless
+$ lspci
+01:00.0 Network controller: Intel Corporation Wireless 3165 (rev 81)
+or
+00:14.3 Network controller: Intel Corporation CNVi: Wi-Fi
+// 查看是否正确加载了 iwlwifi 驱动程序
+lsmod | grep iwlwifi
+iwlwifi               249856  1 iwlmvm
+cfg80211              774144  3 iwlmvm,iwlwifi,mac80211
+or
+iwlwifi               360448  0
+cfg80211              1134592  1 iwlwifi
+
 [irssi]
 $ sudo apt update
 $ sudo apt install irssi
@@ -216,7 +277,12 @@ $ apt-get download [list of packageds]
 xinit /path/to/custom-xorg-config
 这将使用指定的 Xorg 配置文件启动 Xorg 服务器。
 
-$ free -h
+$ free -h 
+```
+              total        used        free      shared  buff/cache   available
+Mem:           3.7Gi       3.6Gi       1.2Mi       31Mi       105Mi
+
+```
 
 <!-- Special parameters -->
 $# the number of cmd-line arguments
@@ -329,6 +395,8 @@ $ gunzip file.gz  // extract and replace file.gz
 $ unzip filename.zip // extract
 $ zip -r file.zip foldername // compress
 
+$ tar -czvf myfolder.tar.gz my_folder
+
 $ tar -cvf all.tar g b d  // –c (create), –v (verbose), and –f (write to or read from a file)
 $ tar -tvf all.tar  // -t(table)
 $ tar -xvf all.tar
@@ -359,6 +427,7 @@ $ mkdir -p lite/promo  // -p: create both the lite and promo directories with on
 $ cd // = $ cd home/charlie: makes charlie’s home directory the working directory
 $ rmdir /home/charlie/lite/promo  // delete a directory without files
 $ rm -r /home/charlie/lite  // delete files and directories within a directory
+$ rm -f abc.md // delete anyway and no prompt, -f = -force
 
 $ touch letter // create an empty file
 $ echo ''
