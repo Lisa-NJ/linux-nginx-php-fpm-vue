@@ -1088,7 +1088,6 @@ $ sudo systemctl is-enabled nginx
 $ sudo systemctl is-active nginx
 Todo: restart
 
-
 <!-- reinstall desktop tool -->
 $ sudo apt update
 $ sudo apt -y upgrade
@@ -1098,7 +1097,7 @@ $ reboot
 
 <!--lisa is not in the sudoers file-->
 $ sudo apt-get update
-$ su root
+c$ su root
 $ apt-get install sudo -y
 $ sudo adduser lisa sudo
 
