@@ -1559,3 +1559,34 @@ tmux show-options -g	        查看全局配置
 - 运行：new-window
 这样就新建了一个窗口，不会影响当前的输出。
 
+[github key]
+`$ git clone git@github.com:Lisa-NJ/my-repo-name` failed with
+```
+Cloning into 'my-repo-name'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+```
+How to fix
+- Generate a new key by 
+`$ ssh-keygen -t rsa -b 4096 -C "myemailname@gmail.com"` and save it as `~/.ssh/id_rsa`
+- Add SSH Key --> GitHub
+    - `$ cat ~/.ssh/github_rsa.pub` and copy the whole text
+    - `https://github.com/settings/keys` / New SSH key
+    - Input `Title`, paste to `Key` and `Add SSH key` 
+- Edit `~/.ssh/config`, add
+```
+Host github.com
+  Hostname github.com
+  User git
+  IdentityFile ~/.ssh/github_rsa
+  IdentitiesOnly yes
+```
+- Run `$ chmod 600 ~/.ssh/config` 
+- Test by `$ ssh -T git@github.com`
+```
+Hi your-github-username! You've successfully authenticated, but GitHub does not provide shell access.
+```
+- Clone by `$ git clone git@github.com:your-github-username/your-repo.git`
