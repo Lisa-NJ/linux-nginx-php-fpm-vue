@@ -23,6 +23,67 @@
 //# shell builtin - page 446
 ??? sra - binary
 
+[grub]
+
+```
+┌───────────────────────┐
+│  1. BIOS/UEFI 固件    │  计算机通电后，首先执行 BIOS 或 UEFI 固件，进行硬件初始化和自检
+└──────────┬────────────┘
+           │
+           ▼
+┌───────────────────────┐
+│  2. 第1阶段加载程序     │   BIOS/UEFI 移交控制权 (位于磁盘的 MBR 中，大小通常为 512 字节)
+│    (boot.img)         │
+└──────────┬────────────┘
+           │
+           ▼
+┌───────────────────────┐
+│  3. 第1.5阶段加载程序   │  由第1阶段加载程序加载，位于磁盘的第一个分区或文件系统的引导扇区; 提供文件系统支持，能够读取磁盘上的文件
+│    (core.img)         │
+└──────────┬────────────┘
+           │
+           ▼
+┌───────────────────────┐
+│  4. 第2阶段加载程序     │ 由第1.5阶段加载程序加载，负责读取 GRUB 配置文件，并据此显示启动菜单
+│    (grub.cfg)         │
+└──────────┬────────────┘
+           │
+           ▼
+┌──────────────────────┐
+│  5. 显示启动菜单       │
+│    (等待用户选择)      │
+└──────────┬───────────┘
+           │
+           ▼
+┌───────────────────────┐
+│  6. 加载内核和initrd    │
+│    (vmlinuz, initrd)  │
+└──────────┬────────────┘
+           │
+           ▼
+┌───────────────────────┐
+│  7. 启动操作系统        │
+└───────────────────────┘
+```
+
+
+[wifi check]
+Q: iwconfig 命令只显示 lo eth0 eth1  没有显示 wlan0?
+A:
+// 查看系统是否识别到无线网卡
+$ lspci | grep -i wireless
+$ lspci
+01:00.0 Network controller: Intel Corporation Wireless 3165 (rev 81)
+or
+00:14.3 Network controller: Intel Corporation CNVi: Wi-Fi
+// 查看是否正确加载了 iwlwifi 驱动程序
+lsmod | grep iwlwifi
+iwlwifi               249856  1 iwlmvm
+cfg80211              774144  3 iwlmvm,iwlwifi,mac80211
+or
+iwlwifi               360448  0
+cfg80211              1134592  1 iwlwifi
+
 [irssi]
 $ sudo apt update
 $ sudo apt install irssi
@@ -77,6 +138,13 @@ $ lspci -k // pci + driver
 (4) Network: ifconfig、ip、ping、netstat、telnet、ftp、route、rlogin rcp、finger、mail、nslookup
 (5) File: file、mkdir、grep、dd、find、mv、ls、diff、cat、ln
 
+<!-- GPT & file system -->
+GPT 分区表：GPT 使用主分区表和备份分区表来维护分区信息。主分区表位于磁盘的开头，备份分区表位于磁盘的末端。
+分区和文件系统：调整文件系统大小和调整分区大小是两个不同的操作。调整文件系统大小通常不会自动更新 GPT 的备份分区表位置，因此需要手动修复。
+$ sudo resize2fs -p /dev/sdb2 10G           // 调整文件系统大小
+$ sudo parted /dev/sdb resizepart 2 10GB    // 调整分区大小
+$ sudo sgdisk -e /dev/sdb                   // 修复 GPT 备份分区表位置
+
 <!-- How to use usb disk on Linux -->
 $ lsblk
 `
@@ -99,7 +167,11 @@ $ mkdir /media/usb
 $ mount /dev/sdb1 /media/usb
 $ umount /media/usb
 
-
+<!-- The backup GPT table is corrupt, but the primary appears ok, so that will be used -->
+$ sudo gdisk /dev/sdc
+$ e
+$ w
+$ sudo gdisk -l /dev/sdc 
 
 <!-- sdc 60G, resize to 20G, make .img, compress to .img.xz -->
 
@@ -109,13 +181,17 @@ $ sudo e2fsck -f /dev/sdc2          // check the file system
 
 $ sudo resize2fs /dev/sdc2 20G // resize to 20G
 
-$ sudo fdisk /dev/sdc
+$ sudo fdisk /dev/sdc  (d 2 n 2 +20G w) => on Disks, 20G && restart GParted would display the update 
+or $ sudo parted /dev/sdb resizepart 2 20GB
 
 $ sudo e2fsck -f /dev/sdc2
 
 $  sudo resize2fs /dev/sdc2
 
 => partition2 is resized to 20G, can be seen with Disks
+
+$ sudo sgdisk -e /dev/sdc 
+=> fix backup GPT
 
 $ sudo mount /dev/sdc2 /mnt
 
@@ -134,6 +210,32 @@ $ xz -zvve9 -T0 ./output.img
 Alternatively, if generated with Disks/Create Disk Image, the size of img file is 56G, and .img.xz is 1.5G
 
 
+<!-- sdc 60G, resize to 5G, make .img, compress to .img.xz by Darius-->
+
+Disks + GParted + Cmd / 60GB source ssd + 8GB target ssd
+
+[1/4 Resize]
+GParted / Resize  4279MB --> 4900MB ～ same as $ resize2fs -p '/dev/sdx2' 4900M
+$ sgdisk -e /dev/sdx 
+=> move the secondary GPT to the back of the disk
+
+[2/4 Clone]
+$ sudo dd if=/dev/sdX of=/dev/sdY status=progress
+=> blank small ssd on Disks, no Partition Table
+
+$ sgdisk /dev/sdX -R /dev/sdY
+=> replicate Partiotion Table
+caution! Secondary header was placed beyond the disk's limits! Moving the header, but other problems may occur!
+
+-- can be fixed by rerunning GParted & Resize
+
+[3/4 Img]
+use: 8GB target ssd
+GDisks / Create Disk Image...
+=> disk.img
+
+[4/4 Shrink]
+$ sudo xz -t -k -T0 -e9 -zvv 'path/to/disk.img
 
 <!-- wrong fs type, bad option, bad superblock on /dev/sdc, missing codepage or helper program... -->
 $ mkfs -t ext4 /dev/sdc         // (1)Format
@@ -175,7 +277,12 @@ $ apt-get download [list of packageds]
 xinit /path/to/custom-xorg-config
 这将使用指定的 Xorg 配置文件启动 Xorg 服务器。
 
-$ free -h
+$ free -h 
+```
+              total        used        free      shared  buff/cache   available
+Mem:           3.7Gi       3.6Gi       1.2Mi       31Mi       105Mi
+
+```
 
 <!-- Special parameters -->
 $# the number of cmd-line arguments
@@ -288,6 +395,8 @@ $ gunzip file.gz  // extract and replace file.gz
 $ unzip filename.zip // extract
 $ zip -r file.zip foldername // compress
 
+$ tar -czvf myfolder.tar.gz my_folder
+
 $ tar -cvf all.tar g b d  // –c (create), –v (verbose), and –f (write to or read from a file)
 $ tar -tvf all.tar  // -t(table)
 $ tar -xvf all.tar
@@ -318,6 +427,7 @@ $ mkdir -p lite/promo  // -p: create both the lite and promo directories with on
 $ cd // = $ cd home/charlie: makes charlie’s home directory the working directory
 $ rmdir /home/charlie/lite/promo  // delete a directory without files
 $ rm -r /home/charlie/lite  // delete files and directories within a directory
+$ rm -f abc.md // delete anyway and no prompt, -f = -force
 
 $ touch letter // create an empty file
 $ echo ''
@@ -548,6 +658,8 @@ $ echo '$person'
 $person
 $ echo \$person
 $person
+
+$ apt policy chromium // Installed + Candidate + Version table
 
 $ sudo apt remove php8.1* --purge
 $ dpkg -l | grep php
@@ -1165,4 +1277,6 @@ X Window System (X视窗系统) 是服务于Unix系统的GUI系统
 bison: generates parsing code that makes it easier to write programs to build compilers
 flex: generates scanners (code that recognizes lexical patterns in text)
 make + GNU Configure + Build System: make it easier to manage complex development projects
+
+
 
