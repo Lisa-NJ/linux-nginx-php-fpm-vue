@@ -23,6 +23,78 @@
 //# shell builtin - page 446
 ??? sra - binary
 
+
+[docker]
+$ sudo docker pull phpnotdead/phalcon:7.4-4.1.0
+$ sudo docker images
+$ sudo docker run -d \
+            --name php7.4-fpm \
+            -v /home/myname/helpers:/var/www/helpers \
+            -v /home/myname/api:/var/www/api \
+            -p 9000:9000 \
+            php:7.4-fpm
+$ sudo docker run -d --name phalcon-api -v ~/my/api/public:/var/www/html -p 9001:9000 phpnotdead/phalcon:7.4-4.1.0
+$ sudo docker ps
+$ sudo docker stop php7.4-fpm-api
+$ sudo docker rm php7.4-fpm-api
+$ sudo docker exec -it <container_name_or_id> /bin/bash
+$ sudo docker exec <container_name_or_id> <command>
+$ sudo docker exec my-container ls /var/www/html
+$ sudo docker logs <container_name_or_id>
+
+$ sudo docker pull php:7.4-fpm
+$ sudo docker run -d --name php-api -v ~/my/api:/var/www/html -p 9009:9000 php:7.4-fpm
+$ sudo docker exec -it <container_name_or_id> sh
+Install: phalcon4 (psr) + procps(ps)
+$ sudo docker commit <CONTAINER_ID> ap-php-phalcon
+$ sudo docker run -d --name php-fpm-phalcon \
+            -v /my/path/work/api:/var/www/html \
+            -p 9000:9000 \
+            ap-php-phalcon
+
+$ sudo docker images
+REPOSITORY            TAG         IMAGE ID       CREATED       SIZE
+php7.4-cli-phalcon4   latest      0361c1856d8c   5 days ago    882MB
+ap-php-phalcon        latest      c66fd6129c8f   5 days ago    510MB
+php                   7.4-fpm     38f2b691dcb8   2 years ago   443MB
+
+$ sudo docker tag c66fd6129c8f ap-php-phalcon:fpm7.4-phalcon4
+$ sudo docker images
+REPOSITORY            TAG               IMAGE ID       CREATED       SIZE
+php7.4-cli-phalcon4   latest            0361c1856d8c   5 days ago    882MB
+ap-php-phalcon        fpm7.4-phalcon4   c66fd6129c8f   5 days ago    510MB   # a new item
+ap-php-phalcon        latest            c66fd6129c8f   5 days ago    510MB
+
+$ sudo docker save -o ap-php-phalcon.tar ap-php-phalcon:fpm7.4-phalcon4
+
+$ sudo chown  lisa:lisa ap-php-phalcon.tar  # not copyable if it is root:root 
+copy to share with team
+$ docker load -i my-app.tar  # to import
+$ sudo docker images    # to check
+
+[time]
+$ timedatectl status
+    Local time: Wed 2025-03-05 09:55:41 ACDT
+           Universal time: Tue 2025-03-04 23:25:41 UTC
+                 RTC time: Tue 2025-03-04 23:25:41
+                Time zone: Australia/Adelaide (ACDT, +1030)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+$ systemctl status ntp
+Unit ntp.service could not be found.
+$ systemctl status ntpd
+Unit ntpd.service could not be found.
+==> systemd-timesyncd or chronyd
+在现代的 Debian 和 Ubuntu 服务器上，默认的时间同步服务是 systemd-timesyncd，而不是 ntpd。
+$ systemctl status systemd-timesyncd
+Loaded: loaded (/lib/systemd/system/systemd-timesyncd.service; enabled; preset: enabled)
+     Active: active (running) since Fri 2025-02-21 11:18:16 ACDT; 1 week 4 days ago
+       Docs: man:systemd-timesyncd.service(8)
+...
+$ apt install systemd-timesyncd
+$ systemctl status systemd-timesyncd
+
 [grub]
 
 ```
@@ -66,6 +138,64 @@
 └───────────────────────┘
 ```
 
+fatal: detected dubious ownership in repository at '/mydir'
+$ git config --global --add safe.direcgtory /mydir
+$ chown -R root:root /mydir
+
+[Thunar File Manager + Other locations]
+$ sudo apt install gvfs-backends
+$ sudo apt install samba smbclient
+Start Thunar + Input "smb://mylocalserver/share" 
+	=> popup window / Connect As "Registered User" user + password / Connect
+	=> Network / /share/ on cpc -- appear on the left of Thunar
+
+[Partition Table]
+$ sudo parted /dev/sdb print
+Model:  USB  SanDisk 3.2Gen1 (scsi)
+Disk /dev/sdb: 30.8GB
+Sector size (logical/physical): 512B/512B
+Partition Table: msdos
+Disk Flags: 
+
+Number  Start   End     Size    Type     File system  Flags
+ 1      1049kB  15.8GB  15.8GB  primary  ext4         boot
+
+$ sudo parted /dev/sda print
+Model: ATA WDC WDS*****G0A- (scsi)
+Disk /dev/sda: 120GB
+Sector size (logical/physical): 512B/512B
+Partition Table: gpt
+Disk Flags: 
+
+Number  Start   End    Size   File system  Name  Flags
+ 1      1049kB  538MB  537MB  fat32              boot, esp
+ 2      538MB   120GB  119GB  ext4
+
+$ sudo fdisk -l
+Disk /dev/sda: 111.79 GiB, 120034123776 bytes, 234441648 sectors
+Disk model: WDC WDS*****G0A-
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: B*****-0393-4A29-91D8-251111*EB8C8
+
+Device       Start       End   Sectors   Size Type
+/dev/sda1     2048   1050623   1048576   512M EFI System
+/dev/sda2  1050624 234440703 233390080 111.3G Linux filesystem
+...
+
+Disk /dev/sdb: 28.65 GiB, 30765219840 bytes, 60088320 sectors
+Disk model:  SanDisk 3.2Gen1
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x6****95d
+
+Device     Boot Start      End  Sectors  Size Id Type
+/dev/sdb1  *     2048 30941183 30939136 14.8G 83 Linux
+
 
 [wifi check]
 Q: iwconfig 命令只显示 lo eth0 eth1  没有显示 wlan0?
@@ -83,6 +213,13 @@ cfg80211              774144  3 iwlmvm,iwlwifi,mac80211
 or
 iwlwifi               360448  0
 cfg80211              1134592  1 iwlwifi
+
+
+[resolution]
+$ apt install fbset
+$ fbset
+or
+$ cat /sys/class/graphics/fb0/virtual_size
 
 [irssi]
 $ sudo apt update
@@ -137,6 +274,11 @@ $ lspci -k // pci + driver
 (3) Management: df、top、free、quota、at、lp、adduser、groupadd kill、crontab、tar、unzip、gunzip、last
 (4) Network: ifconfig、ip、ping、netstat、telnet、ftp、route、rlogin rcp、finger、mail、nslookup
 (5) File: file、mkdir、grep、dd、find、mv、ls、diff、cat、ln
+
+$ > /my/path/to/abc.log
+清空 abc.log 文件的内容，而不会删除文件本身
+$ truncate -s 0 /my/path/to/abc.log
+$ echo -n > /my/path/to/abc.log
 
 <!-- GPT & file system -->
 GPT 分区表：GPT 使用主分区表和备份分区表来维护分区信息。主分区表位于磁盘的开头，备份分区表位于磁盘的末端。
@@ -377,6 +519,7 @@ $ sudo dpkg-reconfigure keyboard-configuration
 $ echo 'My new file.' > myfile  // Create a file by redirecting echo's output to a file
 $ date  // Wed Mar 18 17:12:20 PDT 2009
 $ date +"%A %B %d" // Wednesday March 18
+$ date -d "+1 hour 40 minutes"
 $ script -a filename// recordss a session to filename/typesript, -a 追加 not overwriting
 $ ...
 $ exit
@@ -748,6 +891,17 @@ $ sudo apt update
 $ sudo apt install mysql-server
 $ sudo service mysql status
 
+$ mysql -p
+mysql> connect dbname;
+mysql> describe booking_logging;
+mysql> select count(*) from booking_logging;
+mysql> select from booking_logging where id = 638381749;
+$ ss | grep 6667
+$ ss
+$ ss | grep ircd | wc -l
+$ cd /apircd
+$ irssi
+
 $ gedit php.ini
 $ hostname -I
 $ netstat -l
@@ -864,11 +1018,12 @@ $ jq . output
 $ curl -H "x-api-key: bcdc50d80ac04d7a9afcaee612146a7b" https://newsapi.org/v2/everything?q=apple&from=2022-09-06&to=2022-09-06&sortBy=popularity | tail -n1  > output
 $ jq . output
 
-
 $ curl -H "Content-Type: application/json, x-api-key: 6JA5SRCMyg19dbMPwle5X1yulrMyygFY3s7W32Ps, Authorization:Bearer fqqknicnyiqisvxmtrzizsorokvjzcvlnbizyaah" https://ap-southeast-2.api.vaultre.com.au/api/v1.3/properties/sale?pagesize=50&status=listing&portalStatus=listing&propertyClass=residential&availableOnly=true
 
 $ curl -H "x-api-key: 6JA5SRCMyg19dbMPwle5X1yulrMyygFY3s7W32Ps, Authorization:Bearer fqqknicnyiqisvxmtrzizsorokvjzcvlnbizyaah" https://ap-southeast-2.api.vaultre.com.au/api/v1.3/properties/sale?pagesize=50&status=listing&portalStatus=listing&propertyClass=residential&availableOnly=true
 $ curl https://ap-southeast-2.api.vaultre.com.au/api/v1.3/properties/sale?pagesize=50&status=listing&portalStatus=listing&propertyClass=residential&availableOnly=true -X POST -d @rw.json
+
+$ curl https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid={API Key}
 
 <!-- change password mysql -->
 $ mysql> SET PASSWORD FOR 'root'@'localhost' = PASSWORD('666');
@@ -929,9 +1084,10 @@ $ mysqldump -u root -p owl >owl-0817.sql
 
 <!-- 1. Create db on target server -->
 $ sudo mysql
-MariaDB > create database owl;
-MariaDB > create database csdb;
-MariaDB > create database dcdb;
+[sudo] password for user:
+MariaDB[dbname] > create database owl;
+MariaDB[dbname] > create database csdb;
+MariaDB[dbname] > create database dcdb;
 
 <!-- 2. Migrating the Database -->
 $ cd ~/owl/program/api
@@ -963,6 +1119,16 @@ MariaDB > drop table team, application;
 MariaDB > ...
 MariaDB > SET FOREIGN_KEY_CHECKS=1; -- to re-enable them
 
+// 使用 sudo mysql 可以登录，但 mysql -u root -p 会被拒绝访问
+在 Debian 的 MariaDB 默认配置中，sudo mysql -uroot -p 会尝试通过密码验证登录，但因为还没有为 root 设置密码。MariaDB 默认使用 Unix Socket Authentication 来管理 root 用户。
+如果 root 用户为密码认证，设置密码
+ps: mysql -u root -p + Ctrl D --> login? //...???
+$ sudo mysql
+MariaDB > SELECT user, host, plugin FROM mysql.user;
+mysql_native_password 表示使用密码认证；unix_socket 表示使用 Unix Socket。
+MariaDB > SET PASSWORD FOR 'root'@'localhost' = PASSWORD('999');
+MariaDB > FLUSH PRIVILEGES;
+==> sudo mysql -uroot -p 可以使用新设置的密码登录
 
 <!--install phalcon4-->
 https://docs.phalcon.io/4.0/en/installation#deb-based-distributions-debian-ubuntu-etc
@@ -1200,6 +1366,54 @@ $ sudo systemctl is-enabled nginx
 $ sudo systemctl is-active nginx
 Todo: restart
 
+<!-- smb access issue with Xfce -->
+$ sudo apt install gvfs-backends -y
+$ libreoffice smb://my/share/name/123.docx
+
+在 Xfce 桌面环境 下，libreoffice 可能无法直接打开 smb:// 共享目录下的 .docx 文件，原因主要是：
+1. 为什么 LibreOffice 在 Xfce 下无法打开 SMB 文件？
+Xfce 默认使用 Thunar 文件管理器，但 Thunar 不支持 GNOME 的 GVFS (GNOME Virtual File System) 完整功能，这可能导致 smb:// 共享文件无法正确挂载。
+LibreOffice 依赖 GVFS 处理 smb:// 路径，但在 Xfce 下，GVFS 可能 未正确安装 或 未自动挂载共享目录。
+2. 直接安装 GNOME 是否能解决问题？
+✅ 是的，安装 GNOME 可以解决
+如果安装 GNOME 桌面环境，LibreOffice 可以直接使用 GNOME 的 GVFS 来访问 smb:// 共享文件，通常可以解决这个问题。
+安装 GNOME 
+sudo apt update
+sudo apt install gnome -y
+然后重启并切换到 GNOME 试试
+libreoffice  smb://my/share/name/123.docx 
+命令行打开文件，如果可以打开，说明问题确实是 Xfce 的 GVFS 支持不足导致的。
+3. 不安装 GNOME，如何解决 Xfce 的 SMB 问题？
+如果你 不想安装 GNOME，可以尝试以下方法：
+方法 1：安装 gvfs 组件
+在 Xfce 下，默认可能 没有安装完整的 gvfs 支持，可以手动安装：
+sudo apt install gvfs-backends -y
+重启后
+gio open smb://my/share/name/123.docx
+方法 2：手动挂载 SMB 共享目录
+如果 gvfs 仍然不能正常工作，可以尝试 手动挂载共享目录：
+sudo apt install cifs-utils -y
+sudo mkdir -p /mnt/smb_share
+sudo mount -t cifs //my/share/name /mnt/smb_share -o username=youruser,password=yourpassword,uid=$(id -u),gid=$(id -g),rw
+然后直接从本地路径打开：
+libreoffice /mnt/smb_share/123.docx
+如果这样可以打开，说明问题出在 LibreOffice 不能直接解析 smb:// 路径。
+
+<!-- apt install <package> 发生了什么？ -->
+以 sudo apt install vim 为例：
+
+查找本地索引数据库 /var/lib/apt/lists/，确定 vim 的最新版本和依赖项。
+解析 /var/lib/dpkg/status，检查 vim 是否已安装，以及是否需要升级。
+下载 vim.deb 到 /var/cache/apt/archives/（如果尚未下载）。
+使用 dpkg 安装 .deb：
+$ dpkg -i /var/cache/apt/archives/vim_9.0.0180-1_amd64.deb
+更新 /var/lib/dpkg/status，标记 vim 为已安装。
+
+/etc/apt/sources.list      包含了 软件仓库（Repository） 的地址
+/var/lib/apt/lists/	       存储远程仓库的索引，不包含 .deb 包	ls -lh /var/lib/apt/lists/
+/var/cache/apt/archives/   存储已下载的软件 .deb，但未安装	ls -lh /var/cache/apt/archives/
+/var/lib/dpkg/status	   记录已安装的软件包及其状态	cat /var/lib/dpkg/status
+
 <!-- reinstall desktop tool -->
 $ sudo apt update
 $ sudo apt -y upgrade
@@ -1209,7 +1423,7 @@ $ reboot
 
 <!--lisa is not in the sudoers file-->
 $ sudo apt-get update
-c$ su root
+$ su root
 $ apt-get install sudo -y
 $ sudo adduser lisa sudo
 
@@ -1278,5 +1492,70 @@ bison: generates parsing code that makes it easier to write programs to build co
 flex: generates scanners (code that recognizes lexical patterns in text)
 make + GNU Configure + Build System: make it easier to manage complex development projects
 
+[tmux]
+Tmux 是一个强大的终端复用工具，以下是一些常用指令：
+$ sudo apt install tmux
 
+1. 会话管理
+```
+$ tmux new -s <session_name>	        创建新的会话
+$ tmux ls 或 tmux list-sessions	        列出所有会话
+$ tmux attach -t <session_name>	        重新连接会话
+$ tmux detach	                        从当前会话断开 (在 tmux 内使用 Ctrl+b d)
+$ tmux kill-session -t <session_name>	关闭指定会话
+$ tmux kill-server	                    关闭所有 tmux 会话
+```
+2. 窗口管理
+```
+$ tmux new-window -n mywin               创建一个新窗口，并命名为 "mywin"
+    = Ctrl+b c                        
+$ tmux list-windows                      列出所有窗口（可选择切换）  
+    = Ctrl+b w	       
+$ tmux select-window -t 0:1              切换到会话0的窗口1
+    = Ctrl+b n	                         下一个窗口                  
+    or Ctrl+b p	                         上一个窗口
+    or Ctrl+b <window_number>	         指定编号窗口    
+$ tmux rename-window "NewName"
+    = Ctrl+b ,	                         重命名当前窗口                
+$ tmux kill-window                       关闭当前窗口
+    = Ctrl+b &	                      
+```
+3. 窗格（Pane）管理
+```
+Ctrl+b %	垂直分割窗格
+Ctrl+b "	水平分割窗格
+Ctrl+b o	切换到下一个窗格
+Ctrl+b {	交换当前窗格与左侧窗格
+Ctrl+b }	交换当前窗格与右侧窗格
+Ctrl+b x	关闭当前窗格
+Ctrl+b z	最大化/恢复当前窗格
+Ctrl+b q	显示窗格编号
+```
+4. 调整窗格大小
+```
+Ctrl+b Alt+↑	增大窗格高度
+Ctrl+b Alt+↓	减小窗格高度
+Ctrl+b Alt+→	增大窗格宽度
+Ctrl+b Alt+←	减小窗格宽度
+```
+5. 滚动与复制模式
+```
+Ctrl+b [	进入滚动模式
+Ctrl+b ]	粘贴复制的内容
+q	退出滚动模式
+↑ / ↓	上下滚动
+PgUp / PgDn	向上或向下翻页
+```
+6. 其他常用指令
+```
+tmux source-file ~/.tmux.conf	重新加载 tmux 配置
+tmux set-option -g mouse on	    启用鼠标支持
+tmux show-options -g	        查看全局配置
+```
+如果你经常使用 tmux，可以自定义 .tmux.conf 来优化体验，比如启用鼠标滚动、调整快捷键等。你有需要的话，我可以帮你配置。
+
+7. 屏幕被日志刷满的处理：
+- Ctrl+b 后 松开，再按 : 进入命令模式。
+- 运行：new-window
+这样就新建了一个窗口，不会影响当前的输出。
 
