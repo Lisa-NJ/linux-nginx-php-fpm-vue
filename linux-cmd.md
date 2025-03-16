@@ -1,30 +1,36 @@
-//# cron + updatedb + 
-//# type codes & creator codes
-//# sticky bit (page 980)
-//# the pwd shell builtin && the pwd utility(/bin/pwd)
-//# getfacl  setfacl
-//# xargs/881
-//# the linux tty device driver
-//# background tasks /283 + job contrl
-//# the compatible parameter (page 158) set
-//# a swap file (Figure 6-7, page 162)
-//# LANG page304 and VIMINIT(for vim initialization)
-//# The lnks script (page 406)
-//# PATH page297 -- change the environment so the shell searches the working directory automatically
-//# huponexit (page 333)
-//# set MAIL + MAILPATH + MAILCHECK
-//# menu prompt page 374
-//# select control structure page 428
-//# bash debugging symbol page 410
-//# ps page 796
-//# Functions page 437 -- the use of local and global variables within a function
-//# bash features and options page 330
-//# test utility - page 854
-//# shell builtin - page 446
-??? sra - binary
+### To do list
+
+- [x] 已完成任务
+- [ ] cron + updatedb +
+- [ ] type codes & creator codes
+- [ ] sticky bit (page 980)
+- [ ]  the pwd shell builtin && the pwd 
+- [ ] utility(/bin/pwd)
+- [ ] getfacl  setfacl
+- [ ] xargs/881
+- [ ]  the linux tty device driver
+- [ ]  background tasks /283 + job contrl
+- [ ] the compatible parameter (page 158) set
+- [ ] a swap file (Figure 6-7, page 162)
+- [ ] LANG page304 and VIMINIT(for vim initialization)
+- [ ] The lnks script (page 406)
+- [ ] PATH page297 -- change the environment so the shell searches the working directory automatically
+- [ ] huponexit (page 333)
+- [ ] set MAIL + MAILPATH + MAILCHECK
+- [ ] menu prompt page 374
+- [ ] select control structure page 428
+- [ ] bash debugging symbol page 410
+- [ ] ps page 796
+- [ ] Functions page 437 -- the use of local and global variables within a function
+- [ ] bash features and options page 330
+- [ ] test utility - page 854
+- [ ] shell builtin - page 446
+- [ ] ??? sra - binary
 
 
-[docker]
+
+### docker
+```bash
 $ sudo docker pull phpnotdead/phalcon:7.4-4.1.0
 $ sudo docker images
 $ sudo docker run -d \
@@ -71,8 +77,13 @@ $ sudo chown  lisa:lisa ap-php-phalcon.tar  # not copyable if it is root:root
 copy to share with team
 $ docker load -i my-app.tar  # to import
 $ sudo docker images    # to check
+```
 
-[time]
+
+
+### Time
+
+```bash
 $ timedatectl status
     Local time: Wed 2025-03-05 09:55:41 ACDT
            Universal time: Tue 2025-03-04 23:25:41 UTC
@@ -94,8 +105,11 @@ Loaded: loaded (/lib/systemd/system/systemd-timesyncd.service; enabled; preset: 
 ...
 $ apt install systemd-timesyncd
 $ systemctl status systemd-timesyncd
+```
 
-[grub]
+
+
+### grub
 
 ```
 ┌───────────────────────┐
@@ -138,47 +152,59 @@ $ systemctl status systemd-timesyncd
 └───────────────────────┘
 ```
 
-fatal: detected dubious ownership in repository at '/mydir'
-$ git config --global --add safe.direcgtory /mydir
-$ chown -R root:root /mydir
+### Q+A
 
-[Thunar File Manager + Other locations]
-$ sudo apt install gvfs-backends
+- fatal: detected dubious ownership in repository at '/mydir'
+
+  ```bash
+  $ git config --global --add safe.direcgtory /mydir
+  $ chown -R root:root /mydir
+  ```
+
+  
+
+### Thunar File Manager + Other locations
+
+```bash$ sudo apt install gvfs-backends
 $ sudo apt install samba smbclient
 Start Thunar + Input "smb://mylocalserver/share" 
 	=> popup window / Connect As "Registered User" user + password / Connect
 	=> Network / /share/ on cpc -- appear on the left of Thunar
+```
 
-[Partition Table]
-$ sudo parted /dev/sdb print
-Model:  USB  SanDisk 3.2Gen1 (scsi)
-Disk /dev/sdb: 30.8GB
-Sector size (logical/physical): 512B/512B
-Partition Table: msdos
-Disk Flags: 
+
+
+### Partition Table
+
+- $ sudo parted /dev/sdb print
+  Model:  USB  SanDisk 3.2Gen1 (scsi)
+  Disk /dev/sdb: 30.8GB
+  Sector size (logical/physical): 512B/512B
+  Partition Table: msdos
+  Disk Flags: 
 
 Number  Start   End     Size    Type     File system  Flags
  1      1049kB  15.8GB  15.8GB  primary  ext4         boot
 
-$ sudo parted /dev/sda print
-Model: ATA WDC WDS*****G0A- (scsi)
-Disk /dev/sda: 120GB
-Sector size (logical/physical): 512B/512B
-Partition Table: gpt
-Disk Flags: 
+- $ sudo parted /dev/sda print
+  Model: ATA WDC WDS*****G0A- (scsi)
+  Disk /dev/sda: 120GB
+  Sector size (logical/physical): 512B/512B
+  Partition Table: gpt
+  Disk Flags: 
 
 Number  Start   End    Size   File system  Name  Flags
  1      1049kB  538MB  537MB  fat32              boot, esp
  2      538MB   120GB  119GB  ext4
 
-$ sudo fdisk -l
-Disk /dev/sda: 111.79 GiB, 120034123776 bytes, 234441648 sectors
-Disk model: WDC WDS*****G0A-
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disklabel type: gpt
-Disk identifier: B*****-0393-4A29-91D8-251111*EB8C8
+- $ sudo fdisk -l
+  Disk /dev/sda: 111.79 GiB, 120034123776 bytes, 234441648 sectors
+  Disk model: WDC WDS*****G0A-
+  Units: sectors of 1 * 512 = 512 bytes
+  Sector size (logical/physical): 512 bytes / 512 bytes
+  I/O size (minimum/optimal): 512 bytes / 512 bytes
+  Disklabel type: gpt
+  Disk identifier: B*****-0393-4A29-91D8-251111*EB8C8
 
 Device       Start       End   Sectors   Size Type
 /dev/sda1     2048   1050623   1048576   512M EFI System
@@ -196,8 +222,8 @@ Disk identifier: 0x6****95d
 Device     Boot Start      End  Sectors  Size Id Type
 /dev/sdb1  *     2048 30941183 30939136 14.8G 83 Linux
 
+### wifi check
 
-[wifi check]
 Q: iwconfig 命令只显示 lo eth0 eth1  没有显示 wlan0?
 A:
 // 查看系统是否识别到无线网卡
@@ -213,7 +239,6 @@ cfg80211              774144  3 iwlmvm,iwlwifi,mac80211
 or
 iwlwifi               360448  0
 cfg80211              1134592  1 iwlwifi
-
 
 [resolution]
 $ apt install fbset
@@ -268,24 +293,51 @@ $ lsmod | grep i915 // 如果已加载 i915 模块，说明您已经在使用 In
 $ lspci -v -s `lspci | awk '/ VGA / {print $1}'`
 $ lspci -k // pci + driver
 
-<!-- System Command -->
-(1) Installation & Log in: login、shutdown、halt、reboot、mount、umount、chsh
-(2) Security: passwd、su、umask、chgrp、chmod、chown、chattr、sudo、pswho
-(3) Management: df、top、free、quota、at、lp、adduser、groupadd kill、crontab、tar、unzip、gunzip、last
-(4) Network: ifconfig、ip、ping、netstat、telnet、ftp、route、rlogin rcp、finger、mail、nslookup
-(5) File: file、mkdir、grep、dd、find、mv、ls、diff、cat、ln
+###  System Command
 
+-  Installation & Log in
+
+  login、shutdown、halt、reboot、mount、umount、chsh
+
+- Security
+
+  passwd、su、umask、chgrp、chmod、chown、chattr、sudo、pswho
+
+- Management
+
+  df、top、free、quota、at、lp、adduser、groupadd kill、crontab、tar、unzip、gunzip、last
+
+- Network
+
+  ifconfig、ip、ping、netstat、telnet、ftp、route、rlogin rcp、finger、mail、nslookup
+
+- File
+
+  file、mkdir、grep、dd、find、mv、ls、diff、cat、ln
+
+```bash
 $ > /my/path/to/abc.log
 清空 abc.log 文件的内容，而不会删除文件本身
 $ truncate -s 0 /my/path/to/abc.log
 $ echo -n > /my/path/to/abc.log
+```
 
-<!-- GPT & file system -->
+
+
+### GPT & file system
+
 GPT 分区表：GPT 使用主分区表和备份分区表来维护分区信息。主分区表位于磁盘的开头，备份分区表位于磁盘的末端。
 分区和文件系统：调整文件系统大小和调整分区大小是两个不同的操作。调整文件系统大小通常不会自动更新 GPT 的备份分区表位置，因此需要手动修复。
+
+```bash
 $ sudo resize2fs -p /dev/sdb2 10G           // 调整文件系统大小
 $ sudo parted /dev/sdb resizepart 2 10GB    // 调整分区大小
 $ sudo sgdisk -e /dev/sdb                   // 修复 GPT 备份分区表位置
+```
+
+
+
+
 
 <!-- How to use usb disk on Linux -->
 $ lsblk
