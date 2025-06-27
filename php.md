@@ -132,10 +132,21 @@ $ phalcon migration run
 	- $ php -m => can see xdebug on the list
 4. Integrate Xdebug with the PHP interpreter
 	- edit php.ini, + [xdebug] section
-	- edit /etc/php/7.4/fpm/conf.d/20-xdebug.ini + xdebug.start_with_request=yes
+	```
+	zend_extension=xdebug.so
+
+    [xdebug]
+    xdebug.mode=debug
+    xdebug.start_with_request=yes
+    xdebug.client_host=127.0.0.1
+    xdebug.client_port=9003
+    xdebug.log=/var/log/php/xdebug.log
+	```
+	- edit /etc/php/7.4/fpm/conf.d/20-xdebug.ini + `xdebug.start_with_request=yes`
 	- restart php-fpm
 	- $ php -m
-	- $ sudo updatedb
+	- $ sudo apt install plocate
+	- $ sudo updatedb  // Update the file index
 	- $ locate xdebug.so  // /usr/lib/php/20220829/xdebug.so	
 	- localhost:8001 can see xdebug info
 5. Configure Xdebug in VSCode
