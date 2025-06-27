@@ -177,6 +177,7 @@ Start Thunar + Input "smb://mylocalserver/share"
 ### Partition Table
 
 - $ sudo parted /dev/sdb print
+
   Model:  USB  SanDisk 3.2Gen1 (scsi)
   Disk /dev/sdb: 30.8GB
   Sector size (logical/physical): 512B/512B
@@ -206,9 +207,12 @@ Number  Start   End    Size   File system  Name  Flags
   Disklabel type: gpt
   Disk identifier: B*****-0393-4A29-91D8-251111*EB8C8
 
-Device       Start       End   Sectors   Size Type
-/dev/sda1     2048   1050623   1048576   512M EFI System
-/dev/sda2  1050624 234440703 233390080 111.3G Linux filesystem
+| Device    | Start   | End       | Sectors   | Size   | Type  |            |
+| --------- | :------ | --------- | --------- | ------ | ----- | ---------- |
+| /dev/sda1 | 2048    | 1050623   | 1048576   | 512M   | EFI   | System     |
+| /dev/sda2 | 1050624 | 234440703 | 233390080 | 111.3G | Linux | filesystem |
+
+
 ...
 
 Disk /dev/sdb: 28.65 GiB, 30765219840 bytes, 60088320 sectors
