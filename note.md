@@ -1495,3 +1495,27 @@ Xvfb 在许多情况下都非常有用，例如在服务器上运行测试套件
 
 //...待完成 https://itsfoss.com/ubuntu-keyring/
 
+[mailgun]
+Mailgun 不能随便用一个假域名（比如 noreply@myweb.com）来发邮件。
+✅ 要使用 Mailgun 发送邮件的 YOUR_DOMAIN_NAME，必须满足以下条件：
+✅ 正确配置发信域名的要求
+| 要素                      |     是否必须      |      说明                                      |
+|:-------------------------|:----------------:|:-----------------------------------------------|
+| 域名需你自己拥有            |✅ 必须            |不能用别人的域名或不存在的域名                       |
+| 该域名需设置 DNS 记录       |✅ 必须            |✅ 必须	包括 SPF、DKIM、MX 等                    |
+| 域名不一定要有 SSL 证书	      |❌ 可选	                      |Mailgun 发信不依赖 HTTPS，仅对 DNS 配置有要求         |
+| 可以使用子域名	                        |✅ 推荐	                      |如：mg.myweb.com，不影响主站使用                    |
+| 不能使用任意假邮箱发信人     |✅ 限制	                      |发件人邮箱必须是绑定域名下的，如 noreply@mg.myweb.com  |
+
+✅ 正确的流程是：
+假设你拥有域名 myweb.com
+1. 在 Mailgun 中添加一个子域名，如：mg.myweb.com
+2. Mailgun 会给你几条 DNS 记录
+    - TXT 记录：SPF、DKIM、DMARC
+    - MX 记录：用于接收 bounce 邮件
+    - 有些情况下还有 CNAME 用于验证
+3. 你需要登录你的 DNS 控制台（如 Cloudflare、阿里云、GoDaddy），将这些记录添加进去。
+4. 等待验证通过（通常几分钟～1小时）
+5. 之后你就可以用 noreply@mg.myweb.com 发信，收件人也能看到： From: noreply@mg.myweb.com
+
+
